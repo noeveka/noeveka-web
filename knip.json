@@ -1,0 +1,15 @@
+{
+	"$schema": "https://unpkg.com/knip@5/schema.json",
+	"ignore": ["src/components/ui/**", "src/components/theme-provider.tsx"],
+	"ignoreDependencies": [
+		"eslint-config-prettier",
+		"@fontsource-variable/geist",
+		"lucide-react",
+		"shadcn",
+		"npm"
+	],
+	"ignoreExportsUsedInFile": {
+		"interface": true,
+		"type": true
+	}
+}
