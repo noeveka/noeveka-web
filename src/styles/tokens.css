@@ -9,7 +9,14 @@
    HOW IT WORKS:
    - @theme { } registers tokens into Tailwind (bg-page, text-primary, etc.)
    - :root { } sets the actual light-mode values as CSS variables
-   - themes.css overrides the :root values for dark mode */
+   - themes.css overrides the :root values for dark mode
+
+   NOEVEKA BRAND PALETTE (from brand guidelines):
+     #1E212B  — Dark Navy (dark backgrounds, dark cards)
+     #F65D01  — Orange   (primary brand / CTA)
+     #3D7EB8  — Blue     (secondary accent)
+     #F4F2ED  — Warm Off-White (page background)
+     #8B909A  — Mid Gray (muted text / borders) */
 
 @theme {
   /* LAYER 1: PRIMITIVE PALETTE
@@ -18,32 +25,40 @@
 
   /* Neutral ramp — warm off-white to near-black */
   --color-neutral-0: #ffffff;
-  --color-neutral-50: #f7f7f6;
-  --color-neutral-100: #f1f1f0;
-  --color-neutral-200: #e8e8e7;
-  --color-neutral-300: #ebebea;
-  --color-neutral-400: #d4d4d3;
-  --color-neutral-500: #9b9b97;
-  --color-neutral-600: #6b6b68;
-  --color-neutral-900: #1a1a19;
+  --color-neutral-50: #faf9f7;
+  --color-neutral-100: #f4f2ed;
+  --color-neutral-200: #e8e5dd;
+  --color-neutral-300: #d8d4cb;
+  --color-neutral-400: #b8b4ab;
+  --color-neutral-500: #8b909a;
+  --color-neutral-600: #5a5f6b;
+  --color-neutral-900: #1e212b;
 
-  /* Brand blue ramp */
-  --color-blue-tint: #eaf0ff;
-  --color-blue-500: #274afe;
-  --color-blue-600: #1a3de8;
-  --color-blue-700: #1231cc;
-  --color-blue-dark: #0d1a4a;
-  --color-blue-light: #5b7cff;
-  --color-blue-lighter: #7b96ff;
+  /* Noeveka Orange — primary brand ramp */
+  --color-orange-tint: #fff0e6;
+  --color-orange-100: #ffd4b3;
+  --color-orange-500: #f65d01;
+  --color-orange-600: #d94e00;
+  --color-orange-700: #b84200;
+  --color-orange-dark: #3d1800;
+  --color-orange-light: #ff7a2e;
+  --color-orange-lighter: #ff9556;
 
-  /* Amber ramp */
-  --color-amber-tint: #fff3df;
-  --color-amber-500: #e8920a;
-  --color-amber-600: #c87a00;
-  --color-amber-text: #a06200;
-  --color-amber-dark: #2a1f08;
-  --color-amber-light: #ffb340;
-  --color-amber-lighter: #ffc060;
+  /* Noeveka Dark Navy — dark surfaces / hero ramp */
+  --color-navy-50: #2a2e3d;
+  --color-navy-100: #252839;
+  --color-navy-500: #1e212b;
+  --color-navy-700: #161820;
+  --color-navy-900: #0e0f15;
+
+  /* Noeveka Blue — secondary accent ramp */
+  --color-blue-tint: #e8f1f9;
+  --color-blue-500: #3d7eb8;
+  --color-blue-600: #2f6699;
+  --color-blue-700: #225280;
+  --color-blue-dark: #0d2237;
+  --color-blue-light: #6aa0cc;
+  --color-blue-lighter: #8fb8da;
 
   /* Semantic status primitives */
   --color-green-tint: #edfaf3;
@@ -62,13 +77,13 @@
   --color-red-light: #f07070;
 
   /* Dark mode neutral ramp */
-  --color-dark-bg: #111110;
-  --color-dark-surface: #1c1c1b;
-  --color-dark-subtle: #242423;
-  --color-dark-muted: #2e2e2c;
-  --color-dark-stroke: #3d3d3b;
-  --color-dark-text: #f0f0ef;
-  --color-dark-text-2: #a8a8a4;
+  --color-dark-bg: #0e0f15;
+  --color-dark-surface: #1e212b;
+  --color-dark-subtle: #252839;
+  --color-dark-muted: #2a2e3d;
+  --color-dark-stroke: #363a4a;
+  --color-dark-text: #f0ede8;
+  --color-dark-text-2: #8b909a;
 
   /* LAYER 2: SEMANTIC TOKENS
      Purpose-driven — USE THESE in JSX.
@@ -98,19 +113,24 @@
   --color-text-inverse: var(--color-text-inverse);
   --color-on-brand-bg: var(--color-on-brand-bg);
 
-  /* Brand blue (primary interactive color) */
-  --color-brand-tint: var(--color-blue-tint);
-  --color-brand: var(--color-blue-500);
-  --color-brand-hover: var(--color-blue-600);
-  --color-brand-pressed: var(--color-blue-700);
-  --color-brand-text: var(--color-blue-600);
+  /* Brand Orange (primary interactive color) */
+  --color-brand-tint: var(--color-orange-tint);
+  --color-brand: var(--color-orange-500);
+  --color-brand-hover: var(--color-orange-600);
+  --color-brand-pressed: var(--color-orange-700);
+  --color-brand-text: var(--color-orange-600);
   --color-brand-foreground: var(--color-text-inverse);
 
-  /* Amber (warnings + secondary data only) */
-  --color-amber-tint-semantic: var(--color-amber-tint);
-  --color-amber-semantic: var(--color-amber-500);
-  --color-amber-hover-semantic: var(--color-amber-600);
-  --color-amber-text-semantic: var(--color-amber-text);
+  /* Secondary Blue accent */
+  --color-accent-tint: var(--color-blue-tint);
+  --color-accent: var(--color-blue-500);
+  --color-accent-hover: var(--color-blue-600);
+  --color-accent-text: var(--color-blue-600);
+  --color-accent-foreground: var(--color-text-inverse);
+
+  /* Dark Navy surface (hero, dark cards) */
+  --color-dark-surface-brand: var(--color-navy-500);
+  --color-dark-surface-brand-subtle: var(--color-navy-50);
 
   /* Functional / semantic status */
   --color-success-tint: var(--color-green-tint);
@@ -129,7 +149,7 @@
   --color-background: var(--color-bg-page);
   --color-foreground: var(--color-text-primary);
 
-  --color-primary: var(--color-blue-500);
+  --color-primary: var(--color-orange-500);
   --color-primary-foreground: var(--btn-primary-text);
 
   --color-secondary: var(--color-bg-subtle);
@@ -139,7 +159,7 @@
 
   --color-border: var(--color-stroke-default);
   --color-input: var(--color-stroke-default);
-  --color-ring: var(--color-blue-500);
+  --color-ring: var(--color-orange-500);
 
   /* SPACING — strict 4px base unit
      Every gap, margin, and padding is a multiple of 4. */
@@ -179,8 +199,8 @@
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06); /* subtle card lift */
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08); /* dropdowns, tooltips */
   --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.1); /* modals, command palette */
-  --shadow-focus: 0 0 0 3px rgba(39, 74, 254, 0.25); /* brand focus ring */
-  --shadow-focus-amber: 0 0 0 3px rgba(232, 146, 10, 0.2); /* amber focus ring */
+  --shadow-focus: 0 0 0 3px rgba(246, 93, 1, 0.25); /* orange brand focus ring */
+  --shadow-focus-amber: 0 0 0 3px rgba(246, 93, 1, 0.2); /* orange brand focus ring */
   --shadow-focus-neutral: 0 0 0 3px rgba(0, 0, 0, 0.1); /* neutral focus ring */
   --shadow-focus-danger: 0 0 0 3px rgba(196, 43, 43, 0.15); /* error focus ring */
 
@@ -326,35 +346,35 @@
    themes.css overrides these for dark mode. */
 
 :root {
-  /* Backgrounds */
-  --color-bg-page: #f7f7f6;
+  /* Backgrounds — warm off-white palette matching #F4F2ED brand */
+  --color-bg-page: #f4f2ed;
   --color-bg-surface: #ffffff;
-  --color-bg-subtle: #f1f1f0;
-  --color-bg-muted: #e8e8e7;
+  --color-bg-subtle: #faf9f7;
+  --color-bg-muted: #e8e5dd;
 
   /* Strokes */
-  --color-stroke-default: #ebebea;
-  --color-stroke-strong: #d4d4d3;
+  --color-stroke-default: #e8e5dd;
+  --color-stroke-strong: #d8d4cb;
 
   /* Text */
   --color-on-brand-bg: #ffffff;
-  --color-text-primary: #1a1a19;
-  --color-text-secondary: #474747;
-  --color-text-muted: #6b6b68;
+  --color-text-primary: #1e212b;
+  --color-text-secondary: #474b57;
+  --color-text-muted: #8b909a;
   --color-text-inverse: #ffffff;
 
-  /* Brand blue */
-  --color-brand-tint: #eaf0ff;
-  --color-brand: #274afe;
-  --color-brand-hover: #1a3de8;
-  --color-brand-pressed: #1231cc;
-  --color-brand-text: #1a3de8;
+  /* Brand Orange — #F65D01 */
+  --color-brand-tint: #fff0e6;
+  --color-brand: #f65d01;
+  --color-brand-hover: #d94e00;
+  --color-brand-pressed: #b84200;
+  --color-brand-text: #d94e00;
 
-  /* Amber */
-  --color-amber-tint: #fff3df;
-  --color-amber: #e8920a;
-  --color-amber-hover: #c87a00;
-  --color-amber-text: #a06200;
+  /* Secondary Blue accent — #3D7EB8 */
+  --color-accent-tint: #e8f1f9;
+  --color-accent: #3d7eb8;
+  --color-accent-hover: #2f6699;
+  --color-accent-text: #2f6699;
 
   /* Status */
   --color-success-tint: #edfaf3;
@@ -368,8 +388,8 @@
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
   --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.1);
-  --shadow-focus: 0 0 0 3px rgba(39, 74, 254, 0.25);
-  --shadow-focus-amber: 0 0 0 3px rgba(232, 146, 10, 0.2);
+  --shadow-focus: 0 0 0 3px rgba(246, 93, 1, 0.25);
+  --shadow-focus-amber: 0 0 0 3px rgba(246, 93, 1, 0.2);
   --shadow-focus-neutral: 0 0 0 3px rgba(0, 0, 0, 0.1);
   --shadow-focus-danger: 0 0 0 3px rgba(196, 43, 43, 0.15);
 

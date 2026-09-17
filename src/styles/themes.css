@@ -6,29 +6,31 @@
 
 @media (prefers-color-scheme: dark) {
   :root:not(.light) {
-    --color-bg-page: #080a0a;
-    --color-bg-surface: #1c1c1b;
-    --color-bg-subtle: #242423;
-    --color-bg-muted: #2e2e2c;
+    --color-bg-page: #0e0f15;
+    --color-bg-surface: #1e212b;
+    --color-bg-subtle: #252839;
+    --color-bg-muted: #2a2e3d;
 
-    --color-stroke-default: #2e2e2c;
-    --color-stroke-strong: #3d3d3b;
+    --color-stroke-default: #2a2e3d;
+    --color-stroke-strong: #363a4a;
 
-    --color-text-primary: #f0f0ef;
-    --color-text-secondary: #a8a8a4;
-    --color-text-muted: #6b6b68;
-    --color-text-inverse: #1a1a19;
+    --color-text-primary: #f0ede8;
+    --color-text-secondary: #8b909a;
+    --color-text-muted: #5a5f6b;
+    --color-text-inverse: #1e212b;
 
-    --color-brand-tint: #eaf0ff;
-    --color-brand: #274afe;
-    --color-brand-hover: #1a3de8;
-    --color-brand-pressed: #1231cc;
-    --color-brand-text: #1a3de8;
+    /* Brand Orange stays vivid in dark mode */
+    --color-brand-tint: #3d1800;
+    --color-brand: #f65d01;
+    --color-brand-hover: #ff7a2e;
+    --color-brand-pressed: #d94e00;
+    --color-brand-text: #ff7a2e;
 
-    --color-amber-tint: #2a1f08;
-    --color-amber: #ffb340;
-    --color-amber-hover: #e8a030;
-    --color-amber-text: #ffc060;
+    /* Blue accent in dark mode */
+    --color-accent-tint: #0d2237;
+    --color-accent: #6aa0cc;
+    --color-accent-hover: #8fb8da;
+    --color-accent-text: #8fb8da;
 
     --color-success-tint: #0d2419;
     --color-success: #3dcb84;
@@ -37,37 +39,39 @@
     --color-danger-tint: #260d0d;
     --color-danger: #f07070;
 
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
-    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
-    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.4);
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
   }
 }
 
 /* Class-based dark mode (for manual toggle via <html class="dark">) */
 .dark {
-  --color-bg-page: #080a0a;
-  --color-bg-surface: #1c1c1b;
-  --color-bg-subtle: #242423;
-  --color-bg-muted: #2e2e2c;
+  --color-bg-page: #0e0f15;
+  --color-bg-surface: #1e212b;
+  --color-bg-subtle: #252839;
+  --color-bg-muted: #2a2e3d;
 
-  --color-stroke-default: #2e2e2c;
-  --color-stroke-strong: #3d3d3b;
+  --color-stroke-default: #2a2e3d;
+  --color-stroke-strong: #363a4a;
 
-  --color-text-primary: #f0f0ef;
-  --color-text-secondary: #a8a8a4;
-  --color-text-muted: #6b6b68;
-  --color-text-inverse: #1a1a19;
+  --color-text-primary: #f0ede8;
+  --color-text-secondary: #8b909a;
+  --color-text-muted: #5a5f6b;
+  --color-text-inverse: #1e212b;
 
-  --color-brand-tint: #eaf0ff;
-  --color-brand: #274afe;
-  --color-brand-hover: #1a3de8;
-  --color-brand-pressed: #1231cc;
-  --color-brand-text: #1a3de8;
+  /* Brand Orange stays vivid in dark mode */
+  --color-brand-tint: #3d1800;
+  --color-brand: #f65d01;
+  --color-brand-hover: #ff7a2e;
+  --color-brand-pressed: #d94e00;
+  --color-brand-text: #ff7a2e;
 
-  --color-amber-tint: #2a1f08;
-  --color-amber: #ffb340;
-  --color-amber-hover: #e8a030;
-  --color-amber-text: #ffc060;
+  /* Blue accent in dark mode */
+  --color-accent-tint: #0d2237;
+  --color-accent: #6aa0cc;
+  --color-accent-hover: #8fb8da;
+  --color-accent-text: #8fb8da;
 
   --color-success-tint: #0d2419;
   --color-success: #3dcb84;
@@ -76,7 +80,7 @@
   --color-danger-tint: #260d0d;
   --color-danger: #f07070;
 
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
-  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.4);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
 }

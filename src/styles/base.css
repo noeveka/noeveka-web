@@ -128,7 +128,7 @@ a.text-secondary {
   }
 
   ::selection {
-    background-color: rgba(39, 74, 254, 0.15);
+    background-color: rgba(246, 93, 1, 0.15);
     color: var(--color-text-primary);
   }
 
