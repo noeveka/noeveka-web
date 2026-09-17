@@ -1,0 +1,21 @@
+/* FONTS
+   Local self-hosted fonts for Exaannum.
+   Uses the variable font for full weight range in a single file.
+   Reference: src/assets/fonts/Lexend_Deca/ 
+*/
+
+/*
+  Lexend Deca — Primary typeface
+  wght axis: 100–900
+  format: truetype (variable)
+  Used on: body, headings, buttons, inputs — everything UI.
+  Never use for: code, API keys, file paths (use JetBrains Mono).
+*/
+@font-face {
+  font-family: "Lexend Deca";
+  src: url("../assets/fonts/Lexend_Deca/LexendDeca-VariableFont_wght.ttf")
+    format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}

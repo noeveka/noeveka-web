@@ -1,0 +1,379 @@
+/* DESIGN TOKENS
+   
+   Three layers, strict dependency order:
+   
+     Layer 1 → PRIMITIVES     Raw color values (never use in JSX)
+     Layer 2 → SEMANTICS      Purpose-driven aliases (use these!)
+     Layer 3 → COMPONENTS     Per-component settings
+   
+   HOW IT WORKS:
+   - @theme { } registers tokens into Tailwind (bg-page, text-primary, etc.)
+   - :root { } sets the actual light-mode values as CSS variables
+   - themes.css overrides the :root values for dark mode */
+
+@theme {
+  /* LAYER 1: PRIMITIVE PALETTE
+     Raw color values — NEVER use directly in JSX.
+     These are the raw ingredients for semantic tokens. */
+
+  /* Neutral ramp — warm off-white to near-black */
+  --color-neutral-0: #ffffff;
+  --color-neutral-50: #f7f7f6;
+  --color-neutral-100: #f1f1f0;
+  --color-neutral-200: #e8e8e7;
+  --color-neutral-300: #ebebea;
+  --color-neutral-400: #d4d4d3;
+  --color-neutral-500: #9b9b97;
+  --color-neutral-600: #6b6b68;
+  --color-neutral-900: #1a1a19;
+
+  /* Brand blue ramp */
+  --color-blue-tint: #eaf0ff;
+  --color-blue-500: #274afe;
+  --color-blue-600: #1a3de8;
+  --color-blue-700: #1231cc;
+  --color-blue-dark: #0d1a4a;
+  --color-blue-light: #5b7cff;
+  --color-blue-lighter: #7b96ff;
+
+  /* Amber ramp */
+  --color-amber-tint: #fff3df;
+  --color-amber-500: #e8920a;
+  --color-amber-600: #c87a00;
+  --color-amber-text: #a06200;
+  --color-amber-dark: #2a1f08;
+  --color-amber-light: #ffb340;
+  --color-amber-lighter: #ffc060;
+
+  /* Semantic status primitives */
+  --color-green-tint: #edfaf3;
+  --color-green-500: #1b7f4f;
+  --color-green-dark: #0d2419;
+  --color-green-light: #3dcb84;
+
+  --color-warning-tint: #fff8ec;
+  --color-warning-500: #b05a00;
+  --color-warning-dark: #271a08;
+  --color-warning-light: #e8921a;
+
+  --color-red-tint: #feecec;
+  --color-red-500: #c42b2b;
+  --color-red-dark: #260d0d;
+  --color-red-light: #f07070;
+
+  /* Dark mode neutral ramp */
+  --color-dark-bg: #111110;
+  --color-dark-surface: #1c1c1b;
+  --color-dark-subtle: #242423;
+  --color-dark-muted: #2e2e2c;
+  --color-dark-stroke: #3d3d3b;
+  --color-dark-text: #f0f0ef;
+  --color-dark-text-2: #a8a8a4;
+
+  /* LAYER 2: SEMANTIC TOKENS
+     Purpose-driven — USE THESE in JSX.
+     Each background has a matching "-foreground" for text. */
+
+  /* Backgrounds + their foreground text colors */
+  --color-page: var(--color-bg-page);
+  --color-page-foreground: var(--color-text-primary);
+
+  --color-surface: var(--color-bg-surface);
+  --color-surface-foreground: var(--color-text-primary);
+
+  --color-subtle: var(--color-bg-subtle);
+  --color-subtle-foreground: var(--color-text-secondary);
+
+  --color-muted: var(--color-bg-muted);
+  --color-muted-foreground: var(--color-text-muted);
+
+  /* Strokes / borders */
+  --color-stroke-default: #ebebea;
+  --color-stroke-strong: #d4d4d3;
+
+  /* Text (standalone, when not pairing with a specific background) */
+  --color-text-primary: var(--color-text-primary);
+  --color-text-secondary: var(--color-text-secondary);
+  --color-text-muted: var(--color-text-muted);
+  --color-text-inverse: var(--color-text-inverse);
+  --color-on-brand-bg: var(--color-on-brand-bg);
+
+  /* Brand blue (primary interactive color) */
+  --color-brand-tint: var(--color-blue-tint);
+  --color-brand: var(--color-blue-500);
+  --color-brand-hover: var(--color-blue-600);
+  --color-brand-pressed: var(--color-blue-700);
+  --color-brand-text: var(--color-blue-600);
+  --color-brand-foreground: var(--color-text-inverse);
+
+  /* Amber (warnings + secondary data only) */
+  --color-amber-tint-semantic: var(--color-amber-tint);
+  --color-amber-semantic: var(--color-amber-500);
+  --color-amber-hover-semantic: var(--color-amber-600);
+  --color-amber-text-semantic: var(--color-amber-text);
+
+  /* Functional / semantic status */
+  --color-success-tint: var(--color-green-tint);
+  --color-success: var(--color-green-500);
+  --color-success-foreground: var(--color-text-inverse);
+  --color-warning-tint-semantic: var(--color-warning-tint);
+  --color-warning: var(--color-warning-500);
+  --color-danger-tint: var(--color-red-tint);
+  --color-danger: var(--color-red-500);
+  --color-danger-foreground: var(--color-text-inverse);
+
+  /* SHADCN COMPATIBILITY ALIASES
+     These map our tokens to the names shadcn
+     components expect (bg-primary, text-foreground, etc.) */
+
+  --color-background: var(--color-bg-page);
+  --color-foreground: var(--color-text-primary);
+
+  --color-primary: var(--color-blue-500);
+  --color-primary-foreground: var(--btn-primary-text);
+
+  --color-secondary: var(--color-bg-subtle);
+  --color-secondary-foreground: var(--color-text-primary);
+
+  --color-destructive: var(--color-red-500);
+
+  --color-border: var(--color-stroke-default);
+  --color-input: var(--color-stroke-default);
+  --color-ring: var(--color-blue-500);
+
+  /* SPACING — strict 4px base unit
+     Every gap, margin, and padding is a multiple of 4. */
+
+  --spacing-px: 1px;
+  --spacing-0: 0px;
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+  --spacing-4: 16px;
+  --spacing-5: 20px;
+  --spacing-6: 24px;
+  --spacing-8: 32px;
+  --spacing-10: 40px;
+  --spacing-12: 48px;
+  --spacing-16: 64px;
+  --spacing-20: 80px;
+  --spacing-24: 96px;
+
+  /* BORDER RADIUS */
+  --radius-none: 0px;
+  --radius-sm: 4px; /* chips, badges, tags, small buttons */
+  --radius-md: 8px; /* inputs, buttons, dropdowns, compact cards */
+  --radius-lg: 12px; /* standard cards, panels, modals */
+  --radius-xl: 16px; /* large modals, floating panels, empty states */
+  --radius-full: 9999px; /* pills, avatars, toggles */
+
+  /* BORDER WIDTHS */
+  --border-default: 1px;
+  --border-strong: 1.5px;
+  --border-accent: 2px; /* active nav left-edge indicator */
+
+  /* SHADOWS — elevation system
+     Shadows only exist for elevation and focus.
+     Never use decoratively. */
+  --shadow-none: none;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06); /* subtle card lift */
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08); /* dropdowns, tooltips */
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.1); /* modals, command palette */
+  --shadow-focus: 0 0 0 3px rgba(39, 74, 254, 0.25); /* brand focus ring */
+  --shadow-focus-amber: 0 0 0 3px rgba(232, 146, 10, 0.2); /* amber focus ring */
+  --shadow-focus-neutral: 0 0 0 3px rgba(0, 0, 0, 0.1); /* neutral focus ring */
+  --shadow-focus-danger: 0 0 0 3px rgba(196, 43, 43, 0.15); /* error focus ring */
+
+  /* MOTION — conservative, state-change only
+      Never animate layout properties.
+      Only: opacity, transform, background-color,
+            border-color, box-shadow, color. */
+  --duration-fast: 100ms;
+  --duration-default: 150ms;
+  --duration-slow: 250ms;
+  --duration-chart: 400ms;
+  --easing-default: ease;
+  --easing-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+  --transition-fast: all 100ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Z-INDEX */
+  --z-index-below: -1;
+  --z-index-base: 0;
+  --z-index-raised: 1;
+  --z-index-dropdown: 100;
+  --z-index-sticky: 200;
+  --z-index-overlay: 300;
+  --z-index-modal: 400;
+  --z-index-popover: 500;
+  --z-index-toast: 600;
+
+  /* LAYER 3: COMPONENT TOKENS
+     Per-component settings that reference semantic tokens. */
+
+  /* Button */
+  --btn-height-sm: 30px;
+  --btn-height-md: 36px;
+  --btn-height-lg: 44px;
+  --btn-radius: var(--radius-md);
+  --btn-font-weight: var(--font-weight-medium);
+
+  --btn-primary-bg: var(--color-brand);
+  --btn-primary-bg-hover: var(--color-brand-hover);
+  --btn-primary-bg-pressed: var(--color-brand-pressed);
+  --btn-primary-text: var(--color-neutral-0);
+
+  --btn-secondary-bg: var(--color-bg-surface);
+  --btn-secondary-bg-hover: var(--color-bg-subtle);
+  --btn-secondary-text: var(--color-text-primary);
+  --btn-secondary-border: var(--color-stroke-default);
+
+  --btn-ghost-text: var(--color-text-secondary);
+  --btn-ghost-text-hover: var(--color-text-primary);
+  --btn-ghost-bg-hover: var(--color-bg-subtle);
+
+  --btn-danger-bg: var(--color-bg-surface);
+  --btn-danger-bg-hover: var(--color-danger-tint);
+  --btn-danger-text: var(--color-danger);
+  --btn-danger-border: var(--color-danger);
+
+  /* Input */
+  --input-height-sm: 30px;
+  --input-height-md: 36px;
+  --input-height-lg: 44px;
+  --input-radius: var(--radius-md);
+  --input-bg: var(--color-bg-surface);
+  --input-border: var(--color-stroke-default);
+  --input-border-hover: var(--color-stroke-strong);
+  --input-border-focus: var(--color-brand);
+  --input-border-error: var(--color-danger);
+  --input-text: var(--color-text-primary);
+  --input-placeholder: var(--color-text-muted);
+
+  /* Card */
+  --card-bg: var(--color-bg-surface);
+  --card-border: var(--color-stroke-default);
+  --card-radius: var(--radius-lg);
+  --card-radius-compact: var(--radius-md);
+  --card-padding: var(--spacing-6);
+  --card-padding-compact: var(--spacing-4);
+  --card-shadow: var(--shadow-none);
+  --card-shadow-hover: var(--shadow-sm);
+
+  /* Badge / Status chip */
+  --badge-height: 22px;
+  --badge-radius: var(--radius-sm);
+  --badge-font-size: var(--text-micro);
+  --badge-font-weight: var(--font-weight-medium);
+
+  /* Category chip (clickable filter) */
+  --chip-height: 28px;
+  --chip-radius: var(--radius-full);
+  --chip-font-size: var(--text-sm);
+
+  /* Sidebar */
+  --sidebar-width: 224px;
+  --sidebar-bg: var(--color-bg-surface);
+  --sidebar-border: var(--color-stroke-default);
+
+  /* Nav item */
+  --nav-item-height: 36px;
+  --nav-item-radius: var(--radius-md);
+
+  /* Tooltip */
+  --tooltip-bg: var(--color-text-primary);
+  --tooltip-text: var(--color-text-inverse);
+  --tooltip-radius: var(--radius-sm);
+  --tooltip-font-size: var(--text-micro);
+  --tooltip-padding: 6px 10px;
+  --tooltip-shadow: var(--shadow-md);
+
+  /* Table */
+  --table-radius: var(--radius-lg);
+  --table-header-height: 36px;
+  --table-row-height: 44px;
+
+  /* Modal */
+  --modal-radius: var(--radius-xl);
+  --modal-padding: 28px;
+  --modal-shadow: var(--shadow-lg);
+  --modal-max-width: 480px;
+  --modal-max-width-wide: 640px;
+  --modal-overlay: rgba(0, 0, 0, 0.4);
+
+  /* Toggle / Switch */
+  --toggle-width: 36px;
+  --toggle-height: 20px;
+  --toggle-thumb-size: 16px;
+  --toggle-radius: var(--radius-full);
+
+  /* Progress bar */
+  --progress-height: 6px;
+  --progress-radius: var(--radius-full);
+  --progress-track-bg: var(--color-bg-muted);
+
+  /* Stat / Metric tile */
+  --stat-label-size: var(--text-micro);
+  --stat-value-size: var(--text-display);
+  --stat-padding: var(--spacing-5);
+}
+
+/* :root — LIGHT MODE VALUES (the source of truth)
+   These are the actual color values.
+   The @theme semantic tokens above reference these.
+   themes.css overrides these for dark mode. */
+
+:root {
+  /* Backgrounds */
+  --color-bg-page: #f7f7f6;
+  --color-bg-surface: #ffffff;
+  --color-bg-subtle: #f1f1f0;
+  --color-bg-muted: #e8e8e7;
+
+  /* Strokes */
+  --color-stroke-default: #ebebea;
+  --color-stroke-strong: #d4d4d3;
+
+  /* Text */
+  --color-on-brand-bg: #ffffff;
+  --color-text-primary: #1a1a19;
+  --color-text-secondary: #474747;
+  --color-text-muted: #6b6b68;
+  --color-text-inverse: #ffffff;
+
+  /* Brand blue */
+  --color-brand-tint: #eaf0ff;
+  --color-brand: #274afe;
+  --color-brand-hover: #1a3de8;
+  --color-brand-pressed: #1231cc;
+  --color-brand-text: #1a3de8;
+
+  /* Amber */
+  --color-amber-tint: #fff3df;
+  --color-amber: #e8920a;
+  --color-amber-hover: #c87a00;
+  --color-amber-text: #a06200;
+
+  /* Status */
+  --color-success-tint: #edfaf3;
+  --color-success: #1b7f4f;
+  --color-warning-tint: #fff8ec;
+  --color-warning: #b05a00;
+  --color-danger-tint: #feecec;
+  --color-danger: #c42b2b;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.1);
+  --shadow-focus: 0 0 0 3px rgba(39, 74, 254, 0.25);
+  --shadow-focus-amber: 0 0 0 3px rgba(232, 146, 10, 0.2);
+  --shadow-focus-neutral: 0 0 0 3px rgba(0, 0, 0, 0.1);
+  --shadow-focus-danger: 0 0 0 3px rgba(196, 43, 43, 0.15);
+
+  /* Layout */
+  --sidebar-width: 224px;
+  --card-radius: 12px;
+}

@@ -1,0 +1,168 @@
+@layer base {
+  /* BASE STYLES + RESETS
+   Global rules applied without any className. */
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+    text-size-adjust: 100%;
+  }
+
+  /* Applied Lexend Deca globally via body — flows down to every element */
+  body {
+    font-family: var(--font-primary);
+    font-size: var(--text-base); /* 14px */
+    font-weight: 400;
+    color: var(--color-text-primary);
+    background-color: var(--color-bg-page);
+    line-height: 1.6;
+  }
+
+  /* Headings — sentence case, no ALL CAPS, max weight 500 */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-primary);
+    font-weight: 500;
+    line-height: 1.3;
+    color: var(--color-text-primary);
+    letter-spacing: -0.01em;
+  }
+
+  h1 {
+    font-size: var(--text-h1); /* 24px */
+  }
+  h2 {
+    font-size: var(--text-h2); /* 18px */
+  }
+  h3 {
+    font-size: var(--text-h3); /* 15px */
+  }
+  h4 {
+    font-size: var(--text-base); /* 14px */
+  }
+  h5 {
+    font-size: var(--text-sm); /* 13px */
+  }
+  h6 {
+    font-size: var(--text-micro); /* 11px */
+  }
+
+  /* Links — only style inline content links blue.
+   Nav links, buttons, and cards set their own color via Tailwind. */
+  a {
+    text-decoration: none;
+    transition: color var(--duration-fast) var(--easing-default);
+  }
+
+  /* Inline links inside content (paragraphs, lists, etc.) get brand blue */
+  p a,
+  li a,
+  td a,
+  .prose a {
+    color: var(--color-brand-text);
+  }
+  p a:hover,
+  li a:hover,
+  td a:hover,
+  .prose a:hover {
+    color: var(--color-brand-hover);
+  }
+
+  /* Explicit overrides for anchor tags styled with design system text colors */
+  /* a.text-primary {
+  color: var(--color-text-primary);
+}
+a.text-secondary {
+  color: var(--color-text-secondary);
+} */
+
+  /* Monospace elements — JetBrains Mono only for code/keys/paths */
+  code,
+  pre,
+  kbd {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+  }
+
+  img,
+  video {
+    max-width: 100%;
+    display: block;
+  }
+
+  /* Focus ring — every interactive element must have one */
+  :focus-visible {
+    outline: none;
+    box-shadow: var(--shadow-focus-neutral);
+    border-radius: var(--radius-sm);
+  }
+
+  /* Respect user motion preference */
+  @media (prefers-reduced-motion: no-preference) {
+    * {
+      transition-duration: var(--duration-default);
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+
+  ::selection {
+    background-color: rgba(39, 74, 254, 0.15);
+    color: var(--color-text-primary);
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: var(--color-bg-subtle);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-stroke-strong);
+    border-radius: var(--radius-full);
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-text-muted);
+  }
+
+  /* Keyframes */
+
+  /* Recording pulse — only for active session indicator (one per screen max) */
+  @keyframes pulse {
+    0%,
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.6;
+      transform: scale(0.85);
+    }
+  }
+  .pulse-recording {
+    animation: pulse 1.8s ease-in-out infinite;
+  }
+}

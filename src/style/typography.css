@@ -1,0 +1,50 @@
+/* ============================================================
+   TYPOGRAPHY
+   Type scale, weights, line heights, and letter spacing.
+   All typographic decisions live here — nowhere else.
+   ============================================================ */
+
+@theme {
+  /* FONT FAMILIES
+     Primary: Lexend Deca (self-hosted variable font)
+     Mono:    JetBrains Mono (code, keys, file paths only) */
+
+  --font-sans:
+    "Lexend Deca", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", monospace;
+
+  /* TYPE SCALE — matches design system tokens */
+  --text-micro: 0.6875rem; /* 11px — absolute minimum */
+  --text-sm: 0.8125rem; /* 13px — captions, secondary, mono */
+  --text-base: 0.875rem; /* 14px — body copy, table cells */
+  --text-h3: 0.9375rem; /* 15px — sub-section labels */
+  --text-h2: 1.125rem; /* 18px — card headings, panel titles */
+  --text-h1: 1.5rem; /* 24px — section headings */
+  --text-display: 2rem; /* 32px — page titles, hero numbers */
+
+  /* FONT WEIGHTS — never use 700/800 in this system */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+
+  /* LINE HEIGHTS */
+  --line-height-tight: 1.2;
+  --line-height-snug: 1.3;
+  --line-height-normal: 1.4;
+  --line-height-relaxed: 1.5;
+  --line-height-loose: 1.6;
+
+  /* LETTER SPACING */
+  --letter-spacing-tight: -0.01em; /* headings h1 and above */
+  --letter-spacing-normal: 0em; /* body and below */
+  --letter-spacing-label: 0.06em; /* uppercase legend labels, nav section labels */
+  --letter-spacing-badge: 0.03em; /* status badges */
+  --letter-spacing-table: 0.04em; /* table header cells */
+}
+
+/* :root alias so var(--font-primary) works in inline styles too */
+:root {
+  --font-primary:
+    "Lexend Deca", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", "Fira Code", monospace;
+}

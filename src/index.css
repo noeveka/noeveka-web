@@ -1,1 +1,21 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*  NOEVEKA DESIGN SYSTEM IMPORTS
+    Load order matters — each file depends on the ones above it:
+     1. fonts.css       → @font-face declarations
+     2. typography.css   → type scale, weights, line heights
+     3. tokens.css       → colors, spacing, shadows, components
+     4. themes.css       → dark mode overrides
+     5. base.css         → global resets + element defaults
+     6. components.css   → ready-made component classes */
+
+@import "./styles/typography.css";
+@import "./styles/fonts.css";
+@import "./styles/tokens.css";
+@import "./styles/themes.css";
+@import "./styles/base.css";
+@import "./styles/components.css";

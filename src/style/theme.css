@@ -1,0 +1,82 @@
+/* THEMES — DARK MODE OVERRIDES
+   Only semantic tokens get overridden.
+   Supports two modes:
+   1. System preference via @media (prefers-color-scheme: dark)
+   2. Manual toggle via <html class="dark"> */
+
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    --color-bg-page: #080a0a;
+    --color-bg-surface: #1c1c1b;
+    --color-bg-subtle: #242423;
+    --color-bg-muted: #2e2e2c;
+
+    --color-stroke-default: #2e2e2c;
+    --color-stroke-strong: #3d3d3b;
+
+    --color-text-primary: #f0f0ef;
+    --color-text-secondary: #a8a8a4;
+    --color-text-muted: #6b6b68;
+    --color-text-inverse: #1a1a19;
+
+    --color-brand-tint: #eaf0ff;
+    --color-brand: #274afe;
+    --color-brand-hover: #1a3de8;
+    --color-brand-pressed: #1231cc;
+    --color-brand-text: #1a3de8;
+
+    --color-amber-tint: #2a1f08;
+    --color-amber: #ffb340;
+    --color-amber-hover: #e8a030;
+    --color-amber-text: #ffc060;
+
+    --color-success-tint: #0d2419;
+    --color-success: #3dcb84;
+    --color-warning-tint: #271a08;
+    --color-warning: #e8921a;
+    --color-danger-tint: #260d0d;
+    --color-danger: #f07070;
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
+    --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.4);
+  }
+}
+
+/* Class-based dark mode (for manual toggle via <html class="dark">) */
+.dark {
+  --color-bg-page: #080a0a;
+  --color-bg-surface: #1c1c1b;
+  --color-bg-subtle: #242423;
+  --color-bg-muted: #2e2e2c;
+
+  --color-stroke-default: #2e2e2c;
+  --color-stroke-strong: #3d3d3b;
+
+  --color-text-primary: #f0f0ef;
+  --color-text-secondary: #a8a8a4;
+  --color-text-muted: #6b6b68;
+  --color-text-inverse: #1a1a19;
+
+  --color-brand-tint: #eaf0ff;
+  --color-brand: #274afe;
+  --color-brand-hover: #1a3de8;
+  --color-brand-pressed: #1231cc;
+  --color-brand-text: #1a3de8;
+
+  --color-amber-tint: #2a1f08;
+  --color-amber: #ffb340;
+  --color-amber-hover: #e8a030;
+  --color-amber-text: #ffc060;
+
+  --color-success-tint: #0d2419;
+  --color-success: #3dcb84;
+  --color-warning-tint: #271a08;
+  --color-warning: #e8921a;
+  --color-danger-tint: #260d0d;
+  --color-danger: #f07070;
+
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.2);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.4);
+}
