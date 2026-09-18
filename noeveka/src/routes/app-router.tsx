@@ -6,9 +6,9 @@ import { NotFoundPage } from "@/pages/errors";
 
 // import LandingPage from "@/pages/landing/page";
 
-import { ProtectedRoute } from "./protected-route";
-import { PublicOnlyRoute } from "./public-only-route";
-import { routesRegistry } from "./routes-config";
+// import { ProtectedRoute } from "./protected-route";
+// import { PublicOnlyRoute } from "./public-only-route";
+// import { routesRegistry } from "./routes-config";
 
 export function AppRouter() {
   //   const [checkingSession, setCheckingSession] = React.useState(true);
@@ -43,24 +43,7 @@ export function AppRouter() {
   return (
     <Routes>
       {/* Public landing page */}
-      <Route path={routesRegistry.landing} element={<LandingPage />} />
-
-      {/* Protected dashboard test route */}
-      <Route element={<ProtectedRoute />}>
-        {/* <Route path={routesRegistry.overview} element={<OverviewPage />} /> */}
-      </Route>
-
-      {/* Auth — public only, redirects if logged in */}
-      <Route element={<PublicOnlyRoute />}>
-        {/* <Route element={<AuthLayout />}>
-          <Route path={routesRegistry.login} element={<LoginPage />} />
-          <Route path={routesRegistry.signup} element={<SignupPage />} />
-          <Route
-            path={routesRegistry.forgotPassword}
-            element={<ForgotPasswordPage />}
-          />
-        </Route> */}
-      </Route>
+      {/* <Route path={routesRegistry.landing} element={<LandingPage />} /> */}
 
       {/* Catch-all */}
       <Route path="*" element={<NotFoundPage />} />
