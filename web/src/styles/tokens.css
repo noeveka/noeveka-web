@@ -396,4 +396,5 @@
   /* Layout */
   --sidebar-width: 224px;
   --card-radius: 12px;
+  --container-max: 1200px; /* landing + marketing page max-width */
 }

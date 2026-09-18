@@ -3,12 +3,11 @@ import { Route, Routes } from "react-router";
 
 // import logoUrl from "@/assets/logo/exaannum-logo-fullcolor.svg";
 import { NotFoundPage } from "@/pages/errors";
-
-// import LandingPage from "@/pages/landing/page";
+import LandingPage from "@/pages/landing/page";
 
 // import { ProtectedRoute } from "./protected-route";
 // import { PublicOnlyRoute } from "./public-only-route";
-// import { routesRegistry } from "./routes-config";
+import { routesRegistry } from "./routes-config";
 
 export function AppRouter() {
   //   const [checkingSession, setCheckingSession] = React.useState(true);
@@ -42,8 +41,8 @@ export function AppRouter() {
 
   return (
     <Routes>
-      {/* Public landing page */}
-      {/* <Route path={routesRegistry.landing} element={<LandingPage />} /> */}
+      {/* Landing page */}
+      <Route path={routesRegistry.landing} element={<LandingPage />} />
 
       {/* Catch-all */}
       <Route path="*" element={<NotFoundPage />} />
