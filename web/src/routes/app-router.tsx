@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router";
 // import logoUrl from "@/assets/logo/exaannum-logo-fullcolor.svg";
 import { NotFoundPage } from "@/pages/errors";
 import LandingPage from "@/pages/landing/page";
+import AboutPage from "@/pages/about/page";
 
 // import { ProtectedRoute } from "./protected-route";
 // import { PublicOnlyRoute } from "./public-only-route";
@@ -43,6 +44,9 @@ export function AppRouter() {
     <Routes>
       {/* Landing page */}
       <Route path={routesRegistry.landing} element={<LandingPage />} />
+
+      {/* About page */}
+      <Route path={routesRegistry.about} element={<AboutPage />} />
 
       {/* Catch-all */}
       <Route path="*" element={<NotFoundPage />} />

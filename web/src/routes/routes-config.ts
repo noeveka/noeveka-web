@@ -1,6 +1,7 @@
 export const routesRegistry = {
   // public
   landing: "/",
+  about: "/about",
   privacy: "/privacy",
   terms: "/terms",
   docs: "/docs",
@@ -12,9 +13,6 @@ export const routesRegistry = {
   forgotPassword: "/forgot-password",
 
   // protected — dashboard
-  overview: "/overview",
-  sessions: "/sessions",
-  analytics: "/analytics",
   provenance: "/provenance",
   settings: "/settings",
 } as const;
