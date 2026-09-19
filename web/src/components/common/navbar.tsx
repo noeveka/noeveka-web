@@ -1,20 +1,42 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router";
-
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, Menu, X } from "lucide-react";
+import { getSiteSettings, urlFor } from "@/lib/sanity";
+import { NAVBAR_CONFIG } from "@/config/navbar.config";
 
-const LINKS = [
-  { label: "Home", href: "/" },
-  { label: "About", href: "/#who-we-are" },
-  { label: "Services", href: "/#what-we-do" },
-  { label: "Resources", href: "/#solutions" },
-  { label: "Contact", href: "/#contact" },
-];
+interface NavItem { label: string; href: string }
+
+interface SiteSettings {
+  logoIcon?: { asset?: unknown; alt?: string };
+  logoText?: { asset?: unknown; alt?: string };
+  navItems?: NavItem[];
+  navCtaText?: string;
+  navCtaLink?: string;
+}
+
+// Fallback links live in @/config/navbar.config.ts
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [settings, setSettings] = useState<SiteSettings | null>(null);
   const { pathname } = useLocation();
+
+  useEffect(() => {
+    getSiteSettings().then(setSettings).catch(console.error);
+  }, []);
+
+  const links = settings?.navItems?.length ? settings.navItems : NAVBAR_CONFIG.navItems;
+  const ctaText = settings?.navCtaText ?? NAVBAR_CONFIG.navCtaText;
+  const ctaLink = settings?.navCtaLink ?? NAVBAR_CONFIG.navCtaLink;
+
+  const logoIconSrc = settings?.logoIcon?.asset
+    ? urlFor(settings.logoIcon).width(96).url()
+    : NAVBAR_CONFIG.logoIconFallbackUrl
+
+  const logoTextSrc = settings?.logoText?.asset
+    ? urlFor(settings.logoText).width(320).url()
+    : NAVBAR_CONFIG.logoTextFallbackUrl;
 
   const isActive = (href: string) => {
     if (href.startsWith("/#") || href.startsWith("#")) return false;
@@ -34,15 +56,15 @@ export default function Navbar() {
         <Link to="/" className="flex items-center gap-1">
           <div className="relative h-10 w-10 shrink-0 sm:h-12 sm:w-12">
             <img
-              src="https://res.cloudinary.com/dd5elqfus/image/upload/v1788154826/noeveka_logo_dark_jph2va.png"
-              alt=""
+              src={logoIconSrc}
+              alt={settings?.logoIcon?.alt }
               className="h-full w-full object-contain"
             />
           </div>
           <div className="relative -ml-2 flex h-12 w-40 items-center sm:h-12 sm:w-56 lg:h-14 lg:w-64">
             <img
-              src="/assets/logos/noeveka_black_text_logo.png"
-              alt="Noeveka"
+              src={logoTextSrc}
+              alt={settings?.logoText?.alt}
               className="h-full w-full object-contain object-left"
             />
           </div>
@@ -50,7 +72,7 @@ export default function Navbar() {
 
         {/* Center: Desktop Nav links */}
         <nav className="absolute left-1/2 hidden -translate-x-1/2 items-center gap-8 lg:flex">
-          {LINKS.map((link, idx) => {
+          {links.map((link, idx) => {
             const active = isActive(link.href);
             return (
               <Link
@@ -81,7 +103,7 @@ export default function Navbar() {
 
         {/* Right: CTA Button */}
         <Link
-          to="/#contact"
+          to={ctaLink}
           className="hidden cursor-pointer items-center gap-2 rounded-full border-none px-5 py-2.5 text-[13px] font-semibold shadow-[0_4px_16px_rgba(246,93,1,0.22)] transition-all lg:inline-flex"
           style={{ background: "var(--color-brand)", color: "#ffffff" }}
           onMouseEnter={(e) => {
@@ -93,7 +115,7 @@ export default function Navbar() {
             e.currentTarget.style.transform = "translateY(0)";
           }}
         >
-          <span>Start a conversation</span>{" "}
+          <span>{ctaText}</span>{" "}
           <ArrowRight className="h-3.5 w-3.5" />
         </Link>
 
@@ -122,7 +144,7 @@ export default function Navbar() {
             transition={{ duration: 0.25, ease: "easeInOut" }}
             className="absolute top-16 right-0 left-0 flex w-full flex-col gap-4 overflow-hidden border-b border-gray-200 bg-white px-6 py-5 shadow-xl lg:hidden"
           >
-            {LINKS.map((link, idx) => (
+            {links.map((link, idx) => (
               <Link
                 key={link.label}
                 to={link.href}
@@ -135,12 +157,12 @@ export default function Navbar() {
             ))}
             <div className="border-t border-gray-100 pt-2">
               <Link
-                to="/#contact"
+                to={ctaLink}
                 onClick={() => setMobileMenuOpen(false)}
                 className="flex items-center justify-center gap-2 rounded-full px-5 py-3 text-sm font-semibold text-white shadow-md transition-colors"
                 style={{ background: "var(--color-brand)" }}
               >
-                <span>Start a conversation</span>
+                <span>{ctaText}</span>
                 <ArrowRight className="h-4 w-4" />
               </Link>
             </div>
