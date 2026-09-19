@@ -223,7 +223,7 @@ export default function Footer() {
                   className="h-full w-full object-contain"
                 />
               </div>
-              <div className="relative -ml-2 flex h-12 w-40 items-center sm:h-12 sm:w-56 lg:h-14 lg:w-64">
+              <div className="relative -ml-2 flex h-14 w-26 items-center sm:h-12 sm:w-32 lg:h-14 lg:w-38">
                 <img
                   src={logoTextSrc}
                   alt={settings?.logoText?.alt ?? FOOTER_CONFIG.logoTextAlt}

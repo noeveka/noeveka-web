@@ -23,7 +23,7 @@ export const NAVBAR_CONFIG = {
   logoIconAlt: "",
 
   /** Text/wordmark logo — used when Sanity logoText image is not yet loaded */
-  logoTextFallbackUrl: "/assets/logos/noeveka_black_text_logo.png",
+  logoTextFallbackUrl: "/assets/logos/noeveka_final_name_logo.png",
   logoTextAlt: "Noeveka",
 
   /** Navigation links */
