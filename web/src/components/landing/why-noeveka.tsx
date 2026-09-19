@@ -1,8 +1,5 @@
-import {
-  ArrowRight, CheckCircle2, MessageSquare, Users, ShieldCheck, TrendingUp, Layers3,
-} from "lucide-react";
-import * as LucideIcons from "lucide-react";
 import { motion } from "framer-motion";
+import { LucideIcon } from "@/components/lucide-icons";
 import { fu, fs, fsl } from "@/lib/motion";
 import { WHY_NOEVEKA_CONFIG } from "@/config/landing/why-noeveka.config";
 
@@ -21,15 +18,7 @@ interface WhyNoevekaProps {
   ctaLink?: string;
 }
 
-const ICON_MAP: Record<string, React.ComponentType<{ className?: string; style?: React.CSSProperties }>> = {
-  ShieldCheck, TrendingUp, Layers3, MessageSquare, Users,
-};
 
-function getIcon(name: string) {
-  return ICON_MAP[name]
-    ?? ((LucideIcons as Record<string, unknown>)[name] as React.ComponentType<{ className?: string; style?: React.CSSProperties }>)
-    ?? ShieldCheck;
-}
 
 export default function WhyNoeveka({
   eyebrow = WHY_NOEVEKA_CONFIG.eyebrow,
@@ -61,7 +50,6 @@ export default function WhyNoeveka({
             </div>
 
             {differentiators.map(({ number, icon, title, desc }, idx) => {
-              const Icon = getIcon(icon);
               return (
                 <motion.div
                   key={title}
@@ -72,11 +60,11 @@ export default function WhyNoeveka({
                 >
                   <span className="absolute top-4 right-5 text-[36px] font-black leading-none select-none pointer-events-none" style={{ color: "rgba(246,93,1,0.07)" }}>{number}</span>
                   <div className="w-10 h-10 rounded-xl flex items-center justify-center shrink-0 mt-0.5" style={{ background: "var(--color-brand-tint)" }}>
-                    <Icon className="w-5 h-5" style={{ color: "var(--color-brand)" }} />
+                    <LucideIcon name={icon} fallback="shield-check" className="w-5 h-5" style={{ color: "var(--color-brand)" }} />
                   </div>
                   <div className="flex-1 min-w-0 pr-10">
                     <div className="flex items-center gap-2 mb-1">
-                      <CheckCircle2 className="w-3.5 h-3.5 shrink-0" style={{ color: "var(--color-brand)" }} />
+                      <LucideIcon name="check-circle-2" className="w-3.5 h-3.5 shrink-0" style={{ color: "var(--color-brand)" }} />
                       <p className="text-[13.5px] font-bold" style={{ color: "var(--color-text-primary)" }}>{title}</p>
                     </div>
                     <p className="text-[12.5px] leading-relaxed" style={{ color: "var(--color-text-muted)" }}>{desc}</p>
@@ -100,11 +88,10 @@ export default function WhyNoeveka({
 
             <motion.div {...fu(0.17)} className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
               {features.map(({ icon, title, desc }) => {
-                const Icon = getIcon(icon);
                 return (
                   <div key={title} className="p-5 rounded-xl flex flex-col gap-3" style={{ background: "var(--color-bg-surface)", border: "1px solid var(--color-stroke-default)" }}>
                     <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ background: "var(--color-brand-tint)" }}>
-                      <Icon className="w-5 h-5" style={{ color: "var(--color-brand)" }} />
+                      <LucideIcon name={icon} fallback="shield-check" className="w-5 h-5" style={{ color: "var(--color-brand)" }} />
                     </div>
                     <div>
                       <p className="text-[13.5px] font-bold mb-1" style={{ color: "var(--color-text-primary)" }}>{title}</p>
@@ -118,11 +105,11 @@ export default function WhyNoeveka({
             <motion.div {...fu(0.22)}>
               {ctaLink ? (
                 <a href={ctaLink} className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-[13.5px] font-semibold transition-all cursor-pointer border-none" style={{ background: "var(--color-bg-surface)", color: "var(--color-text-primary)", border: "1px solid var(--color-stroke-default)", boxShadow: "0 2px 10px rgba(0,0,0,0.06)" }} onMouseEnter={(e) => { e.currentTarget.style.borderColor = "var(--color-brand)"; e.currentTarget.style.color = "var(--color-brand)"; e.currentTarget.style.transform = "translateY(-1px)"; }} onMouseLeave={(e) => { e.currentTarget.style.borderColor = "var(--color-stroke-default)"; e.currentTarget.style.color = "var(--color-text-primary)"; e.currentTarget.style.transform = "translateY(0)"; }}>
-                  {ctaText} <ArrowRight className="w-4 h-4" />
+                  {ctaText} <LucideIcon name="arrow-right" className="w-4 h-4" />
                 </a>
               ) : (
                 <button className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full text-[13.5px] font-semibold transition-all cursor-pointer border-none" style={{ background: "var(--color-bg-surface)", color: "var(--color-text-primary)", border: "1px solid var(--color-stroke-default)", boxShadow: "0 2px 10px rgba(0,0,0,0.06)" }} onMouseEnter={(e) => { e.currentTarget.style.borderColor = "var(--color-brand)"; e.currentTarget.style.color = "var(--color-brand)"; e.currentTarget.style.transform = "translateY(-1px)"; }} onMouseLeave={(e) => { e.currentTarget.style.borderColor = "var(--color-stroke-default)"; e.currentTarget.style.color = "var(--color-text-primary)"; e.currentTarget.style.transform = "translateY(0)"; }}>
-                  {ctaText} <ArrowRight className="w-4 h-4" />
+                  {ctaText} <LucideIcon name="arrow-right" className="w-4 h-4" />
                 </button>
               )}
             </motion.div>

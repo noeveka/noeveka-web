@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
-import { Star } from "lucide-react";
+import { LucideIcon } from "@/components/lucide-icons";
 import { fu, fs } from "@/lib/motion";
 import { getTestimonials } from "@/lib/sanity";
 import { TESTIMONIALS_CONFIG } from "@/config/landing/testimonials.config";
@@ -71,7 +71,7 @@ function StarRating({ n }: { n: number }) {
   return (
     <div className="flex items-center gap-0.5">
       {Array.from({ length: n }).map((_, i) => (
-        <Star key={i} className="w-3.5 h-3.5 fill-current" style={{ color: "var(--color-brand)" }} />
+        <LucideIcon key={i} name="star" className="w-3.5 h-3.5 fill-current" style={{ color: "var(--color-brand)" }} />
       ))}
       <span className="ml-1.5 text-[11.5px] font-bold" style={{ color: "var(--color-brand)" }}>{n}.0</span>
     </div>

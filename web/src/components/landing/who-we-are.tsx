@@ -1,4 +1,4 @@
-import { ArrowRight, Star } from "lucide-react";
+import { LucideIcon } from "@/components/lucide-icons";
 import { motion } from "framer-motion";
 import { fu } from "@/lib/motion";
 import { urlFor } from "@/lib/sanity";
@@ -94,7 +94,7 @@ export default function WhoWeAre({
                   onMouseEnter={(e) => { e.currentTarget.style.background = "var(--color-brand-hover)"; e.currentTarget.style.transform = "translateY(-1px)"; }}
                   onMouseLeave={(e) => { e.currentTarget.style.background = "var(--color-brand)"; e.currentTarget.style.transform = "translateY(0)"; }}
                 >
-                  {ctaText} <ArrowRight className="w-4 h-4" />
+                  {ctaText} <LucideIcon name="arrow-right" className="w-4 h-4" />
                 </a>
               ) : (
                 <button
@@ -103,7 +103,7 @@ export default function WhoWeAre({
                   onMouseEnter={(e) => { e.currentTarget.style.background = "var(--color-brand-hover)"; e.currentTarget.style.transform = "translateY(-1px)"; }}
                   onMouseLeave={(e) => { e.currentTarget.style.background = "var(--color-brand)"; e.currentTarget.style.transform = "translateY(0)"; }}
                 >
-                  {ctaText} <ArrowRight className="w-4 h-4" />
+                  {ctaText} <LucideIcon name="arrow-right" className="w-4 h-4" />
                 </button>
               )}
               <div className="flex flex-col gap-0.5">
@@ -117,7 +117,7 @@ export default function WhoWeAre({
               <div className="flex-1 p-4 rounded-xl" style={{ background: "var(--color-bg-subtle)", border: "1px solid var(--color-stroke-default)" }}>
                 <div className="flex items-center gap-1 mb-1.5">
                   {[1, 2, 3, 4, 5].map((n) => (
-                    <Star key={n} className="w-3.5 h-3.5 fill-amber-400" style={{ color: "#FBBF24" }} />
+                    <LucideIcon key={n} name="star" className="w-3.5 h-3.5 fill-amber-400" style={{ color: "#FBBF24" }} />
                   ))}
                 </div>
                 <p className="text-[22px] font-extrabold" style={{ color: "var(--color-text-primary)" }}>

@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight, Check, Phone, Star } from "lucide-react";
+import { LucideIcon } from "@/components/lucide-icons";
 
 import { HERO_CONFIG } from "@/config/landing/hero.config";
 import { fu } from "@/lib/motion";
@@ -95,8 +95,9 @@ export default function Hero({
           >
             <div className="flex items-center gap-0.5">
               {Array.from({ length: 5 }).map((_, i) => (
-                <Star
+                <LucideIcon
                   key={i}
+                  name="star"
                   className="h-3 w-3 fill-current"
                   style={{ color: "var(--color-brand)" }}
                 />
@@ -166,7 +167,7 @@ export default function Hero({
                   e.currentTarget.style.transform = "translateY(0)";
                 }}
               >
-                {primaryCtaText} <ArrowRight className="h-4 w-4" />
+                {primaryCtaText} <LucideIcon name="arrow-right" className="h-4 w-4" />
               </a>
             ) : (
               <button
@@ -189,7 +190,7 @@ export default function Hero({
                     "0 4px 24px rgba(246,93,1,0.42)";
                 }}
               >
-                {primaryCtaText} <ArrowRight className="h-4 w-4" />
+                {primaryCtaText} <LucideIcon name="arrow-right" className="h-4 w-4" />
               </button>
             )}
 
@@ -214,7 +215,7 @@ export default function Hero({
                   e.currentTarget.style.transform = "translateY(0)";
                 }}
               >
-                <Phone className="h-4 w-4" /> {secondaryCtaText}
+                <LucideIcon name="phone" className="h-4 w-4" /> {secondaryCtaText}
               </a>
             ) : (
               <button
@@ -236,7 +237,7 @@ export default function Hero({
                   e.currentTarget.style.transform = "translateY(0)";
                 }}
               >
-                <Phone className="h-4 w-4" /> {secondaryCtaText}
+                <LucideIcon name="phone" className="h-4 w-4" /> {secondaryCtaText}
               </button>
             )}
           </motion.div>
@@ -253,7 +254,8 @@ export default function Hero({
                 className="flex items-center gap-1.5 text-[12.5px] font-medium"
                 style={{ color: "rgba(255,255,255,0.65)" }}
               >
-                <Check
+                <LucideIcon
+                  name="check"
                   className="h-3.5 w-3.5 shrink-0"
                   style={{ color: "var(--color-brand)" }}
                 />

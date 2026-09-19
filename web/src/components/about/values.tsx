@@ -1,15 +1,8 @@
 import { motion } from "framer-motion";
-import * as LucideIcons from "lucide-react";
 
+import { LucideIcon } from "@/components/lucide-icons";
 import { ABOUT_CONFIG } from "@/config/about.config";
 import { fs, fu } from "@/lib/motion";
-
-function getIcon(name: string) {
-  const Icon = (LucideIcons as Record<string, unknown>)[name] as
-    | React.ComponentType<{ className?: string; style?: React.CSSProperties }>
-    | undefined;
-  return Icon ?? LucideIcons.Layers;
-}
 
 export interface ValueItem {
   icon: string;
@@ -75,7 +68,6 @@ export default function Values({
           {/* Right: value cards */}
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             {items.map(({ icon, title, desc }, i) => {
-              const Icon = getIcon(icon);
               return (
                 <motion.div
                   key={title}
@@ -94,7 +86,9 @@ export default function Values({
                       border: "1px solid rgba(246,93,1,0.18)",
                     }}
                   >
-                    <Icon
+                    <LucideIcon
+                      name={icon}
+                      fallback="layers"
                       className="h-6 w-6"
                       style={{ color: "var(--color-brand)" }}
                     />

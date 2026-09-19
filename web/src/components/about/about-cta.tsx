@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { LucideIcon } from "../lucide-icons";
 
 import { fu } from "@/lib/motion";
 
@@ -115,7 +115,7 @@ export default function AboutCta({
                     "0 4px 20px rgba(246,93,1,0.28)";
                 }}
               >
-                {primaryCtaText} <ArrowRight className="h-4 w-4" />
+                {primaryCtaText} <LucideIcon name="arrow-right" className="h-4 w-4" />
               </a>
             ) : (
               <button
@@ -134,7 +134,7 @@ export default function AboutCta({
                     "0 4px 20px rgba(246,93,1,0.28)";
                 }}
               >
-                {primaryCtaText} <ArrowRight className="h-4 w-4" />
+                  {primaryCtaText} <LucideIcon name="arrow-right" className="h-4 w-4" />
               </button>
             )}
             {secondaryCtaLink ? (
