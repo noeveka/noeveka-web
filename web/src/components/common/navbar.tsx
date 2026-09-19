@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowRight, Menu, X } from "lucide-react";
+import { LucideIcon } from "@/components/lucide-icons";
 import { getSiteSettings, urlFor } from "@/lib/sanity";
 import { NAVBAR_CONFIG } from "@/config/navbar.config";
 
@@ -61,7 +61,7 @@ export default function Navbar() {
               className="h-full w-full object-contain"
             />
           </div>
-          <div className="relative -ml-2 flex h-12 w-40 items-center sm:h-12 sm:w-56 lg:h-14 lg:w-64">
+          <div className="relative -ml-2 flex h-14 w-26 items-center sm:h-12 sm:w-32 lg:h-14 lg:w-38">
             <img
               src={logoTextSrc}
               alt={settings?.logoText?.alt}
@@ -116,7 +116,7 @@ export default function Navbar() {
           }}
         >
           <span>{ctaText}</span>{" "}
-          <ArrowRight className="h-3.5 w-3.5" />
+          <LucideIcon name="arrow-right" className="h-3.5 w-3.5" />
         </Link>
 
         {/* Mobile hamburger button */}
@@ -127,9 +127,9 @@ export default function Navbar() {
           aria-label="Toggle navigation menu"
         >
           {mobileMenuOpen ? (
-            <X className="h-6 w-6" />
+            <LucideIcon name="close" className="h-6 w-6" />
           ) : (
-            <Menu className="h-6 w-6" />
+            <LucideIcon name="menu" className="h-6 w-6" />
           )}
         </button>
       </div>
@@ -163,7 +163,7 @@ export default function Navbar() {
                 style={{ background: "var(--color-brand)" }}
               >
                 <span>{ctaText}</span>
-                <ArrowRight className="h-4 w-4" />
+                <LucideIcon name="arrow-right" className="h-4 w-4" />
               </Link>
             </div>
           </motion.div>

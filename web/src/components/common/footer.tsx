@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ArrowRight, Mail } from "lucide-react";
+import { LucideIcon } from "@/components/lucide-icons";
 import { getSiteSettings, urlFor } from "@/lib/sanity";
 import { FOOTER_CONFIG } from "@/config/footer.config";
 import LinkedInSvg from "@/components/svgs/linkedin-svg";
@@ -127,7 +127,7 @@ export default function Footer() {
               className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl"
               style={{ background: "var(--color-brand)" }}
             >
-              <Mail className="h-5 w-5 text-white" />
+              <LucideIcon name="mail" className="h-5 w-5 text-white" />
             </div>
             <div>
               <p
@@ -170,7 +170,7 @@ export default function Footer() {
               }
               aria-label="Subscribe"
             >
-              <ArrowRight className="h-4 w-4" />
+              <LucideIcon name="arrow-right" className="h-4 w-4" />
             </button>
           </div>
         </div>
@@ -223,7 +223,7 @@ export default function Footer() {
                   className="h-full w-full object-contain"
                 />
               </div>
-              <div className="relative -ml-2 flex h-12 w-40 items-center sm:h-12 sm:w-56 lg:h-14 lg:w-64">
+              <div className="relative -ml-2 flex h-14 w-26 items-center sm:h-12 sm:w-32 lg:h-14 lg:w-38">
                 <img
                   src={logoTextSrc}
                   alt={settings?.logoText?.alt ?? FOOTER_CONFIG.logoTextAlt}

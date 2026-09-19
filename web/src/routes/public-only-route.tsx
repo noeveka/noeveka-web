@@ -11,7 +11,7 @@ export function PublicOnlyRoute() {
   const isUserAuthenticated = false;
 
   if (isUserAuthenticated) {
-    return <Navigate to={routesRegistry.overview} replace />;
+    return <Navigate to={routesRegistry.landing} replace />;
   }
 
   return <Outlet />;

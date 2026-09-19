@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
 
+import { LucideIcon } from "@/components/lucide-icons";
 import { CTA_STRIP_CONFIG } from "@/config/landing/cta-strip.config";
 import { fu } from "@/lib/motion";
 
@@ -111,7 +111,7 @@ export default function CtaStrip({
                     "0 4px 20px rgba(246,93,1,0.28)";
                 }}
               >
-                {primaryCtaText} <ArrowRight className="h-4 w-4" />
+                {primaryCtaText} <LucideIcon name="arrow-right" className="h-4 w-4" />
               </a>
             ) : (
               <button
@@ -130,7 +130,7 @@ export default function CtaStrip({
                     "0 4px 20px rgba(246,93,1,0.28)";
                 }}
               >
-                {primaryCtaText} <ArrowRight className="h-4 w-4" />
+                {primaryCtaText} <LucideIcon name="arrow-right" className="h-4 w-4" />
               </button>
             )}
             {secondaryCtaLink ? (

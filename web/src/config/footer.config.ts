@@ -8,7 +8,8 @@ export const FOOTER_CONFIG = {
     "https://res.cloudinary.com/dd5elqfus/image/upload/v1788154826/noeveka_logo_dark_jph2va.png",
   logoIconAlt: "",
 
-  logoTextFallbackUrl: "/assets/logos/noeveka_black_text_logo.png",
+  // logoTextFallbackUrl: "/assets/logos/noeveka_black_text_logo.png",
+  logoTextFallbackUrl: "/assets/logos/noeveka_final_name_logo.png",
   logoTextAlt: "Noeveka",
 
   tagline:
@@ -45,7 +46,8 @@ export const FOOTER_CONFIG = {
   contactAddress: "India · Serving Global Enterprise Teams",
 
   newsletterHeading: "Sign up to our newsletter",
-  newsletterSubtext: "Subscribe for architecture insights, free resources & updates.",
+  newsletterSubtext:
+    "Subscribe for architecture insights, free resources & updates.",
   newsletterPlaceholder: "Enter Your E-Mail",
 
   copyrightText: "© {year} Noeveka Data & AI Solutions. All rights reserved.",

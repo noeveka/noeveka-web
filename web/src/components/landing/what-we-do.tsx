@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import { ChevronsRight } from "lucide-react";
-import * as LucideIcons from "lucide-react";
 import { motion } from "framer-motion";
+import { LucideIcon } from "@/components/lucide-icons";
 import { fu, fs } from "@/lib/motion";
 import { getServices } from "@/lib/sanity";
 import { SERVICES_CONFIG } from "@/config/landing/services.config";
@@ -47,11 +46,6 @@ interface WhatWeDoProps {
   cardCtaText?: string;
 }
 
-function getIcon(name: string) {
-  const Icon = (LucideIcons as Record<string, unknown>)[name] as React.ComponentType<{ className?: string; style?: React.CSSProperties }> | undefined;
-  return Icon ?? LucideIcons.BarChart3;
-}
-
 export default function WhatWeDo({
   eyebrow = SERVICES_CONFIG.eyebrow,
   heading = SERVICES_CONFIG.heading,
@@ -95,7 +89,6 @@ export default function WhatWeDo({
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 items-end">
           {displayServices.map((s, i) => {
             const cs = styles[s.variant] ?? styles.white;
-            const Icon = getIcon(s.icon);
             return (
               <motion.div
                 key={s._id}
@@ -111,7 +104,7 @@ export default function WhatWeDo({
                   <div className="absolute -bottom-10 -right-10 w-[140px] h-[140px] rounded-full pointer-events-none" style={{ background: "rgba(255,255,255,0.10)" }} />
                 )}
                 <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-6" style={{ background: cs.iconBg }}>
-                  <Icon className="w-6 h-6" style={{ color: cs.iconColor }} />
+                  <LucideIcon name={s.icon} fallback="bar-chart-3" className="w-6 h-6" style={{ color: cs.iconColor }} />
                 </div>
                 <h3 className="text-[17px] font-bold leading-snug mb-3" style={{ color: cs.text }}>{s.title}</h3>
                 <p className="text-[13px] leading-relaxed flex-1 mb-8" style={{ color: cs.muted }}>{s.description}</p>
@@ -121,7 +114,7 @@ export default function WhatWeDo({
                   onMouseEnter={(e) => { e.currentTarget.style.opacity = "0.80"; e.currentTarget.style.transform = "translateX(2px)"; }}
                   onMouseLeave={(e) => { e.currentTarget.style.opacity = "1"; e.currentTarget.style.transform = "translateX(0)"; }}
                 >
-                  {cardCtaText} <ChevronsRight className="w-3.5 h-3.5" />
+                  {cardCtaText} <LucideIcon name="chevrons-right" className="w-3.5 h-3.5" />
                 </button>
               </motion.div>
             );

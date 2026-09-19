@@ -7,6 +7,8 @@ import Testimonials from "@/components/landing/testimonials";
 import WhatWeDo from "@/components/landing/what-we-do";
 import WhoWeAre from "@/components/landing/who-we-are";
 import WhyNoeveka from "@/components/landing/why-noeveka";
+import { PageHead } from "@/components/seo";
+import { SEO_CONFIG } from "@/config/seo.config";
 import { getHomePage } from "@/lib/sanity";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -21,6 +23,12 @@ export default function LandingPage() {
 
   return (
     <>
+      <PageHead
+        title={page?.seo?.metaTitle ?? SEO_CONFIG.pages.landing.title}
+        description={
+          page?.seo?.metaDescription ?? SEO_CONFIG.pages.landing.description
+        }
+      />
       <Hero {...(page?.hero ?? {})} />
       <WhatWeDo
         eyebrow={page?.servicesSection?.eyebrow}
