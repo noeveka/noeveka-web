@@ -1,0 +1,400 @@
+/* DESIGN TOKENS
+   
+   Three layers, strict dependency order:
+   
+     Layer 1 → PRIMITIVES     Raw color values (never use in JSX)
+     Layer 2 → SEMANTICS      Purpose-driven aliases (use these!)
+     Layer 3 → COMPONENTS     Per-component settings
+   
+   HOW IT WORKS:
+   - @theme { } registers tokens into Tailwind (bg-page, text-primary, etc.)
+   - :root { } sets the actual light-mode values as CSS variables
+   - themes.css overrides the :root values for dark mode
+
+   NOEVEKA BRAND PALETTE (from brand guidelines):
+     #1E212B  — Dark Navy (dark backgrounds, dark cards)
+     #F65D01  — Orange   (primary brand / CTA)
+     #3D7EB8  — Blue     (secondary accent)
+     #F4F2ED  — Warm Off-White (page background)
+     #8B909A  — Mid Gray (muted text / borders) */
+
+@theme {
+  /* LAYER 1: PRIMITIVE PALETTE
+     Raw color values — NEVER use directly in JSX.
+     These are the raw ingredients for semantic tokens. */
+
+  /* Neutral ramp — warm off-white to near-black */
+  --color-neutral-0: #ffffff;
+  --color-neutral-50: #faf9f7;
+  --color-neutral-100: #f4f2ed;
+  --color-neutral-200: #e8e5dd;
+  --color-neutral-300: #d8d4cb;
+  --color-neutral-400: #b8b4ab;
+  --color-neutral-500: #8b909a;
+  --color-neutral-600: #5a5f6b;
+  --color-neutral-900: #1e212b;
+
+  /* Noeveka Orange — primary brand ramp */
+  --color-orange-tint: #fff0e6;
+  --color-orange-100: #ffd4b3;
+  --color-orange-500: #f65d01;
+  --color-orange-600: #d94e00;
+  --color-orange-700: #b84200;
+  --color-orange-dark: #3d1800;
+  --color-orange-light: #ff7a2e;
+  --color-orange-lighter: #ff9556;
+
+  /* Noeveka Dark Navy — dark surfaces / hero ramp */
+  --color-navy-50: #2a2e3d;
+  --color-navy-100: #252839;
+  --color-navy-500: #1e212b;
+  --color-navy-700: #161820;
+  --color-navy-900: #0e0f15;
+
+  /* Noeveka Blue — secondary accent ramp */
+  --color-blue-tint: #e8f1f9;
+  --color-blue-500: #3d7eb8;
+  --color-blue-600: #2f6699;
+  --color-blue-700: #225280;
+  --color-blue-dark: #0d2237;
+  --color-blue-light: #6aa0cc;
+  --color-blue-lighter: #8fb8da;
+
+  /* Semantic status primitives */
+  --color-green-tint: #edfaf3;
+  --color-green-500: #1b7f4f;
+  --color-green-dark: #0d2419;
+  --color-green-light: #3dcb84;
+
+  --color-warning-tint: #fff8ec;
+  --color-warning-500: #b05a00;
+  --color-warning-dark: #271a08;
+  --color-warning-light: #e8921a;
+
+  --color-red-tint: #feecec;
+  --color-red-500: #c42b2b;
+  --color-red-dark: #260d0d;
+  --color-red-light: #f07070;
+
+  /* Dark mode neutral ramp */
+  --color-dark-bg: #0e0f15;
+  --color-dark-surface: #1e212b;
+  --color-dark-subtle: #252839;
+  --color-dark-muted: #2a2e3d;
+  --color-dark-stroke: #363a4a;
+  --color-dark-text: #f0ede8;
+  --color-dark-text-2: #8b909a;
+
+  /* LAYER 2: SEMANTIC TOKENS
+     Purpose-driven — USE THESE in JSX.
+     Each background has a matching "-foreground" for text. */
+
+  /* Backgrounds + their foreground text colors */
+  --color-page: var(--color-bg-page);
+  --color-page-foreground: var(--color-text-primary);
+
+  --color-surface: var(--color-bg-surface);
+  --color-surface-foreground: var(--color-text-primary);
+
+  --color-subtle: var(--color-bg-subtle);
+  --color-subtle-foreground: var(--color-text-secondary);
+
+  --color-muted: var(--color-bg-muted);
+  --color-muted-foreground: var(--color-text-muted);
+
+  /* Strokes / borders */
+  --color-stroke-default: #ebebea;
+  --color-stroke-strong: #d4d4d3;
+
+  /* Text (standalone, when not pairing with a specific background) */
+  --color-text-primary: var(--color-text-primary);
+  --color-text-secondary: var(--color-text-secondary);
+  --color-text-muted: var(--color-text-muted);
+  --color-text-inverse: var(--color-text-inverse);
+  --color-on-brand-bg: var(--color-on-brand-bg);
+
+  /* Brand Orange (primary interactive color) */
+  --color-brand-tint: var(--color-orange-tint);
+  --color-brand: var(--color-orange-500);
+  --color-brand-hover: var(--color-orange-600);
+  --color-brand-pressed: var(--color-orange-700);
+  --color-brand-text: var(--color-orange-600);
+  --color-brand-foreground: var(--color-text-inverse);
+
+  /* Secondary Blue accent */
+  --color-accent-tint: var(--color-blue-tint);
+  --color-accent: var(--color-blue-500);
+  --color-accent-hover: var(--color-blue-600);
+  --color-accent-text: var(--color-blue-600);
+  --color-accent-foreground: var(--color-text-inverse);
+
+  /* Dark Navy surface (hero, dark cards) */
+  --color-dark-surface-brand: var(--color-navy-500);
+  --color-dark-surface-brand-subtle: var(--color-navy-50);
+
+  /* Functional / semantic status */
+  --color-success-tint: var(--color-green-tint);
+  --color-success: var(--color-green-500);
+  --color-success-foreground: var(--color-text-inverse);
+  --color-warning-tint-semantic: var(--color-warning-tint);
+  --color-warning: var(--color-warning-500);
+  --color-danger-tint: var(--color-red-tint);
+  --color-danger: var(--color-red-500);
+  --color-danger-foreground: var(--color-text-inverse);
+
+  /* SHADCN COMPATIBILITY ALIASES
+     These map our tokens to the names shadcn
+     components expect (bg-primary, text-foreground, etc.) */
+
+  --color-background: var(--color-bg-page);
+  --color-foreground: var(--color-text-primary);
+
+  --color-primary: var(--color-orange-500);
+  --color-primary-foreground: var(--btn-primary-text);
+
+  --color-secondary: var(--color-bg-subtle);
+  --color-secondary-foreground: var(--color-text-primary);
+
+  --color-destructive: var(--color-red-500);
+
+  --color-border: var(--color-stroke-default);
+  --color-input: var(--color-stroke-default);
+  --color-ring: var(--color-orange-500);
+
+  /* SPACING — strict 4px base unit
+     Every gap, margin, and padding is a multiple of 4. */
+
+  --spacing-px: 1px;
+  --spacing-0: 0px;
+  --spacing-1: 4px;
+  --spacing-2: 8px;
+  --spacing-3: 12px;
+  --spacing-4: 16px;
+  --spacing-5: 20px;
+  --spacing-6: 24px;
+  --spacing-8: 32px;
+  --spacing-10: 40px;
+  --spacing-12: 48px;
+  --spacing-16: 64px;
+  --spacing-20: 80px;
+  --spacing-24: 96px;
+
+  /* BORDER RADIUS */
+  --radius-none: 0px;
+  --radius-sm: 4px; /* chips, badges, tags, small buttons */
+  --radius-md: 8px; /* inputs, buttons, dropdowns, compact cards */
+  --radius-lg: 12px; /* standard cards, panels, modals */
+  --radius-xl: 16px; /* large modals, floating panels, empty states */
+  --radius-full: 9999px; /* pills, avatars, toggles */
+
+  /* BORDER WIDTHS */
+  --border-default: 1px;
+  --border-strong: 1.5px;
+  --border-accent: 2px; /* active nav left-edge indicator */
+
+  /* SHADOWS — elevation system
+     Shadows only exist for elevation and focus.
+     Never use decoratively. */
+  --shadow-none: none;
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06); /* subtle card lift */
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08); /* dropdowns, tooltips */
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.1); /* modals, command palette */
+  --shadow-focus: 0 0 0 3px rgba(246, 93, 1, 0.25); /* orange brand focus ring */
+  --shadow-focus-amber: 0 0 0 3px rgba(246, 93, 1, 0.2); /* orange brand focus ring */
+  --shadow-focus-neutral: 0 0 0 3px rgba(0, 0, 0, 0.1); /* neutral focus ring */
+  --shadow-focus-danger: 0 0 0 3px rgba(196, 43, 43, 0.15); /* error focus ring */
+
+  /* MOTION — conservative, state-change only
+      Never animate layout properties.
+      Only: opacity, transform, background-color,
+            border-color, box-shadow, color. */
+  --duration-fast: 100ms;
+  --duration-default: 150ms;
+  --duration-slow: 250ms;
+  --duration-chart: 400ms;
+  --easing-default: ease;
+  --easing-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+
+  --transition-fast: all 100ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: all 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: all 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Z-INDEX */
+  --z-index-below: -1;
+  --z-index-base: 0;
+  --z-index-raised: 1;
+  --z-index-dropdown: 100;
+  --z-index-sticky: 200;
+  --z-index-overlay: 300;
+  --z-index-modal: 400;
+  --z-index-popover: 500;
+  --z-index-toast: 600;
+
+  /* LAYER 3: COMPONENT TOKENS
+     Per-component settings that reference semantic tokens. */
+
+  /* Button */
+  --btn-height-sm: 30px;
+  --btn-height-md: 36px;
+  --btn-height-lg: 44px;
+  --btn-radius: var(--radius-md);
+  --btn-font-weight: var(--font-weight-medium);
+
+  --btn-primary-bg: var(--color-brand);
+  --btn-primary-bg-hover: var(--color-brand-hover);
+  --btn-primary-bg-pressed: var(--color-brand-pressed);
+  --btn-primary-text: var(--color-neutral-0);
+
+  --btn-secondary-bg: var(--color-bg-surface);
+  --btn-secondary-bg-hover: var(--color-bg-subtle);
+  --btn-secondary-text: var(--color-text-primary);
+  --btn-secondary-border: var(--color-stroke-default);
+
+  --btn-ghost-text: var(--color-text-secondary);
+  --btn-ghost-text-hover: var(--color-text-primary);
+  --btn-ghost-bg-hover: var(--color-bg-subtle);
+
+  --btn-danger-bg: var(--color-bg-surface);
+  --btn-danger-bg-hover: var(--color-danger-tint);
+  --btn-danger-text: var(--color-danger);
+  --btn-danger-border: var(--color-danger);
+
+  /* Input */
+  --input-height-sm: 30px;
+  --input-height-md: 36px;
+  --input-height-lg: 44px;
+  --input-radius: var(--radius-md);
+  --input-bg: var(--color-bg-surface);
+  --input-border: var(--color-stroke-default);
+  --input-border-hover: var(--color-stroke-strong);
+  --input-border-focus: var(--color-brand);
+  --input-border-error: var(--color-danger);
+  --input-text: var(--color-text-primary);
+  --input-placeholder: var(--color-text-muted);
+
+  /* Card */
+  --card-bg: var(--color-bg-surface);
+  --card-border: var(--color-stroke-default);
+  --card-radius: var(--radius-lg);
+  --card-radius-compact: var(--radius-md);
+  --card-padding: var(--spacing-6);
+  --card-padding-compact: var(--spacing-4);
+  --card-shadow: var(--shadow-none);
+  --card-shadow-hover: var(--shadow-sm);
+
+  /* Badge / Status chip */
+  --badge-height: 22px;
+  --badge-radius: var(--radius-sm);
+  --badge-font-size: var(--text-micro);
+  --badge-font-weight: var(--font-weight-medium);
+
+  /* Category chip (clickable filter) */
+  --chip-height: 28px;
+  --chip-radius: var(--radius-full);
+  --chip-font-size: var(--text-sm);
+
+  /* Sidebar */
+  --sidebar-width: 224px;
+  --sidebar-bg: var(--color-bg-surface);
+  --sidebar-border: var(--color-stroke-default);
+
+  /* Nav item */
+  --nav-item-height: 36px;
+  --nav-item-radius: var(--radius-md);
+
+  /* Tooltip */
+  --tooltip-bg: var(--color-text-primary);
+  --tooltip-text: var(--color-text-inverse);
+  --tooltip-radius: var(--radius-sm);
+  --tooltip-font-size: var(--text-micro);
+  --tooltip-padding: 6px 10px;
+  --tooltip-shadow: var(--shadow-md);
+
+  /* Table */
+  --table-radius: var(--radius-lg);
+  --table-header-height: 36px;
+  --table-row-height: 44px;
+
+  /* Modal */
+  --modal-radius: var(--radius-xl);
+  --modal-padding: 28px;
+  --modal-shadow: var(--shadow-lg);
+  --modal-max-width: 480px;
+  --modal-max-width-wide: 640px;
+  --modal-overlay: rgba(0, 0, 0, 0.4);
+
+  /* Toggle / Switch */
+  --toggle-width: 36px;
+  --toggle-height: 20px;
+  --toggle-thumb-size: 16px;
+  --toggle-radius: var(--radius-full);
+
+  /* Progress bar */
+  --progress-height: 6px;
+  --progress-radius: var(--radius-full);
+  --progress-track-bg: var(--color-bg-muted);
+
+  /* Stat / Metric tile */
+  --stat-label-size: var(--text-micro);
+  --stat-value-size: var(--text-display);
+  --stat-padding: var(--spacing-5);
+}
+
+/* :root — LIGHT MODE VALUES (the source of truth)
+   These are the actual color values.
+   The @theme semantic tokens above reference these.
+   themes.css overrides these for dark mode. */
+
+:root {
+  /* Backgrounds — warm off-white palette matching #F4F2ED brand */
+  --color-bg-page: #f4f2ed;
+  --color-bg-surface: #ffffff;
+  --color-bg-subtle: #faf9f7;
+  --color-bg-muted: #e8e5dd;
+
+  /* Strokes */
+  --color-stroke-default: #e8e5dd;
+  --color-stroke-strong: #d8d4cb;
+
+  /* Text */
+  --color-on-brand-bg: #ffffff;
+  --color-text-primary: #1e212b;
+  --color-text-secondary: #474b57;
+  --color-text-muted: #8b909a;
+  --color-text-inverse: #ffffff;
+
+  /* Brand Orange — #F65D01 */
+  --color-brand-tint: #fff0e6;
+  --color-brand: #f65d01;
+  --color-brand-hover: #d94e00;
+  --color-brand-pressed: #b84200;
+  --color-brand-text: #d94e00;
+
+  /* Secondary Blue accent — #3D7EB8 */
+  --color-accent-tint: #e8f1f9;
+  --color-accent: #3d7eb8;
+  --color-accent-hover: #2f6699;
+  --color-accent-text: #2f6699;
+
+  /* Status */
+  --color-success-tint: #edfaf3;
+  --color-success: #1b7f4f;
+  --color-warning-tint: #fff8ec;
+  --color-warning: #b05a00;
+  --color-danger-tint: #feecec;
+  --color-danger: #c42b2b;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.1);
+  --shadow-focus: 0 0 0 3px rgba(246, 93, 1, 0.25);
+  --shadow-focus-amber: 0 0 0 3px rgba(246, 93, 1, 0.2);
+  --shadow-focus-neutral: 0 0 0 3px rgba(0, 0, 0, 0.1);
+  --shadow-focus-danger: 0 0 0 3px rgba(196, 43, 43, 0.15);
+
+  /* Layout */
+  --sidebar-width: 224px;
+  --card-radius: 12px;
+  --container-max: 1200px; /* landing + marketing page max-width */
+}
