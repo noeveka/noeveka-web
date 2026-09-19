@@ -1,11 +1,18 @@
 import { Link } from "react-router";
 
 import { LucideIcon, lucideIconRegistry } from "@/components/lucide-icons";
+import { PageHead } from "@/components/seo";
+import { SEO_CONFIG } from "@/config/seo.config";
 import { routesRegistry } from "@/routes/routes-config";
 
 export default function NotFoundPage() {
   return (
     <div className="duration-default bg-page flex min-h-screen w-full flex-col items-center justify-center px-6 text-center transition-colors">
+      <PageHead
+        title={SEO_CONFIG.pages.notFound.title}
+        description={SEO_CONFIG.pages.notFound.description}
+        noIndex
+      />
       <div className="border-danger/10 bg-danger/5 text-danger mb-6 flex h-16 w-16 items-center justify-center rounded-2xl border shadow-sm">
         <LucideIcon name={lucideIconRegistry.Close} size={32} />
       </div>

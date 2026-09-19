@@ -6,7 +6,9 @@ import Mission from "@/components/about/mission";
 import Story from "@/components/about/story";
 import Values from "@/components/about/values";
 import AboutCta from "@/components/about/about-cta";
+import { PageHead } from "@/components/seo";
 import { ABOUT_CONFIG } from "@/config/about.config";
+import { SEO_CONFIG } from "@/config/seo.config";
 import { getAboutPage } from "@/lib/sanity";
 
 interface AboutPageData {
@@ -37,6 +39,10 @@ export default function AboutPage() {
 
   return (
     <>
+      <PageHead
+        title={SEO_CONFIG.pages.about.title}
+        description={SEO_CONFIG.pages.about.description}
+      />
       <Hero
         eyebrow={data?.hero?.eyebrow}
         headingLine1={data?.hero?.headingLine1}
