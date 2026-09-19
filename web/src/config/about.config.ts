@@ -1,9 +1,5 @@
-/**
- * about.config.ts — static fallback data for the About page.
- */
-
 export const ABOUT_CONFIG = {
-  // ── Page Hero (dark, cinematic) ───────────────────────────────────────────
+  // Page Hero (dark, cinematic)
   hero: {
     eyebrow: "About Noeveka",
     headingLine1: "Where Data Architecture",
@@ -13,7 +9,7 @@ export const ABOUT_CONFIG = {
       "We are an independent enterprise data & AI advisory firm — built by architects who have shipped real systems at global scale, not consultants who have only read about them.",
   },
 
-  // ── Founder section ───────────────────────────────────────────────────────
+  // Founder section 
   founder: {
     name: "Ajay Kumar",
     title: "CEO & Founder",
@@ -35,7 +31,7 @@ export const ABOUT_CONFIG = {
     photoAlt: "Ajay Kumar — Founder & CEO, Noeveka",
   },
 
-  // ── Mission strip ─────────────────────────────────────────────────────────
+  // Mission strip
   mission: {
     eyebrow: "Our Mission",
     statement: "To make world-class data architecture thinking accessible to every enterprise — independent, practical, and built for impact.",
@@ -46,7 +42,7 @@ export const ABOUT_CONFIG = {
     ],
   },
 
-  // ── Story / Timeline ─────────────────────────────────────────────────────
+  // Story / Timeline
   story: {
     eyebrow: "Our Journey",
     heading: "Built from real experience,\nnot textbooks.",
@@ -59,7 +55,7 @@ export const ABOUT_CONFIG = {
     ],
   },
 
-  // ── Values ────────────────────────────────────────────────────────────────
+  // Values 
   values: {
     eyebrow: "What We Stand For",
     heading: "Principles we refuse to compromise.",
@@ -71,7 +67,7 @@ export const ABOUT_CONFIG = {
     ],
   },
 
-  // ── Positioning stats ─────────────────────────────────────────────────────
+  // Positioning stats 
   stats: [
     { value: "15+", label: "Years", sub: "Enterprise architecture experience" },
     { value: "5K+", label: "Leaders", sub: "Trained across global enterprises" },
