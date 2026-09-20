@@ -2,6 +2,8 @@ export const routesRegistry = {
   // public
   landing: "/",
   about: "/about",
+  resources: "/resources",
+  contact: "/contact",
   privacy: "/privacy",
   terms: "/terms",
   docs: "/docs",

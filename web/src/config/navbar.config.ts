@@ -31,11 +31,11 @@ export const NAVBAR_CONFIG = {
     { label: "Home", href: "/" },
     { label: "About", href: "/about" },
     { label: "Services", href: "/#what-we-do" },
-    { label: "Resources", href: "/#solutions" },
-    { label: "Contact", href: "/#contact" },
+    { label: "Resources", href: "/resources" },
+    { label: "Contact", href: "/contact" },
   ] satisfies NavItem[],
 
   /** CTA button */
   navCtaText: "Start a conversation",
-  navCtaLink: "/#contact",
+  navCtaLink: "/contact",
 } as const;

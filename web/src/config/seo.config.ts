@@ -17,6 +17,16 @@ export const SEO_CONFIG = {
       description:
         "Meet Noeveka — an independent enterprise data & AI advisory firm built by architects who have shipped real systems at global scale.",
     },
+    resources: {
+      title: "Free Resources",
+      description:
+        "Free data architecture checklists, playbooks, guides, and templates from Noeveka. Built by enterprise architects — practical, vendor-unbiased, and free to download.",
+    },
+    contact: {
+      title: "Contact Us",
+      description:
+        "Get in touch with the Noeveka team. Book a free 30-minute strategy call, ask about our services, or send us a message — we respond within 1–2 business days.",
+    },
     notFound: {
       title: "Page Not Found",
       description:
@@ -24,3 +34,4 @@ export const SEO_CONFIG = {
     },
   },
 } as const;
+

@@ -144,7 +144,42 @@ export async function getServices() {
 }
 
 export async function getResources() {
-  return client.fetch(`*[_type == "resource"] | order(_createdAt desc)`);
+  return client.fetch(`*[_type == "resource"] | order(order asc, _createdAt desc){
+    _id,
+    title,
+    description,
+    category,
+    pageCount,
+    isFeatured,
+    thumbnail{ asset->{ url }, alt },
+    "pdfUrl": pdfFile.asset->url,
+    publishedAt,
+    order
+  }`);
+}
+
+// ─── Resources Page Copy ───────────────────────────────────────────────────────
+export async function getResourcesPage() {
+  return client.fetch(`*[_type == "resourcesPage"][0]{
+    hero{
+      eyebrow,
+      heading,
+      headingHighlight,
+      subtext,
+      ctaPrimaryText,
+      ctaPrimaryLink,
+      ctaSecondaryText,
+      ctaSecondaryLink
+    },
+    gridSection{
+      heading,
+      subtext,
+      categories,
+      authorName,
+      authorAvatar{ asset, alt },
+      emptyStateText
+    }
+  }`);
 }
 
 // ─── About Page ───────────────────────────────────────────────────────────────
