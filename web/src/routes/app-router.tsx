@@ -6,6 +6,8 @@ import MainLayout from "@/layouts/main-layout";
 import { NotFoundPage } from "@/pages/errors";
 import LandingPage from "@/pages/landing/page";
 import AboutPage from "@/pages/about/page";
+import ResourcesPage from "@/pages/resources/page";
+import ContactPage from "@/pages/contact/page";
 
 // import { ProtectedRoute } from "./protected-route";
 // import { PublicOnlyRoute } from "./public-only-route";
@@ -18,6 +20,8 @@ export function AppRouter() {
       <Route element={<MainLayout />}>
         <Route path={routesRegistry.landing} element={<LandingPage />} />
         <Route path={routesRegistry.about} element={<AboutPage />} />
+        <Route path={routesRegistry.resources} element={<ResourcesPage />} />
+        <Route path={routesRegistry.contact} element={<ContactPage />} />
       </Route>
 
       {/* Catch-all */}

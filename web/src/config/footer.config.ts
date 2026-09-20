@@ -54,9 +54,9 @@ export const FOOTER_CONFIG = {
 
   footerNavLinks: [
     { label: "Home", href: "/" },
-    { label: "About", href: "/#who-we-are" },
+    { label: "About", href: "/about" },
     { label: "Services", href: "/#what-we-do" },
-    { label: "Resources", href: "#" },
-    { label: "Contact", href: "/#contact" },
+    { label: "Resources", href: "/resources" },
+    { label: "Contact", href: "/contact" },
   ],
 } as const;
