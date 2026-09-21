@@ -16,7 +16,6 @@ interface AboutCtaProps {
 }
 
 export default function AboutCta({
-  eyebrow = "Work With Us",
   headingPlain = "Ready to get",
   headingHighlight = "architect-quality thinking",
   headingTail = "on your data platform?",
@@ -40,7 +39,7 @@ export default function AboutCta({
           className="relative flex flex-col items-center justify-between gap-10 overflow-hidden rounded-3xl px-8 py-14 sm:py-16 lg:flex-row"
           style={{
             background: "var(--color-bg-surface)",
-            border: "1px solid var(--color-stroke-default)",
+            // border: "1px solid var(--color-stroke-default)",
             boxShadow: "0 4px 32px rgba(15,17,23,0.06)",
           }}
         >
@@ -59,20 +58,7 @@ export default function AboutCta({
                 "radial-gradient(circle at 100% 100%, rgba(246,93,1,0.06) 0%, transparent 70%)",
             }}
           />
-          {/* Brand left accent */}
-          <div
-            className="absolute top-0 left-0 h-full w-1.5 rounded-l-3xl"
-            style={{ background: "var(--color-brand)" }}
-          />
-
           <div className="relative max-w-xl text-left">
-            <motion.p
-              {...fu()}
-              className="mb-3 flex items-center gap-2 text-[10.5px] font-bold tracking-[0.22em] uppercase"
-              style={{ color: "var(--color-brand)" }}
-            >
-              <span>✳</span> {eyebrow}
-            </motion.p>
             <motion.h2
               {...fu(0.07)}
               className="mb-4 text-3xl leading-snug font-extrabold tracking-tight sm:text-[2.2rem]"

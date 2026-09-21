@@ -11,13 +11,11 @@ export interface ValueItem {
 }
 
 interface ValuesProps {
-  eyebrow?: string;
   heading?: string;
   items?: ValueItem[];
 }
 
 export default function Values({
-  eyebrow = ABOUT_CONFIG.values.eyebrow,
   heading = ABOUT_CONFIG.values.heading,
   items = ABOUT_CONFIG.values.items as unknown as ValueItem[],
 }: ValuesProps) {
@@ -33,13 +31,6 @@ export default function Values({
         <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-2 lg:gap-16">
           {/* Left: heading */}
           <div className="self-start lg:sticky lg:top-24">
-            <motion.p
-              {...fu()}
-              className="mb-4 flex items-center gap-2 text-[10px] font-bold tracking-[0.22em] uppercase"
-              style={{ color: "var(--color-brand)" }}
-            >
-              <span>✳</span> {eyebrow}
-            </motion.p>
             <motion.h2
               {...fu(0.07)}
               className="mb-6 text-[1.9rem] leading-snug font-extrabold tracking-tight sm:text-[2.3rem]"

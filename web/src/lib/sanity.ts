@@ -186,35 +186,42 @@ export async function getResourcesPage() {
 export async function getAboutPage() {
   return client.fetch(`*[_type == "aboutPage"][0]{
     hero{
-      eyebrow,
       headingLine1,
       headingLine2,
       headingHighlight,
-      subtext
+      subtext,
+      ctaPrimaryText,
+      ctaPrimaryLink,
+      ctaSecondaryText,
+      ctaSecondaryLink,
+      badgeTags,
+      mobileStats[]{ value, label }
     },
     stats{
       items[]{ value, label, sub }
     },
+    resourcesTeaser{
+      heading,
+      headingHighlight,
+      subtext,
+      ctaText,
+      ctaLink
+    },
     founder{
       name,
+      initials,
       title,
       company,
       tagline,
       bio,
-      photo{ asset, alt }
+      photo{ asset, alt },
+      credentials[]{ label, value }
     },
     mission{
-      eyebrow,
       statement,
       pillars[]{ number, title, desc }
     },
-    story{
-      eyebrow,
-      heading,
-      milestones[]{ year, event, detail }
-    },
     values{
-      eyebrow,
       heading,
       items[]{ icon, title, desc }
     },

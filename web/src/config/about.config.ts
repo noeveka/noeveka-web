@@ -1,20 +1,30 @@
 export const ABOUT_CONFIG = {
-  // Page Hero (dark, cinematic)
+  // Page Hero
   hero: {
-    eyebrow: "About Noeveka",
     headingLine1: "Where Data Architecture",
     headingLine2: "Meets",
     headingHighlight: "Human Judgment.",
     subtext:
       "We are an independent enterprise data & AI advisory firm — built by architects who have shipped real systems at global scale, not consultants who have only read about them.",
+    ctaPrimaryText: "Book a Strategy Call",
+    ctaPrimaryLink: "/contact",
+    ctaSecondaryText: "Our Services",
+    ctaSecondaryLink: "/",
+    badgeTags: ["Microsoft Expert", "Databricks Certified", "15+ Yrs"],
+    mobileStats: [
+      { value: "15+", label: "Yrs experience" },
+      { value: "5K+", label: "Leaders trained" },
+      { value: "100%", label: "Independent" },
+    ],
   },
 
-  // Founder section 
+  // Founder section
   founder: {
     name: "Ajay Kumar",
+    initials: "AK",
     title: "CEO & Founder",
     company: "Noeveka Data & AI Solutions",
-    tagline: "\"Good architecture is not about the tool. It's about the judgment behind it.\"",
+    tagline: "Good architecture is not about the tool. It's about the judgment behind it.",
     bio: [
       "Ajay Kumar is a Principal Data & AI Architect with 15+ years of hands-on experience designing enterprise data platforms across global financial services, retail, and healthcare organisations.",
       "He has led Fabric, Databricks, and Azure-native data platform programmes at scale — advising C-suite leaders on platform strategy, team capability, and cost governance with zero vendor bias.",
@@ -31,9 +41,20 @@ export const ABOUT_CONFIG = {
     photoAlt: "Ajay Kumar — Founder & CEO, Noeveka",
   },
 
+  // Resources teaser (CredentialsStrip component)
+  resourcesTeaser: {
+    heading: "Architecture thinking,",
+    headingHighlight: "yours to keep.",
+    subtext:
+      "Practical checklists, playbooks, and guides built by enterprise architects — no fluff, no vendor bias.",
+    cardLinkText: "Get Free Download",
+    cardLinkHref: "/resources",
+    ctaText: "Explore All Free Resources",
+    ctaLink: "/resources",
+  },
+
   // Mission strip
   mission: {
-    eyebrow: "Our Mission",
     statement: "To make world-class data architecture thinking accessible to every enterprise — independent, practical, and built for impact.",
     pillars: [
       { number: "01", title: "Independent", desc: "Zero vendor reseller relationships. We recommend what is right for you, not what earns us a commission." },
@@ -42,22 +63,8 @@ export const ABOUT_CONFIG = {
     ],
   },
 
-  // Story / Timeline
-  story: {
-    eyebrow: "Our Journey",
-    heading: "Built from real experience,\nnot textbooks.",
-    milestones: [
-      { year: "2008", event: "First enterprise data warehouse programme", detail: "Led EDW design for a Top-10 UK bank — learning what scale really means." },
-      { year: "2014", event: "Azure & Cloud-first transformation", detail: "Pioneered cloud-native lakehouse patterns before they had a name." },
-      { year: "2019", event: "AI & GenAI advisory begins", detail: "Advising enterprises on responsible AI adoption and data governance strategy." },
-      { year: "2023", event: "Noeveka founded", detail: "Launched to give enterprise leaders direct access to independent, architect-quality thinking." },
-      { year: "2024", event: "5,000+ leaders trained", detail: "Bootcamps, workshops, and playbooks trusted across global enterprise teams." },
-    ],
-  },
-
-  // Values 
+  // Values
   values: {
-    eyebrow: "What We Stand For",
     heading: "Principles we refuse to compromise.",
     items: [
       { icon: "Scale", title: "Independence", desc: "No vendor partnerships. No hidden incentives. Just honest architectural judgment." },
@@ -67,7 +74,34 @@ export const ABOUT_CONFIG = {
     ],
   },
 
-  // Positioning stats 
+  // Origin story timeline
+  story: {
+    heading: "How Noeveka\ncame to be.",
+    milestones: [
+      {
+        year: "2008",
+        event: "First Enterprise Data Platform",
+        detail: "Ajay designs his first large-scale data warehouse for a global financial services firm — sparking a 15-year obsession with getting architecture right.",
+      },
+      {
+        year: "2015",
+        event: "Cloud-Native Pivot",
+        detail: "Early adopter of Azure-native data platforms, leading cloud migrations for FTSE 100 organisations before it became mainstream.",
+      },
+      {
+        year: "2020",
+        event: "Independent Advisory Work",
+        detail: "Frustrated by vendor-biased consultancies, Ajay begins advising data leaders independently — offering unbiased, architect-quality thinking.",
+      },
+      {
+        year: "2023",
+        event: "Noeveka Is Founded",
+        detail: "Noeveka is established to formalise what had already become a movement: independent, outcome-driven data & AI advisory for enterprise leaders.",
+      },
+    ],
+  },
+
+  // Positioning stats
   stats: [
     { value: "15+", label: "Years", sub: "Enterprise architecture experience" },
     { value: "5K+", label: "Leaders", sub: "Trained across global enterprises" },
@@ -75,3 +109,4 @@ export const ABOUT_CONFIG = {
     { value: "3", label: "Service Lines", sub: "Advisory · Workshops · Playbooks" },
   ],
 } as const;
+
