@@ -16,7 +16,6 @@ interface CtaStripProps {
 }
 
 export default function CtaStrip({
-  eyebrow = CTA_STRIP_CONFIG.eyebrow,
   headingPart = CTA_STRIP_CONFIG.headingPart,
   headingHighlight = CTA_STRIP_CONFIG.headingHighlight,
   body = CTA_STRIP_CONFIG.body,
@@ -30,7 +29,7 @@ export default function CtaStrip({
       id="contact"
       className="flex justify-center"
       style={{
-        background: "var(--color-bg-subtle)",
+        // background: "var(--color-bg-subtle)",
         borderTop: "1px solid var(--color-stroke-default)",
       }}
     >
@@ -57,19 +56,7 @@ export default function CtaStrip({
                 "radial-gradient(circle at 100% 100%, rgba(246,93,1,0.06) 0%, transparent 70%)",
             }}
           />
-          <div
-            className="absolute top-0 left-0 h-full w-1.5 rounded-l-3xl"
-            style={{ background: "var(--color-brand)" }}
-          />
-
           <div className="relative max-w-xl text-left">
-            <motion.p
-              {...fu()}
-              className="mb-3 flex items-center gap-2 text-[10.5px] font-bold tracking-[0.22em] uppercase"
-              style={{ color: "var(--color-brand)" }}
-            >
-              <span>✳</span> {eyebrow}
-            </motion.p>
             <motion.h2
               {...fu(0.07)}
               className="mb-4 text-3xl leading-snug font-extrabold tracking-tight sm:text-[2.2rem]"
