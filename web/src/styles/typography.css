@@ -6,11 +6,11 @@
 
 @theme {
   /* FONT FAMILIES
-     Primary: Lexend Deca (self-hosted variable font)
+     Primary: Inter (self-hosted variable font, opsz + wght axes)
      Mono:    JetBrains Mono (code, keys, file paths only) */
 
   --font-sans:
-    "Lexend Deca", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-mono: "JetBrains Mono", "Fira Code", monospace;
 
   /* TYPE SCALE — matches design system tokens */
@@ -45,6 +45,14 @@
 /* :root alias so var(--font-primary) works in inline styles too */
 :root {
   --font-primary:
-    "Lexend Deca", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-mono: "JetBrains Mono", "Fira Code", monospace;
+
+  /* Inter highlight shades — use for text highlights, tag backgrounds,
+     callout tints, or any element that needs an Inter-neutral accent.
+     Derived from Inter's warm neutral character. */
+  --color-inter-highlight-subtle: rgba(61, 126, 184, 0.08);  /* faint blue-neutral tint */
+  --color-inter-highlight-soft:   rgba(246, 93, 1, 0.10);    /* warm orange glow */
+  --color-inter-highlight-strong: rgba(246, 93, 1, 0.20);    /* stronger orange emphasis */
+  --color-inter-highlight-text:   #d94e00;                   /* highlighted inline text */
 }
