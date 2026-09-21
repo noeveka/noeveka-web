@@ -16,7 +16,6 @@ interface MissionProps {
 }
 
 export default function Mission({
-  eyebrow = ABOUT_CONFIG.mission.eyebrow,
   statement = ABOUT_CONFIG.mission.statement,
   pillars = ABOUT_CONFIG.mission.pillars as unknown as Pillar[],
 }: MissionProps) {
@@ -29,13 +28,6 @@ export default function Mission({
         {/* Header */}
         <div className="mb-14 flex flex-col gap-8 lg:flex-row lg:items-end">
           <div className="flex-1">
-            <motion.p
-              {...fu()}
-              className="mb-3 flex items-center gap-2 text-[10px] font-bold tracking-[0.22em] uppercase"
-              style={{ color: "var(--color-brand)" }}
-            >
-              <span>✳</span> {eyebrow}
-            </motion.p>
             <motion.p
               {...fu(0.07)}
               className="max-w-[640px] text-h1 leading-snug font-extrabold sm:text-[1.9rem]"

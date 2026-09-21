@@ -10,13 +10,11 @@ export interface Milestone {
 }
 
 interface StoryProps {
-  eyebrow?: string;
   heading?: string;
   milestones?: Milestone[];
 }
 
 export default function Story({
-  eyebrow = ABOUT_CONFIG.story.eyebrow,
   heading = ABOUT_CONFIG.story.heading,
   milestones = ABOUT_CONFIG.story.milestones as unknown as Milestone[],
 }: StoryProps) {
@@ -34,13 +32,6 @@ export default function Story({
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16">
           {/* Left: sticky heading */}
           <div className="self-start lg:sticky lg:top-24 lg:col-span-4">
-            <motion.p
-              {...fu()}
-              className="mb-4 flex items-center gap-2 text-[10px] font-bold tracking-[0.22em] uppercase"
-              style={{ color: "var(--color-brand)" }}
-            >
-              <span>✳</span> {eyebrow}
-            </motion.p>
             <motion.h2
               {...fu(0.07)}
               className="text-[1.9rem] leading-snug font-extrabold tracking-tight sm:text-[2.2rem]"

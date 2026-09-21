@@ -116,28 +116,28 @@ export default function Footer() {
       <div
         style={{
           background: "var(--color-brand-tint)",
-          borderTop: "1px solid rgba(246, 93, 1, 0.22)",
-          borderBottom: "1px solid rgba(246, 93, 1, 0.22)",
+          borderTop: "1px solid rgba(246, 93, 1, 0.18)",
+          borderBottom: "1px solid rgba(246, 93, 1, 0.18)",
         }}
       >
-        <div className="lp-container lp-px flex flex-col items-center justify-between gap-5 py-5 sm:flex-row">
-          {/* Left */}
-          <div className="flex items-center gap-4">
+        <div className="lp-container lp-px flex flex-col items-center justify-between gap-3 py-4 sm:flex-row sm:gap-5 sm:py-5">
+          {/* Left — icon + copy */}
+          <div className="flex w-full items-center gap-3 sm:w-auto">
             <div
-              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl"
+              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg sm:h-10 sm:w-10 sm:rounded-xl"
               style={{ background: "var(--color-brand)" }}
             >
-              <LucideIcon name="mail" className="h-5 w-5 text-white" />
+              <LucideIcon name="mail" className="h-4 w-4 text-white sm:h-[18px] sm:w-[18px]" />
             </div>
-            <div>
+            <div className="min-w-0">
               <p
-                className="text-[15px] font-bold"
+                className="truncate text-[13px] font-bold sm:text-[14px]"
                 style={{ color: "var(--color-text-primary)" }}
               >
                 {newsletterHeading}
               </p>
               <p
-                className="text-[12px]"
+                className="hidden truncate text-[11.5px] sm:block"
                 style={{ color: "var(--color-text-muted)" }}
               >
                 {newsletterSubtext}
@@ -147,7 +147,7 @@ export default function Footer() {
 
           {/* Email input */}
           <div
-            className="flex w-full items-center overflow-hidden rounded-xl border sm:w-auto sm:min-w-[360px]"
+            className="flex w-full items-center overflow-hidden rounded-xl border sm:w-auto sm:min-w-[320px]"
             style={{
               background: "var(--color-bg-surface)",
               borderColor: "rgba(246, 93, 1, 0.22)",
@@ -156,11 +156,11 @@ export default function Footer() {
             <input
               type="email"
               placeholder={newsletterPlaceholder}
-              className="flex-1 bg-transparent px-4 py-3 text-[13px] outline-none"
+              className="flex-1 bg-transparent px-3 py-2.5 text-[13px] outline-none sm:px-4 sm:py-3"
               style={{ color: "var(--color-text-primary)" }}
             />
             <button
-              className="shrink-0 cursor-pointer border-none px-4 py-3 transition-all"
+              className="shrink-0 cursor-pointer border-none px-3 py-2.5 transition-all sm:px-4 sm:py-3"
               style={{ background: "var(--color-brand)", color: "#ffffff" }}
               onMouseEnter={(e) =>
                 (e.currentTarget.style.background = "var(--color-brand-hover)")
@@ -193,17 +193,21 @@ export default function Footer() {
           }}
         />
 
-        {/* Watermark */}
+        {/* Watermark — fluid width, always fills the container */}
         <div
           className="pointer-events-none absolute right-0 bottom-0 left-0 flex items-end justify-center overflow-hidden select-none"
           aria-hidden="true"
         >
           <span
-            className="text-[8rem] leading-none font-extrabold uppercase sm:text-[12rem] lg:text-[16rem]"
             style={{
+              fontSize: "clamp(3.5rem, 18vw, 14rem)",
+              lineHeight: 1,
+              fontWeight: 800,
+              textTransform: "uppercase",
+              letterSpacing: "0.08em",
               color: "transparent",
               WebkitTextStroke: "1px rgba(15,17,23,0.05)",
-              letterSpacing: "0.1em",
+              whiteSpace: "nowrap",
             }}
           >
             NOEVEKA
