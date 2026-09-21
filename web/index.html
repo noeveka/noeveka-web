@@ -14,8 +14,78 @@
       content="Independent enterprise data & AI advisory firm — built by architects who have shipped real systems at global scale. Fabric, Databricks, and Azure-native platform strategy."
     />
     <title>Noeveka | Independent Enterprise Data & AI Advisory</title>
+    <meta name="color-scheme" content="light" />
+    <link
+      rel="preload"
+      as="image"
+      href="/assets/logos/noeveka_final_name_logo.png"
+      fetchpriority="high"
+    />
+    <style>
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background-color: #f4f2ed;
+        color-scheme: light;
+      }
+      #noeveka-preloader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 999999;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #f4f2ed;
+        transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+          visibility 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        will-change: opacity, visibility;
+      }
+      #noeveka-preloader.loaded {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+      }
+      .noeveka-preloader-logo {
+        width: 180px;
+        max-width: 65vw;
+        height: auto;
+        border: 0;
+        outline: none;
+        display: block;
+        animation: noeveka-blink 1.5s ease-in-out infinite;
+        user-select: none;
+        -webkit-user-drag: none;
+      }
+      @keyframes noeveka-blink {
+        0%,
+        100% {
+          opacity: 0.25;
+          transform: scale(0.97);
+        }
+        50% {
+          opacity: 1;
+          transform: scale(1);
+        }
+      }
+    </style>
   </head>
   <body>
+    <div id="noeveka-preloader" aria-label="Loading Noeveka" role="status">
+      <img
+        class="noeveka-preloader-logo"
+        src="/assets/logos/noeveka_final_name_logo.png"
+        alt="Noeveka"
+        decoding="sync"
+        loading="eager"
+      />
+    </div>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>

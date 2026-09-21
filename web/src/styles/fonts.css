@@ -1,38 +1,29 @@
 /* FONTS
-   Local self-hosted fonts for Exaannum.
-   Uses the variable font for full weight range in a single file.
-   Reference: src/assets/fonts/Lexend_Deca/ 
+   Self-hosted Inter variable font — single file covers full weight range.
+   Source: /public/assets/fonts/
+   Used on: body, headings, buttons, inputs — everything UI.
+   Never use for: code, API keys, file paths (use a mono font).
 */
 
 /*
-  Lexend Deca — Primary typeface
-  wght axis: 100–900
+  Inter — Primary typeface
+  opsz axis: 14–32  |  wght axis: 100–900
   format: truetype (variable)
-  Used on: body, headings, buttons, inputs — everything UI.
-  Never use for: code, API keys, file paths (use JetBrains Mono).
 */
 @font-face {
-  font-family: "Poppins";
-  src: url("../assets/fonts/Poppins-Medium.ttf") format("truetype");
-  font-weight: 500;
+  font-family: "Inter";
+  src: url("/assets/fonts/Inter-VariableFont_opsz,wght.ttf")
+    format("truetype");
+  font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Playfair Display";
-  src: url("../assets/fonts/PlayfairDisplay-VariableFont_wght.ttf")
+  font-family: "Inter";
+  src: url("/assets/fonts/Inter-Italic-VariableFont_opsz,wght.ttf")
     format("truetype");
-  font-weight: 400 900;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: "Playfair Display";
-  src: url("../assets/fonts/PlayfairDisplay-Italic-VariableFont_wght.ttf")
-    format("truetype");
-  font-weight: 400 900;
+  font-weight: 100 900;
   font-style: italic;
   font-display: swap;
 }
