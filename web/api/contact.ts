@@ -1,5 +1,5 @@
 import type { IncomingMessage, ServerResponse } from "node:http";
-import { handleContactSubmission, type ContactRequestBody } from "../src/server/contactHandler.ts";
+import { handleContactSubmission, type ContactRequestBody } from "./_lib/contactHandler.ts";
 
 export const config = {
   runtime: "nodejs",

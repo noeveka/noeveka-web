@@ -1,4 +1,4 @@
-import { handleResourceDownloadSubmission, ResourceDownloadRequestBody } from "../../src/server/resourceDownloadHandler";
+import { handleResourceDownloadSubmission, ResourceDownloadRequestBody } from "../../api/_lib/resourceDownloadHandler";
 
 interface Env {
   RESEND_API_KEY?: string;

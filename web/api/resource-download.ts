@@ -1,5 +1,5 @@
 import type { IncomingMessage, ServerResponse } from "node:http";
-import { handleResourceDownloadSubmission, type ResourceDownloadRequestBody } from "../src/server/resourceDownloadHandler.ts";
+import { handleResourceDownloadSubmission, type ResourceDownloadRequestBody } from "./_lib/resourceDownloadHandler.ts";
 
 export const config = {
   runtime: "nodejs",

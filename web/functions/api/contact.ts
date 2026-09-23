@@ -1,4 +1,4 @@
-import { handleContactSubmission, ContactRequestBody } from "../../src/server/contactHandler";
+import { handleContactSubmission, ContactRequestBody } from "../../api/_lib/contactHandler";
 
 interface Env {
   RESEND_API_KEY?: string;

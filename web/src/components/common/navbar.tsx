@@ -32,10 +32,11 @@ export default function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  // Close mobile menu on route change
-  useEffect(() => {
+  const [prevPathname, setPrevPathname] = useState(pathname);
+  if (prevPathname !== pathname) {
+    setPrevPathname(pathname);
     setMobileMenuOpen(false);
-  }, [pathname]);
+  }
 
   const links = settings?.navItems?.length ? settings.navItems : NAVBAR_CONFIG.navItems;
   const ctaText = settings?.navCtaText ?? NAVBAR_CONFIG.navCtaText;
