@@ -1,5 +1,6 @@
 import {
   ArrowRight,
+  ArrowUpRight,
   BarChart3,
   BookOpen,
   Check,
@@ -22,7 +23,9 @@ import {
   Layers3,
   LayoutDashboard,
   Lightbulb,
+  Loader2,
   Mail,
+  MapPin,
   Menu,
   MessageSquare,
   Minus,
@@ -51,6 +54,7 @@ import {
 export const iconMap = {
   // navigation
   "arrow-right": ArrowRight,
+  "arrow-up-right": ArrowUpRight,
   "chevron-down": ChevronDown,
   "chevron-left": ChevronLeft,
   "chevron-right": ChevronRight,
@@ -72,11 +76,13 @@ export const iconMap = {
   key: Key,
   eye: Eye,
   "eye-off": EyeOff,
+  "loader-2": Loader2,
 
   // communication & contact
   phone: Phone,
   mail: Mail,
   "message-square": MessageSquare,
+  "map-pin": MapPin,
   users: Users,
 
   // navigation items
@@ -109,6 +115,7 @@ export const iconMap = {
 
 export const lucideIconRegistry = {
   ArrowRight: "arrow-right",
+  ArrowUpRight: "arrow-up-right",
   ChevronDown: "chevron-down",
   ChevronLeft: "chevron-left",
   ChevronRight: "chevron-right",
@@ -127,9 +134,11 @@ export const lucideIconRegistry = {
   Key: "key",
   Eye: "eye",
   EyeOff: "eye-off",
+  Loader2: "loader-2",
   Phone: "phone",
   Home: "home",
   Mail: "mail",
+  MapPin: "map-pin",
   Star: "star",
   MessageSquare: "message-square",
   Users: "users",

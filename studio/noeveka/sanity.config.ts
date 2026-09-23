@@ -3,12 +3,14 @@ import {structureTool} from 'sanity/structure'
 import {visionTool} from '@sanity/vision'
 import {schemaTypes} from './schemaTypes'
 
+const dataset = process.env.SANITY_STUDIO_DATASET || 'production'
+
 export default defineConfig({
   name: 'default',
-  title: 'noeveka',
+  title: `noeveka (${dataset})`,
 
   projectId: 'gv2hvfjr',
-  dataset: 'production',
+  dataset: dataset,
 
   plugins: [structureTool(), visionTool()],
 

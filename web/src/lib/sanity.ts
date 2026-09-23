@@ -238,3 +238,45 @@ export async function getAboutPage() {
   }`);
 }
 
+// ─── Contact Page ────────────────────────────────────────────────────────────
+export async function getContactPage() {
+  return client.fetch(`*[_type == "contactPage"][0]{
+    hero{
+      heading,
+      subtext
+    },
+    form{
+      firstNameLabel,
+      firstNamePlaceholder,
+      lastNameLabel,
+      lastNamePlaceholder,
+      emailLabel,
+      emailPlaceholder,
+      phoneLabel,
+      phonePlaceholder,
+      messageLabel,
+      messagePlaceholder,
+      servicesLabel,
+      services[]{ id, label },
+      submitText,
+      submittingText,
+      successHeading,
+      successSubtext,
+      resetButtonText
+    },
+    channels{
+      chat{
+        title,
+        subtext,
+        links[]{ icon, label, href, external }
+      },
+      call{
+        title,
+        subtext,
+        links[]{ icon, label, href }
+      }
+    }
+  }`);
+}
+
+

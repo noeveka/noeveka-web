@@ -27,14 +27,52 @@ export function DownloadModal({ resource, onClose }: DownloadModalProps) {
     return e;
   };
 
+  const [serverError, setServerError] = useState<string | null>(null);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setServerError(null);
     const errs = validate();
-    if (Object.keys(errs).length) { setErrors(errs); return; }
+    if (Object.keys(errs).length) {
+      setErrors(errs);
+      return;
+    }
+
     setLoading(true);
-    await new Promise((r) => setTimeout(r, 800));
-    setLoading(false);
-    setSubmitted(true);
+    try {
+      await fetch("/api/resource-download", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: form.name,
+          email: form.email,
+          consent: form.consent,
+          resourceTitle: resource.title,
+          resourceId: resource._id,
+          pdfUrl: resource.pdfUrl,
+        }),
+      });
+
+      setLoading(false);
+      setSubmitted(true);
+
+      // Auto-trigger download if pdfUrl is present
+      if (resource.pdfUrl) {
+        const link = document.createElement("a");
+        link.href = resource.pdfUrl;
+        link.download = `${resource.title.toLowerCase().replace(/[^a-z0-9]/g, "-")}.pdf`;
+        link.target = "_blank";
+        link.rel = "noopener noreferrer";
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      }
+    } catch (err: unknown) {
+      console.error("Resource download submit error:", err);
+      // Even if network fails, unlock download for visitor satisfaction
+      setLoading(false);
+      setSubmitted(true);
+    }
   };
 
   const inputStyle = (hasErr: boolean): React.CSSProperties => ({
@@ -101,6 +139,13 @@ export function DownloadModal({ resource, onClose }: DownloadModalProps) {
             </p>
 
             <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-3.5">
+              {serverError && (
+                <div className="flex items-center gap-2 rounded-lg border border-red-200 bg-red-50 p-2.5 text-[12px] text-red-600">
+                  <LucideIcon name="alert-circle" className="h-4 w-4 shrink-0" />
+                  <span>{serverError}</span>
+                </div>
+              )}
+
               <div className="flex flex-col gap-1">
                 <label className="text-[12px] font-semibold text-neutral-600" htmlFor="dl-name">
                   Full Name
