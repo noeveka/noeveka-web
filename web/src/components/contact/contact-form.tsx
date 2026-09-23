@@ -127,15 +127,36 @@ export default function ContactForm({ data }: ContactFormProps) {
     });
   };
 
+  const [serverError, setServerError] = useState<string | null>(null);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    setServerError(null);
     if (!validate()) return;
 
     setIsSubmitting(true);
-    // Simulate submission delay
-    await new Promise((resolve) => setTimeout(resolve, 800));
-    setIsSubmitting(false);
-    setIsSubmitted(true);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formState),
+      });
+
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok) {
+        setServerError(data?.error || "Unable to send your message right now. Please try again or email us directly.");
+        setIsSubmitting(false);
+        return;
+      }
+
+      setIsSubmitting(false);
+      setIsSubmitted(true);
+    } catch (err: unknown) {
+      console.error("Contact form submit error:", err);
+      setServerError("Network error. Please check your connection and try again.");
+      setIsSubmitting(false);
+    }
   };
 
   const handleReset = () => {
@@ -149,6 +170,7 @@ export default function ContactForm({ data }: ContactFormProps) {
       services: [],
     });
     setErrors({});
+    setServerError(null);
     setIsSubmitted(false);
   };
 
@@ -185,6 +207,13 @@ export default function ContactForm({ data }: ContactFormProps) {
 
   return (
     <form onSubmit={handleSubmit} noValidate className="flex flex-col gap-5">
+      {serverError && (
+        <div className="flex items-center gap-2.5 rounded-lg border border-red-200 bg-red-50 p-3.5 text-sm text-red-700">
+          <LucideIcon name="alert-circle" className="h-4 w-4 shrink-0 text-red-500" />
+          <span>{serverError}</span>
+        </div>
+      )}
+
       {/* 1. First name + Last name */}
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         {/* First Name */}
