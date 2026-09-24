@@ -14,9 +14,9 @@ interface IndustryItem {
 
 interface IndustryDomainsProps {
   quote?: {
-    quote: string;
-    author: string;
-    role: string;
+    quote?: string;
+    author?: string;
+    role?: string;
   };
   industries?: readonly IndustryItem[];
 }

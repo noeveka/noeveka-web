@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { PageHead } from "@/components/seo";
 import { SEO_CONFIG } from "@/config/seo.config";
 import { SERVICES_CONFIG, type ServiceFocusArea } from "@/config/services.config";
+import { getServicesPage } from "@/lib/sanity";
 import {
   ServicesHero,
   EngagementProcess,
@@ -21,42 +22,54 @@ interface ServicesPageData {
     ctaPrimaryText?: string;
     ctaPrimaryLink?: string;
   };
-  focusAreas?: readonly ServiceFocusArea[];
+  focusAreas?: ServiceFocusArea[];
+  impactPrinciplesSection?: {
+    heading?: string;
+    body?: string;
+    principles?: Array<{
+      number: string;
+      title: string;
+      description: string;
+    }>;
+  };
+  engagementSection?: {
+    heading?: string;
+    subtext?: string;
+    steps?: Array<{
+      number: string;
+      title: string;
+      desc: string;
+    }>;
+  };
+  industrySection?: {
+    quote?: {
+      quote?: string;
+      author?: string;
+      role?: string;
+    };
+    industries?: Array<{
+      label: string;
+      icon: string;
+    }>;
+  };
+  ctaSection?: {
+    headingPart?: string;
+    headingHighlight?: string;
+    body?: string;
+    primaryCtaText?: string;
+    primaryCtaLink?: string;
+    secondaryCtaText?: string;
+    secondaryCtaLink?: string;
+  };
 }
 
 export default function ServicesPage() {
-  // Config data is used as the current state and fallback.
-  // When Sanity schema & API are configured in the next phase,
-  // this state will be populated by Sanity while falling back seamlessly to SERVICES_CONFIG.
-  const [data, setData] = useState<ServicesPageData>({
-    hero: {
-      badge: SERVICES_CONFIG.hero.badge,
-      headingLine1: SERVICES_CONFIG.hero.headingLine1,
-      headingLine2: SERVICES_CONFIG.hero.headingLine2,
-      headingHighlight: SERVICES_CONFIG.hero.headingHighlight,
-      subtext: SERVICES_CONFIG.hero.subtext,
-      ctaPrimaryText: SERVICES_CONFIG.hero.ctaPrimaryText,
-      ctaPrimaryLink: SERVICES_CONFIG.hero.ctaPrimaryLink,
-    },
-    focusAreas: SERVICES_CONFIG.focusAreas,
-  });
+  const [data, setData] = useState<ServicesPageData | null>(null);
 
   useEffect(() => {
-    // When Sanity is configured, replace with getServicesPage().then(setData).catch(console.error);
-    // Setting config data as initial state & fallback
-    setData({
-      hero: {
-        badge: SERVICES_CONFIG.hero.badge,
-        headingLine1: SERVICES_CONFIG.hero.headingLine1,
-        headingLine2: SERVICES_CONFIG.hero.headingLine2,
-        headingHighlight: SERVICES_CONFIG.hero.headingHighlight,
-        subtext: SERVICES_CONFIG.hero.subtext,
-        ctaPrimaryText: SERVICES_CONFIG.hero.ctaPrimaryText,
-        ctaPrimaryLink: SERVICES_CONFIG.hero.ctaPrimaryLink,
-      },
-      focusAreas: SERVICES_CONFIG.focusAreas,
-    });
+    getServicesPage().then(setData).catch(console.error);
   }, []);
+  console.log('This is the Service page data coming from sanity', data)
 
   return (
     <>
@@ -66,36 +79,36 @@ export default function ServicesPage() {
       />
       <main>
         <ServicesHero
-          headingLine1={data.hero?.headingLine1}
-          headingLine2={data.hero?.headingLine2}
-          headingHighlight={data.hero?.headingHighlight}
-          subtext={data.hero?.subtext}
-          ctaPrimaryText={data.hero?.ctaPrimaryText}
-          ctaPrimaryLink={data.hero?.ctaPrimaryLink}
-          focusAreas={data.focusAreas}
+          headingLine1={data?.hero?.headingLine1 ?? SERVICES_CONFIG.hero.headingLine1}
+          headingLine2={data?.hero?.headingLine2 ?? SERVICES_CONFIG.hero.headingLine2}
+          headingHighlight={data?.hero?.headingHighlight ?? SERVICES_CONFIG.hero.headingHighlight}
+          subtext={data?.hero?.subtext ?? SERVICES_CONFIG.hero.subtext}
+          ctaPrimaryText={data?.hero?.ctaPrimaryText ?? SERVICES_CONFIG.hero.ctaPrimaryText}
+          ctaPrimaryLink={data?.hero?.ctaPrimaryLink ?? SERVICES_CONFIG.hero.ctaPrimaryLink}
+          focusAreas={data?.focusAreas ?? SERVICES_CONFIG.focusAreas}
         />
-        <TrustCompanyLogoBar/>
+        <TrustCompanyLogoBar />
         <ImpactPrinciples
-          heading={SERVICES_CONFIG.impactPrinciplesSection.heading}
-          body={SERVICES_CONFIG.impactPrinciplesSection.body}
-          principles={SERVICES_CONFIG.impactPrinciplesSection.principles}
+          heading={data?.impactPrinciplesSection?.heading ?? SERVICES_CONFIG.impactPrinciplesSection.heading}
+          body={data?.impactPrinciplesSection?.body ?? SERVICES_CONFIG.impactPrinciplesSection.body}
+          principles={data?.impactPrinciplesSection?.principles ?? SERVICES_CONFIG.impactPrinciplesSection.principles}
         />
         <EngagementProcess
-          subtext={SERVICES_CONFIG.engagementSection.subtext}
-          steps={SERVICES_CONFIG.engagementSection.steps}
+          subtext={data?.engagementSection?.subtext ?? SERVICES_CONFIG.engagementSection.subtext}
+          steps={data?.engagementSection?.steps ?? SERVICES_CONFIG.engagementSection.steps}
         />
         <IndustryDomains
-          quote={SERVICES_CONFIG.founderQuote}
-          industries={SERVICES_CONFIG.industries}
+          quote={data?.industrySection?.quote ?? SERVICES_CONFIG.founderQuote}
+          industries={data?.industrySection?.industries ?? SERVICES_CONFIG.industries}
         />
         <ServicesCta
-          headingPart={SERVICES_CONFIG.ctaSection.headingPart}
-          headingHighlight={SERVICES_CONFIG.ctaSection.headingHighlight}
-          body={SERVICES_CONFIG.ctaSection.body}
-          primaryCtaText={SERVICES_CONFIG.ctaSection.primaryCtaText}
-          primaryCtaLink={SERVICES_CONFIG.ctaSection.primaryCtaLink}
-          secondaryCtaText={SERVICES_CONFIG.ctaSection.secondaryCtaText}
-          secondaryCtaLink={SERVICES_CONFIG.ctaSection.secondaryCtaLink}
+          headingPart={data?.ctaSection?.headingPart ?? SERVICES_CONFIG.ctaSection.headingPart}
+          headingHighlight={data?.ctaSection?.headingHighlight ?? SERVICES_CONFIG.ctaSection.headingHighlight}
+          body={data?.ctaSection?.body ?? SERVICES_CONFIG.ctaSection.body}
+          primaryCtaText={data?.ctaSection?.primaryCtaText ?? SERVICES_CONFIG.ctaSection.primaryCtaText}
+          primaryCtaLink={data?.ctaSection?.primaryCtaLink ?? SERVICES_CONFIG.ctaSection.primaryCtaLink}
+          secondaryCtaText={data?.ctaSection?.secondaryCtaText ?? SERVICES_CONFIG.ctaSection.secondaryCtaText}
+          secondaryCtaLink={data?.ctaSection?.secondaryCtaLink ?? SERVICES_CONFIG.ctaSection.secondaryCtaLink}
         />
       </main>
     </>

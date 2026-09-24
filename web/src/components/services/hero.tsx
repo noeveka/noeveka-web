@@ -76,20 +76,21 @@ export default function ServicesHero({
   ctaPrimaryLink = SERVICES_CONFIG.hero.ctaPrimaryLink,
   focusAreas = SERVICES_CONFIG.focusAreas,
 }: ServicesHeroProps) {
-  const card1 = focusAreas[0];
-  const card2 = focusAreas[1];
-  const card3 = focusAreas[2];
-  const card4 = focusAreas[3];
+  const activeFocusAreas = (focusAreas && focusAreas.length >= 4) ? focusAreas : SERVICES_CONFIG.focusAreas;
+  const card1 = activeFocusAreas[0];
+  const card2 = activeFocusAreas[1];
+  const card3 = activeFocusAreas[2];
+  const card4 = activeFocusAreas[3];
 
   return (
     <section className={styles.section} id="services-hero">
       {/* ── Ambient Background Decorations ── */}
       <div
-        className="pointer-events-none absolute inset-0"
-        style={{
-          background:
-            "radial-gradient(ellipse 70% 50% at 50% 25%, rgba(246,93,1,0.06) 0%, rgba(250,249,247,0) 80%)",
-        }}
+        className="pointer-events-none absolute inset-0 bg-white"
+        // style={{
+        //   background:
+        //     "radial-gradient(ellipse 70% 50% at 50% 25%, rgba(246,93,1,0.06) 0%, rgba(250,249,247,0) 80%)",
+        // }}
       />
 
       <div className={styles.container}>
