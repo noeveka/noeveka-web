@@ -1,4 +1,4 @@
-import { BRAND } from "./constants";
+import { BRAND } from "./constants.js";
 
 export interface ResourceDownloadUserConfirmationProps {
   name: string;

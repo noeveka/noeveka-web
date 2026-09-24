@@ -2,7 +2,7 @@
 import {
   renderContactTeamNotificationEmail,
   renderContactUserConfirmationEmail,
-} from "./email-templates";
+} from "./email-templates/index.js";
 
 export interface ContactRequestBody {
   firstName: string;
