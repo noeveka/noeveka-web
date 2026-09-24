@@ -4,52 +4,7 @@ import { LucideIcon } from "@/components/lucide-icons";
 import { fu, fs } from "@/lib/motion";
 import { getTestimonials } from "@/lib/sanity";
 import { TESTIMONIALS_CONFIG } from "@/config/landing/testimonials.config";
-
-/* ─── Brand SVG logos (hardcoded — branding marks) ──────────────────── */
-const MicrosoftSvg = () => (
-  <svg width="20" height="20" viewBox="0 0 21 21" role="img" aria-label="Microsoft">
-    <rect x="1" y="1" width="9" height="9" fill="#f25022" /><rect x="11" y="1" width="9" height="9" fill="#7fba00" />
-    <rect x="1" y="11" width="9" height="9" fill="#00a4ef" /><rect x="11" y="11" width="9" height="9" fill="#ffb900" />
-  </svg>
-);
-const DatabricksSvg = () => (
-  <svg width="22" height="22" viewBox="0 0 24 24" role="img" aria-label="Databricks">
-    <path d="M12 2L22 7.5V16.5L12 22L2 16.5V7.5Z" fill="#FF3621" />
-    <path d="M12 6L19 10V14L12 18L5 14V10Z" fill="#fff" opacity="0.15" />
-    <line x1="7" y1="9.5" x2="12" y2="12.5" stroke="#fff" strokeWidth="1.4" strokeLinecap="round" opacity="0.8" />
-    <line x1="17" y1="9.5" x2="12" y2="12.5" stroke="#fff" strokeWidth="1.4" strokeLinecap="round" opacity="0.8" />
-    <line x1="12" y1="12.5" x2="12" y2="17" stroke="#fff" strokeWidth="1.4" strokeLinecap="round" opacity="0.8" />
-  </svg>
-);
-const AzureSvg = () => (
-  <svg width="22" height="22" viewBox="0 0 96 96" role="img" aria-label="Azure">
-    <defs><linearGradient id="az-grad" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stopColor="#0078D4" /><stop offset="100%" stopColor="#50E6FF" /></linearGradient></defs>
-    <path fill="url(#az-grad)" d="M34.93 6.27L9.12 74.42H29.2l21.23-47.29 16.21 33.73H48.82L41.7 74.42H86.88L55.41 6.27Z" />
-  </svg>
-);
-const PowerBISvg = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" role="img" aria-label="Power BI">
-    <rect x="2" y="13" width="5" height="8" rx="1.2" fill="#F2C811" />
-    <rect x="9.5" y="8" width="5" height="13" rx="1.2" fill="#F2C811" opacity="0.85" />
-    <rect x="17" y="3" width="5" height="18" rx="1.2" fill="#F2C811" opacity="0.7" />
-  </svg>
-);
-const SnowflakeSvg = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#29B5E8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" role="img" aria-label="Snowflake">
-    <line x1="12" y1="2" x2="12" y2="22" /><line x1="2" y1="12" x2="22" y2="12" />
-    <line x1="4.93" y1="4.93" x2="19.07" y2="19.07" /><line x1="19.07" y1="4.93" x2="4.93" y2="19.07" />
-    <polyline points="9,5 12,2 15,5" /><polyline points="19,9 22,12 19,15" />
-    <polyline points="15,19 12,22 9,19" /><polyline points="5,15 2,12 5,9" />
-  </svg>
-);
-
-const LOGOS = [
-  { name: "Microsoft Fabric", Logo: MicrosoftSvg },
-  { name: "Databricks", Logo: DatabricksSvg },
-  { name: "Azure", Logo: AzureSvg },
-  { name: "Power BI", Logo: PowerBISvg },
-  { name: "Snowflake", Logo: SnowflakeSvg },
-];
+import TrustCompanyLogoBar from "./trust-company-logo-bar";
 
 interface Testimonial {
   _id: string;
@@ -96,16 +51,7 @@ export default function Testimonials({
   return (
     <>
       {/* ── Trust logo bar ── */}
-      <section className="flex justify-center border-y" style={{ background: "var(--color-bg-surface)", borderColor: "var(--color-stroke-default)" }}>
-        <div className="lp-container lp-px py-5 grid grid-cols-5 divide-x" style={{ borderColor: "var(--color-stroke-default)" }}>
-          {LOGOS.map(({ name, Logo }) => (
-            <div key={name} className="flex items-center justify-center gap-2.5 px-4 py-3" style={{ borderColor: "var(--color-stroke-default)" }}>
-              <Logo />
-              <span className="text-[13px] font-semibold hidden sm:block" style={{ color: "var(--color-text-primary)" }}>{name}</span>
-            </div>
-          ))}
-        </div>
-      </section>
+      <TrustCompanyLogoBar/>
 
       {/* ── Testimonials section ── */}
       <section className="flex justify-center" style={{ background: "var(--color-bg-subtle)" }}>
