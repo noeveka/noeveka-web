@@ -1,7 +1,7 @@
 // Shared resource download gate handler using standard Web Request / Response and Resend REST API
 import {
   renderResourceDownloadTeamNotificationEmail,
-  renderResourceDownloadUserConfirmationEmail,
+  // renderResourceDownloadUserConfirmationEmail,
 } from "./email-templates/index.js";
 
 export interface ResourceDownloadRequestBody {
@@ -24,7 +24,7 @@ export async function handleResourceDownloadSubmission(
     LOGO_TEXT_URL?: string;
   }
 ) {
-  const { name, email, consent, resourceTitle = "Resource Document", resourceId, pdfUrl } = body;
+  const { name, email, consent, resourceTitle = "Resource Document", resourceId } = body;
 
   // 1. Strict Validation per User Flow
   if (!name?.trim()) {
@@ -90,13 +90,13 @@ export async function handleResourceDownloadSubmission(
     logoTextUrl: env.LOGO_TEXT_URL,
   });
 
-  const userConfirmationHtml = renderResourceDownloadUserConfirmationEmail({
-    name,
-    resourceTitle,
-    pdfUrl,
-    logoIconUrl: env.LOGO_ICON_URL,
-    logoTextUrl: env.LOGO_TEXT_URL,
-  });
+  // const userConfirmationHtml = renderResourceDownloadUserConfirmationEmail({
+  //   name,
+  //   resourceTitle,
+  //   pdfUrl,
+  //   logoIconUrl: env.LOGO_ICON_URL,
+  //   logoTextUrl: env.LOGO_TEXT_URL,
+  // });
 
   // 4. Send Notifications in parallel
   try {
@@ -118,20 +118,20 @@ export async function handleResourceDownloadSubmission(
       }),
 
       // 4B. User confirmation copy with direct download link
-      fetch("https://api.resend.com/emails", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${resendApiKey}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          from: fromEmail,
-          to: [email.trim()],
-          reply_to: toEmail,
-          subject: `Your download: ${resourceTitle} — Noeveka`,
-          html: userConfirmationHtml,
-        }),
-      }),
+      // fetch("https://api.resend.com/emails", {
+      //   method: "POST",
+      //   headers: {
+      //     Authorization: `Bearer ${resendApiKey}`,
+      //     "Content-Type": "application/json",
+      //   },
+      //   body: JSON.stringify({
+      //     from: fromEmail,
+      //     to: [email.trim()],
+      //     reply_to: toEmail,
+      //     subject: `Your download: ${resourceTitle} — Noeveka`,
+      //     html: userConfirmationHtml,
+      //   }),
+      // }),
     ]);
 
     return {
