@@ -2,7 +2,7 @@
 import {
   renderResourceDownloadTeamNotificationEmail,
   renderResourceDownloadUserConfirmationEmail,
-} from "./email-templates/index.ts";
+} from "./email-templates";
 
 export interface ResourceDownloadRequestBody {
   name: string;

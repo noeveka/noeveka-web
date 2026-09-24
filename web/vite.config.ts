@@ -2,8 +2,8 @@ import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import path from "node:path";
 import { defineConfig, loadEnv, type Plugin } from "vite";
-import { handleContactSubmission } from "./api/_lib/contactHandler.ts";
-import { handleResourceDownloadSubmission } from "./api/_lib/resourceDownloadHandler.ts";
+import { handleContactSubmission } from "./api/_lib/contactHandler";
+import { handleResourceDownloadSubmission } from "./api/_lib/resourceDownloadHandler";
 
 function localApiPlugin(env: Record<string, string>): Plugin {
   return {

@@ -1,4 +1,4 @@
-import { BRAND } from "./constants.ts";
+import { BRAND } from "./constants";
 
 export interface ContactUserConfirmationProps {
   firstName: string;
