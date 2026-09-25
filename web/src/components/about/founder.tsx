@@ -1,241 +1,195 @@
+import { Link } from "react-router";
 import { motion } from "framer-motion";
 
 import { LucideIcon } from "@/components/lucide-icons";
+import LinkedInSvg from "@/components/svgs/linkedin-svg";
 import { ABOUT_CONFIG } from "@/config/about.config";
-import { fs, fsl, fu } from "@/lib/motion";
+import { fu } from "@/lib/motion";
 import { urlFor } from "@/lib/sanity";
 
 interface FounderProps {
+  eyebrow?: string;
+  heading?: string;
   name?: string;
   initials?: string;
   title?: string;
   company?: string;
   tagline?: string;
-  bio?: string[];
-  photo?: { asset?: unknown; alt?: string } | unknown;
+  bio?: readonly string[];
+  photo?: { asset?: unknown; alt?: string } | string;
   photoAlt?: string;
-  credentials?: Array<{ label: string; value: string }>;
+  credentials?: readonly { label: string; value: string }[];
+  whyFoundedHeading?: string;
+  whyFoundedText?: string;
+  linkedinUrl?: string;
+  email?: string;
+  contactLink?: string;
 }
 
-const DEFAULT_CREDENTIALS = ABOUT_CONFIG.founder.credentials as unknown as Array<{ label: string; value: string }>;
-
 export default function Founder({
+  eyebrow = ABOUT_CONFIG.founder.eyebrow,
+  heading = ABOUT_CONFIG.founder.heading,
   name = ABOUT_CONFIG.founder.name,
-  initials = ABOUT_CONFIG.founder.initials,
-  title = ABOUT_CONFIG.founder.title,
-  company = ABOUT_CONFIG.founder.company,
   tagline = ABOUT_CONFIG.founder.tagline,
-  bio = ABOUT_CONFIG.founder.bio as unknown as string[],
-  photo,
+  bio = ABOUT_CONFIG.founder.bio,
+  photo = ABOUT_CONFIG.founder.photoFallbackUrl,
   photoAlt = ABOUT_CONFIG.founder.photoAlt,
-  credentials,
+  credentials = ABOUT_CONFIG.founder.credentials,
+  whyFoundedHeading = ABOUT_CONFIG.founder.whyFoundedHeading,
+  whyFoundedText = ABOUT_CONFIG.founder.whyFoundedText,
+  linkedinUrl = ABOUT_CONFIG.founder.linkedinUrl,
+  email = ABOUT_CONFIG.founder.email,
+  contactLink = ABOUT_CONFIG.founder.contactLink,
 }: FounderProps) {
-  const resolvedCredentials = credentials?.length ? credentials : DEFAULT_CREDENTIALS;
-  const founderPhotoSrc = (photo as { asset?: unknown })?.asset
-    ? urlFor(photo).width(900).url()
-    : ABOUT_CONFIG.founder.photoFallbackUrl;
+  const resolvedCredentials = credentials?.length
+    ? credentials
+    : ABOUT_CONFIG.founder.credentials;
+
+  const resolvedBio = bio?.length ? bio : ABOUT_CONFIG.founder.bio;
+
+  const imgSrc =
+    typeof photo === "string"
+      ? photo
+      : (photo as { asset?: unknown })?.asset
+      ? urlFor(photo).width(800).quality(90).url()
+      : ABOUT_CONFIG.founder.photoFallbackUrl;
+
+  const cleanTagline = (tagline || ABOUT_CONFIG.founder.tagline)
+    .replace(/^["']|["']$/g, "")
+    .trim();
 
   return (
     <section
-      className="flex justify-center overflow-hidden border-b"
-      style={{
-        background: "#ffffff",
-        borderColor: "var(--color-stroke-default)",
-      }}
+      id="founder"
+      className="relative flex justify-center overflow-hidden border-t border-b border-neutral-200/60 bg-[#faf9f8] py-20 lg:py-28"
     >
-      <div className="lp-container lp-px py-16 lg:py-24">
-        {/* Two-column editorial grid */}
-        <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-[420px_1fr] lg:gap-16">
-          {/* ── LEFT: Photo + floating stats ── */}
-          <motion.div {...fsl(0.04)} className="relative">
-            {/* Photo wrapper */}
-            <div
-              className="relative overflow-hidden rounded-3xl shadow-[0_32px_72px_rgba(0,0,0,0.16)]"
-              style={{
-                aspectRatio: "3/4",
-                border: "1px solid rgba(0,0,0,0.07)",
-                background: "#f5f4f2",
-              }}
-            >
-              <img
-                src={founderPhotoSrc}
-                alt={photoAlt}
-                className="absolute inset-0 h-full w-full object-cover object-[58%_12%]"
-              />
+      <div className="lp-container lp-px mx-auto max-w-6xl">
+        {/* Top Header Row matching the reference layout */}
+        <div className="mb-10 flex flex-col justify-between gap-3 sm:flex-row sm:items-baseline sm:mb-12">
+          {eyebrow && (
+            <div className="text-[13px] font-mono font-medium tracking-wider text-neutral-500 uppercase">
+              {eyebrow}
+            </div>
+          )}
+          {heading && (
+            <h2 className="text-3xl font-extrabold tracking-tight text-[#161922] sm:text-4xl">
+              {heading}
+            </h2>
+          )}
+        </div>
 
-              {/* Bottom fade overlay */}
-              <div
-                className="pointer-events-none absolute inset-0"
-                style={{
-                  background:
-                    "linear-gradient(to top, rgba(10,10,10,0.65) 0%, rgba(0,0,0,0.05) 45%, transparent 65%)",
-                }}
+        {/* Two-Column Clean Grid */}
+        <div className="grid grid-cols-1 items-stretch gap-8 lg:grid-cols-[380px_1fr] xl:grid-cols-[410px_1fr] lg:gap-10">
+          {/* ── LEFT: Clean Portrait Card ── */}
+          <motion.div
+            {...fu(0.04)}
+            className="relative flex min-h-[480px] w-full flex-col justify-between overflow-hidden rounded-3xl border border-neutral-200/80 bg-[#161922] p-7 shadow-[0_4px_24px_rgba(0,0,0,0.06)]"
+          >
+            {/* Portrait Image */}
+            <img
+              src={imgSrc}
+              alt={photoAlt}
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+
+            {/* Scrim Overlay */}
+            <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/90 via-black/30 to-transparent" />
+
+            {/* Top Logo / Icon Mark */}
+            <div className="relative z-10 flex h-10 w-10 items-center justify-center rounded-full border border-white/30 bg-white/20 text-white backdrop-blur-md">
+              <LucideIcon
+                name="sparkles"
+                className="h-4.5 w-4.5 text-[#f65d01]"
               />
+            </div>
+
+            {/* Bottom Overlay Info */}
+            <div className="relative z-10 mt-auto flex flex-col items-start gap-3">
+              <p className="text-xl font-bold tracking-tight text-white sm:text-[22px] leading-snug drop-shadow-sm">
+                &ldquo;{cleanTagline}&rdquo;
+              </p>
             </div>
           </motion.div>
 
-          {/* ── RIGHT: Editorial content ── */}
-          <div className="flex flex-col gap-8 lg:pt-2">
-            {/* Name + title badge */}
-            <motion.div {...fu(0.06)}>
-              <h2
-                className="mb-3 text-[2.4rem] leading-none font-extrabold tracking-tight sm:text-[3rem] lg:text-[3.2rem]"
-                style={{ color: "var(--color-text-primary)" }}
-              >
+          {/* ── RIGHT: Clean Content Card ── */}
+          <motion.div
+            {...fu(0.08)}
+            className="relative flex flex-col justify-between rounded-3xl border border-neutral-200/80 bg-white p-8 sm:p-10 shadow-[0_4px_24px_rgba(0,0,0,0.03)]"
+          >
+            <div>
+              {/* Founder Name */}
+              <h3 className="text-2xl font-bold tracking-tight text-[#161922] sm:text-3xl">
                 {name}
-              </h2>
-              <div className="flex flex-wrap items-center gap-2">
-                <span
-                  className="inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-[11px] font-bold"
-                  style={{
-                    background: "rgba(246,93,1,0.09)",
-                    border: "1.5px solid rgba(246,93,1,0.22)",
-                    color: "var(--color-brand)",
-                  }}
-                >
-                  <div
-                    className="h-1.5 w-1.5 rounded-full"
-                    style={{ background: "var(--color-brand)" }}
-                  />
-                  {title}
-                </span>
-                <span
-                  className="text-[12px]"
-                  style={{ color: "var(--color-text-muted)" }}
-                >
-                  {company}
-                </span>
+              </h3>
+
+              {/* Bio Paragraphs */}
+              <div className="mt-4 space-y-3.5 text-[15px] leading-relaxed text-[#4b5563] sm:text-[15.5px]">
+                {resolvedBio.map((paragraph, index) => (
+                  <p key={index}>{paragraph}</p>
+                ))}
               </div>
-            </motion.div>
 
-            {/* Divider */}
-            <div
-              className="h-px w-full"
-              style={{ background: "var(--color-stroke-default)" }}
-            />
+              {/* Social / Direct Connect Icons */}
+              <div className="mt-6 flex items-center gap-3">
+                {linkedinUrl && (
+                  <a
+                    href={linkedinUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="LinkedIn"
+                    className="flex h-10 w-10 items-center justify-center rounded-full bg-[#161922] text-white shadow-xs transition-all duration-200 hover:bg-[#f65d01] hover:-translate-y-0.5 active:translate-y-0"
+                  >
+                    <LinkedInSvg />
+                  </a>
+                )}
+                {email && (
+                  <a
+                    href={`mailto:${email}`}
+                    aria-label="Email Noeveka"
+                    className="flex h-10 w-10 items-center justify-center rounded-full bg-[#161922] text-white shadow-xs transition-all duration-200 hover:bg-[#f65d01] hover:-translate-y-0.5 active:translate-y-0"
+                  >
+                    <LucideIcon name="mail" className="h-4 w-4" />
+                  </a>
+                )}
+                {contactLink && (
+                  <Link
+                    to={contactLink}
+                    aria-label="Book a strategy call"
+                    className="flex h-10 w-10 items-center justify-center rounded-full bg-[#161922] text-white shadow-xs transition-all duration-200 hover:bg-[#f65d01] hover:-translate-y-0.5 active:translate-y-0"
+                  >
+                    <LucideIcon name="calendar" className="h-4 w-4" />
+                  </Link>
+                )}
+              </div>
 
-            {/* Quote */}
-            <motion.div {...fu(0.1)} className="relative pl-6">
-              {/* Decorative big open-quote */}
-              <span
-                className="pointer-events-none absolute -top-4 -left-1 leading-none font-black select-none"
-                style={{
-                  fontSize: "5rem",
-                  color: "rgba(246,93,1,0.12)",
-                  fontFamily: "Georgia, serif",
-                }}
-              >
-                "
-              </span>
-              <blockquote
-                className="relative text-[1.25rem] leading-snug font-bold sm:text-[1.45rem]"
-                style={{
-                  color: "var(--color-text-primary)",
-                  borderLeft: "3px solid var(--color-brand)",
-                  paddingLeft: "1.25rem",
-                  fontStyle: "italic",
-                }}
-              >
-                {/* Strip surrounding quotes if already in config */}
-                {tagline.replace(/^["']|["']$/g, "")}
-              </blockquote>
-            </motion.div>
+              {/* "Why He Founded Noeveka?" block */}
+              {whyFoundedText && (
+                <div className="mt-8 border-t border-neutral-100 pt-6">
+                  {whyFoundedHeading && (
+                    <h4 className="text-[17px] font-bold tracking-tight text-[#161922]">
+                      {whyFoundedHeading}
+                    </h4>
+                  )}
+                  <p className="mt-2 text-[14.5px] leading-relaxed text-[#555d6e]">
+                    {whyFoundedText}
+                  </p>
+                </div>
+              )}
+            </div>
 
-            {/* Bio — just first paragraph, keep it tight */}
-            <motion.p
-              {...fu(0.14)}
-              className="max-w-[520px] text-[14.5px] leading-relaxed"
-              style={{ color: "var(--color-text-secondary)" }}
-            >
-              {bio[0]}
-            </motion.p>
-
-            {/* Divider */}
-            <div
-              className="h-px w-full"
-              style={{ background: "var(--color-stroke-default)" }}
-            />
-
-            {/* Credentials — 2×2 grid */}
-            <motion.div
-              {...fs(0.18)}
-              className="grid grid-cols-2 gap-3 sm:grid-cols-2"
-            >
+            {/* Bottom Credentials Pill Strip */}
+            <div className="mt-8 flex flex-wrap items-center gap-2.5 border-t border-neutral-100 pt-6">
               {resolvedCredentials.map(({ label, value }) => (
                 <div
                   key={label}
-                  className="group flex flex-col gap-1 rounded-2xl p-4 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-[0_6px_20px_rgba(0,0,0,0.06)]"
-                  style={{
-                    background: "#f7f6f4",
-                    border: "1px solid var(--color-stroke-default)",
-                  }}
+                  className="inline-flex items-center gap-1.5 rounded-full border border-neutral-200/90 bg-[#faf9f8] px-3.5 py-1.5 text-[12px] text-neutral-700 shadow-xs"
                 >
-                  <span
-                    className="text-[9.5px] font-bold tracking-[0.18em] uppercase"
-                    style={{ color: "var(--color-brand)" }}
-                  >
-                    {label}
-                  </span>
-                  <span
-                    className="text-[14px] leading-tight font-extrabold"
-                    style={{ color: "var(--color-text-primary)" }}
-                  >
-                    {value}
-                  </span>
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#f65d01]" />
+                  <span className="font-semibold text-[#161922]">{value}</span>
                 </div>
               ))}
-            </motion.div>
-
-            {/* Signature row */}
-            <motion.div
-              {...fu(0.22)}
-              className="flex items-center gap-4 border-t pt-6"
-              style={{ borderColor: "var(--color-stroke-default)" }}
-            >
-              {/* Initials avatar */}
-              <div
-                className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full text-[15px] font-black text-white"
-                style={{
-                  background: "var(--color-text-primary)",
-                  boxShadow: "0 4px 16px rgba(0,0,0,0.14)",
-                }}
-              >
-                {initials}
-              </div>
-              <div className="flex-1">
-                <p
-                  className="text-[14px] font-extrabold"
-                  style={{
-                    color: "var(--color-text-primary)",
-                    fontFamily: "Georgia, serif",
-                    fontStyle: "italic",
-                  }}
-                >
-                  {name}
-                </p>
-                <p
-                  className="text-[11.5px]"
-                  style={{ color: "var(--color-text-muted)" }}
-                >
-                  {title}, {company}
-                </p>
-              </div>
-              {/* Verified badge */}
-              <div
-                className="flex h-8 w-8 items-center justify-center rounded-full"
-                style={{
-                  background: "rgba(246,93,1,0.10)",
-                  border: "1.5px solid rgba(246,93,1,0.25)",
-                }}
-              >
-                <LucideIcon
-                  name="badge-check"
-                  className="h-4 w-4"
-                  style={{ color: "var(--color-brand)" }}
-                />
-              </div>
-            </motion.div>
-          </div>
+            </div>
+          </motion.div>
         </div>
       </div>
     </section>

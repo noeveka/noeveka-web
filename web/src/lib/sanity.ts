@@ -186,28 +186,62 @@ export async function getResourcesPage() {
 export async function getAboutPage() {
   return client.fetch(`*[_type == "aboutPage"][0]{
     hero{
+      badge,
       headingLine1,
       headingLine2,
       headingHighlight,
+      subheading,
       subtext,
       ctaPrimaryText,
       ctaPrimaryLink,
       ctaSecondaryText,
       ctaSecondaryLink,
+      bgImage{ asset, alt },
+      mobileBgImage{ asset, alt },
       badgeTags,
+      stats[]{ value, label },
       mobileStats[]{ value, label }
+    },
+    narrativeSection{
+      topBlock{
+        eyebrow,
+        headingLine1,
+        headingLine2,
+        headingLine3,
+        headingHighlight,
+        paragraph1,
+        paragraph2,
+        punchline
+      },
+      image{ asset, alt },
+      bottomBlock{
+        eyebrowPart1,
+        eyebrowHighlight,
+        headingPlain,
+        headingHighlight,
+        paragraph,
+        punchline
+      }
     },
     stats{
       items[]{ value, label, sub }
     },
-    resourcesTeaser{
+    journey{
+      eyebrow,
       heading,
-      headingHighlight,
       subtext,
-      ctaText,
-      ctaLink
+      milestones[]{
+        year,
+        stage,
+        location,
+        title,
+        description,
+        isHighlight
+      }
     },
     founder{
+      eyebrow,
+      heading,
       name,
       initials,
       title,
@@ -215,7 +249,11 @@ export async function getAboutPage() {
       tagline,
       bio,
       photo{ asset, alt },
-      credentials[]{ label, value }
+      credentials[]{ label, value },
+      whyFoundedHeading,
+      whyFoundedText,
+      linkedinUrl,
+      email
     },
     mission{
       statement,
@@ -226,6 +264,8 @@ export async function getAboutPage() {
       items[]{ icon, title, desc }
     },
     cta{
+      headingLine1,
+      headingLine2,
       headingPlain,
       headingHighlight,
       headingTail,

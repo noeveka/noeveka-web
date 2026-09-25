@@ -49,6 +49,7 @@ import {
   Users,
   X,
   Zap,
+  Calendar,
 } from "lucide-react";
 
 // Icon map
@@ -85,6 +86,7 @@ export const iconMap = {
   // communication & contact
   phone: Phone,
   mail: Mail,
+  calendar: Calendar,
   "message-square": MessageSquare,
   "map-pin": MapPin,
   users: Users,
@@ -146,6 +148,7 @@ export const lucideIconRegistry = {
   Phone: "phone",
   Home: "home",
   Mail: "mail",
+  Calendar: "calendar",
   MapPin: "map-pin",
   Star: "star",
   MessageSquare: "message-square",

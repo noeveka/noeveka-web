@@ -21,12 +21,13 @@ export const aboutPage = defineType({
   type: 'document',
   groups: [
     { name: 'hero',      title: '1 · Hero' },
-    { name: 'stats',     title: '2 · Stats Bar' },
-    { name: 'resources', title: '3 · Resources Teaser' },
-    { name: 'founder',   title: '4 · Founder' },
-    { name: 'mission',   title: '5 · Mission' },
-    { name: 'values',    title: '6 · Values' },
-    { name: 'cta',       title: '7 · CTA' },
+    { name: 'narrative', title: '2 · Origin Narrative' },
+    { name: 'stats',     title: '3 · Stats Bar' },
+    { name: 'journey',   title: '4 · Global Journey Timeline' },
+    { name: 'founder',   title: '5 · Founder' },
+    { name: 'mission',   title: '6 · Mission' },
+    { name: 'values',    title: '7 · Values' },
+    { name: 'cta',       title: '8 · CTA' },
   ],
 
   fields: [
@@ -37,43 +38,54 @@ export const aboutPage = defineType({
       title: 'Hero Section',
       type: 'object',
       group: 'hero',
-      description: 'Light-mode split hero — heading left, founder photo right.',
+      description: 'Cinematic hero with founder photo background, dual aspect ratios for desktop and mobile, and clear value narrative.',
       fields: [
         defineField({
-          name: 'headingLine1',
-          title: 'Heading — Line 1 (plain)',
+          name: 'badge',
+          title: 'Kicker Badge Text',
           type: 'string',
-          description: 'First line of the main heading.',
-          initialValue: 'Where Data Architecture',
+          initialValue: 'About Us',
+        }),
+        defineField({
+          name: 'headingLine1',
+          title: 'Heading — Line 1',
+          type: 'string',
+          initialValue: 'A Global Journey.',
         }),
         defineField({
           name: 'headingLine2',
-          title: 'Heading — Line 2 (plain)',
+          title: 'Heading — Line 2',
           type: 'string',
-          description: 'Second word(s) before the orange highlight.',
-          initialValue: 'Meets',
+          initialValue: 'A Bigger',
         }),
         defineField({
           name: 'headingHighlight',
-          title: 'Heading — Highlight (orange)',
+          title: 'Heading — Highlight (Orange)',
           type: 'string',
-          description: 'The word(s) rendered in brand orange. Keep short for impact.',
-          initialValue: 'Human Judgment.',
+          description: 'Rendered in brand orange.',
+          initialValue: 'Purpose.',
+        }),
+        defineField({
+          name: 'subheading',
+          title: 'Subheading / Tagline',
+          type: 'string',
+          description: 'Bold narrative subtitle (e.g. From BI Consulting Pro to NOE·V·EKA).',
+          initialValue: 'From BI Consulting Pro to NOE·V·EKA — Architecting the AI Era.',
         }),
         defineField({
           name: 'subtext',
-          title: 'Subtext / Description',
+          title: 'Subtext / Paragraph',
           type: 'text',
           rows: 3,
-          description: 'One or two sentences summarising the brand positioning.',
+          description: 'Explains the evolution and mission of Noeveka.',
           initialValue:
-            'We are an independent enterprise data & AI advisory firm — built by architects who have shipped real systems at global scale, not consultants who have only read about them.',
+            'What started as a focused BI and analytics initiative has evolved into NOE·V·EKA — an independent enterprise Data & AI advisory, helping organizations design, govern, and implement intelligent, future-ready ecosystems.',
         }),
         defineField({
           name: 'ctaPrimaryText',
           title: 'Primary CTA — Button Text',
           type: 'string',
-          initialValue: 'Book a Strategy Call',
+          initialValue: "Let's Talk",
         }),
         defineField({
           name: 'ctaPrimaryLink',
@@ -85,26 +97,67 @@ export const aboutPage = defineType({
           name: 'ctaSecondaryText',
           title: 'Secondary CTA — Button Text',
           type: 'string',
-          initialValue: 'Our Services',
+          initialValue: 'Explore Focus Areas',
         }),
         defineField({
           name: 'ctaSecondaryLink',
           title: 'Secondary CTA — Link',
           type: 'string',
-          initialValue: '/',
+          initialValue: '/services',
+        }),
+        defineField({
+          name: 'bgImage',
+          title: 'Hero Background Image (Desktop - 16:9 / Landscape)',
+          type: 'image',
+          options: { hotspot: true },
+          description: 'Main cinematic background featuring founder in studio/office setting. Recommended landscape ratio 16:9 or 21:9.',
+          fields: [
+            defineField({ name: 'alt', title: 'Alt Text', type: 'string', initialValue: 'Ajay Kumar — Founder & CEO, Noeveka' }),
+          ],
+        }),
+        defineField({
+          name: 'mobileBgImage',
+          title: 'Hero Background Image (Mobile - 4:3 / 1:1 Portrait)',
+          type: 'image',
+          options: { hotspot: true },
+          description: 'Optional tailored portrait or square image optimized for mobile viewports.',
+          fields: [
+            defineField({ name: 'alt', title: 'Alt Text', type: 'string', initialValue: 'Ajay Kumar — Founder & CEO, Noeveka' }),
+          ],
         }),
         defineField({
           name: 'badgeTags',
-          title: 'Credential Tags (floating badge on photo)',
+          title: 'Feature Tags / Accreditations',
           type: 'array',
           of: [{ type: 'string' }],
-          description: 'Short tags shown in the floating badge on the founder photo. Max 3 recommended.',
-          initialValue: ['Microsoft Expert', 'Databricks Certified', '15+ Yrs'],
+          description: 'Credibility badges shown in hero overlay.',
+          initialValue: ['Independent Advisory', 'Global Architecture', '15+ Yrs Exp'],
+        }),
+        defineField({
+          name: 'stats',
+          title: 'Hero Highlight Metrics',
+          type: 'array',
+          of: [
+            {
+              type: 'object',
+              fields: [
+                defineField({ name: 'value', title: 'Value', type: 'string', description: 'e.g. "15+"' }),
+                defineField({ name: 'label', title: 'Label', type: 'string', description: 'e.g. "Years Experience"' }),
+              ],
+              preview: { select: { title: 'value', subtitle: 'label' } },
+            },
+          ],
+          initialValue: [
+            { value: '15+', label: 'Years Experience' },
+            { value: '3', label: 'Global Hubs' },
+            { value: '5K+', label: 'Leaders Trained' },
+            { value: '100%', label: 'Independent' },
+          ],
         }),
         defineField({
           name: 'mobileStats',
           title: 'Mobile Stats Strip',
-          description: 'Three quick stats shown below hero on mobile only.',
+          description: 'Quick stats shown on mobile screens.',
           type: 'array',
           of: [
             {
@@ -125,7 +178,134 @@ export const aboutPage = defineType({
       ],
     }),
 
-    // ─── 2. STATS BAR ─────────────────────────────────────────────────────────
+    // ─── 2. ORIGIN NARRATIVE ("The Frustration & The Realisation") ─────────────
+    defineField({
+      name: 'narrativeSection',
+      title: 'Origin Narrative Section',
+      type: 'object',
+      group: 'narrative',
+      description: 'The editorial story section following the hero: Problem/Frustration -> Workspace Desk Image -> The Realisation.',
+      fields: [
+        defineField({
+          name: 'topBlock',
+          title: 'Upper Block (The Frustration)',
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'eyebrow',
+              title: 'Eyebrow',
+              type: 'string',
+              initialValue: 'The Frustration We Saw',
+            }),
+            defineField({
+              name: 'headingLine1',
+              title: 'Heading Line 1',
+              type: 'string',
+              initialValue: 'When It Feels Like Your',
+            }),
+            defineField({
+              name: 'headingLine2',
+              title: 'Heading Line 2',
+              type: 'string',
+              initialValue: "Firm's Running on",
+            }),
+            defineField({
+              name: 'headingLine3',
+              title: 'Heading Line 3',
+              type: 'string',
+              initialValue: 'Spreadsheets, Silos, and',
+            }),
+            defineField({
+              name: 'headingHighlight',
+              title: 'Heading Highlight (Bold Dark)',
+              type: 'string',
+              initialValue: 'Pure Grit',
+            }),
+            defineField({
+              name: 'paragraph1',
+              title: 'Paragraph 1',
+              type: 'text',
+              rows: 3,
+              initialValue:
+                'Across modern enterprises, leadership teams are struggling with fragmented data systems that refuse to talk to each other. Ad-hoc pipelines, fragile spreadsheet models, inconsistent governance, and cloud costs spiraling out of control.',
+            }),
+            defineField({
+              name: 'paragraph2',
+              title: 'Paragraph 2',
+              type: 'text',
+              rows: 3,
+              initialValue:
+                'We searched for independent, architect-grade guidance in the market — but all we found were vendor reseller pitches, massive agency overheads, and slide decks without real implementation rigor.',
+            }),
+            defineField({
+              name: 'punchline',
+              title: 'Closing Punchline (Bold)',
+              type: 'string',
+              initialValue: 'There had to be a better way...',
+            }),
+          ],
+        }),
+
+        defineField({
+          name: 'image',
+          title: 'Middle Media Banner (Workspace / Desk Photo)',
+          type: 'image',
+          options: { hotspot: true },
+          description: 'Editorial workspace or architectural desk photo with no faces.',
+          fields: [
+            defineField({ name: 'alt', title: 'Alt Text', type: 'string', initialValue: 'Noeveka enterprise architecture workspace desk' }),
+          ],
+        }),
+
+        defineField({
+          name: 'bottomBlock',
+          title: 'Lower Block (The Realisation)',
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'eyebrowPart1',
+              title: 'Eyebrow Part 1',
+              type: 'string',
+              initialValue: 'The Moment',
+            }),
+            defineField({
+              name: 'eyebrowHighlight',
+              title: 'Eyebrow Highlight (Orange)',
+              type: 'string',
+              initialValue: 'We Realised It',
+            }),
+            defineField({
+              name: 'headingPlain',
+              title: 'Heading Plain Text',
+              type: 'string',
+              initialValue: "You Don't Need to Start Over. You Just Need",
+            }),
+            defineField({
+              name: 'headingHighlight',
+              title: 'Heading Highlight (Brand Orange)',
+              type: 'string',
+              initialValue: 'Things to Work Better.',
+            }),
+            defineField({
+              name: 'paragraph',
+              title: 'Body Paragraph',
+              type: 'text',
+              rows: 3,
+              initialValue:
+                "Most enterprises aren't asking for an expensive, multi-year rip-and-replace of their entire stack. They just want clean data foundations, reliable AI workflows, sane governance, and architecture that empowers their teams to move fast without breaking compliance.",
+            }),
+            defineField({
+              name: 'punchline',
+              title: 'Closing Punchline (Bold)',
+              type: 'string',
+              initialValue: "That's exactly what we set out to build.",
+            }),
+          ],
+        }),
+      ],
+    }),
+
+    // ─── 3. STATS BAR ─────────────────────────────────────────────────────────
     defineField({
       name: 'stats',
       title: 'Stats Bar',
@@ -153,45 +333,57 @@ export const aboutPage = defineType({
       ],
     }),
 
-    // ─── 3. RESOURCES TEASER ──────────────────────────────────────────────────
+    // ─── 4. GLOBAL JOURNEY TIMELINE ───────────────────────────────────────────
     defineField({
-      name: 'resourcesTeaser',
-      title: 'Resources Teaser Section',
+      name: 'journey',
+      title: 'Global Journey Timeline',
       type: 'object',
-      group: 'resources',
-      description: 'Zigzag preview of free resources with a link to the Resources page.',
+      group: 'journey',
+      description: 'Timeline illustrating Noeveka evolution from Singapore (2020) to UAE (2022) to Netherlands (2024) to Today.',
       fields: [
         defineField({
-          name: 'heading',
-          title: 'Section Heading (plain)',
+          name: 'eyebrow',
+          title: 'Eyebrow',
           type: 'string',
-          initialValue: 'Architecture thinking,',
+          initialValue: 'Our Journey',
         }),
         defineField({
-          name: 'headingHighlight',
-          title: 'Section Heading — Highlight (orange)',
+          name: 'heading',
+          title: 'Heading',
           type: 'string',
-          initialValue: 'yours to keep.',
+          initialValue: 'From Local Roots to a Global Footprint',
         }),
         defineField({
           name: 'subtext',
-          title: 'Section Subtext',
+          title: 'Subtext',
           type: 'text',
           rows: 2,
           initialValue:
-            'Practical checklists, playbooks, and guides built by enterprise architects — no fluff, no vendor bias.',
+            'A journey driven by independent architecture leadership, real enterprise impact, and continuous international expansion.',
         }),
         defineField({
-          name: 'ctaText',
-          title: 'CTA Button Text',
-          type: 'string',
-          initialValue: 'Explore All Free Resources',
-        }),
-        defineField({
-          name: 'ctaLink',
-          title: 'CTA Button Link',
-          type: 'string',
-          initialValue: '/resources',
+          name: 'milestones',
+          title: 'Journey Milestones',
+          type: 'array',
+          of: [
+            {
+              type: 'object',
+              fields: [
+                defineField({ name: 'year', title: 'Year (e.g. 2020)', type: 'string' }),
+                defineField({ name: 'stage', title: 'Stage Badge (e.g. LEARN, GROW, SCALE)', type: 'string' }),
+                defineField({ name: 'location', title: 'Location (e.g. Singapore)', type: 'string' }),
+                defineField({ name: 'title', title: 'Title', type: 'string' }),
+                defineField({ name: 'description', title: 'Description', type: 'text', rows: 2 }),
+                defineField({ name: 'isHighlight', title: 'Is Highlight Card (Orange accent)', type: 'boolean', initialValue: false }),
+              ],
+              preview: {
+                select: {
+                  title: 'year',
+                  subtitle: 'title',
+                },
+              },
+            },
+          ],
         }),
       ],
     }),
@@ -204,6 +396,18 @@ export const aboutPage = defineType({
       group: 'founder',
       description: 'Editorial 2-column section: photo left, bio & quote right. Photo also appears in the Hero.',
       fields: [
+        defineField({
+          name: 'eyebrow',
+          title: 'Eyebrow',
+          type: 'string',
+          initialValue: '\\\\ About Founder \\\\',
+        }),
+        defineField({
+          name: 'heading',
+          title: 'Section Heading',
+          type: 'string',
+          initialValue: 'Meet The Founder',
+        }),
         defineField({
           name: 'name',
           title: 'Founder Name',
@@ -275,6 +479,32 @@ export const aboutPage = defineType({
             { label: 'Enterprise Experience', value: '15+ Years' },
             { label: 'Clients Trained', value: '5,000+ Leaders' },
           ],
+        }),
+        defineField({
+          name: 'whyFoundedHeading',
+          title: 'Why Founded Heading',
+          type: 'string',
+          initialValue: 'Why He Founded Noeveka?',
+        }),
+        defineField({
+          name: 'whyFoundedText',
+          title: 'Why Founded Description',
+          type: 'text',
+          rows: 3,
+          initialValue:
+            'To give enterprise data leaders direct access to independent, architect-grade thinking — without vendor reseller kickbacks, bloated agency overhead, or junior delivery.',
+        }),
+        defineField({
+          name: 'linkedinUrl',
+          title: 'LinkedIn URL',
+          type: 'url',
+          initialValue: 'https://www.linkedin.com/company/noeveka',
+        }),
+        defineField({
+          name: 'email',
+          title: 'Direct Email',
+          type: 'string',
+          initialValue: 'hello@noeveka.com',
         }),
       ],
     }),
@@ -361,25 +591,37 @@ export const aboutPage = defineType({
       title: 'CTA Section',
       type: 'object',
       group: 'cta',
-      description: 'Call-to-action card at the bottom of the page.',
+      description: 'Minimalist call-to-action section at the bottom of the page.',
       fields: [
         defineField({
-          name: 'headingPlain',
-          title: 'Heading — Plain text',
+          name: 'headingLine1',
+          title: 'Heading Line 1',
           type: 'string',
-          initialValue: 'Ready to get',
+          initialValue: 'Upgrade How You Work,',
+        }),
+        defineField({
+          name: 'headingLine2',
+          title: 'Heading Line 2',
+          type: 'string',
+          initialValue: 'Not What You Do',
+        }),
+        defineField({
+          name: 'headingPlain',
+          title: 'Heading — Plain text (Legacy)',
+          type: 'string',
+          hidden: true,
         }),
         defineField({
           name: 'headingHighlight',
-          title: 'Heading — Highlight (orange)',
+          title: 'Heading — Highlight (Legacy)',
           type: 'string',
-          initialValue: 'architect-quality thinking',
+          hidden: true,
         }),
         defineField({
           name: 'headingTail',
-          title: 'Heading — Tail text',
+          title: 'Heading — Tail text (Legacy)',
           type: 'string',
-          initialValue: 'on your data platform?',
+          hidden: true,
         }),
         defineField({
           name: 'body',
@@ -387,31 +629,31 @@ export const aboutPage = defineType({
           type: 'text',
           rows: 3,
           initialValue:
-            'Book a free 30-minute strategy call with Ajay. No sales pitch — just an honest view of your architecture, cost, and roadmap.',
+            'Noeveka helps enterprise leaders modernise their Data & AI architecture and governance — without changing the principles, people, or judgment that make their firm what it is.',
         }),
         defineField({
           name: 'primaryCtaText',
           title: 'Primary CTA — Button Text',
           type: 'string',
-          initialValue: 'Book a Free Strategy Call',
+          initialValue: "Let's Talk",
         }),
         defineField({
           name: 'primaryCtaLink',
           title: 'Primary CTA — Link',
           type: 'string',
-          initialValue: '/#contact',
+          initialValue: '/contact',
         }),
         defineField({
           name: 'secondaryCtaText',
-          title: 'Secondary CTA — Button Text',
+          title: 'Secondary CTA — Link Text',
           type: 'string',
-          initialValue: 'Explore Our Services',
+          initialValue: 'Explore the Platform',
         }),
         defineField({
           name: 'secondaryCtaLink',
           title: 'Secondary CTA — Link',
           type: 'string',
-          initialValue: '/',
+          initialValue: '/services',
         }),
       ],
     }),
