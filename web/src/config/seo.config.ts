@@ -17,6 +17,11 @@ export const SEO_CONFIG = {
       description:
         "Meet Noeveka — an independent enterprise data & AI advisory firm built by architects who have shipped real systems at global scale.",
     },
+    services: {
+      title: "Services | Enterprise Data & AI Advisory",
+      description:
+        "Four core focus areas: Enterprise Data & AI Architecture, Enterprise AI & Agentic Systems, AI Governance, and Data & AI Transformation Advisory.",
+    },
     resources: {
       title: "Free Resources",
       description:

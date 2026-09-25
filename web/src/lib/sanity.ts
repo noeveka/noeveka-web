@@ -279,4 +279,68 @@ export async function getContactPage() {
   }`);
 }
 
+// ─── Services Page ───────────────────────────────────────────────────────────
+export async function getServicesPage() {
+  return client.fetch(`*[_type == "servicesPage"][0]{
+    hero{
+      badge,
+      headingLine1,
+      headingLine2,
+      headingHighlight,
+      subtext,
+      ctaPrimaryText,
+      ctaPrimaryLink
+    },
+    focusAreas[]{
+      id,
+      number,
+      icon,
+      title,
+      shortDescription,
+      bullets,
+      visualType,
+      ctaText,
+      ctaLink
+    },
+    impactPrinciplesSection{
+      heading,
+      body,
+      principles[]{
+        number,
+        title,
+        description
+      }
+    },
+    engagementSection{
+      heading,
+      subtext,
+      steps[]{
+        number,
+        title,
+        desc
+      }
+    },
+    industrySection{
+      quote{
+        quote,
+        author,
+        role
+      },
+      industries[]{
+        label,
+        icon
+      }
+    },
+    ctaSection{
+      headingPart,
+      headingHighlight,
+      body,
+      primaryCtaText,
+      primaryCtaLink,
+      secondaryCtaText,
+      secondaryCtaLink
+    }
+  }`);
+}
+
 

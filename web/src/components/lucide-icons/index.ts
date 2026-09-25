@@ -1,2 +1,2 @@
 export { LucideIcon } from "./lucide-icon";
-export { lucideIconRegistry } from "./lucide-config";
+export { lucideIconRegistry, type IconName } from "./lucide-config";
