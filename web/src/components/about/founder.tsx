@@ -48,11 +48,13 @@ export default function Founder({
   const resolvedBio = bio?.length ? bio : ABOUT_CONFIG.founder.bio;
 
   const imgSrc =
-    typeof photo === "string"
+    typeof photo === "string" && photo !== ABOUT_CONFIG.founder.photoFallbackUrl
       ? photo
-      : (photo as { asset?: unknown })?.asset
+      : (photo as { asset?: { _ref?: string } })?.asset?._ref &&
+        (photo as { asset?: { _ref?: string } })?.asset?._ref !==
+          "image-133f466b19a3f3216a63a29d4e9c0523cd72902b-3024x4032-jpg"
       ? urlFor(photo).width(800).quality(90).url()
-      : ABOUT_CONFIG.founder.photoFallbackUrl;
+      : "/assets/team-pictures/founder_image_about_page.jpeg";
 
   const cleanTagline = (tagline || ABOUT_CONFIG.founder.tagline)
     .replace(/^["']|["']$/g, "")
@@ -89,7 +91,7 @@ export default function Founder({
             <img
               src={imgSrc}
               alt={photoAlt}
-              className="absolute inset-0 h-full w-full object-cover"
+              className="absolute inset-0 h-full w-full object-cover object-[center_20%]"
             />
 
             {/* Scrim Overlay */}
