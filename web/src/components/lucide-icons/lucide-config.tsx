@@ -1,4 +1,5 @@
 import {
+  Activity,
   ArrowRight,
   ArrowUpRight,
   BarChart3,
@@ -118,12 +119,14 @@ export const iconMap = {
   lightbulb: Lightbulb,
   scale: Scale,
 
+  activity: Activity,
   // theme
   sun: Sun,
   moon: Moon,
 } as const;
 
 export const lucideIconRegistry = {
+  Activity: "activity",
   ArrowRight: "arrow-right",
   ArrowUpRight: "arrow-up-right",
   ChevronDown: "chevron-down",

@@ -44,8 +44,10 @@ export async function getHomePage() {
   return client.fetch(`*[_type == "homePage"][0]{
     hero{
       bgImage{ asset, alt },
-      trustBadgeRating,
-      trustBadgeDescriptor,
+      eyebrow,
+      headingLine1,
+      headingHighlight,
+      headingLine2,
       headingPart1,
       headingHighlight1,
       headingPart2,

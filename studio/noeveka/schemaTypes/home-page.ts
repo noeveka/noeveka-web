@@ -32,6 +32,30 @@ export const homePage = defineType({
           ],
         }),
         defineField({
+          name: 'eyebrow',
+          title: 'Eyebrow / Kicker',
+          type: 'string',
+          initialValue: 'ARCHITECT LED',
+        }),
+        defineField({
+          name: 'headingLine1',
+          title: 'Heading — Line 1',
+          type: 'string',
+          initialValue: 'Enterprise Data &',
+        }),
+        defineField({
+          name: 'headingHighlight',
+          title: 'Heading — Highlight (orange)',
+          type: 'string',
+          initialValue: 'AI',
+        }),
+        defineField({
+          name: 'headingLine2',
+          title: 'Heading — Line 2',
+          type: 'string',
+          initialValue: 'Solutions',
+        }),
+        defineField({
           name: 'trustBadgeRating',
           title: 'Trust Badge — Rating',
           type: 'string',
