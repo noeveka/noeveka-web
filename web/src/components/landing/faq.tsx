@@ -1,10 +1,8 @@
 import { useState } from "react";
-
 import { AnimatePresence, motion } from "framer-motion";
-
 import { LucideIcon } from "@/components/lucide-icons";
 import { FAQ_CONFIG } from "@/config/landing/faq.config";
-import { fsl, fu } from "@/lib/motion";
+import { fu } from "@/lib/motion";
 
 interface FaqItem {
   question: string;
@@ -24,124 +22,143 @@ export default function Faq({
   subtext = FAQ_CONFIG.subtext,
   faqs,
 }: FaqProps) {
-  const [open, setOpen] = useState<number | null>(0);
+  const [open, setOpen] = useState<number | null>(null);
   const displayFaqs: FaqItem[] = faqs?.length ? faqs : [...FAQ_CONFIG.faqs];
 
   return (
-    <section
-      className="flex justify-center border-t"
-      style={{
-        background: "var(--color-bg-surface)",
-        borderColor: "var(--color-stroke-default)",
-      }}
-    >
-      <div className="lp-container lp-px py-16 lg:py-24">
-        <div className="mb-12 text-center">
-          <motion.p
+    <section className="flex justify-center bg-[#fafafa]">
+      <div className="lp-container lp-px pb-16">
+        {/* Section Header */}
+        <div className="mb-12 sm:mb-16 text-center">
+          <motion.div
             {...fu()}
-            className="mb-3 inline-flex items-center gap-2 text-[10px] font-bold tracking-[0.22em] uppercase"
-            style={{ color: "var(--color-brand)" }}
+            className="inline-flex items-center gap-2 mb-3.5"
           >
-            <span>✳</span> {eyebrow}
-          </motion.p>
+            <span
+              className="text-xs font-bold"
+              style={{ color: "var(--color-brand)" }}
+            >
+              ✳
+            </span>
+            <span
+              className="text-xs font-bold tracking-[0.2em] uppercase"
+              style={{ color: "var(--color-brand)" }}
+            >
+              {eyebrow}
+            </span>
+          </motion.div>
+
           <motion.h2
             {...fu(0.07)}
-            className="mb-4 text-2xl leading-snug font-extrabold tracking-tight sm:text-display"
-            style={{ color: "var(--color-text-primary)" }}
+            className="text-3xl sm:text-4xl lg:text-[2.65rem] font-extrabold tracking-tight text-[#0f172a] mb-4"
           >
             {heading}
           </motion.h2>
+
           <motion.p
             {...fu(0.12)}
-            className="mx-auto max-w-[520px] text-[14.5px] leading-relaxed"
-            style={{ color: "var(--color-text-muted)" }}
+            className="text-[15px] sm:text-[16px] text-slate-500 max-w-xl mx-auto leading-relaxed"
           >
             {subtext}
           </motion.p>
         </div>
 
-        <motion.div
-          {...fsl(0.12)}
-          className="mx-auto flex max-w-[760px] flex-col gap-3"
-        >
+        {/* FAQ Accordion List */}
+        <div className="mx-auto flex max-w-[840px] flex-col gap-3.5 sm:gap-4">
           {displayFaqs.map((faq, i) => {
             const isOpen = open === i;
+            const questionText = /^\d+[.\-\s]/.test(faq.question)
+              ? faq.question
+              : `${i + 1}. ${faq.question}`;
+
             return (
-              <div
-                key={i}
-                className="overflow-hidden rounded-2xl transition-all duration-200"
+              <motion.div
+                key={faq.question}
+                initial={{ opacity: 0, y: 14 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.35, delay: i * 0.05 }}
+                className="overflow-hidden rounded-2xl bg-white transition-all duration-300"
                 style={{
                   border: isOpen
-                    ? "1.5px solid var(--color-brand)"
-                    : "1px solid var(--color-stroke-default)",
-                  background: "var(--color-bg-surface)",
+                    ? "1px solid rgba(246, 93, 1, 0.32)"
+                    : "1px solid rgba(226, 232, 240, 0.8)",
                   boxShadow: isOpen
-                    ? "0 4px 24px rgba(246,93,1,0.10)"
-                    : "0 1px 4px rgba(0,0,0,0.04)",
+                    ? "0 4px 20px rgba(15, 23, 42, 0.06)"
+                    : "0 2px 10px rgba(15, 23, 42, 0.02)",
                 }}
               >
                 <button
+                  type="button"
                   onClick={() => setOpen(isOpen ? null : i)}
-                  className="flex w-full cursor-pointer items-center justify-between gap-4 border-none bg-transparent px-6 py-5 text-left"
+                  className="group flex w-full cursor-pointer items-center justify-between gap-4 border-none bg-transparent px-6 sm:px-7 py-5 sm:py-5.5 text-left focus:outline-none"
                 >
                   <span
-                    className="text-[14.5px] leading-snug font-semibold"
-                    style={{ color: "var(--color-text-primary)" }}
+                    className={`text-[14.5px] sm:text-[15.5px] leading-snug font-bold transition-colors duration-200 ${
+                      isOpen ? "text-[#0f172a]" : "text-slate-800"
+                    }`}
                   >
-                    {i + 1}. {faq.question}
+                    {questionText}
                   </span>
-                  <div
-                    className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full transition-colors duration-200"
-                    style={{
-                      background: isOpen
-                        ? "var(--color-brand)"
-                        : "var(--color-bg-subtle)",
-                      border: `1px solid ${isOpen ? "var(--color-brand)" : "var(--color-stroke-default)"}`,
-                    }}
+
+                  <motion.div
+                    animate={{ rotate: isOpen ? 45 : 0 }}
+                    transition={{ duration: 0.25, ease: "easeInOut" }}
+                    className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border transition-all duration-200 ${
+                      isOpen
+                        ? "bg-[#fff5ee] border-[rgba(246,93,1,0.3)] text-[#f15a24]"
+                        : "bg-[#f8fafc] border-slate-200/70 text-slate-400 group-hover:border-slate-300 group-hover:text-slate-600"
+                    }`}
                   >
-                    {isOpen ? (
-                      <LucideIcon
-                        name="minus"
-                        className="h-3.5 w-3.5"
-                        style={{ color: "#fff" }}
-                      />
-                    ) : (
-                      <LucideIcon
-                        name="plus"
-                        className="h-3.5 w-3.5"
-                        style={{ color: "var(--color-text-muted)" }}
-                      />
-                    )}
-                  </div>
+                    <LucideIcon
+                      name="plus"
+                      className="h-4 w-4 transition-colors"
+                      style={isOpen ? { color: "var(--color-brand)" } : undefined}
+                    />
+                  </motion.div>
                 </button>
+
                 <AnimatePresence initial={false}>
                   {isOpen && (
                     <motion.div
-                      key="body"
+                      key="content"
                       initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.28, ease: "easeInOut" }}
-                      style={{ overflow: "hidden" }}
+                      animate={{
+                        height: "auto",
+                        opacity: 1,
+                        transition: {
+                          height: {
+                            duration: 0.32,
+                            ease: [0.04, 0.62, 0.23, 0.98],
+                          },
+                          opacity: { duration: 0.22, delay: 0.08 },
+                        },
+                      }}
+                      exit={{
+                        height: 0,
+                        opacity: 0,
+                        transition: {
+                          height: {
+                            duration: 0.25,
+                            ease: [0.04, 0.62, 0.23, 0.98],
+                          },
+                          opacity: { duration: 0.15 },
+                        },
+                      }}
+                      className="overflow-hidden"
                     >
-                      <div
-                        className="border-t px-6 pt-0 pb-6"
-                        style={{ borderColor: "rgba(246,93,1,0.12)" }}
-                      >
-                        <p
-                          className="pt-4 text-[13.5px] leading-relaxed"
-                          style={{ color: "var(--color-text-secondary)" }}
-                        >
+                      <div className="px-6 sm:px-7 pb-6 pt-1">
+                        <p className="text-[14px] leading-relaxed text-slate-500">
                           {faq.answer}
                         </p>
                       </div>
                     </motion.div>
                   )}
                 </AnimatePresence>
-              </div>
+              </motion.div>
             );
           })}
-        </motion.div>
+        </div>
       </div>
     </section>
   );
