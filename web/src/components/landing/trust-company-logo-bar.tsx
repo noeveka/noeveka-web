@@ -7,9 +7,9 @@ import SnowflakeSvg from "../svgs/snowflake-svg";
 const LOGOS = [
   { name: "Microsoft", Logo: MicrosoftSvg },
   { name: "Databricks", Logo: DatabricksSvg },
+  { name: "Snowflake", Logo: SnowflakeSvg },
   { name: "Azure", Logo: AzureSvg },
   { name: "Power BI", Logo: PowerBISvg },
-  { name: "Snowflake", Logo: SnowflakeSvg },
 ];
 
 export default function TrustCompanyLogoBar() {

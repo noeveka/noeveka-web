@@ -30,8 +30,6 @@ export default function WhoWeAre({
   founderName = WHO_WE_ARE_CONFIG.founderName,
   founderRole = WHO_WE_ARE_CONFIG.founderRole,
   founderPhoto,
-  statBadgeValue = WHO_WE_ARE_CONFIG.statBadgeValue,
-  statBadgeLabel = WHO_WE_ARE_CONFIG.statBadgeLabel,
   ratingValue = WHO_WE_ARE_CONFIG.ratingValue,
   ratingLabel = WHO_WE_ARE_CONFIG.ratingLabel,
   skillsHeading = WHO_WE_ARE_CONFIG.skillsHeading,
@@ -41,10 +39,6 @@ export default function WhoWeAre({
     ? urlFor(founderPhoto).width(800).url()
     : WHO_WE_ARE_CONFIG.founderPhotoFallbackUrl;
   const founderAlt = founderPhoto?.alt ?? WHO_WE_ARE_CONFIG.founderPhotoAlt;
-
-  const labelWords = statBadgeLabel.split(" ");
-  const badgeLine1 = labelWords.slice(0, 2).join(" ");
-  const badgeLine2 = labelWords.slice(2).join(" ");
 
   return (
     <section
@@ -60,15 +54,6 @@ export default function WhoWeAre({
             <div className="relative w-full aspect-4/3 sm:aspect-14/10 lg:h-[430px] rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.12)] border border-black/5 bg-gray-900">
               <img src={founderSrc} alt={founderAlt} className="absolute inset-0 w-full h-full object-cover object-[58%_25%]" />
               <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.3) 0%, transparent 40%)" }} />
-            </div>
-            <div
-              className="absolute bottom-5 right-5 sm:bottom-6 sm:right-6 rounded-2xl px-5 py-4 text-center shadow-[0_10px_30px_rgba(246,93,1,0.32)] border border-white/20 z-10"
-              style={{ background: "var(--color-brand)" }}
-            >
-              <p className="text-3xl sm:text-[32px] font-extrabold text-white leading-none mb-1">{statBadgeValue}</p>
-              <p className="text-[11px] sm:text-[12px] font-semibold text-white/95 leading-tight">
-                {badgeLine1}<br />{badgeLine2}
-              </p>
             </div>
           </motion.div>
 

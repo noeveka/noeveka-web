@@ -12,7 +12,7 @@ export const WHO_WE_ARE_CONFIG = {
   founderName: "Ajay Kumar",
   founderRole: "Founder & Chief Architect — Noeveka",
   founderPhotoFallbackUrl:
-    "https://res.cloudinary.com/dd5elqfus/image/upload/v1788162069/Screenshot_2026-08-31_at_1.10.57_PM_mgjzrs.png",
+    "/assets/team-pictures/founder_image_about_us_section.jpeg",
   founderPhotoAlt: "Ajay Kumar — Founder, Noeveka",
 
   statBadgeValue: "15+",

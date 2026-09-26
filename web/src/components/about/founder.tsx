@@ -54,7 +54,7 @@ export default function Founder({
         (photo as { asset?: { _ref?: string } })?.asset?._ref !==
           "image-133f466b19a3f3216a63a29d4e9c0523cd72902b-3024x4032-jpg"
       ? urlFor(photo).width(800).quality(90).url()
-      : "/assets/team-pictures/founder_image_about_page.jpeg";
+      : "/assets/team-pictures/founder_image_about_us_section.jpeg";
 
   const cleanTagline = (tagline || ABOUT_CONFIG.founder.tagline)
     .replace(/^["']|["']$/g, "")
@@ -97,18 +97,10 @@ export default function Founder({
             {/* Scrim Overlay */}
             <div className="pointer-events-none absolute inset-0 bg-linear-to-t from-black/90 via-black/30 to-transparent" />
 
-            {/* Top Logo / Icon Mark */}
-            <div className="relative z-10 flex h-10 w-10 items-center justify-center rounded-full border border-white/30 bg-white/20 text-white backdrop-blur-md">
-              <LucideIcon
-                name="sparkles"
-                className="h-4.5 w-4.5 text-[#f65d01]"
-              />
-            </div>
-
             {/* Bottom Overlay Info */}
             <div className="relative z-10 mt-auto flex flex-col items-start gap-3">
-              <p className="text-xl font-bold tracking-tight text-white sm:text-[22px] leading-snug drop-shadow-sm">
-                &ldquo;{cleanTagline}&rdquo;
+              <p className="text-lg font-bold tracking-tight text-white sm:text-[18px] leading-snug drop-shadow-sm">
+                {cleanTagline}
               </p>
             </div>
           </motion.div>

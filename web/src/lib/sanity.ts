@@ -44,6 +44,7 @@ export async function getHomePage() {
   return client.fetch(`*[_type == "homePage"][0]{
     hero{
       bgImage{ asset, alt },
+      bgImageMobile{ asset, alt },
       eyebrow,
       headingLine1,
       headingHighlight,
@@ -65,7 +66,16 @@ export async function getHomePage() {
       eyebrow,
       heading,
       subtext,
-      cardCtaText
+      cardCtaText,
+      services[]{
+        title,
+        description,
+        icon,
+        variant,
+        ctaText,
+        ctaLink,
+        featured
+      }
     },
     aboutSection{
       eyebrow,
@@ -141,7 +151,10 @@ export async function getServices() {
     description,
     icon,
     variant,
-    featured
+    featured,
+    ctaText,
+    ctaLink,
+    order
   }`);
 }
 

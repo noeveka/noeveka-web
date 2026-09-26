@@ -4,7 +4,7 @@ import { LucideIcon } from "@/components/lucide-icons";
 import { fu, fs } from "@/lib/motion";
 import { getTestimonials } from "@/lib/sanity";
 import { TESTIMONIALS_CONFIG } from "@/config/landing/testimonials.config";
-import TrustCompanyLogoBar from "./trust-company-logo-bar";
+
 
 interface Testimonial {
   _id: string;
@@ -69,7 +69,7 @@ export default function Testimonials({
   return (
     <>
       {/* ── Trust logo bar ── */}
-      <TrustCompanyLogoBar />
+
 
       {/* ── Testimonials section ── */}
       <section className="flex justify-center bg-[#fafafa]">
