@@ -50,20 +50,20 @@ export const aboutPage = defineType({
           name: 'headingLine1',
           title: 'Heading — Line 1',
           type: 'string',
-          initialValue: 'A Global Journey.',
+          initialValue: 'Architect-Led Clarity for',
         }),
         defineField({
           name: 'headingLine2',
           title: 'Heading — Line 2',
           type: 'string',
-          initialValue: 'A Bigger',
+          initialValue: 'Enterprise Ambition',
         }),
         defineField({
           name: 'headingHighlight',
           title: 'Heading — Highlight (Orange)',
           type: 'string',
           description: 'Rendered in brand orange.',
-          initialValue: 'Purpose.',
+          initialValue: '',
         }),
         defineField({
           name: 'subheading',
@@ -79,7 +79,7 @@ export const aboutPage = defineType({
           rows: 3,
           description: 'Explains the evolution and mission of Noeveka.',
           initialValue:
-            'What started as a focused BI and analytics initiative has evolved into NOE·V·EKA — an independent enterprise Data & AI advisory, helping organizations design, govern, and implement intelligent, future-ready ecosystems.',
+            'Noeveka is an independent enterprise advisory delivering architect-grade data platform strategy, Fabric & Databricks implementation, and GenAI governance.',
         }),
         defineField({
           name: 'ctaPrimaryText',
@@ -505,6 +505,41 @@ export const aboutPage = defineType({
           title: 'Direct Email',
           type: 'string',
           initialValue: 'hello@noeveka.com',
+        }),
+        defineField({
+          name: 'statusBadges',
+          title: 'Status Badges',
+          description: 'Status items displayed to the right of the bio (e.g. Netherlands, Open to Global Opportunities, Remote First, Advisory).',
+          type: 'array',
+          of: [
+            {
+              type: 'object',
+              fields: [
+                defineField({ name: 'icon', title: 'Icon Name', type: 'string', description: 'map-pin, globe, laptop, handshake' }),
+                defineField({ name: 'title', title: 'Title', type: 'string' }),
+                defineField({ name: 'subtext', title: 'Subtext', type: 'string' }),
+              ],
+              preview: { select: { title: 'title', subtitle: 'subtext' } },
+            },
+          ],
+        }),
+        defineField({
+          name: 'focusPillars',
+          title: 'Focus / Capability Pillars',
+          description: '4 capability cards displayed at the bottom of the founder section.',
+          type: 'array',
+          of: [
+            {
+              type: 'object',
+              fields: [
+                defineField({ name: 'icon', title: 'Icon Name', type: 'string', description: 'layers-3, bar-chart-3, shield-check, users' }),
+                defineField({ name: 'title', title: 'Title', type: 'string' }),
+                defineField({ name: 'desc', title: 'Description', type: 'text', rows: 2 }),
+                defineField({ name: 'color', title: 'Color', type: 'string', initialValue: 'neutral' }),
+              ],
+              preview: { select: { title: 'title', subtitle: 'desc' } },
+            },
+          ],
         }),
       ],
     }),

@@ -80,6 +80,9 @@ interface AboutPageData {
     credentials?: Array<{ label: string; value: string }>;
     whyFoundedHeading?: string;
     whyFoundedText?: string;
+    whyFoundedParagraphs?: string[];
+    statusBadges?: Array<{ icon: string; title: string; subtext?: string }>;
+    focusPillars?: Array<{ icon: string; title: string; desc: string; color: string }>;
     linkedinUrl?: string;
     email?: string;
   };
@@ -163,6 +166,9 @@ export default function AboutPage() {
         credentials={data?.founder?.credentials}
         whyFoundedHeading={data?.founder?.whyFoundedHeading}
         whyFoundedText={data?.founder?.whyFoundedText}
+        whyFoundedParagraphs={data?.founder?.whyFoundedParagraphs}
+        statusBadges={data?.founder?.statusBadges}
+        focusPillars={data?.founder?.focusPillars}
         linkedinUrl={data?.founder?.linkedinUrl}
         email={data?.founder?.email}
       />
