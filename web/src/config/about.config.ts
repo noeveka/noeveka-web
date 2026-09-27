@@ -36,20 +36,73 @@ export const ABOUT_CONFIG = {
 
   // Founder section
   founder: {
-    eyebrow: "\\\\ About Founder \\\\",
+    eyebrow: "FOUNDER",
     heading: "Meet The Founder",
     name: "Ajay Kumar",
+    nameFirst: "Ajay",
+    nameLast: "Kumar",
     initials: "AK",
-    title: "CEO & Founder",
-    company: "Noeveka Data & AI Solutions",
-    tagline: "Good architecture is not about the tool. It's about the judgment behind it.",
+    title: "Founder & Principal Data, AI & Enterprise Architect",
+    company: "NOE·V·EKA",
+    tagline: "Technology changes. Good architecture creates lasting advantage.",
+    quoteHighlight: "lasting advantage.",
     bio: [
-      "Ajay Kumar is a Principal Data & AI Architect with 15+ years of hands-on experience designing enterprise data platforms across global financial services, retail, and healthcare organisations.",
-      "He has led Fabric, Databricks, and Azure-native data platform programmes at scale — advising C-suite leaders on platform strategy, team capability, and cost governance with zero vendor bias.",
+      "Ajay Kumar is the founder of NOE·V·EKA and an enterprise technology leader with 15+ years of experience designing and delivering data, analytics, cloud and AI capabilities for global organisations.",
+      "He combines deep technical architecture with business, product and leadership experience — helping organisations turn complex technology challenges into pragmatic, scalable and governed solutions that create real business value.",
     ],
-    whyFoundedHeading: "Why He Founded Noeveka?",
+    whyFoundedHeading: "Why He Founded NOE·V·EKA?",
     whyFoundedText:
-      "To give enterprise data leaders direct access to independent, architect-grade thinking — without vendor reseller kickbacks, bloated agency overhead, or junior delivery.",
+      "NOE·V·EKA was created around a simple belief: enterprises need independent, architect-grade thinking before technology decisions. Too many organisations invest in tools without a clear architecture, governance or execution plan — leading to fragmented platforms, higher costs and limited business impact.\n\nAjay founded NOE·V·EKA to bridge this gap — bringing together strategy, architecture and hands-on engineering to help organisations build modern, governed and future-ready data and AI capabilities, including the next generation of agentic systems.",
+    whyFoundedParagraphs: [
+      "NOE·V·EKA was created around a simple belief: enterprises need independent, architect-grade thinking before technology decisions. Too many organisations invest in tools without a clear architecture, governance or execution plan — leading to fragmented platforms, higher costs and limited business impact.",
+      "Ajay founded NOE·V·EKA to bridge this gap — bringing together strategy, architecture and hands-on engineering to help organisations build modern, governed and future-ready data and AI capabilities, including the next generation of agentic systems.",
+    ],
+    statusBadges: [
+      {
+        icon: "map-pin",
+        title: "Netherlands",
+        subtext: "Based in Europe\nGlobal Experience",
+      },
+      {
+        icon: "globe",
+        title: "Open to Global Opportunities",
+      },
+      {
+        icon: "laptop",
+        title: "Remote First",
+        subtext: "(with occasional travel)",
+      },
+      {
+        icon: "handshake",
+        title: "Advisory | Architecture | Delivery Support",
+      },
+    ],
+    focusPillars: [
+      {
+        icon: "layers-3",
+        title: "Enterprise Architecture",
+        desc: "From strategy to execution across data, AI and digital platforms.",
+        color: "orange",
+      },
+      {
+        icon: "bar-chart-3",
+        title: "Data & AI Platforms",
+        desc: "Designing modern, scalable and governed platforms.",
+        color: "blue",
+      },
+      {
+        icon: "shield-check",
+        title: "Governed & Agentic AI",
+        desc: "Responsible, secure and production-grade AI solutions.",
+        color: "purple",
+      },
+      {
+        icon: "users",
+        title: "Engineering Leadership",
+        desc: "Building and leading high-performing, global teams.",
+        color: "green",
+      },
+    ],
     credentials: [
       { label: "Microsoft Certified", value: "Fabric & Azure Expert" },
       { label: "Databricks Certified", value: "Data Engineer & Architect" },
@@ -57,8 +110,8 @@ export const ABOUT_CONFIG = {
       { label: "Clients Trained", value: "5,000+ Leaders" },
     ],
     photoFallbackUrl:
-      "/assets/team-pictures/founder_image_about_us_section.jpeg",
-    photoAlt: "Ajay Kumar — Founder & CEO, Noeveka",
+      "/assets/about-page/ajay_image_for_founder_section_about_page.png",
+    photoAlt: "Ajay Kumar — Founder & Principal Data, AI & Enterprise Architect, Noeveka",
     linkedinUrl: "https://www.linkedin.com/company/noeveka",
     email: "hello@noeveka.com",
     contactLink: "/contact",

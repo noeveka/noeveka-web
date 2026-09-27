@@ -27,7 +27,7 @@ export default function AboutJourney({
     milestones && milestones.length > 0 ? milestones : [...ABOUT_CONFIG.journey.milestones];
 
   return (
-    <section className="relative w-full overflow-hidden bg-white py-20 lg:py-28">
+    <section className="relative w-full overflow-hidden bg-white py-20 lg:py-24">
       <div className="lp-container lp-px mx-auto max-w-4xl">
         {/* Section Header */}
         <div className="mb-14 sm:mb-20 text-left">

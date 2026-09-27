@@ -83,6 +83,7 @@ export default function Hero({
         : typeof photo === "string" && photo
           ? photo
           : ABOUT_CONFIG.hero.bgImageFallbackUrl;
+          console.log("photo src", photoSrc)
 
   const photoAltText =
     (bgImage as { alt?: string })?.alt ??
@@ -90,7 +91,7 @@ export default function Hero({
     ABOUT_CONFIG.hero.bgImageAlt;
 
   return (
-    <section className="relative w-full overflow-hidden bg-white pt-24 pb-14 sm:pt-28 sm:pb-16 lg:pt-32 lg:pb-20">
+    <section className="relative w-full overflow-hidden bg-white pt-16 pb-14 sm:pt-18 sm:pb-16 lg:pt-20 lg:pb-20">
       <div className="lp-container lp-px mx-auto max-w-6xl">
         {/* ── Top Centered Header Content ── */}
         <div className="mx-auto max-w-3xl text-center">
@@ -141,7 +142,7 @@ export default function Hero({
           className="relative mx-auto mt-10 w-full max-w-5xl overflow-hidden rounded-t-3xl rounded-bl-3xl bg-white sm:mt-12"
         >
           {/* Main Hero Photograph */}
-          <div className="relative aspect-16/11 w-full overflow-hidden sm:aspect-video">
+          <div className="relative w-full overflow-hidden">
             <img
               src={photoSrc}
               alt={photoAltText}
@@ -173,8 +174,8 @@ export default function Hero({
 
             {/* ── White Stairs SVG Overlay (Desktop) ── */}
             <svg
-              className="pointer-events-none absolute right-0 bottom-0 left-0 z-20 hidden h-20 w-full sm:block lg:h-24"
-              viewBox="0 0 1200 120"
+              className="pointer-events-none absolute right-0 bottom-0 left-0 z-20 hidden h-22 w-full sm:block lg:h-32"
+              viewBox="0 0 1000 120"
               fill="none"
               preserveAspectRatio="none"
             >

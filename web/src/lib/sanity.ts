@@ -268,6 +268,8 @@ export async function getAboutPage() {
       credentials[]{ label, value },
       whyFoundedHeading,
       whyFoundedText,
+      statusBadges[]{ icon, title, subtext },
+      focusPillars[]{ icon, title, desc, color },
       linkedinUrl,
       email
     },

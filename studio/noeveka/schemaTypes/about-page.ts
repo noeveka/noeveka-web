@@ -506,6 +506,41 @@ export const aboutPage = defineType({
           type: 'string',
           initialValue: 'hello@noeveka.com',
         }),
+        defineField({
+          name: 'statusBadges',
+          title: 'Status Badges',
+          description: 'Status items displayed to the right of the bio (e.g. Netherlands, Open to Global Opportunities, Remote First, Advisory).',
+          type: 'array',
+          of: [
+            {
+              type: 'object',
+              fields: [
+                defineField({ name: 'icon', title: 'Icon Name', type: 'string', description: 'map-pin, globe, laptop, handshake' }),
+                defineField({ name: 'title', title: 'Title', type: 'string' }),
+                defineField({ name: 'subtext', title: 'Subtext', type: 'string' }),
+              ],
+              preview: { select: { title: 'title', subtitle: 'subtext' } },
+            },
+          ],
+        }),
+        defineField({
+          name: 'focusPillars',
+          title: 'Focus / Capability Pillars',
+          description: '4 capability cards displayed at the bottom of the founder section.',
+          type: 'array',
+          of: [
+            {
+              type: 'object',
+              fields: [
+                defineField({ name: 'icon', title: 'Icon Name', type: 'string', description: 'layers-3, bar-chart-3, shield-check, users' }),
+                defineField({ name: 'title', title: 'Title', type: 'string' }),
+                defineField({ name: 'desc', title: 'Description', type: 'text', rows: 2 }),
+                defineField({ name: 'color', title: 'Color', type: 'string', initialValue: 'neutral' }),
+              ],
+              preview: { select: { title: 'title', subtitle: 'desc' } },
+            },
+          ],
+        }),
       ],
     }),
 
