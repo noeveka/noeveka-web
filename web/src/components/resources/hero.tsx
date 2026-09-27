@@ -3,14 +3,12 @@ import { motion } from "framer-motion";
 import { Link } from "react-router";
 import { LucideIcon } from "@/components/lucide-icons";
 import { RESOURCES_CONFIG } from "@/config/resources.config";
-import {
-  PowerBISvg,
-  FabricSvg,
-  DatabricksSvg,
-  AzureSvg,
-  GenAISvg,
-  GovernanceSvg,
-} from "@/components/svgs/tech-svgs";
+
+import { MicrosoftFabricSvg } from "@/components/svgs/microsoft-fabric-svg";
+import DatabricksSvg from "../svgs/databricks-svg";
+import AzureSvg from "../svgs/Azure-svg";
+import PowerBISvg from "../svgs/powerbi-svg";
+
 
 interface ResourcesHeroProps {
   eyebrow?: string;
@@ -66,7 +64,7 @@ const ARC_BADGES: ArcBadge[] = [
   {
     key: "fabric",
     name: "Microsoft Fabric",
-    Svg: FabricSvg,
+    Svg: MicrosoftFabricSvg,
     color: "#0078d4",
     bg: "#ffffff",
     border: "#0078d440",
@@ -87,18 +85,6 @@ const ARC_BADGES: ArcBadge[] = [
     top: "48%",
     delay: 0.25,
   },
-  {
-    key: "genai",
-    name: "GenAI",
-    Svg: GenAISvg,
-    color: "#10a37f",
-    bg: "#ffffff",
-    border: "#10a37f40",
-    shadow: "rgba(16, 163, 127, 0.25)",
-    right: "15%",
-    top: "76%",
-    delay: 0.3,
-  },
 ];
 
 /* Empty node dots resting on arc lines (Opero-style decorative points) */
@@ -112,16 +98,13 @@ const ARC_NODES = [
 
 /* Platform logos strip */
 const PLATFORMS = [
-  { name: "Microsoft Fabric", Svg: FabricSvg },
+  { name: "Microsoft Fabric", Svg: MicrosoftFabricSvg },
   { name: "Databricks", Svg: DatabricksSvg },
   { name: "Microsoft Azure", Svg: AzureSvg },
   { name: "Power BI", Svg: PowerBISvg },
-  { name: "GenAI & OpenAI", Svg: GenAISvg },
-  { name: "Governance & Purview", Svg: GovernanceSvg },
 ];
 
 export default function ResourcesHero({
-  eyebrow,
   heading = RESOURCES_CONFIG.hero.heading,
   headingHighlight = RESOURCES_CONFIG.hero.headingHighlight,
   subtext = RESOURCES_CONFIG.hero.subtext,
@@ -243,31 +226,6 @@ export default function ResourcesHero({
 
           {/* Centered Hero Content */}
           <div className="relative z-10 flex flex-col items-center py-20 text-center lg:py-28">
-            {/* Optional Eyebrow Pill */}
-            {eyebrow && (
-              <motion.div
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4 }}
-                className="mb-6 inline-flex items-center gap-2 rounded-full px-4 py-1.5"
-                style={{
-                  background: "rgba(246,93,1,0.08)",
-                  border: "1.5px solid rgba(246,93,1,0.2)",
-                }}
-              >
-                <div
-                  className="h-1.5 w-1.5 rounded-full"
-                  style={{ background: "var(--color-brand)" }}
-                />
-                <span
-                  className="text-[11px] font-extrabold tracking-[0.2em] uppercase"
-                  style={{ color: "var(--color-brand)" }}
-                >
-                  {eyebrow}
-                </span>
-              </motion.div>
-            )}
-
             {/* H1 Heading */}
             <motion.h1
               initial={{ opacity: 0, y: 20 }}

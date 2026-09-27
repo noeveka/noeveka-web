@@ -1,19 +1,21 @@
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
+import { Link } from "react-router";
+
 import { LucideIcon } from "@/components/lucide-icons";
-import { getSiteSettings, urlFor } from "@/lib/sanity";
-import { FOOTER_CONFIG } from "@/config/footer.config";
-import LinkedInSvg from "@/components/svgs/linkedin-svg";
-import YoutubeSvg from "@/components/svgs/youtube-svg";
 import InstagramSvg from "@/components/svgs/instagram-svg";
+import LinkedInSvg from "@/components/svgs/linkedin-svg";
 import XSvg from "@/components/svgs/x-svg";
+import YoutubeSvg from "@/components/svgs/youtube-svg";
+import { FOOTER_CONFIG } from "@/config/footer.config";
+import { getSiteSettings, urlFor } from "@/lib/sanity";
+import NewsLetterStrip from "@/components/common/new-letter-strip";
 
 const ICON_MAP: Record<string, () => React.JSX.Element> = {
   LinkedIn: LinkedInSvg,
-  "X / Twitter": XSvg,
+  X: XSvg,
   YouTube: YoutubeSvg,
   Instagram: InstagramSvg,
 };
-
 
 // Derived from config so the social link SVGs are resolved at component level
 const FALLBACK_SOCIAL = FOOTER_CONFIG.socialLinks.map((s) => ({
@@ -22,8 +24,33 @@ const FALLBACK_SOCIAL = FOOTER_CONFIG.socialLinks.map((s) => ({
   label: s.platform,
 }));
 
-function FooterLink({ label, light }: { label: string; light?: boolean }) {
-  const base = light ? "var(--color-text-secondary)" : "var(--color-text-muted)";
+function FooterLink({
+  label,
+  light,
+  href,
+}: {
+  label: string;
+  light?: boolean;
+  href?: string;
+}) {
+  const base = light
+    ? "var(--color-text-secondary)"
+    : "var(--color-text-muted)";
+  if (href && href !== "#") {
+    return (
+      <Link
+        to={href}
+        className="text-[13px] transition-colors"
+        style={{ color: base }}
+        onMouseEnter={(e) =>
+          (e.currentTarget.style.color = "var(--color-brand)")
+        }
+        onMouseLeave={(e) => (e.currentTarget.style.color = base)}
+      >
+        {label}
+      </Link>
+    );
+  }
   return (
     <button
       className="cursor-pointer border-none bg-transparent p-0 text-left text-[13px] transition-colors"
@@ -73,108 +100,82 @@ export default function Footer() {
 
   const tagline = settings?.footerTagline ?? FOOTER_CONFIG.tagline;
 
-  const socialLinks =
-    settings?.socialLinks?.length
-      ? settings.socialLinks.map((s) => ({
-          Icon: ICON_MAP[s.platform] ?? LinkedInSvg,
-          href: s.href,
-          label: s.platform,
-        }))
-      : FALLBACK_SOCIAL;
+  const socialLinks = settings?.socialLinks?.length
+    ? settings.socialLinks.map((s) => ({
+        Icon: ICON_MAP[s.platform] ?? LinkedInSvg,
+        href: s.href,
+        label: s.platform,
+      }))
+    : FALLBACK_SOCIAL;
 
-  const companyHeading = settings?.companyColumnHeading ?? FOOTER_CONFIG.companyColumnHeading;
+  const companyHeading =
+    settings?.companyColumnHeading ?? FOOTER_CONFIG.companyColumnHeading;
   const companyLinks = settings?.companyLinks?.length
     ? settings.companyLinks
     : [...FOOTER_CONFIG.companyLinks];
 
-  const servicesHeading = settings?.servicesColumnHeading ?? FOOTER_CONFIG.servicesColumnHeading;
-  const servicesLinks = settings?.servicesLinks?.length
-    ? settings.servicesLinks
-    : [...FOOTER_CONFIG.servicesLinks];
+  const servicesHeading =
+    settings?.servicesColumnHeading ?? FOOTER_CONFIG.servicesColumnHeading;
+  // const servicesLinks = settings?.servicesLinks?.length
+  //   ? settings.servicesLinks
+  //   : [...FOOTER_CONFIG.servicesLinks];
 
-  const contactHeading = settings?.contactHeading ?? FOOTER_CONFIG.contactHeading;
+  const contactHeading =
+    settings?.contactHeading ?? FOOTER_CONFIG.contactHeading;
   const contactEmail = settings?.contactEmail ?? FOOTER_CONFIG.contactEmail;
   const contactPhone = settings?.contactPhone ?? FOOTER_CONFIG.contactPhone;
-  const contactAddress = settings?.contactAddress ?? FOOTER_CONFIG.contactAddress;
+  const contactAddress =
+    settings?.contactAddress ?? FOOTER_CONFIG.contactAddress;
 
-  const newsletterHeading = settings?.newsletterHeading ?? FOOTER_CONFIG.newsletterHeading;
-  const newsletterSubtext = settings?.newsletterSubtext ?? FOOTER_CONFIG.newsletterSubtext;
-  const newsletterPlaceholder = settings?.newsletterPlaceholder ?? FOOTER_CONFIG.newsletterPlaceholder;
 
-  const copyrightText = (settings?.copyrightText ?? FOOTER_CONFIG.copyrightText).replace(
-    "{year}",
-    String(new Date().getFullYear())
-  );
+  const copyrightText = (
+    settings?.copyrightText ?? FOOTER_CONFIG.copyrightText
+  ).replace("{year}", String(new Date().getFullYear()));
 
   const footerNavLinks = settings?.footerNavLinks?.length
     ? settings.footerNavLinks
     : [...FOOTER_CONFIG.footerNavLinks];
 
+  const [copied, setCopied] = useState(false);
+  const [openSections, setOpenSections] = useState({
+    company: true,
+    services: true,
+    contact: true,
+  });
+
+  const toggleSection = (section: "company" | "services" | "contact") => {
+    setOpenSections((prev) => ({ ...prev, [section]: !prev[section] }));
+  };
+
+  const handleCopyEmail = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(contactEmail);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
+  };
+
+  const shortenedServices = [
+    "Data & AI Architecture",
+    "AI & Agentic Systems",
+    "AI Governance & Assurance",
+    "Transformation Advisory",
+  ];
+
+  const mobileCompanyLinks = [
+    { label: "Home", href: "/" },
+    { label: "Resources", href: "/resources" },
+    { label: "About", href: "/about" },
+    { label: "Contact", href: "/contact" },
+    { label: "Services", href: "/services" },
+  ];
+
   return (
     <footer>
       {/* ── Newsletter strip ──────────────────────────────── */}
-      <div
-        style={{
-          background: "var(--color-brand-tint)",
-          borderTop: "1px solid rgba(246, 93, 1, 0.18)",
-          borderBottom: "1px solid rgba(246, 93, 1, 0.18)",
-        }}
-      >
-        <div className="lp-container lp-px flex flex-col items-center justify-between gap-3 py-4 sm:flex-row sm:gap-5 sm:py-5">
-          {/* Left — icon + copy */}
-          <div className="flex w-full items-center gap-3 sm:w-auto">
-            <div
-              className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg sm:h-10 sm:w-10 sm:rounded-xl"
-              style={{ background: "var(--color-brand)" }}
-            >
-              <LucideIcon name="mail" className="h-4 w-4 text-white sm:h-[18px] sm:w-[18px]" />
-            </div>
-            <div className="min-w-0">
-              <p
-                className="truncate text-[13px] font-bold sm:text-[14px]"
-                style={{ color: "var(--color-text-primary)" }}
-              >
-                {newsletterHeading}
-              </p>
-              <p
-                className="hidden truncate text-[11.5px] sm:block"
-                style={{ color: "var(--color-text-muted)" }}
-              >
-                {newsletterSubtext}
-              </p>
-            </div>
-          </div>
-
-          {/* Email input */}
-          <div
-            className="flex w-full items-center overflow-hidden rounded-xl border sm:w-auto sm:min-w-[320px]"
-            style={{
-              background: "var(--color-bg-surface)",
-              borderColor: "rgba(246, 93, 1, 0.22)",
-            }}
-          >
-            <input
-              type="email"
-              placeholder={newsletterPlaceholder}
-              className="flex-1 bg-transparent px-3 py-2.5 text-[13px] outline-none sm:px-4 sm:py-3"
-              style={{ color: "var(--color-text-primary)" }}
-            />
-            <button
-              className="shrink-0 cursor-pointer border-none px-3 py-2.5 transition-all sm:px-4 sm:py-3"
-              style={{ background: "var(--color-brand)", color: "#ffffff" }}
-              onMouseEnter={(e) =>
-                (e.currentTarget.style.background = "var(--color-brand-hover)")
-              }
-              onMouseLeave={(e) =>
-                (e.currentTarget.style.background = "var(--color-brand)")
-              }
-              aria-label="Subscribe"
-            >
-              <LucideIcon name="arrow-right" className="h-4 w-4" />
-            </button>
-          </div>
-        </div>
-      </div>
+      <NewsLetterStrip />
 
       {/* ── Main footer body (LIGHT) ──────────────────────── */}
       <div
@@ -214,10 +215,10 @@ export default function Footer() {
           </span>
         </div>
 
-        {/* Grid content */}
-        <div className="lp-container lp-px relative z-10 grid grid-cols-1 gap-10 pt-14 pb-28 sm:grid-cols-2 lg:grid-cols-5">
+        {/* ── Desktop grid content (lg and up) ── */}
+        <div className="lp-container lp-px relative z-10 hidden grid-cols-5 gap-10 pt-14 pb-28 lg:grid">
           {/* Brand column — 2 cols */}
-          <div className="flex flex-col gap-5 lg:col-span-2">
+          <div className="col-span-2 flex flex-col gap-5">
             {/* Logo */}
             <div className="flex items-center gap-1">
               <div className="relative h-10 w-10 shrink-0 sm:h-12 sm:w-12">
@@ -286,7 +287,7 @@ export default function Footer() {
             <ul className="flex flex-col gap-2.5">
               {companyLinks.map((l) => (
                 <li key={l.label}>
-                  <FooterLink label={l.label} />
+                  <FooterLink label={l.label} href={l.href} />
                 </li>
               ))}
             </ul>
@@ -301,9 +302,9 @@ export default function Footer() {
               {servicesHeading}
             </p>
             <ul className="flex flex-col gap-2.5">
-              {servicesLinks.map((l) => (
-                <li key={l.label}>
-                  <FooterLink label={l.label} />
+              {shortenedServices.map((service) => (
+                <li key={service}>
+                  <FooterLink label={service} />
                 </li>
               ))}
             </ul>
@@ -329,7 +330,10 @@ export default function Footer() {
               >
                 {contactEmail}
               </a>
-              <p className="text-[13px]" style={{ color: "var(--color-text-muted)" }}>
+              <p
+                className="text-[13px]"
+                style={{ color: "var(--color-text-muted)" }}
+              >
                 {contactPhone}
               </p>
               <p
@@ -342,19 +346,271 @@ export default function Footer() {
           </div>
         </div>
 
+        {/* ── Mobile View (< lg) ── */}
+        <div className="lp-container lp-px relative z-10 block pt-10 pb-16 lg:hidden">
+          {/* Brand header */}
+          <div className="mb-7 flex flex-col items-start gap-4">
+            {/* Logo */}
+            <div className="flex items-center gap-1">
+              <div className="relative h-9 w-9 shrink-0">
+                <img
+                  src={logoIconSrc}
+                  alt={settings?.logoIcon?.alt ?? FOOTER_CONFIG.logoIconAlt}
+                  className="h-full w-full object-contain"
+                />
+              </div>
+              <div className="relative -ml-2 flex h-12 w-28 items-center">
+                <img
+                  src={logoTextSrc}
+                  alt={settings?.logoText?.alt ?? FOOTER_CONFIG.logoTextAlt}
+                  className="h-full w-full object-contain object-left"
+                />
+              </div>
+            </div>
+
+            {/* Tagline */}
+            <p
+              className="max-w-md text-[13px] leading-relaxed"
+              style={{ color: "var(--color-text-muted)" }}
+            >
+              {tagline}
+            </p>
+
+            {/* Social icons */}
+            <div className="flex items-center gap-2.5 pt-0.5">
+              {socialLinks.map(({ Icon, href, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  aria-label={label}
+                  className="flex h-9 w-9 items-center justify-center rounded-full transition-all"
+                  style={{
+                    background: "var(--color-bg-surface)",
+                    border: "1px solid var(--color-stroke-default)",
+                    color: "var(--color-text-muted)",
+                  }}
+                  onMouseEnter={(e) => {
+                    const el = e.currentTarget as HTMLAnchorElement;
+                    el.style.background = "var(--color-brand)";
+                    el.style.borderColor = "var(--color-brand)";
+                    el.style.color = "#fff";
+                  }}
+                  onMouseLeave={(e) => {
+                    const el = e.currentTarget as HTMLAnchorElement;
+                    el.style.background = "var(--color-bg-surface)";
+                    el.style.borderColor = "var(--color-stroke-default)";
+                    el.style.color = "var(--color-text-muted)";
+                  }}
+                >
+                  <Icon />
+                </a>
+              ))}
+            </div>
+          </div>
+
+          {/* Interactive Sections without heavy boxy feel */}
+          <div className="flex flex-col gap-3">
+            {/* ── Section 1: COMPANY ── */}
+            <div
+              className="rounded-xl p-4 transition-all duration-200 sm:p-5"
+              style={{
+                background: "rgba(255, 255, 255, 0.72)",
+                boxShadow: "0 2px 8px rgba(15, 23, 42, 0.02)",
+              }}
+            >
+              <button
+                onClick={() => toggleSection("company")}
+                className="flex w-full cursor-pointer items-center justify-between border-none bg-transparent p-0 text-left"
+              >
+                <span
+                  className="text-[11.5px] font-bold tracking-[0.18em] uppercase"
+                  style={{ color: "var(--color-text-primary)" }}
+                >
+                  {companyHeading}
+                </span>
+                <LucideIcon
+                  name="chevron-down"
+                  className={`h-4 w-4 transition-transform duration-200 ${
+                    openSections.company ? "rotate-180" : ""
+                  }`}
+                  style={{ color: "var(--color-brand)" }}
+                />
+              </button>
+
+              {openSections.company && (
+                <div className="mt-3 grid grid-cols-2 gap-x-4 gap-y-1.5 border-t border-slate-100 pt-3.5">
+                  {mobileCompanyLinks.map((l) => (
+                    <Link
+                      key={l.label}
+                      to={l.href}
+                      className="group -mx-2 flex items-center justify-between rounded-lg px-2 py-1.5 text-[13px] font-medium text-slate-600 transition-all hover:bg-orange-50/50 hover:text-[#f65d01]"
+                    >
+                      <span>{l.label}</span>
+                      <LucideIcon
+                        name="chevron-right"
+                        className="h-3.5 w-3.5 text-slate-300 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:text-[#f65d01]"
+                      />
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* ── Section 2: SERVICES ── */}
+            <div
+              className="rounded-xl p-4 transition-all duration-200 sm:p-5"
+              style={{
+                background: "rgba(255, 255, 255, 0.72)",
+                boxShadow: "0 2px 8px rgba(15, 23, 42, 0.02)",
+              }}
+            >
+              <button
+                onClick={() => toggleSection("services")}
+                className="flex w-full cursor-pointer items-center justify-between border-none bg-transparent p-0 text-left"
+              >
+                <span
+                  className="text-[11.5px] font-bold tracking-[0.18em] uppercase"
+                  style={{ color: "var(--color-text-primary)" }}
+                >
+                  {servicesHeading}
+                </span>
+                <LucideIcon
+                  name="chevron-down"
+                  className={`h-4 w-4 transition-transform duration-200 ${
+                    openSections.services ? "rotate-180" : ""
+                  }`}
+                  style={{ color: "var(--color-brand)" }}
+                />
+              </button>
+
+              {openSections.services && (
+                <div className="mt-3 flex flex-col gap-1 border-t border-slate-100 pt-3.5">
+                  {shortenedServices.map((service) => (
+                    <div
+                      key={service}
+                      className="group -mx-2 flex cursor-default items-center justify-between rounded-lg px-2 py-1.5 text-[13px] font-medium text-slate-600 transition-all hover:bg-orange-50/50 hover:text-[#f65d01]"
+                    >
+                      <span>{service}</span>
+                      <LucideIcon
+                        name="chevron-right"
+                        className="h-3.5 w-3.5 text-slate-300 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:text-[#f65d01]"
+                      />
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+
+            {/* ── Section 3: CONTACT ── */}
+            <div
+              className="rounded-2xl p-4 transition-all duration-200 sm:p-5"
+              style={{
+                background: "rgba(255, 255, 255, 0.72)",
+                boxShadow: "0 2px 8px rgba(15, 23, 42, 0.02)",
+              }}
+            >
+              <button
+                onClick={() => toggleSection("contact")}
+                className="flex w-full cursor-pointer items-center justify-between border-none bg-transparent p-0 text-left"
+              >
+                <span
+                  className="text-[11.5px] font-bold tracking-[0.18em] uppercase"
+                  style={{ color: "var(--color-text-primary)" }}
+                >
+                  {contactHeading}
+                </span>
+                <LucideIcon
+                  name="chevron-down"
+                  className={`h-4 w-4 transition-transform duration-200 ${
+                    openSections.contact ? "rotate-180" : ""
+                  }`}
+                  style={{ color: "var(--color-brand)" }}
+                />
+              </button>
+
+              {openSections.contact && (
+                <div className="mt-3 flex flex-col gap-3 border-t border-slate-100 pt-3.5">
+                  {/* Email with copy */}
+                  <div className="flex items-center gap-2">
+                    <a
+                      href={`mailto:${contactEmail}`}
+                      className="text-[13px] font-semibold transition-colors hover:underline"
+                      style={{ color: "var(--color-brand)" }}
+                    >
+                      {contactEmail}
+                    </a>
+                    <button
+                      onClick={handleCopyEmail}
+                      aria-label="Copy email address"
+                      className="flex h-6 w-6 cursor-pointer items-center justify-center rounded-md border border-neutral-200/60 bg-white text-neutral-400 transition-colors hover:border-[#f65d01]/40 hover:text-[#f65d01]"
+                    >
+                      <LucideIcon
+                        name={copied ? "check" : "copy"}
+                        className={`h-3 w-3 ${copied ? "text-green-600" : ""}`}
+                      />
+                    </button>
+                    {copied && (
+                      <span className="text-[11px] font-semibold text-green-600">
+                        Copied!
+                      </span>
+                    )}
+                  </div>
+
+                  {/* Phone */}
+                  {contactPhone && (
+                    <div className="flex items-center gap-2.5 text-[12.5px] text-slate-600">
+                      <LucideIcon
+                        name="phone"
+                        className="h-3.5 w-3.5 shrink-0 text-slate-400"
+                      />
+                      <span>{contactPhone}</span>
+                    </div>
+                  )}
+
+                  {/* Address */}
+                  {contactAddress && (
+                    <div className="flex items-center gap-2.5 text-[12.5px] text-slate-600">
+                      <LucideIcon
+                        name="map-pin"
+                        className="h-3.5 w-3.5 shrink-0 text-slate-400"
+                      />
+                      <span>{contactAddress}</span>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
         {/* ── Bottom bar ────────────────────────────────────── */}
         <div
           className="relative z-10 border-t"
           style={{ borderColor: "var(--color-stroke-default)" }}
         >
-          <div className="lp-container lp-px flex flex-col items-center justify-between gap-3 py-4 sm:flex-row">
+          <div className="lp-container lp-px flex items-center justify-between gap-3 py-4">
             <p
               className="text-[11.5px]"
               style={{ color: "var(--color-text-muted)" }}
             >
               {copyrightText}
             </p>
-            <nav className="flex items-center gap-5">
+
+            {/* Mobile logo icon (visible only on small screens) */}
+            <Link
+              to="/"
+              aria-label="Noeveka Home"
+              className="flex shrink-0 items-center transition-opacity hover:opacity-80 sm:hidden"
+            >
+              <img
+                src={logoIconSrc}
+                alt={settings?.logoIcon?.alt ?? FOOTER_CONFIG.logoIconAlt}
+                className="h-5.5 w-5.5 object-contain"
+              />
+            </Link>
+
+            {/* Navigation links (hidden on small screens, visible on sm+) */}
+            <nav className="hidden items-center gap-5 sm:flex">
               {footerNavLinks.map((l) => (
                 <button
                   key={l.label}

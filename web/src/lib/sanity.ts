@@ -31,6 +31,7 @@ export async function getSiteSettings() {
     contactEmail,
     contactPhone,
     contactAddress,
+    newsletterTag,
     newsletterHeading,
     newsletterSubtext,
     newsletterPlaceholder,

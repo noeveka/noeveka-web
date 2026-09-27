@@ -14,6 +14,7 @@ import {
   ChevronsRight,
   Clock,
   Code,
+  Copy,
   Cpu,
   Database,
   Download,
@@ -51,6 +52,7 @@ import {
   X,
   Zap,
   Calendar,
+  ArrowLeft,
 } from "lucide-react";
 
 // Icon map
@@ -60,6 +62,7 @@ import {
 export const iconMap = {
   // navigation
   "arrow-right": ArrowRight,
+  "arrow-left": ArrowLeft,
   "arrow-up-right": ArrowUpRight,
   "chevron-down": ChevronDown,
   "chevron-left": ChevronLeft,
@@ -74,6 +77,7 @@ export const iconMap = {
   // actions
   search: Search,
   settings: Settings,
+  copy: Copy,
   plus: Plus,
   minus: Minus,
   check: Check,
@@ -128,6 +132,7 @@ export const iconMap = {
 export const lucideIconRegistry = {
   Activity: "activity",
   ArrowRight: "arrow-right",
+  ArrowLeft: "arrow-left",
   ArrowUpRight: "arrow-up-right",
   ChevronDown: "chevron-down",
   ChevronLeft: "chevron-left",
@@ -135,6 +140,7 @@ export const lucideIconRegistry = {
   ChevronUp: "chevron-up",
   ChevronsRight: "chevrons-right",
   Close: "close",
+  Copy: "copy",
   X: "close",
   Menu: "menu",
   Search: "search",
