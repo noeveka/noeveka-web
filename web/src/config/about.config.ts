@@ -2,12 +2,12 @@ export const ABOUT_CONFIG = {
   // Page Hero
   hero: {
     badge: "About Us",
-    headingLine1: "A Global Journey.",
-    headingLine2: "A Bigger",
-    headingHighlight: "Purpose.",
+    headingLine1: "Architect-Led Clarity for",
+    headingLine2: "Enterprise Ambition",
+    headingHighlight: "",
     subheading: "From BI Consulting Pro to NOE·V·EKA — Architecting the AI Era.",
     subtext:
-      "What started as a focused BI and analytics initiative has evolved into NOE·V·EKA — an independent enterprise Data & AI advisory, helping organizations design, govern, and implement intelligent, future-ready ecosystems.",
+      "Noeveka is an independent enterprise advisory delivering architect-grade data platform strategy, Fabric & Databricks implementation, and GenAI governance.",
     ctaPrimaryText: "Let's Talk",
     ctaPrimaryLink: "/contact",
     ctaSecondaryText: "Explore Focus Areas",
@@ -15,7 +15,7 @@ export const ABOUT_CONFIG = {
     
     // Background and founder images
     // Desktop: landscape/cinematic 16:9 ratio; Mobile: portrait/compact 4:3 or 1:1 ratio
-    bgImageFallbackUrl: "/assets/team-pictures/noeveka_founder_final.png",
+    bgImageFallbackUrl: "/assets/about-page/about_page_hero_image.png",
     bgImageAlt: "Ajay Kumar — Founder & CEO, Noeveka",
     mobileBgImageFallbackUrl: "/assets/team-pictures/noeveka_founder_picture_2.jpeg",
 
@@ -57,7 +57,7 @@ export const ABOUT_CONFIG = {
       { label: "Clients Trained", value: "5,000+ Leaders" },
     ],
     photoFallbackUrl:
-      "/assets/team-pictures/founder_image_about_page.jpeg",
+      "/assets/team-pictures/founder_image_about_us_section.jpeg",
     photoAlt: "Ajay Kumar — Founder & CEO, Noeveka",
     linkedinUrl: "https://www.linkedin.com/company/noeveka",
     email: "hello@noeveka.com",
@@ -82,7 +82,7 @@ export const ABOUT_CONFIG = {
 
     // Middle Media Banner (Editorial Workspace Desk Photo)
     image: {
-      url: "/assets/architect_desk_workspace.jpg",
+      url: "/assets/about-page/about_page_img_second.png",
       alt: "Noeveka enterprise architecture workspace desk with data models and technical blueprints",
       aspectRatio: "16/9",
     },

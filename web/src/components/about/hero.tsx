@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+
 import { motion } from "framer-motion";
 
 import AzureSvg from "@/components/svgs/Azure-svg";
@@ -7,6 +8,7 @@ import MicrosoftSvg from "@/components/svgs/microsoft-svg";
 import SnowflakeSvg from "@/components/svgs/snowflake-svg";
 import { ABOUT_CONFIG } from "@/config/about.config";
 import { fu } from "@/lib/motion";
+import { urlFor } from "@/lib/sanity";
 
 interface HeroStat {
   value: string;
@@ -43,7 +45,9 @@ export default function Hero({
   ctaSecondaryText,
   ctaSecondaryLink,
   stats,
-  photoAlt = "Ajay Kumar — Founder & Principal Architect, Noeveka",
+  bgImage,
+  photo,
+  photoAlt,
 }: HeroProps) {
   const resolvedStats = stats?.length ? stats : [...ABOUT_CONFIG.hero.stats];
 
@@ -54,28 +58,36 @@ export default function Hero({
     resolvedStats[2] || { value: "5K+", label: "Leaders Trained" },
   ];
 
-  const line1 =
-    headingLine1 && headingLine1 !== "A Global Journey."
-      ? headingLine1
-      : "Architect-Led Clarity for";
+  const line1 = headingLine1 || ABOUT_CONFIG.hero.headingLine1;
+  const line2 = headingLine2 || ABOUT_CONFIG.hero.headingLine2;
+  const highlight = headingHighlight || ABOUT_CONFIG.hero.headingHighlight;
+  const resolvedSubtext = subtext || ABOUT_CONFIG.hero.subtext;
 
-  const line2 =
-    headingLine2 && headingLine2 !== "A Bigger"
-      ? headingLine2
-      : "Enterprise Ambition";
+  const primaryText =
+    ctaPrimaryText || ABOUT_CONFIG.hero.ctaPrimaryText || "Let's Talk";
+  const primaryHref =
+    ctaPrimaryLink || ABOUT_CONFIG.hero.ctaPrimaryLink || "/contact";
+  const secondaryText =
+    ctaSecondaryText ||
+    ABOUT_CONFIG.hero.ctaSecondaryText ||
+    "Explore Focus Areas";
+  const secondaryHref =
+    ctaSecondaryLink || ABOUT_CONFIG.hero.ctaSecondaryLink || "/services";
 
-  const highlight =
-    headingHighlight && headingHighlight !== "Purpose." ? headingHighlight : "";
+  const photoSrc = (bgImage as { asset?: unknown })?.asset
+    ? urlFor(bgImage).width(1600).quality(90).url()
+    : (photo as { asset?: unknown })?.asset
+      ? urlFor(photo).width(1600).quality(90).url()
+      : typeof bgImage === "string" && bgImage
+        ? bgImage
+        : typeof photo === "string" && photo
+          ? photo
+          : ABOUT_CONFIG.hero.bgImageFallbackUrl;
 
-  const resolvedSubtext =
-    subtext && !subtext.includes("From BI Consulting Pro")
-      ? subtext
-      : "Noeveka is an independent enterprise advisory delivering architect-grade data platform strategy, Fabric & Databricks implementation, and GenAI governance.";
-
-  const primaryText = ctaPrimaryText || ABOUT_CONFIG.hero.ctaPrimaryText || "Let's Talk";
-  const primaryHref = ctaPrimaryLink || ABOUT_CONFIG.hero.ctaPrimaryLink || "/contact";
-  const secondaryText = ctaSecondaryText || ABOUT_CONFIG.hero.ctaSecondaryText || "Explore Focus Areas";
-  const secondaryHref = ctaSecondaryLink || ABOUT_CONFIG.hero.ctaSecondaryLink || "/services";
+  const photoAltText =
+    (bgImage as { alt?: string })?.alt ??
+    photoAlt ??
+    ABOUT_CONFIG.hero.bgImageAlt;
 
   return (
     <section className="relative w-full overflow-hidden bg-white pt-24 pb-14 sm:pt-28 sm:pb-16 lg:pt-32 lg:pb-20">
@@ -85,18 +97,19 @@ export default function Hero({
           {/* Main Headline */}
           <motion.h1
             {...fu(0.04)}
-            className="text-3xl font-extrabold tracking-tight text-[#161922] sm:text-5xl lg:text-[56px] leading-[1.12]"
+            className="text-3xl leading-[1.12] font-extrabold tracking-tight text-[#161922] sm:text-5xl lg:text-[56px]"
           >
             <span className="block sm:tracking-tight">{line1}</span>
-            <span className="block mt-1 sm:mt-2 text-[#161922]">
-              {line2} {highlight && <span className="text-[#f65d01]">{highlight}</span>}
+            <span className="mt-1 block text-[#161922] sm:mt-2">
+              {line2}{" "}
+              {highlight && <span className="text-[#f65d01]">{highlight}</span>}
             </span>
           </motion.h1>
 
           {/* Subtext */}
           <motion.p
             {...fu(0.08)}
-            className="mx-auto mt-5 max-w-2xl text-[15px] sm:text-base lg:text-[17px] leading-relaxed text-[#555d6e]"
+            className="mx-auto mt-5 max-w-2xl text-[15px] leading-relaxed text-[#555d6e] sm:text-base lg:text-[17px]"
           >
             {resolvedSubtext}
           </motion.p>
@@ -108,14 +121,14 @@ export default function Hero({
           >
             <Link
               to={primaryHref}
-              className="inline-flex cursor-pointer items-center justify-center rounded-full bg-[#f65d01] px-8 py-3 text-[14px] font-semibold text-white shadow-[0_4px_16px_rgba(246,93,1,0.28)] transition-all duration-200 hover:bg-[#ff711e] hover:shadow-[0_8px_24px_rgba(246,93,1,0.4)] hover:-translate-y-0.5 active:translate-y-0"
+              className="inline-flex cursor-pointer items-center justify-center rounded-full bg-[#f65d01] px-8 py-3 text-[14px] font-semibold text-white shadow-[0_4px_16px_rgba(246,93,1,0.28)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#ff711e] hover:shadow-[0_8px_24px_rgba(246,93,1,0.4)] active:translate-y-0"
             >
               {primaryText}
             </Link>
 
             <Link
               to={secondaryHref}
-              className="inline-flex cursor-pointer items-center justify-center rounded-full border border-neutral-300 bg-white px-7 py-3 text-[14px] font-semibold text-[#161922] shadow-xs transition-all duration-200 hover:bg-neutral-50 hover:border-neutral-400 hover:-translate-y-0.5 active:translate-y-0"
+              className="inline-flex cursor-pointer items-center justify-center rounded-full border border-neutral-300 bg-white px-7 py-3 text-[14px] font-semibold text-[#161922] shadow-xs transition-all duration-200 hover:-translate-y-0.5 hover:border-neutral-400 hover:bg-neutral-50 active:translate-y-0"
             >
               {secondaryText}
             </Link>
@@ -125,13 +138,13 @@ export default function Hero({
         {/* ── Center Photo with White Stairs-Like Bottom ── */}
         <motion.div
           {...fu(0.16)}
-          className="relative mx-auto mt-10 sm:mt-12 w-full max-w-5xl overflow-hidden rounded-t-3xl rounded-bl-3xl bg-white"
+          className="relative mx-auto mt-10 w-full max-w-5xl overflow-hidden rounded-t-3xl rounded-bl-3xl bg-white sm:mt-12"
         >
           {/* Main Hero Photograph */}
-          <div className="relative aspect-[16/11] sm:aspect-[16/9] w-full overflow-hidden">
+          <div className="relative aspect-16/11 w-full overflow-hidden sm:aspect-video">
             <img
-              src="/assets/team-pictures/about_page_hero_image.png"
-              alt={photoAlt}
+              src={photoSrc}
+              alt={photoAltText}
               className="h-full w-full object-cover object-[center_30%]"
             />
 
@@ -151,7 +164,7 @@ export default function Hero({
                   <span className="text-base font-bold tracking-tight text-white drop-shadow-md sm:text-2xl lg:text-3xl">
                     {item.value}
                   </span>
-                  <span className="mt-0.5 text-[8.5px] font-medium leading-tight text-white/90 drop-shadow-sm sm:text-[11px] lg:text-xs">
+                  <span className="mt-0.5 text-[8.5px] leading-tight font-medium text-white/90 drop-shadow-sm sm:text-[11px] lg:text-xs">
                     {item.label}
                   </span>
                 </div>
@@ -160,7 +173,7 @@ export default function Hero({
 
             {/* ── White Stairs SVG Overlay (Desktop) ── */}
             <svg
-              className="pointer-events-none absolute bottom-0 left-0 right-0 z-20 hidden h-20 w-full sm:block lg:h-24"
+              className="pointer-events-none absolute right-0 bottom-0 left-0 z-20 hidden h-20 w-full sm:block lg:h-24"
               viewBox="0 0 1200 120"
               fill="none"
               preserveAspectRatio="none"
@@ -173,7 +186,7 @@ export default function Hero({
 
             {/* ── White Stairs SVG Overlay (Mobile) ── */}
             <svg
-              className="pointer-events-none absolute bottom-0 left-0 right-0 z-20 block h-14 w-full sm:hidden"
+              className="pointer-events-none absolute right-0 bottom-0 left-0 z-20 block h-14 w-full sm:hidden"
               viewBox="0 0 600 100"
               fill="none"
               preserveAspectRatio="none"
@@ -187,8 +200,8 @@ export default function Hero({
         </motion.div>
 
         {/* ── Trusted Partners Row Underneath Stairs ── */}
-        <motion.div {...fu(0.2)} className="mt-10 sm:mt-12 text-center">
-          <p className="mb-6 text-[14px] italic text-[#555d6e] sm:text-base">
+        <motion.div {...fu(0.2)} className="mt-10 text-center sm:mt-12">
+          <p className="mb-6 text-[14px] text-[#555d6e] italic sm:text-base">
             Trusted partners
           </p>
 

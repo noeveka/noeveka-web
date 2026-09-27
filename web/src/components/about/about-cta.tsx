@@ -29,40 +29,21 @@ export default function AboutCta({
   secondaryCtaText,
   secondaryCtaLink,
 }: AboutCtaProps) {
-  // Gracefully fallback old legacy Sanity defaults to the new design requested
   const line1 =
     headingLine1 ||
-    (headingPlain && headingPlain !== "Ready to get"
-      ? `${headingPlain} ${headingHighlight || ""}`.trim()
-      : ABOUT_CONFIG.cta.headingLine1);
+    (headingPlain ? `${headingPlain} ${headingHighlight || ""}`.trim() : "") ||
+    ABOUT_CONFIG.cta.headingLine1;
 
   const line2 =
     headingLine2 ||
-    (headingTail && headingTail !== "on your data platform?"
-      ? headingTail
-      : ABOUT_CONFIG.cta.headingLine2);
+    headingTail ||
+    ABOUT_CONFIG.cta.headingLine2;
 
-  const bodyText =
-    body && !body.includes("Book a free 30-minute strategy call with Ajay")
-      ? body
-      : ABOUT_CONFIG.cta.body;
-
-  const primaryText =
-    primaryCtaText && primaryCtaText !== "Book a Free Strategy Call"
-      ? primaryCtaText
-      : ABOUT_CONFIG.cta.primaryCtaText;
-
-  const primaryHref =
-    primaryCtaLink && primaryCtaLink !== "/#contact"
-      ? primaryCtaLink
-      : ABOUT_CONFIG.cta.primaryCtaLink;
-
-  const secondaryText =
-    secondaryCtaText && secondaryCtaText !== "Explore Our Services"
-      ? secondaryCtaText
-      : ABOUT_CONFIG.cta.secondaryCtaText;
-
-  const secondaryHref =
+  const bodyText = body || ABOUT_CONFIG.cta.body;
+  const primaryText = primaryCtaText || ABOUT_CONFIG.cta.primaryCtaText;
+  const primaryHref = primaryCtaLink || ABOUT_CONFIG.cta.primaryCtaLink;
+  const secondaryText = secondaryCtaText || ABOUT_CONFIG.cta.secondaryCtaText;
+  const secondaryHref = secondaryCtaLink || ABOUT_CONFIG.cta.secondaryCtaLink;
     secondaryCtaLink && secondaryCtaLink !== "/"
       ? secondaryCtaLink
       : ABOUT_CONFIG.cta.secondaryCtaLink;
