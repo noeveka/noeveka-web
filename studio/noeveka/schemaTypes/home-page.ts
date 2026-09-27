@@ -24,7 +24,17 @@ export const homePage = defineType({
       fields: [
         defineField({
           name: 'bgImage',
-          title: 'Background Image',
+          title: 'Background Image (Desktop / Large screen)',
+          type: 'image',
+          options: { hotspot: true },
+          fields: [
+            defineField({ name: 'alt', title: 'Alt Text', type: 'string' }),
+          ],
+        }),
+        defineField({
+          name: 'bgImageMobile',
+          title: 'Background Image (Mobile / Small screen)',
+          description: 'Square or portrait image shown on phones (<768px). Leave blank to use the default local fallback.',
           type: 'image',
           options: { hotspot: true },
           fields: [
@@ -161,25 +171,63 @@ export const homePage = defineType({
           name: 'eyebrow',
           title: 'Eyebrow Label',
           type: 'string',
-          initialValue: 'Our Core Ecosystem',
+          initialValue: 'Our Services',
         }),
         defineField({
           name: 'heading',
           title: 'Section Heading',
           type: 'string',
-          initialValue: 'Essential services for enterprise data excellence',
+          initialValue: 'End-to-end AI & Data Solutions for Enterprise Growth',
         }),
         defineField({
           name: 'subtext',
           title: 'Section Subtext',
           type: 'text',
-          rows: 2,
+          rows: 3,
+          initialValue:
+            'We help organizations design, build and scale modern data and AI systems — from strategy to production, with a focus on real business impact.',
         }),
         defineField({
           name: 'cardCtaText',
           title: 'Card CTA Button Text',
           type: 'string',
-          initialValue: 'Explore More',
+          initialValue: 'Learn More',
+        }),
+        defineField({
+          name: 'services',
+          title: 'Services (Optional In-Page Override)',
+          description:
+            'If defined, overrides the global Service documents on the Home Page.',
+          type: 'array',
+          of: [
+            {
+              type: 'object',
+              fields: [
+                defineField({ name: 'title', title: 'Title', type: 'string', validation: (Rule) => Rule.required() }),
+                defineField({ name: 'description', title: 'Description', type: 'text', rows: 3, validation: (Rule) => Rule.required() }),
+                defineField({ name: 'icon', title: 'Icon Name', type: 'string', initialValue: 'layers' }),
+                defineField({
+                  name: 'variant',
+                  title: 'Card Variant',
+                  type: 'string',
+                  options: {
+                    list: [
+                      { title: 'White', value: 'white' },
+                      { title: 'Orange (highlight)', value: 'orange' },
+                      { title: 'Black', value: 'black' },
+                    ],
+                  },
+                  initialValue: 'white',
+                }),
+                defineField({ name: 'ctaText', title: 'CTA Text', type: 'string', initialValue: 'Learn More' }),
+                defineField({ name: 'ctaLink', title: 'CTA Link', type: 'string' }),
+                defineField({ name: 'featured', title: 'Featured', type: 'boolean', initialValue: false }),
+              ],
+              preview: {
+                select: { title: 'title', subtitle: 'variant' },
+              },
+            },
+          ],
         }),
       ],
     }),

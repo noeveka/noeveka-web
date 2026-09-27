@@ -186,8 +186,8 @@ export function ArchitectureStackVisual({ className = "" }: { className?: string
 }
 
 /**
- * Visual graphic 02: Enterprise AI & Agentic Systems Network
- * Central node AI AGENTS connected to peripheral nodes
+ * Visual graphic 02: Enterprise AI & Agentic Systems
+ * Dark hardware/AI tile with glowing robot core, cloud badge, metrics pill, and node graph
  */
 export function AgenticNetworkVisual({ className = "" }: { className?: string }) {
   return (
@@ -196,70 +196,106 @@ export function AgenticNetworkVisual({ className = "" }: { className?: string })
       aria-hidden="true"
     >
       <svg
-        viewBox="0 0 120 120"
+        viewBox="0 0 200 170"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="w-full h-full"
+        className="w-full h-full max-h-[160px] drop-shadow-sm"
       >
         <defs>
-          <linearGradient id="agentPulse" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#F65D01" />
-            <stop offset="100%" stopColor="#FF9556" />
+          <filter id="robotGlow" x="-30%" y="-30%" width="160%" height="160%">
+            <feDropShadow dx="0" dy="4" stdDeviation="8" floodColor="#F65D01" floodOpacity="0.45" />
+          </filter>
+          <filter id="badgeShadow" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="3" stdDeviation="4" floodColor="#000000" floodOpacity="0.08" />
+          </filter>
+          <linearGradient id="robotCoreGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#FFA066" />
+            <stop offset="40%" stopColor="#F65D01" />
+            <stop offset="100%" stopColor="#EA4800" />
+          </linearGradient>
+          <linearGradient id="tileGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#2E3240" />
+            <stop offset="100%" stopColor="#1E212B" />
           </linearGradient>
         </defs>
 
-        {/* Connecting lines */}
-        <line x1="60" y1="60" x2="25" y2="35" stroke="#F65D01" strokeWidth="1.5" strokeOpacity="0.4" strokeDasharray="3 2" />
-        <line x1="60" y1="60" x2="95" y2="35" stroke="#F65D01" strokeWidth="1.5" strokeOpacity="0.4" strokeDasharray="3 2" />
-        <line x1="60" y1="60" x2="20" y2="75" stroke="#F65D01" strokeWidth="1.5" strokeOpacity="0.4" strokeDasharray="3 2" />
-        <line x1="60" y1="60" x2="100" y2="75" stroke="#F65D01" strokeWidth="1.5" strokeOpacity="0.4" strokeDasharray="3 2" />
-        <line x1="60" y1="60" x2="60" y2="100" stroke="#F65D01" strokeWidth="1.5" strokeOpacity="0.4" strokeDasharray="3 2" />
+        {/* Ambient subtle warm waves */}
+        <circle cx="100" cy="85" r="75" stroke="#F65D01" strokeWidth="1" strokeOpacity="0.12" strokeDasharray="4 4" />
+        <circle cx="100" cy="85" r="55" stroke="#F65D01" strokeWidth="1" strokeOpacity="0.18" />
 
-        {/* Outer nodes */}
-        <circle cx="25" cy="35" r="9" fill="#1E212B" stroke="#363A4A" strokeWidth="1.5" />
-        <circle cx="25" cy="35" r="3.5" fill="#3D7EB8" />
-
-        <circle cx="95" cy="35" r="9" fill="#1E212B" stroke="#363A4A" strokeWidth="1.5" />
-        <circle cx="95" cy="35" r="3.5" fill="#3D7EB8" />
-
-        <circle cx="20" cy="75" r="9" fill="#1E212B" stroke="#363A4A" strokeWidth="1.5" />
-        <circle cx="20" cy="75" r="3.5" fill="#3D7EB8" />
-
-        <circle cx="100" cy="75" r="9" fill="#1E212B" stroke="#363A4A" strokeWidth="1.5" />
-        <circle cx="100" cy="75" r="3.5" fill="#3D7EB8" />
-
-        <circle cx="60" cy="100" r="8" fill="#1E212B" stroke="#363A4A" strokeWidth="1.5" />
-        <circle cx="60" cy="100" r="3" fill="#3D7EB8" />
-
-        {/* Center node glow */}
-        <circle cx="60" cy="60" r="24" fill="#F65D01" fillOpacity="0.12" />
-
-        {/* Center node */}
-        <circle cx="60" cy="60" r="18" fill="url(#agentPulse)" stroke="#FFFFFF" strokeWidth="1.8" />
-        <text
+        {/* Main dark agentic tile */}
+        <rect
           x="60"
-          y="58"
-          textAnchor="middle"
-          fill="#FFFFFF"
-          fontSize="6.5"
-          fontWeight="800"
-          fontFamily="system-ui, -apple-system, sans-serif"
-          letterSpacing="0.4"
-        >
-          AI
-        </text>
-        <text
-          x="60"
-          y="66"
-          textAnchor="middle"
-          fill="#FFFFFF"
-          fontSize="6"
-          fontWeight="800"
-          fontFamily="system-ui, -apple-system, sans-serif"
-          letterSpacing="0.4"
-        >
-          AGENTS
-        </text>
+          y="45"
+          width="80"
+          height="80"
+          rx="18"
+          fill="url(#tileGrad)"
+          stroke="#3C4152"
+          strokeWidth="1.5"
+          filter="url(#badgeShadow)"
+        />
+
+        {/* Corner rivets */}
+        <circle cx="70" cy="55" r="2" fill="#50566B" />
+        <circle cx="130" cy="55" r="2" fill="#50566B" />
+        <circle cx="70" cy="115" r="2" fill="#50566B" />
+        <circle cx="130" cy="115" r="2" fill="#50566B" />
+
+        {/* Glowing orange central robot button */}
+        <circle
+          cx="100"
+          cy="85"
+          r="23"
+          fill="url(#robotCoreGrad)"
+          filter="url(#robotGlow)"
+        />
+
+        {/* Robot face inside */}
+        {/* Antenna */}
+        <line x1="100" y1="74" x2="100" y2="71" stroke="#FFFFFF" strokeWidth="1.5" strokeLinecap="round" />
+        <circle cx="100" cy="70" r="1.5" fill="#FFFFFF" />
+        {/* Head */}
+        <rect x="91" y="75" width="18" height="15" rx="3.5" fill="#FFFFFF" />
+        {/* Ears */}
+        <rect x="89.5" y="79" width="1.5" height="4" rx="0.75" fill="#FFFFFF" />
+        <rect x="109" y="79" width="1.5" height="4" rx="0.75" fill="#FFFFFF" />
+        {/* Eyes */}
+        <circle cx="96" cy="81" r="1.5" fill="#F65D01" />
+        <circle cx="104" cy="81" r="1.5" fill="#F65D01" />
+        {/* Smile */}
+        <path d="M96 85.5 Q100 88 104 85.5" stroke="#F65D01" strokeWidth="1.2" strokeLinecap="round" fill="none" />
+
+        {/* ── Floating Badge 1: Top-Right Orange Cloud ── */}
+        <g filter="url(#badgeShadow)">
+          <circle cx="148" cy="42" r="15" fill="#F65D01" />
+          {/* Cloud icon */}
+          <path
+            d="M142 44.5 C140.5 44.5 139 43.5 139 42 C139 40.5 140.2 39.5 141.5 39.5 C141.8 38 143.2 37 145 37 C147 37 148.5 38.2 148.8 39.8 C149.2 39.6 149.6 39.5 150 39.5 C151.4 39.5 152.5 40.6 152.5 42 C152.5 43.4 151.4 44.5 150 44.5 Z"
+            fill="#FFFFFF"
+          />
+        </g>
+
+        {/* ── Floating Badge 2: Right-Side Analytics Pill ── */}
+        <g filter="url(#badgeShadow)">
+          <rect x="144" y="80" width="22" height="26" rx="8" fill="#FFFFFF" stroke="#F0ECE4" strokeWidth="1" />
+          {/* 3 orange bars */}
+          <rect x="148" y="94" width="3" height="7" rx="1.5" fill="#F65D01" />
+          <rect x="153.5" y="89" width="3" height="12" rx="1.5" fill="#F65D01" />
+          <rect x="159" y="85" width="3" height="16" rx="1.5" fill="#F65D01" />
+        </g>
+
+        {/* ── Floating Badge 3: Bottom-Left Interconnected Nodes ── */}
+        <g filter="url(#badgeShadow)">
+          <circle cx="52" cy="115" r="14" fill="#FFFFFF" stroke="#F0ECE4" strokeWidth="1" />
+          {/* 3 interconnected nodes */}
+          <circle cx="47" cy="118" r="2.5" fill="#F65D01" />
+          <circle cx="57" cy="118" r="2.5" fill="#F65D01" />
+          <circle cx="52" cy="110" r="2.5" fill="#F65D01" />
+          <line x1="47" y1="118" x2="57" y2="118" stroke="#F65D01" strokeWidth="1" />
+          <line x1="47" y1="118" x2="52" y2="110" stroke="#F65D01" strokeWidth="1" />
+          <line x1="57" y1="118" x2="52" y2="110" stroke="#F65D01" strokeWidth="1" />
+        </g>
       </svg>
     </div>
   );
@@ -276,87 +312,95 @@ export function GovernanceShieldVisual({ className = "" }: { className?: string 
       aria-hidden="true"
     >
       <svg
-        viewBox="0 0 120 120"
+        viewBox="0 0 160 160"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="w-full h-full"
+        className="w-full h-full max-h-[160px] drop-shadow-sm"
       >
         <defs>
           <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#F65D01" stopOpacity="0.25" />
-            <stop offset="100%" stopColor="#1E212B" stopOpacity="0.15" />
+            <stop offset="0%" stopColor="#FFF4ED" />
+            <stop offset="50%" stopColor="#FFE4D3" />
+            <stop offset="100%" stopColor="#FFD4B8" />
           </linearGradient>
+          <filter id="shieldShadow" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="4" stdDeviation="6" floodColor="#F65D01" floodOpacity="0.25" />
+          </filter>
         </defs>
+
+        {/* Ambient subtle glow ring */}
+        <circle cx="80" cy="80" r="68" stroke="#F65D01" strokeWidth="1" strokeOpacity="0.12" strokeDasharray="3 3" />
 
         {/* Outer shield perimeter */}
         <path
-          d="M60 18 L94 30 V62 C94 82 79 99 60 106 C41 99 26 82 26 62 V30 L60 18 Z"
+          d="M80 24 L122 40 V82 C122 108 103 130 80 138 C57 130 38 108 38 82 V40 L80 24 Z"
           fill="url(#shieldGrad)"
           stroke="#F65D01"
-          strokeWidth="1.8"
+          strokeWidth="2.2"
+          filter="url(#shieldShadow)"
         />
 
-        {/* Inner shield border */}
+        {/* Inner shield dashed line */}
         <path
-          d="M60 26 L86 36 V62 C86 77 75 91 60 97 C45 91 34 77 34 62 V36 L60 26 Z"
+          d="M80 34 L112 47 V82 C112 102 96 119 80 126 C64 119 48 102 48 82 V47 L80 34 Z"
           stroke="#F65D01"
-          strokeWidth="1"
+          strokeWidth="1.2"
           strokeOpacity="0.5"
-          strokeDasharray="3 2"
+          strokeDasharray="3 2.5"
         />
 
         {/* Center divider spine */}
-        <line x1="60" y1="28" x2="60" y2="92" stroke="#F65D01" strokeWidth="1.2" strokeOpacity="0.6" />
+        <line x1="80" y1="36" x2="80" y2="120" stroke="#F65D01" strokeWidth="1.2" strokeOpacity="0.4" />
 
         {/* Horizontal crossbar */}
-        <line x1="42" y1="58" x2="78" y2="58" stroke="#F65D01" strokeWidth="1.2" strokeOpacity="0.4" />
+        <line x1="58" y1="74" x2="102" y2="74" stroke="#F65D01" strokeWidth="1.2" strokeOpacity="0.3" />
 
         {/* Trust / Control text indicators */}
         <text
-          x="46"
-          y="48"
+          x="62"
+          y="62"
           textAnchor="middle"
           fill="#1E212B"
-          fontSize="6"
+          fontSize="7.5"
           fontWeight="800"
-          letterSpacing="0.8"
+          letterSpacing="1"
           fontFamily="system-ui, -apple-system, sans-serif"
         >
           TRUST
         </text>
         <text
-          x="74"
-          y="48"
+          x="98"
+          y="62"
           textAnchor="middle"
           fill="#1E212B"
-          fontSize="6"
+          fontSize="7.5"
           fontWeight="800"
-          letterSpacing="0.8"
+          letterSpacing="1"
           fontFamily="system-ui, -apple-system, sans-serif"
         >
           CONTROL
         </text>
 
-        {/* Center checkmark / emblem badge */}
-        <circle cx="60" cy="58" r="9" fill="#F65D01" />
+        {/* Center checkmark badge */}
+        <circle cx="80" cy="74" r="11" fill="#F65D01" />
         <path
-          d="M56 58 L59 61 L65 55"
+          d="M75 74 L78.5 77.5 L85.5 70.5"
           stroke="#FFFFFF"
-          strokeWidth="1.8"
+          strokeWidth="2.2"
           strokeLinecap="round"
           strokeLinejoin="round"
         />
 
         {/* Bottom banner: RESPONSIBLE AI */}
-        <rect x="30" y="74" width="60" height="12" rx="6" fill="#1E212B" />
+        <rect x="44" y="94" width="72" height="15" rx="7.5" fill="#1E212B" />
         <text
-          x="60"
-          y="82.5"
+          x="80"
+          y="104.5"
           textAnchor="middle"
           fill="#FFFFFF"
-          fontSize="5"
-          fontWeight="700"
-          letterSpacing="0.6"
+          fontSize="6.5"
+          fontWeight="800"
+          letterSpacing="0.8"
           fontFamily="system-ui, -apple-system, sans-serif"
         >
           RESPONSIBLE AI
@@ -367,8 +411,8 @@ export function GovernanceShieldVisual({ className = "" }: { className?: string 
 }
 
 /**
- * Visual graphic 04: Transformation Advisory Ascending Trajectory
- * Milestones: ASSESS -> DESIGN -> EXECUTE -> SCALE
+ * Visual graphic 04: Data & AI Transformation Advisory
+ * Trajectory curve with STRATEGY -> EXECUTION badge matching reference screenshot
  */
 export function TransformationCurveVisual({ className = "" }: { className?: string }) {
   return (
@@ -377,72 +421,76 @@ export function TransformationCurveVisual({ className = "" }: { className?: stri
       aria-hidden="true"
     >
       <svg
-        viewBox="0 0 320 160"
+        viewBox="0 0 220 160"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="w-full h-full"
+        className="w-full h-full max-h-[160px] drop-shadow-sm"
       >
         <defs>
-          <linearGradient id="transCurveGrad" x1="0%" y1="100%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#3D7EB8" stopOpacity="0.4" />
-            <stop offset="50%" stopColor="#3D7EB8" />
+          <linearGradient id="transCurveGradLight" x1="0%" y1="100%" x2="100%" y2="0%">
+            <stop offset="0%" stopColor="#FFA066" stopOpacity="0.4" />
+            <stop offset="50%" stopColor="#F65D01" stopOpacity="0.85" />
             <stop offset="100%" stopColor="#F65D01" />
           </linearGradient>
-          <linearGradient id="transAreaGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" stopColor="#F65D01" stopOpacity="0.18" />
-            <stop offset="100%" stopColor="#3D7EB8" stopOpacity="0.0" />
+          <linearGradient id="transAreaGradLight" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" stopColor="#F65D01" stopOpacity="0.14" />
+            <stop offset="100%" stopColor="#F65D01" stopOpacity="0.01" />
           </linearGradient>
+          <filter id="pillShadow" x="-20%" y="-20%" width="140%" height="140%">
+            <feDropShadow dx="0" dy="2" stdDeviation="4" floodColor="#000000" floodOpacity="0.08" />
+          </filter>
         </defs>
 
-        {/* Grid lines in dark theme */}
-        <line x1="30" y1="125" x2="290" y2="125" stroke="#2A2E3D" strokeWidth="0.8" strokeDasharray="3 3" />
-        <line x1="30" y1="85" x2="290" y2="85" stroke="#2A2E3D" strokeWidth="0.8" strokeDasharray="3 3" />
-        <line x1="30" y1="45" x2="290" y2="45" stroke="#2A2E3D" strokeWidth="0.8" strokeDasharray="3 3" />
+        {/* Ambient subtle horizontal grid */}
+        <line x1="20" y1="115" x2="200" y2="115" stroke="#EBE7DE" strokeWidth="1" strokeDasharray="3 3" />
+        <line x1="20" y1="80" x2="200" y2="80" stroke="#EBE7DE" strokeWidth="1" strokeDasharray="3 3" />
+        <line x1="20" y1="45" x2="200" y2="45" stroke="#EBE7DE" strokeWidth="1" strokeDasharray="3 3" />
 
         {/* Fill area beneath curve */}
         <path
-          d="M 40 120 C 100 120, 150 105, 190 70 C 230 35, 260 22, 280 18 L 280 135 L 40 135 Z"
-          fill="url(#transAreaGrad)"
+          d="M 35 115 C 80 115, 120 95, 155 60 C 175 42, 185 36, 195 32 L 195 125 L 35 125 Z"
+          fill="url(#transAreaGradLight)"
         />
 
         {/* Trajectory curve */}
         <path
-          d="M 40 120 C 100 120, 150 105, 190 70 C 230 35, 260 22, 280 18"
-          stroke="url(#transCurveGrad)"
-          strokeWidth="3.2"
+          d="M 35 115 C 80 115, 120 95, 155 60 C 175 42, 185 36, 195 32"
+          stroke="url(#transCurveGradLight)"
+          strokeWidth="2.8"
           strokeLinecap="round"
         />
 
-        {/* Arrowhead at peak */}
-        <polygon points="278,14 286,18 280,24" fill="#F65D01" />
+        {/* Milestone Node 1: Start */}
+        <circle cx="45" cy="115" r="4.5" fill="#FFFFFF" stroke="#F65D01" strokeWidth="2" />
+        <circle cx="45" cy="115" r="2" fill="#F65D01" />
 
-        {/* Stage 1: ASSESS */}
-        <circle cx="50" cy="120" r="5" fill="#1E212B" stroke="#3D7EB8" strokeWidth="2" />
-        <circle cx="50" cy="120" r="2" fill="#3D7EB8" />
-        <text x="50" y="142" textAnchor="middle" fill="#8B909A" fontSize="7.5" fontWeight="700" letterSpacing="0.8">
-          ASSESS
-        </text>
+        {/* Milestone Node 2: Mid */}
+        <circle cx="115" cy="98" r="4.5" fill="#FFFFFF" stroke="#F65D01" strokeWidth="2" />
+        <circle cx="115" cy="98" r="2" fill="#F65D01" />
 
-        {/* Stage 2: DESIGN */}
-        <circle cx="120" cy="112" r="5" fill="#1E212B" stroke="#3D7EB8" strokeWidth="2" />
-        <circle cx="120" cy="112" r="2" fill="#3D7EB8" />
-        <text x="120" y="134" textAnchor="middle" fill="#8B909A" fontSize="7.5" fontWeight="700" letterSpacing="0.8">
-          DESIGN
-        </text>
+        {/* Milestone Node 3: Growth */}
+        <circle cx="160" cy="55" r="5" fill="#F65D01" stroke="#FFFFFF" strokeWidth="2" />
 
-        {/* Stage 3: EXECUTE */}
-        <circle cx="200" cy="62" r="5" fill="#1E212B" stroke="#FF7A2E" strokeWidth="2" />
-        <circle cx="200" cy="62" r="2.5" fill="#FF7A2E" />
-        <text x="200" y="50" textAnchor="middle" fill="#FF9556" fontSize="7.5" fontWeight="700" letterSpacing="0.8">
-          EXECUTE
-        </text>
+        {/* Milestone Node 4: Target Peak */}
+        <circle cx="195" cy="32" r="6" fill="#F65D01" stroke="#FFFFFF" strokeWidth="2" />
+        <circle cx="195" cy="32" r="2.5" fill="#FFFFFF" />
 
-        {/* Stage 4: SCALE */}
-        <circle cx="270" cy="22" r="6" fill="#F65D01" stroke="#FFFFFF" strokeWidth="2" />
-        <circle cx="270" cy="22" r="2.5" fill="#FFFFFF" />
-        <text x="270" y="12" textAnchor="middle" fill="#FFFFFF" fontSize="8.5" fontWeight="800" letterSpacing="1">
-          SCALE
-        </text>
+        {/* ── Badge Pill: STRATEGY → EXECUTION ── */}
+        <g filter="url(#pillShadow)">
+          <rect x="95" y="124" width="112" height="22" rx="11" fill="#FFFFFF" stroke="#EFECE5" strokeWidth="1" />
+          <text
+            x="151"
+            y="138.5"
+            textAnchor="middle"
+            fill="#757780"
+            fontSize="7.5"
+            fontWeight="700"
+            letterSpacing="0.8"
+            fontFamily="system-ui, -apple-system, sans-serif"
+          >
+            STRATEGY  →  EXECUTION
+          </text>
+        </g>
       </svg>
     </div>
   );

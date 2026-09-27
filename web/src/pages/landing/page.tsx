@@ -10,6 +10,7 @@ import WhyNoeveka from "@/components/landing/why-noeveka";
 import { PageHead } from "@/components/seo";
 import { SEO_CONFIG } from "@/config/seo.config";
 import { getHomePage } from "@/lib/sanity";
+import TrustCompanyLogoBar from "@/components/landing/trust-company-logo-bar";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type HomePageData = Record<string, any>;
@@ -35,6 +36,7 @@ export default function LandingPage() {
         heading={page?.servicesSection?.heading}
         subtext={page?.servicesSection?.subtext}
         cardCtaText={page?.servicesSection?.cardCtaText}
+        services={page?.servicesSection?.services}
       />
       <WhoWeAre
         eyebrow={page?.aboutSection?.eyebrow}
@@ -52,6 +54,7 @@ export default function LandingPage() {
         skillsHeading={page?.aboutSection?.skillsHeading}
         skills={page?.aboutSection?.skills}
       />
+      <TrustCompanyLogoBar />
       <Testimonials
         eyebrow={page?.testimonialsSection?.eyebrow}
         heading={page?.testimonialsSection?.heading}

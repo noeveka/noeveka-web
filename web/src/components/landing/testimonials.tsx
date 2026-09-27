@@ -4,7 +4,7 @@ import { LucideIcon } from "@/components/lucide-icons";
 import { fu, fs } from "@/lib/motion";
 import { getTestimonials } from "@/lib/sanity";
 import { TESTIMONIALS_CONFIG } from "@/config/landing/testimonials.config";
-import TrustCompanyLogoBar from "./trust-company-logo-bar";
+
 
 interface Testimonial {
   _id: string;
@@ -69,7 +69,7 @@ export default function Testimonials({
   return (
     <>
       {/* ── Trust logo bar ── */}
-      <TrustCompanyLogoBar />
+
 
       {/* ── Testimonials section ── */}
       <section className="flex justify-center bg-[#fafafa]">
@@ -110,7 +110,7 @@ export default function Testimonials({
           </div>
 
           {/* Testimonial Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-7">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-7">
             {displayTestimonials.map(
               (
                 { _id, company, abbr, quote, authorName, authorRole, rating },
@@ -128,25 +128,32 @@ export default function Testimonials({
                     .toUpperCase();
 
                 const badgeIcon = getBadgeIcon(company);
+                const isLastAndOdd =
+                  displayTestimonials.length % 2 === 1 &&
+                  i === displayTestimonials.length - 1;
 
                 return (
                   <motion.div
                     key={_id}
                     {...fs(0.06 + i * 0.1)}
-                    className="flex flex-col justify-between rounded-2xl bg-white p-7 sm:p-8 transition-all duration-300 hover:-translate-y-1"
+                    className={`flex flex-col justify-between rounded-2xl bg-white p-6 sm:p-7 xl:p-8 transition-all duration-300 hover:-translate-y-1 ${
+                      isLastAndOdd
+                        ? "md:col-span-2 md:max-w-xl md:w-full md:mx-auto lg:col-span-1 lg:max-w-none"
+                        : ""
+                    }`}
                     style={{
                       border: "1px solid rgba(226, 232, 240, 0.8)",
                       boxShadow: "0 4px 20px rgba(15, 23, 42, 0.04)",
                     }}
                   >
                     {/* Top Row: Quote Badge & Category Tag */}
-                    <div className="flex items-center justify-between mb-6">
+                    <div className="flex items-center justify-between gap-3 mb-5 sm:mb-6">
                       <div
-                        className="flex h-10 w-10 items-center justify-center rounded-xl"
+                        className="flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-xl"
                         style={{ background: "#fff4ed" }}
                       >
                         <svg
-                          className="h-4 w-4"
+                          className="h-3.5 w-3.5 sm:h-4 sm:w-4"
                           viewBox="0 0 24 24"
                           fill="var(--color-brand)"
                           style={{ color: "var(--color-brand)" }}
@@ -156,12 +163,12 @@ export default function Testimonials({
                       </div>
 
                       <div
-                        className="inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[11.5px] font-semibold text-slate-700"
+                        className="inline-flex items-center gap-1.5 rounded-full px-2.5 sm:px-3 py-1 text-[11px] sm:text-[11.5px] font-semibold text-slate-700 shrink-0"
                         style={{ background: "#fff4ed" }}
                       >
                         <LucideIcon
                           name={badgeIcon}
-                          className="h-3.5 w-3.5"
+                          className="h-3.5 w-3.5 shrink-0"
                           style={{ color: "var(--color-brand)" }}
                         />
                         <span>{company}</span>
@@ -169,20 +176,20 @@ export default function Testimonials({
                     </div>
 
                     {/* Middle: Testimonial Quote */}
-                    <p className="flex-1 text-[14px] sm:text-[14.5px] leading-[1.68] text-slate-600 font-normal mb-8">
+                    <p className="flex-1 text-[13.5px] sm:text-[14px] lg:text-[14.5px] leading-[1.65] text-slate-600 font-normal mb-6 sm:mb-8">
                       &ldquo;{cleanedQuote}&rdquo;
                     </p>
 
                     {/* Bottom Row: Author details & Stars */}
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-3">
+                    <div className="flex flex-wrap sm:flex-nowrap items-center justify-between gap-3 pt-4 sm:pt-5 border-t border-slate-100/80">
+                      <div className="flex items-center gap-2.5 sm:gap-3 min-w-0 flex-1">
                         <div
-                          className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-[11.5px] font-bold text-white tracking-wide"
+                          className="flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-full text-[11px] sm:text-[11.5px] font-bold text-white tracking-wide"
                           style={{ background: "#0f172a" }}
                         >
                           {initials}
                         </div>
-                        <div className="min-w-0">
+                        <div className="min-w-0 flex-1">
                           <p className="text-[13.5px] sm:text-[14px] font-bold leading-tight text-slate-900">
                             {authorName}
                           </p>
@@ -192,17 +199,17 @@ export default function Testimonials({
                         </div>
                       </div>
 
-                      <div className="flex items-center gap-1 shrink-0 ml-3">
+                      <div className="flex items-center gap-0.5 sm:gap-1 shrink-0">
                         {Array.from({ length: 5 }).map((_, starIdx) => (
                           <LucideIcon
                             key={starIdx}
                             name="star"
-                            className="h-3.5 w-3.5 fill-current"
+                            className="h-3 w-3 sm:h-3.5 sm:w-3.5 fill-current"
                             style={{ color: "var(--color-brand)" }}
                           />
                         ))}
                         <span
-                          className="ml-1 text-[12.5px] font-bold"
+                          className="ml-1 text-[11.5px] sm:text-[12.5px] font-bold"
                           style={{ color: "var(--color-brand)" }}
                         >
                           {(rating || 5).toFixed(1)}

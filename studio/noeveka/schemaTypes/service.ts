@@ -22,7 +22,7 @@ export const service = defineType({
       name: 'icon',
       title: 'Icon Name',
       type: 'string',
-      description: 'Lucide icon name (e.g. "BarChart3", "BookOpen", "Lightbulb")',
+      description: 'Lucide icon name (e.g. "layers", "bot", "shield-check", "trending-up", "bar-chart-3")',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -42,10 +42,23 @@ export const service = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: 'ctaText',
+      title: 'CTA Text',
+      type: 'string',
+      description: 'Card CTA button label (defaults to "Learn More")',
+      initialValue: 'Learn More',
+    }),
+    defineField({
+      name: 'ctaLink',
+      title: 'CTA Link',
+      type: 'string',
+      description: 'URL or section anchor (e.g. "/services#data-ai-architecture")',
+    }),
+    defineField({
       name: 'featured',
       title: 'Featured Card',
       type: 'boolean',
-      description: 'Adds extra top padding and a decorative circle to this card',
+      description: 'Adds extra highlight styling / accent',
       initialValue: false,
     }),
     defineField({

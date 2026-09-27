@@ -24,20 +24,19 @@ export const FOOTER_CONFIG = {
 
   companyColumnHeading: "Company",
   companyLinks: [
-    { label: "About Us", href: "#" },
-    { label: "Our Approach", href: "#" },
-    { label: "Workshops", href: "#" },
-    { label: "Bootcamps", href: "#" },
-    { label: "Latest Blog", href: "#" },
+    { label: "Home", href: "/" },
+    { label: "About", href: "/about" },
+    { label: "Services", href: "/services" },
+    { label: "Resources", href: "/resources" },
+    { label: "Contact", href: "/contact" },
   ],
 
   servicesColumnHeading: "Services",
   servicesLinks: [
-    { label: "Fabric Architecture", href: "#" },
-    { label: "Databricks & Lakehouse", href: "#" },
-    { label: "AI & GenAI Advisory", href: "#" },
-    { label: "FinOps & Cost Audit", href: "#" },
-    { label: "Corporate Training", href: "#" },
+    { label: "Data & AI Architecture", href: "#" },
+    { label: "AI & Agentic Systems", href: "#" },
+    { label: "AI Governance & Assurance", href: "#" },
+    { label: "Transformation Advisory", href: "#" },
   ],
 
   contactHeading: "Contact",
@@ -45,10 +44,11 @@ export const FOOTER_CONFIG = {
   contactPhone: "+91 98765 43210",
   contactAddress: "India · Serving Global Enterprise Teams",
 
-  newsletterHeading: "Sign up to our newsletter",
+  newsletterTag: "STAY UPDATED",
+  newsletterHeading: "Join our newsletter",
   newsletterSubtext:
-    "Subscribe for architecture insights, free resources & updates.",
-  newsletterPlaceholder: "Enter Your E-Mail",
+    "Get the latest insights on data, AI architecture, resources and product updates — straight to your inbox.",
+  newsletterPlaceholder: "hello@noeveka.com",
 
   copyrightText: "© {year} Noeveka Data & AI Solutions. All rights reserved.",
 

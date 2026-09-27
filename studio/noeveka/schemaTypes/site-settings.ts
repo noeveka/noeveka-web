@@ -157,22 +157,30 @@ export const siteSettings = defineType({
 
     // Newsletter strip
     defineField({
+      name: 'newsletterTag',
+      title: 'Newsletter Strip Tag / Eyebrow',
+      type: 'string',
+      initialValue: 'STAY UPDATED',
+    }),
+    defineField({
       name: 'newsletterHeading',
       title: 'Newsletter Strip Heading',
       type: 'string',
-      initialValue: 'Sign up to our newsletter',
+      initialValue: 'Join our newsletter',
     }),
     defineField({
       name: 'newsletterSubtext',
       title: 'Newsletter Strip Subtext',
       type: 'text',
       rows: 2,
+      initialValue:
+        'Get the latest insights on data, AI architecture, resources and product updates — straight to your inbox.',
     }),
     defineField({
       name: 'newsletterPlaceholder',
       title: 'Newsletter Input Placeholder',
       type: 'string',
-      initialValue: 'Enter Your E-Mail',
+      initialValue: 'hello@noeveka.com',
     }),
 
     // Bottom bar

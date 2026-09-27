@@ -83,8 +83,6 @@ export default function ServicesPage() {
           headingLine2={data?.hero?.headingLine2 ?? SERVICES_CONFIG.hero.headingLine2}
           headingHighlight={data?.hero?.headingHighlight ?? SERVICES_CONFIG.hero.headingHighlight}
           subtext={data?.hero?.subtext ?? SERVICES_CONFIG.hero.subtext}
-          ctaPrimaryText={data?.hero?.ctaPrimaryText ?? SERVICES_CONFIG.hero.ctaPrimaryText}
-          ctaPrimaryLink={data?.hero?.ctaPrimaryLink ?? SERVICES_CONFIG.hero.ctaPrimaryLink}
           focusAreas={data?.focusAreas ?? SERVICES_CONFIG.focusAreas}
         />
         <TrustCompanyLogoBar />

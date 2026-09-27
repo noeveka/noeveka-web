@@ -76,7 +76,7 @@ export default function AboutNarrative({
               {top.headingLine2}
               <br />
               {top.headingLine3}{" "}
-              <span className="text-[#1e212b] font-black underline decoration-[#f65d01]/30 decoration-4 underline-offset-4">
+              <span className="">
                 {top.headingHighlight}
               </span>
             </h2>
@@ -108,7 +108,7 @@ export default function AboutNarrative({
           transition={{ duration: 0.65 }}
           className="relative my-16 overflow-hidden rounded-[24px] sm:rounded-[32px] border border-neutral-200/90 shadow-[0_24px_50px_-12px_rgba(0,0,0,0.12)] lg:my-24"
         >
-          <div className="relative aspect-[16/9] w-full overflow-hidden bg-neutral-100 sm:aspect-[21/9] lg:aspect-[2.4/1]">
+          <div className="relative aspect-video w-full overflow-hidden bg-neutral-100 sm:aspect-21/9 lg:aspect-[2.4/1]">
             <img
               src={imageSrc}
               alt={imageAlt}

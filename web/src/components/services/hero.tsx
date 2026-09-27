@@ -1,5 +1,6 @@
 import { Link } from "react-router";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { LucideIcon, lucideIconRegistry } from "@/components/lucide-icons";
 import {
   ArchitectureStackVisual,
@@ -16,267 +17,329 @@ interface ServicesHeroProps {
   headingLine2?: string;
   headingHighlight?: string;
   subtext?: string;
-  ctaPrimaryText?: string;
-  ctaPrimaryLink?: string;
   focusAreas?: readonly ServiceFocusArea[];
 }
 
-const styles = {
-  section: "relative w-full overflow-hidden bg-[#faf9f7] pt-14 pb-20 lg:pt-20 lg:pb-28 selection:bg-[#f65d01]/20",
-  container: "lp-container lp-px relative z-10 mx-auto",
-  
-  // Header styles
-  headerWrapper: "mx-auto max-w-3xl text-center mb-12 lg:mb-16",
-  kickerBadge: "inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-xs font-bold tracking-wider uppercase bg-[#1e212b]/5 text-[#1e212b] border border-neutral-300/60 mb-5 shadow-xs",
-  kickerDot: "h-2 w-2 rounded-full bg-[#f65d01] animate-pulse",
-  headline: "text-3xl sm:text-4xl md:text-5xl lg:text-[54px] font-extrabold tracking-tight text-[#1e212b] leading-[1.08] mb-4 sm:mb-5",
-  headlineHighlight: "text-[#f65d01] inline-block",
-  subtext: "text-base sm:text-lg text-neutral-600 max-w-2xl mx-auto leading-relaxed mb-7 sm:mb-8 font-normal",
-  
-  // CTA styles
-  ctaContainer: "flex items-center justify-center gap-4",
-  primaryCta: "group inline-flex items-center gap-3 rounded-full bg-[#1e212b] pl-6 pr-2.5 py-2.5 text-sm sm:text-base font-semibold text-white shadow-md transition-all duration-300 hover:bg-[#f65d01] hover:shadow-lg hover:-translate-y-0.5",
-  ctaArrowBubble: "flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-white/15 text-white transition-transform duration-300 group-hover:scale-110 group-hover:bg-white group-hover:text-[#f65d01]",
-  
-  // Cards Grid layout (3-column asymmetric matching reference design)
-  cardsGrid: "grid grid-cols-1 lg:grid-cols-12 gap-5 lg:gap-6 items-stretch",
-  leftCol: "lg:col-span-4 flex flex-col",
-  centerCol: "lg:col-span-4 flex flex-col justify-between gap-5 lg:gap-6",
-  rightCol: "lg:col-span-4 flex flex-col",
-
-  // Left card (01 Architecture)
-  cardLeft: "group relative flex flex-col justify-between rounded-[28px] bg-white p-5 sm:p-6 border border-neutral-200/90 shadow-[0_12px_32px_-4px_rgba(0,0,0,0.06)] hover:shadow-[0_20px_48px_-6px_rgba(246,93,1,0.14)] hover:border-[#f65d01]/30 transition-all duration-300 hover:-translate-y-1 h-full min-h-[460px]",
-  cardLeftVisualBox: "relative w-full h-[200px] sm:h-[210px] rounded-2xl overflow-hidden bg-gradient-to-b from-[#fff6ed] via-[#ffedd9] to-[#fffaf5] border border-orange-100 flex items-center justify-center p-3 mb-6",
-  actionCircleBtn: "absolute bottom-3 right-3 flex h-10 w-10 items-center justify-center rounded-full bg-[#f65d01] text-white shadow-[0_4px_14px_rgba(246,93,1,0.4)] transition-all duration-300 group-hover:scale-110 group-hover:bg-[#1e212b]",
-  numberBadge: "inline-block text-xs font-black tracking-widest text-[#f65d01] bg-[#f65d01]/10 px-2 py-0.5 rounded-md mb-2 w-fit",
-  cardTitle: "text-xl sm:text-[22px] font-bold text-[#1e212b] tracking-tight leading-snug mb-2 group-hover:text-[#f65d01] transition-colors",
-  cardDesc: "text-sm text-neutral-600 leading-relaxed mb-4",
-  bulletsList: "flex flex-wrap gap-1.5 pt-2 border-t border-neutral-100",
-  pillTag: "text-[11px] font-medium text-neutral-600 bg-neutral-100 px-2.5 py-1 rounded-full",
-
-  // Center horizontal cards (02 & 03)
-  cardCenterItem: "group relative flex items-center gap-4 sm:gap-5 rounded-[24px] bg-white p-5 border border-neutral-200/90 shadow-[0_12px_32px_-4px_rgba(0,0,0,0.06)] hover:shadow-[0_20px_48px_-6px_rgba(246,93,1,0.12)] hover:border-[#f65d01]/30 transition-all duration-300 hover:-translate-y-1 flex-1",
-  centerVisualSquare: "relative h-20 w-20 sm:h-22 sm:w-22 shrink-0 rounded-2xl bg-gradient-to-br from-[#1e212b] to-[#2a2e3d] flex items-center justify-center overflow-hidden border border-[#363a4a] shadow-inner",
-  centerVisualCircle: "relative h-20 w-20 sm:h-22 sm:w-22 shrink-0 rounded-full bg-gradient-to-br from-[#fff0e6] to-[#ffd4b3] flex items-center justify-center overflow-hidden border border-[#f65d01]/30 shadow-inner",
-  centerActionBadge: "absolute -bottom-1 -right-1 flex h-7 w-7 items-center justify-center rounded-full bg-[#f65d01] text-white shadow-sm transition-transform duration-300 group-hover:scale-110 group-hover:bg-[#1e212b]",
-  centerCardTitle: "text-base sm:text-lg font-bold text-[#1e212b] leading-tight mb-1.5 group-hover:text-[#f65d01] transition-colors",
-  centerCardDesc: "text-xs sm:text-[13px] text-neutral-600 leading-normal line-clamp-2",
-
-  // Right card (04 Transformation Advisory)
-  cardRight: "group relative flex flex-col justify-between rounded-[28px] bg-white p-5 sm:p-6 border border-neutral-200/90 shadow-[0_12px_32px_-4px_rgba(0,0,0,0.06)] hover:shadow-[0_20px_48px_-6px_rgba(246,93,1,0.14)] hover:border-[#f65d01]/30 transition-all duration-300 hover:-translate-y-1 h-full min-h-[460px]",
-  cardRightVisualBox: "relative w-full h-[200px] sm:h-[210px] rounded-2xl overflow-hidden bg-gradient-to-br from-[#1e212b] via-[#161820] to-[#0e0f15] border border-neutral-800 flex items-center justify-center p-3 mt-6 shadow-inner",
+const VisualMap: Record<ServiceFocusArea["visualType"], React.FC<{ className?: string }>> = {
+  stack: ArchitectureStackVisual,
+  agents: AgenticNetworkVisual,
+  governance: GovernanceShieldVisual,
+  transformation: TransformationCurveVisual,
 };
+
+const AUTO_ADVANCE_MS = 5000;
 
 export default function ServicesHero({
   headingLine1 = SERVICES_CONFIG.hero.headingLine1,
   headingLine2 = SERVICES_CONFIG.hero.headingLine2,
   headingHighlight = SERVICES_CONFIG.hero.headingHighlight,
   subtext = SERVICES_CONFIG.hero.subtext,
-  ctaPrimaryText = SERVICES_CONFIG.hero.ctaPrimaryText,
-  ctaPrimaryLink = SERVICES_CONFIG.hero.ctaPrimaryLink,
   focusAreas = SERVICES_CONFIG.focusAreas,
 }: ServicesHeroProps) {
-  const activeFocusAreas = (focusAreas && focusAreas.length >= 4) ? focusAreas : SERVICES_CONFIG.focusAreas;
-  const card1 = activeFocusAreas[0];
-  const card2 = activeFocusAreas[1];
-  const card3 = activeFocusAreas[2];
-  const card4 = activeFocusAreas[3];
+  const areas = focusAreas && focusAreas.length >= 4 ? focusAreas : SERVICES_CONFIG.focusAreas;
+  const total = areas.length;
+
+  // Extended track for desktop/tablet continuous sliding
+  const trackItems = [...areas, ...areas, ...areas];
+  const startIndex = total; // Index 4
+
+  const [currentIndex, setCurrentIndex] = useState(startIndex);
+  const [isPaused, setIsPaused] = useState(false);
+  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  // Active slide index (0 to 3) for dots and mobile
+  const activeDot = ((currentIndex % total) + total) % total;
+  const activeCard = areas[activeDot];
+  const ActiveVisual = VisualMap[activeCard.visualType] ?? ArchitectureStackVisual;
+
+  const next = useCallback(() => {
+    setCurrentIndex((prev) => {
+      const nextIdx = prev + 1;
+      if (nextIdx >= trackItems.length - 2) {
+        return startIndex + (nextIdx % total);
+      }
+      return nextIdx;
+    });
+  }, [trackItems.length, startIndex, total]);
+
+  const prev = useCallback(() => {
+    setCurrentIndex((prev) => {
+      const prevIdx = prev - 1;
+      if (prevIdx < 2) {
+        return startIndex + (prevIdx % total);
+      }
+      return prevIdx;
+    });
+  }, [startIndex, total]);
+
+  const goToDot = useCallback(
+    (dotIndex: number) => {
+      const currentDot = ((currentIndex % total) + total) % total;
+      const diff = dotIndex - currentDot;
+      setCurrentIndex((curr) => curr + diff);
+    },
+    [currentIndex, total]
+  );
+
+  // Auto-advance
+  useEffect(() => {
+    if (isPaused) return;
+    timerRef.current = setTimeout(next, AUTO_ADVANCE_MS);
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
+  }, [currentIndex, isPaused, next]);
 
   return (
-    <section className={styles.section} id="services-hero">
-      {/* ── Ambient Background Decorations ── */}
+    <section
+      className="relative w-full overflow-hidden bg-white pt-10 pb-16 sm:pt-14 sm:pb-20 lg:pt-16 lg:pb-24 selection:bg-[#f65d01]/20"
+      id="services-hero"
+    >
+      {/* Subtle radial ambient background glow */}
       <div
-        className="pointer-events-none absolute inset-0 bg-white"
-        // style={{
-        //   background:
-        //     "radial-gradient(ellipse 70% 50% at 50% 25%, rgba(246,93,1,0.06) 0%, rgba(250,249,247,0) 80%)",
-        // }}
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(ellipse 70% 45% at 50% 0%, rgba(246,93,1,0.06) 0%, transparent 70%)",
+        }}
       />
 
-      <div className={styles.container}>
-        {/* ── Top Centered Header ── */}
-        <div className={styles.headerWrapper}>
-          {/* Main Title */}
-          <motion.h1
-            initial={{ opacity: 0, y: 18 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.08 }}
-            className={styles.headline}
-          >
-            {headingLine1}
-            <br />
-            <span className={styles.headlineHighlight}>{headingHighlight ?? headingLine2}</span>
-          </motion.h1>
+      <div className="lp-container lp-px relative z-10 mx-auto">
+        {/* ── Section Header with Centered Title & Top-Right Navigation Arrows ── */}
+        <div className="relative mb-8 sm:mb-12 lg:mb-14">
+          {/* Centered Heading & Subtext */}
+          <div className="text-center max-w-2xl mx-auto px-2 sm:px-4">
+            <motion.h1
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.05 }}
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-[52px] font-extrabold tracking-tight text-[#1e212b] leading-[1.1] mb-3"
+            >
+              {headingLine1}
+              <br />
+              <span className="text-[#f65d01]">{headingHighlight ?? headingLine2}</span>
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.15 }}
+              className="text-sm sm:text-base md:text-lg text-neutral-500 max-w-xl mx-auto leading-relaxed"
+            >
+              {subtext}
+            </motion.p>
+          </div>
 
-          {/* Subtext description */}
-          <motion.p
-            initial={{ opacity: 0, y: 14 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.16 }}
-            className={styles.subtext}
-          >
-            {subtext}
-          </motion.p>
-
-          {/* Centered CTA Pill Button */}
+          {/* Top-Right Arrow Buttons */}
           <motion.div
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.45, delay: 0.22 }}
-            className={styles.ctaContainer}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.4, delay: 0.2 }}
+            className="mt-6 flex justify-center sm:absolute sm:right-0 sm:top-2 sm:mt-0 items-center gap-2.5 z-30"
           >
-            <a href={ctaPrimaryLink} className={styles.primaryCta}>
-              <span>{ctaPrimaryText}</span>
-              <span className={styles.ctaArrowBubble}>
-                <LucideIcon
-                  name={lucideIconRegistry.ArrowRight}
-                  className="h-4 w-4"
-                />
-              </span>
-            </a>
+            <button
+              onClick={prev}
+              aria-label="Previous service"
+              className="flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full border border-neutral-200 bg-white text-[#1e212b] shadow-sm transition-all duration-200 hover:border-[#f65d01] hover:text-[#f65d01] hover:shadow-md active:scale-95 cursor-pointer"
+            >
+              <LucideIcon name={lucideIconRegistry.ArrowLeft} className="h-4 w-4 sm:h-4.5 sm:w-4.5" />
+            </button>
+            <button
+              onClick={next}
+              aria-label="Next service"
+              className="flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full border border-neutral-200 bg-white text-[#1e212b] shadow-sm transition-all duration-200 hover:border-[#f65d01] hover:text-[#f65d01] hover:shadow-md active:scale-95 cursor-pointer"
+            >
+              <LucideIcon name={lucideIconRegistry.ArrowRight} className="h-4 w-4 sm:h-4.5 sm:w-4.5" />
+            </button>
           </motion.div>
         </div>
 
-        {/* ── 4-Card Hero Grid (Staggered 3-Column Asymmetric Formation) ── */}
-        <div className={styles.cardsGrid} id="services-cards">
-          {/* ── Column 1 (Left Card: 01 Enterprise Data & AI Architecture) ── */}
-          {card1 && (
+        {/* ── Mobile View: Smooth Animated Single Card (< sm) ── */}
+        <div
+          className="block sm:hidden w-full max-w-[380px] mx-auto px-1"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
+          <AnimatePresence mode="wait">
             <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.15 }}
-              className={styles.leftCol}
+              key={activeCard.id}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: -20 }}
+              transition={{ duration: 0.3 }}
+              className="w-full rounded-[28px] border border-orange-200/90 shadow-[0_16px_40px_rgba(246,93,1,0.08)] bg-gradient-to-b from-white via-white to-[#fffaf6] p-6 flex flex-col justify-between min-h-[440px]"
             >
-              <Link to={card1.ctaLink} className={styles.cardLeft}>
-                {/* Visual Banner on TOP */}
-                <div className={styles.cardLeftVisualBox}>
-                  <ArchitectureStackVisual />
-                  <div className={styles.actionCircleBtn} aria-label={card1.title}>
-                    <LucideIcon
-                      name={lucideIconRegistry.ArrowRight}
-                      className="h-4 w-4"
-                    />
-                  </div>
+              <div>
+                <div className="flex items-center gap-2 mb-2.5">
+                  <span className="text-xs font-black tracking-widest text-[#f65d01]">
+                    {activeCard.number} / 0{total}
+                  </span>
+                  {activeCard.badgeText && (
+                    <span className="text-[11px] font-semibold uppercase tracking-wider text-neutral-400">
+                      • {activeCard.badgeText}
+                    </span>
+                  )}
                 </div>
+                <h3 className="text-xl font-extrabold tracking-tight text-[#1e212b] leading-[1.2] mb-2.5">
+                  {activeCard.title}
+                </h3>
+                <p className="text-xs text-neutral-500 leading-relaxed mb-4">
+                  {activeCard.shortDescription}
+                </p>
+              </div>
 
-                {/* Text on BOTTOM */}
-                <div>
-                  <span className={styles.numberBadge}>{card1.number}</span>
-                  <h3 className={styles.cardTitle}>{card1.title}</h3>
-                  <p className={styles.cardDesc}>{card1.shortDescription}</p>
-
-                  <div className={styles.bulletsList}>
-                    {card1.bullets.slice(0, 3).map((bullet, idx) => (
-                      <span key={idx} className={styles.pillTag}>
-                        {bullet}
-                      </span>
-                    ))}
-                  </div>
+              {/* Visual in center */}
+              <div className="relative flex items-center justify-center py-4 my-1">
+                <div
+                  className="pointer-events-none absolute w-36 h-36 rounded-full"
+                  style={{
+                    background: "radial-gradient(circle, rgba(246,93,1,0.12) 0%, transparent 70%)",
+                  }}
+                />
+                <div className="relative z-10 w-full max-w-[210px] flex items-center justify-center">
+                  <ActiveVisual className="w-full h-auto max-h-[140px]" />
                 </div>
-              </Link>
+              </div>
+
+              {/* CTA Button */}
+              <div className="pt-2">
+                <Link
+                  to={activeCard.ctaLink}
+                  className="group inline-flex items-center gap-2 rounded-full border border-orange-300 bg-white px-4 py-2 text-xs font-semibold text-[#1e212b] shadow-xs transition-all duration-200 hover:border-[#f65d01] hover:bg-[#f65d01] hover:text-white"
+                >
+                  <span>{activeCard.ctaText ?? "Learn more"}</span>
+                  <LucideIcon
+                    name={lucideIconRegistry.ArrowRight}
+                    className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5"
+                  />
+                </Link>
+              </div>
             </motion.div>
-          )}
+          </AnimatePresence>
+        </div>
 
-          {/* ── Column 2 (Center Column: Two Stacked Horizontal Cards) ── */}
-          <div className={styles.centerCol}>
-            {/* Card 02: Enterprise AI & Agentic Systems */}
-            {card2 && (
-              <motion.div
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.55, delay: 0.22 }}
-                className="flex-1 flex"
-              >
-                <Link to={card2.ctaLink} className={styles.cardCenterItem}>
-                  {/* Left Visual container */}
-                  <div className={styles.centerVisualSquare}>
-                    <AgenticNetworkVisual />
-                    <div className={styles.centerActionBadge}>
-                      <LucideIcon
-                        name={lucideIconRegistry.ArrowRight}
-                        className="h-3.5 w-3.5"
+        {/* ── Tablet & Desktop View: 3-Card Continuous Sliding Track (>= sm) ── */}
+        <div
+          className="hidden sm:block relative w-full h-[370px] md:h-[380px] overflow-visible"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
+          {/* Inner motion track */}
+          <motion.div
+            animate={{
+              x: -currentIndex * 564, // 540px card + 24px gap
+            }}
+            transition={{
+              type: "spring",
+              stiffness: 240,
+              damping: 26,
+              mass: 0.85,
+            }}
+            style={{
+              left: "50%",
+              marginLeft: -270, // -540 / 2
+              gap: "24px",
+            }}
+            className="flex items-center absolute top-0 h-full"
+          >
+            {trackItems.map((card, idx) => {
+              const isCenter = idx === currentIndex;
+              const isAdjacent = Math.abs(idx - currentIndex) === 1;
+              const Visual = VisualMap[card.visualType] ?? ArchitectureStackVisual;
+
+              return (
+                <div
+                  key={`${card.id}-${idx}`}
+                  onClick={() => {
+                    if (idx !== currentIndex) {
+                      setCurrentIndex(idx);
+                    }
+                  }}
+                  style={{ width: "540px" }}
+                  className={`shrink-0 h-full rounded-[32px] overflow-hidden transition-all duration-300 ${
+                    isCenter
+                      ? "border border-orange-200/90 shadow-[0_20px_50px_rgba(246,93,1,0.08)] bg-gradient-to-b from-white via-white to-[#fffaf6] scale-100 z-20 opacity-100 cursor-default"
+                      : isAdjacent
+                      ? "border border-neutral-200/80 shadow-[0_8px_24px_rgba(0,0,0,0.04)] bg-white scale-[0.93] z-10 opacity-55 hover:opacity-80 cursor-pointer"
+                      : "opacity-0 scale-[0.85] pointer-events-none"
+                  }`}
+                >
+                  <div className="grid grid-cols-[1.15fr_1fr] h-full">
+                    {/* Left Column: Content */}
+                    <div className="p-7 md:p-8 flex flex-col justify-between z-10">
+                      <div>
+                        {/* Number & Badge */}
+                        <div className="flex items-center gap-2 mb-2.5">
+                          <span className="text-xs sm:text-sm font-black tracking-widest text-[#f65d01]">
+                            {card.number} / 0{total}
+                          </span>
+                          {card.badgeText && (
+                            <span className="text-[11px] font-semibold uppercase tracking-wider text-neutral-400">
+                              • {card.badgeText}
+                            </span>
+                          )}
+                        </div>
+
+                        {/* Title */}
+                        <h3 className="text-xl sm:text-2xl font-extrabold tracking-tight text-[#1e212b] leading-[1.18] mb-2 sm:mb-3">
+                          {card.title}
+                        </h3>
+
+                        {/* Description */}
+                        <p className="text-xs sm:text-sm text-neutral-500 leading-relaxed mb-4 line-clamp-3">
+                          {card.shortDescription}
+                        </p>
+                      </div>
+
+                      {/* CTA Button */}
+                      <div>
+                        <Link
+                          to={card.ctaLink}
+                          className="group inline-flex items-center gap-2 rounded-full border border-orange-300 bg-white/80 px-4 py-1.5 sm:px-4.5 sm:py-2 text-xs sm:text-sm font-semibold text-[#1e212b] shadow-xs transition-all duration-200 hover:border-[#f65d01] hover:bg-[#f65d01] hover:text-white hover:shadow-[0_4px_14px_rgba(246,93,1,0.25)]"
+                        >
+                          <span>{card.ctaText ?? "Learn more"}</span>
+                          <LucideIcon
+                            name={lucideIconRegistry.ArrowRight}
+                            className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5"
+                          />
+                        </Link>
+                      </div>
+                    </div>
+
+                    {/* Right Column: Visual Graphic */}
+                    <div className="relative flex items-center justify-center p-4 sm:p-5 overflow-hidden bg-gradient-to-br from-orange-50/25 via-transparent to-transparent">
+                      {/* Subtle ambient warm glow */}
+                      <div
+                        className="pointer-events-none absolute w-44 h-44 rounded-full"
+                        style={{
+                          background:
+                            "radial-gradient(circle, rgba(246,93,1,0.10) 0%, transparent 70%)",
+                        }}
                       />
+                      <div className="relative z-10 w-full max-w-[240px] flex items-center justify-center">
+                        <Visual className="w-full h-auto max-h-[165px]" />
+                      </div>
                     </div>
                   </div>
-
-                  {/* Right Text */}
-                  <div className="flex-1">
-                    <span className={styles.numberBadge}>{card2.number}</span>
-                    <h3 className={styles.centerCardTitle}>{card2.title}</h3>
-                    <p className={styles.centerCardDesc}>{card2.shortDescription}</p>
-                  </div>
-                </Link>
-              </motion.div>
-            )}
-
-            {/* Card 03: AI Governance & Architecture Assurance */}
-            {card3 && (
-              <motion.div
-                initial={{ opacity: 0, y: 24 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.55, delay: 0.28 }}
-                className="flex-1 flex"
-              >
-                <Link to={card3.ctaLink} className={styles.cardCenterItem}>
-                  {/* Left Visual container */}
-                  <div className={styles.centerVisualCircle}>
-                    <GovernanceShieldVisual />
-                    <div className={styles.centerActionBadge}>
-                      <LucideIcon
-                        name={lucideIconRegistry.ArrowRight}
-                        className="h-3.5 w-3.5"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Right Text */}
-                  <div className="flex-1">
-                    <span className={styles.numberBadge}>{card3.number}</span>
-                    <h3 className={styles.centerCardTitle}>{card3.title}</h3>
-                    <p className={styles.centerCardDesc}>{card3.shortDescription}</p>
-                  </div>
-                </Link>
-              </motion.div>
-            )}
-          </div>
-
-          {/* ── Column 3 (Right Card: 04 Transformation Advisory) ── */}
-          {card4 && (
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.35 }}
-              className={styles.rightCol}
-            >
-              <Link to={card4.ctaLink} className={styles.cardRight}>
-                {/* Text on TOP */}
-                <div>
-                  <span className={styles.numberBadge}>{card4.number}</span>
-                  <h3 className={styles.cardTitle}>{card4.title}</h3>
-                  <p className={styles.cardDesc}>{card4.shortDescription}</p>
-
-                  <div className={styles.bulletsList}>
-                    {card4.bullets.slice(0, 3).map((bullet, idx) => (
-                      <span key={idx} className={styles.pillTag}>
-                        {bullet}
-                      </span>
-                    ))}
-                  </div>
                 </div>
+              );
+            })}
+          </motion.div>
+        </div>
 
-                {/* Visual Banner on BOTTOM */}
-                <div className={styles.cardRightVisualBox}>
-                  <TransformationCurveVisual />
-                  <div className={styles.actionCircleBtn} aria-label={card4.title}>
-                    <LucideIcon
-                      name={lucideIconRegistry.ArrowRight}
-                      className="h-4 w-4"
-                    />
-                  </div>
-                </div>
-              </Link>
-            </motion.div>
-          )}
+        {/* ── Bottom Pagination Indicators ── */}
+        <div className="mt-8 sm:mt-10 flex items-center justify-center gap-2.5">
+          {areas.map((_, i) => (
+            <button
+              key={i}
+              onClick={() => goToDot(i)}
+              aria-label={`Go to slide ${i + 1}`}
+              className={`rounded-full transition-all duration-300 cursor-pointer ${
+                i === activeDot
+                  ? "w-7 h-2 bg-[#f65d01]"
+                  : "w-2 h-2 bg-neutral-300 hover:bg-neutral-400"
+              }`}
+            />
+          ))}
         </div>
       </div>
     </section>
