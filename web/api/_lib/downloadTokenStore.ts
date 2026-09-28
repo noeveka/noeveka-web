@@ -45,10 +45,10 @@ function base64urlEncode(data: Uint8Array): string {
     .replace(/=+$/, "");
 }
 
-function base64urlDecode(str: string): Uint8Array {
+function base64urlDecode(str: string): Uint8Array<ArrayBuffer> {
   const padded = str.replace(/-/g, "+").replace(/_/g, "/");
   const bin = atob(padded);
-  return Uint8Array.from(bin, (c) => c.charCodeAt(0));
+  return Uint8Array.from(bin, (c) => c.charCodeAt(0)) as Uint8Array<ArrayBuffer>;
 }
 
 // ─── Public API ───────────────────────────────────────────────────────────────
