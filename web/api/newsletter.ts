@@ -1,5 +1,5 @@
 import type { IncomingMessage, ServerResponse } from "node:http";
-import { handleResourceDownloadSubmission, type ResourceDownloadRequestBody } from "./_lib/resourceDownloadHandler.js";
+import { handleNewsletterSubscription, type NewsletterRequestBody } from "./_lib/newsletterHandler.js";
 
 export const config = {
   runtime: "nodejs",
@@ -19,16 +19,14 @@ export default async function handler(req: ApiRequest, res: ApiResponse) {
     return res.status(405).json({ error: "Method not allowed" });
   }
 
-  const body = (typeof req.body === "string" ? JSON.parse(req.body) : req.body) as ResourceDownloadRequestBody;
+  const body = (typeof req.body === "string" ? JSON.parse(req.body) : req.body) as NewsletterRequestBody;
 
-  const result = await handleResourceDownloadSubmission(body, {
+  const result = await handleNewsletterSubscription(body, {
     RESEND_API_KEY: process.env.RESEND_API_KEY,
-    CONTACT_INBOX_EMAIL: process.env.CONTACT_INBOX_EMAIL,
-    FROM_EMAIL: process.env.FROM_EMAIL,
     RESEND_AUDIENCE_ID: process.env.RESEND_AUDIENCE_ID,
+    FROM_EMAIL: process.env.FROM_EMAIL,
     LOGO_ICON_URL: process.env.LOGO_ICON_URL,
     LOGO_TEXT_URL: process.env.LOGO_TEXT_URL,
-    DOWNLOAD_TOKEN_SECRET: process.env.DOWNLOAD_TOKEN_SECRET,
   });
 
   return res.status(result.status).json(result.body);

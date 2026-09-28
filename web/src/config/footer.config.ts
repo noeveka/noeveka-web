@@ -33,10 +33,10 @@ export const FOOTER_CONFIG = {
 
   servicesColumnHeading: "Services",
   servicesLinks: [
-    { label: "Data & AI Architecture", href: "#" },
-    { label: "AI & Agentic Systems", href: "#" },
-    { label: "AI Governance & Assurance", href: "#" },
-    { label: "Transformation Advisory", href: "#" },
+    { label: "Data & AI Architecture", href: "/services/enterprise-data-ai-architecture" },
+    { label: "AI & Agentic Systems", href: "/services/enterprise-ai-agentic-systems" },
+    { label: "AI Governance & Assurance", href: "/services/ai-governance-architecture-assurance" },
+    { label: "Transformation Advisory", href: "/services/data-ai-transformation-advisory" },
   ],
 
   contactHeading: "Contact",

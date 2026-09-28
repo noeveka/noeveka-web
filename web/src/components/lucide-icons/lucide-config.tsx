@@ -53,6 +53,7 @@ import {
   Zap,
   Calendar,
   ArrowLeft,
+  Crosshair,
 } from "lucide-react";
 
 // Icon map
@@ -122,6 +123,7 @@ export const iconMap = {
   network: Network,
   lightbulb: Lightbulb,
   scale: Scale,
+  crosshair: Crosshair,
 
   activity: Activity,
   // theme
@@ -131,6 +133,7 @@ export const iconMap = {
 
 export const lucideIconRegistry = {
   Activity: "activity",
+  Crosshair: "crosshair",
   ArrowRight: "arrow-right",
   ArrowLeft: "arrow-left",
   ArrowUpRight: "arrow-up-right",

@@ -166,7 +166,7 @@ export default function ServicesHero({
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: -20 }}
               transition={{ duration: 0.3 }}
-              className="w-full rounded-[28px] border border-orange-200/90 shadow-[0_16px_40px_rgba(246,93,1,0.08)] bg-gradient-to-b from-white via-white to-[#fffaf6] p-6 flex flex-col justify-between min-h-[440px]"
+              className="w-full rounded-[28px] border border-orange-200/90 shadow-[0_16px_40px_rgba(246,93,1,0.08)] bg-linear-to-b from-white via-white to-[#fffaf6] p-6 flex flex-col justify-between min-h-[440px]"
             >
               <div>
                 <div className="flex items-center gap-2 mb-2.5">
@@ -257,7 +257,7 @@ export default function ServicesHero({
                   style={{ width: "540px" }}
                   className={`shrink-0 h-full rounded-[32px] overflow-hidden transition-all duration-300 ${
                     isCenter
-                      ? "border border-orange-200/90 shadow-[0_20px_50px_rgba(246,93,1,0.08)] bg-gradient-to-b from-white via-white to-[#fffaf6] scale-100 z-20 opacity-100 cursor-default"
+                      ? "border border-orange-200/90 shadow-[0_20px_50px_rgba(246,93,1,0.08)] bg-linear-to-b from-white via-white to-[#fffaf6] scale-100 z-20 opacity-100 cursor-default"
                       : isAdjacent
                       ? "border border-neutral-200/80 shadow-[0_8px_24px_rgba(0,0,0,0.04)] bg-white scale-[0.93] z-10 opacity-55 hover:opacity-80 cursor-pointer"
                       : "opacity-0 scale-[0.85] pointer-events-none"
@@ -292,21 +292,37 @@ export default function ServicesHero({
 
                       {/* CTA Button */}
                       <div>
-                        <Link
-                          to={card.ctaLink}
-                          className="group inline-flex items-center gap-2 rounded-full border border-orange-300 bg-white/80 px-4 py-1.5 sm:px-4.5 sm:py-2 text-xs sm:text-sm font-semibold text-[#1e212b] shadow-xs transition-all duration-200 hover:border-[#f65d01] hover:bg-[#f65d01] hover:text-white hover:shadow-[0_4px_14px_rgba(246,93,1,0.25)]"
-                        >
-                          <span>{card.ctaText ?? "Learn more"}</span>
-                          <LucideIcon
-                            name={lucideIconRegistry.ArrowRight}
-                            className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5"
-                          />
-                        </Link>
+                        {(() => {
+                          const routeMap: Record<string, string> = {
+                            "enterprise-data-ai-architecture": "/services/enterprise-data-ai-architecture",
+                            "ai-governance-assurance": "/services/ai-governance-architecture-assurance",
+                            "ai-agentic-systems": "/services/enterprise-ai-agentic-systems",
+                            "transformation-advisory": "/services/data-ai-transformation-advisory",
+                          };
+                          const link =
+                            (card.id && routeMap[card.id]) ||
+                            (card.ctaLink && card.ctaLink.startsWith("/services/")
+                              ? card.ctaLink
+                              : "/services");
+
+                          return (
+                            <Link
+                              to={link}
+                              className="group inline-flex items-center gap-2 rounded-full border border-orange-300 bg-white/80 px-4 py-1.5 sm:px-4.5 sm:py-2 text-xs sm:text-sm font-semibold text-[#1e212b] shadow-xs transition-all duration-200 hover:border-[#f65d01] hover:bg-[#f65d01] hover:text-white hover:shadow-[0_4px_14px_rgba(246,93,1,0.25)]"
+                            >
+                              <span>{card.ctaText ?? "Learn more"}</span>
+                              <LucideIcon
+                                name={lucideIconRegistry.ArrowRight}
+                                className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5"
+                              />
+                            </Link>
+                          );
+                        })()}
                       </div>
                     </div>
 
                     {/* Right Column: Visual Graphic */}
-                    <div className="relative flex items-center justify-center p-4 sm:p-5 overflow-hidden bg-gradient-to-br from-orange-50/25 via-transparent to-transparent">
+                    <div className="relative flex items-center justify-center p-4 sm:p-5 overflow-hidden bg-linear-to-br from-orange-50/25 via-transparent to-transparent">
                       {/* Subtle ambient warm glow */}
                       <div
                         className="pointer-events-none absolute w-44 h-44 rounded-full"

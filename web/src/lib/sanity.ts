@@ -401,4 +401,100 @@ export async function getServicesPage() {
   }`);
 }
 
+// ─── Service Detail Page ──────────────────────────────────────────────────
+export async function getServiceDetailPage(slug: string) {
+  return client.fetch(
+    `*[_type == "serviceDetailPage" && slug.current == $slug][0]{
+    title,
+    "slug": slug.current,
+    seoDescription,
+    hero{
+      badge,
+      heading,
+      headingHighlight,
+      description,
+      primaryCtaText,
+      primaryCtaLink,
+      secondaryCtaText,
+      secondaryCtaLink,
+      heroImage{ asset, alt },
+      stackAnnotations[]{ tier, label }
+    },
+    challenge{
+      heading,
+      paragraphs,
+      signalsHeading,
+      signals
+    },
+    whatWeDo{
+      heading,
+      subtext,
+      items[]{
+        icon,
+        title,
+        description,
+        linkText,
+        linkUrl
+      }
+    },
+    architectureLens{
+      heading,
+      subtext,
+      layers[]{
+        icon,
+        title,
+        description,
+        variant
+      },
+      footerNote
+    },
+    howWeEngage{
+      heading,
+      subtext,
+      steps[]{
+        number,
+        title,
+        description
+      }
+    },
+    deliverables{
+      heading,
+      subtext,
+      items
+    },
+    outcomes{
+      heading,
+      subtext,
+      items[]{
+        icon,
+        title,
+        description
+      }
+    },
+    relatedExpertise{
+      heading,
+      subtext,
+      services[]{
+        number,
+        icon,
+        title,
+        description,
+        linkUrl,
+        linkText
+      }
+    },
+    bottomCta{
+      headingLine1,
+      headingLine2,
+      subtext,
+      primaryCtaText,
+      primaryCtaLink,
+      secondaryCtaText,
+      secondaryCtaLink
+    }
+  }`,
+    { slug }
+  );
+}
+
 

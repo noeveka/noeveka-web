@@ -1,0 +1,9 @@
+export { default as ServiceHero } from "./service-hero";
+export { default as ServiceChallenge } from "./service-challenge";
+export { default as ServiceWhatWeDo } from "./service-what-we-do";
+export { default as ServiceArchitectureLens } from "./service-architecture-lens";
+export { default as ServiceHowWeEngage } from "./service-how-we-engage";
+export { default as ServiceDeliverables } from "./service-deliverables";
+export { default as ServiceOutcomes } from "./service-outcomes";
+export { default as ServiceRelatedExpertise } from "./service-related-expertise";
+export { default as ServiceBottomCta } from "./service-bottom-cta";

@@ -7,6 +7,7 @@ import { contactPage } from './contact-page'
 import { testimonial } from './testimonial'
 import { service } from './service'
 import { resource } from './resource'
+import { serviceDetailPage } from './service-detail-page'
 
 export const schemaTypes = [
   siteSettings,
@@ -18,5 +19,6 @@ export const schemaTypes = [
   testimonial,
   service,
   resource,
+  serviceDetailPage,
 ]
 

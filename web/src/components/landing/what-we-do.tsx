@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router";
 import { motion } from "framer-motion";
 import { LucideIcon } from "@/components/lucide-icons";
 import { fu, fs } from "@/lib/motion";
@@ -80,6 +81,13 @@ interface WhatWeDoProps {
   services?: ServiceItem[];
 }
 
+const SERVICE_ROUTE_MAP: Record<string, string> = {
+  "Enterprise Data & AI Architecture": "/services/enterprise-data-ai-architecture",
+  "Enterprise AI & Agentic Systems": "/services/enterprise-ai-agentic-systems",
+  "AI Governance & Architecture Assurance": "/services/ai-governance-architecture-assurance",
+  "Data & AI Transformation Advisory": "/services/data-ai-transformation-advisory",
+};
+
 export default function WhatWeDo({
   eyebrow = SERVICES_CONFIG.eyebrow,
   heading = SERVICES_CONFIG.heading,
@@ -109,6 +117,38 @@ export default function WhatWeDo({
       : sanityServices.length > 0
         ? sanityServices
         : [...SERVICES_CONFIG.services];
+
+  const resolveServiceLink = (service: ServiceItem): string => {
+    // If explicitly provided a valid dedicated page path, keep it
+    if (service.ctaLink && service.ctaLink.startsWith("/services/")) {
+      return service.ctaLink;
+    }
+    // If it's an external link, keep it
+    if (service.ctaLink && service.ctaLink.startsWith("http")) {
+      return service.ctaLink;
+    }
+    // Check against canonical title map
+    const mapped = SERVICE_ROUTE_MAP[service.title.trim()];
+    if (mapped) {
+      return mapped;
+    }
+    // Check partial matches
+    const lower = service.title.toLowerCase();
+    if (lower.includes("governance") || lower.includes("assurance")) {
+      return "/services/ai-governance-architecture-assurance";
+    }
+    if (lower.includes("agentic") || (lower.includes("ai") && lower.includes("systems"))) {
+      return "/services/enterprise-ai-agentic-systems";
+    }
+    if (lower.includes("transformation") || lower.includes("advisory")) {
+      return "/services/data-ai-transformation-advisory";
+    }
+    if (lower.includes("data") && lower.includes("architecture")) {
+      return "/services/enterprise-data-ai-architecture";
+    }
+    // Fallback to existing link or /services
+    return service.ctaLink && service.ctaLink !== "#" ? service.ctaLink : "/services";
+  };
 
   return (
     <section
@@ -156,7 +196,7 @@ export default function WhatWeDo({
           {displayServices.map((s, i) => {
             const cs = styles[s.variant] ?? styles.white;
             const buttonText = s.ctaText || cardCtaText || "Learn More";
-            const targetLink = s.ctaLink || "/services";
+            const targetLink = resolveServiceLink(s);
 
             return (
               <motion.div
@@ -210,26 +250,51 @@ export default function WhatWeDo({
 
                 {/* CTA Button */}
                 <div className="relative z-10 pt-2">
-                  <a
-                    href={targetLink}
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[13px] font-semibold transition-all duration-200 self-start no-underline"
-                    style={{ background: cs.btnBg, color: cs.btnText }}
-                    onMouseEnter={(e) => {
-                      e.currentTarget.style.opacity = "0.85";
-                      e.currentTarget.style.transform = "translateX(3px)";
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.opacity = "1";
-                      e.currentTarget.style.transform = "translateX(0)";
-                    }}
-                  >
-                    {buttonText}{" "}
-                    <LucideIcon
-                      name="arrow-right"
-                      className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5"
-                      style={{ color: cs.btnText }}
-                    />
-                  </a>
+                  {targetLink.startsWith("http") ? (
+                    <a
+                      href={targetLink}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[13px] font-semibold transition-all duration-200 self-start no-underline"
+                      style={{ background: cs.btnBg, color: cs.btnText }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.opacity = "0.85";
+                        e.currentTarget.style.transform = "translateX(3px)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.opacity = "1";
+                        e.currentTarget.style.transform = "translateX(0)";
+                      }}
+                    >
+                      {buttonText}{" "}
+                      <LucideIcon
+                        name="arrow-right"
+                        className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5"
+                        style={{ color: cs.btnText }}
+                      />
+                    </a>
+                  ) : (
+                    <Link
+                      to={targetLink}
+                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[13px] font-semibold transition-all duration-200 self-start no-underline"
+                      style={{ background: cs.btnBg, color: cs.btnText }}
+                      onMouseEnter={(e) => {
+                        e.currentTarget.style.opacity = "0.85";
+                        e.currentTarget.style.transform = "translateX(3px)";
+                      }}
+                      onMouseLeave={(e) => {
+                        e.currentTarget.style.opacity = "1";
+                        e.currentTarget.style.transform = "translateX(0)";
+                      }}
+                    >
+                      {buttonText}{" "}
+                      <LucideIcon
+                        name="arrow-right"
+                        className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5"
+                        style={{ color: cs.btnText }}
+                      />
+                    </Link>
+                  )}
                 </div>
               </motion.div>
             );
