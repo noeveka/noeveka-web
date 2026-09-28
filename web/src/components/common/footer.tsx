@@ -158,10 +158,10 @@ export default function Footer() {
   };
 
   const shortenedServices = [
-    "Data & AI Architecture",
-    "AI & Agentic Systems",
-    "AI Governance & Assurance",
-    "Transformation Advisory",
+    { label: "Data & AI Architecture", href: "/services/enterprise-data-ai-architecture" },
+    { label: "AI & Agentic Systems", href: "/services/enterprise-ai-agentic-systems" },
+    { label: "AI Governance & Assurance", href: "/services/ai-governance-architecture-assurance" },
+    { label: "Transformation Advisory", href: "/services/data-ai-transformation-advisory" },
   ];
 
   const mobileCompanyLinks = [
@@ -174,10 +174,8 @@ export default function Footer() {
 
   return (
     <footer>
-      {/* ── Newsletter strip ──────────────────────────────── */}
-      <NewsLetterStrip />
 
-      {/* ── Main footer body (LIGHT) ──────────────────────── */}
+      <NewsLetterStrip />
       <div
         className="relative overflow-hidden"
         style={{
@@ -303,8 +301,8 @@ export default function Footer() {
             </p>
             <ul className="flex flex-col gap-2.5">
               {shortenedServices.map((service) => (
-                <li key={service}>
-                  <FooterLink label={service} />
+                <li key={service.label}>
+                  <FooterLink label={service.label} href={service.href} />
                 </li>
               ))}
             </ul>
@@ -486,16 +484,17 @@ export default function Footer() {
               {openSections.services && (
                 <div className="mt-3 flex flex-col gap-1 border-t border-slate-100 pt-3.5">
                   {shortenedServices.map((service) => (
-                    <div
-                      key={service}
-                      className="group -mx-2 flex cursor-default items-center justify-between rounded-lg px-2 py-1.5 text-[13px] font-medium text-slate-600 transition-all hover:bg-orange-50/50 hover:text-[#f65d01]"
+                    <Link
+                      key={service.label}
+                      to={service.href}
+                      className="group -mx-2 flex cursor-pointer items-center justify-between rounded-lg px-2 py-1.5 text-[13px] font-medium text-slate-600 transition-all hover:bg-orange-50/50 hover:text-[#f65d01]"
                     >
-                      <span>{service}</span>
+                      <span>{service.label}</span>
                       <LucideIcon
                         name="chevron-right"
                         className="h-3.5 w-3.5 text-slate-300 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:text-[#f65d01]"
                       />
-                    </div>
+                    </Link>
                   ))}
                 </div>
               )}

@@ -20,7 +20,7 @@ export const SERVICES_CONFIG = {
       variant: "white" as const,
       featured: false,
       ctaText: "Learn More",
-      ctaLink: "/services#data-ai-architecture",
+      ctaLink: "/services/enterprise-data-ai-architecture",
       order: 1,
     },
     {
@@ -32,7 +32,7 @@ export const SERVICES_CONFIG = {
       variant: "orange" as const,
       featured: true,
       ctaText: "Learn More",
-      ctaLink: "/services#ai-agentic-systems",
+      ctaLink: "/services/enterprise-ai-agentic-systems",
       order: 2,
     },
     {
@@ -44,7 +44,7 @@ export const SERVICES_CONFIG = {
       variant: "black" as const,
       featured: false,
       ctaText: "Learn More",
-      ctaLink: "/services#ai-governance-assurance",
+      ctaLink: "/services/ai-governance-architecture-assurance",
       order: 3,
     },
     {
@@ -56,7 +56,7 @@ export const SERVICES_CONFIG = {
       variant: "white" as const,
       featured: false,
       ctaText: "Learn More",
-      ctaLink: "/services#transformation-advisory",
+      ctaLink: "/services/data-ai-transformation-advisory",
       order: 4,
     },
   ],

@@ -16,6 +16,9 @@ export function DownloadModal({ resource, onClose }: DownloadModalProps) {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [downloadStatus, setDownloadStatus] = useState<"idle" | "downloading" | "done">("idle");
+  // One-time proxy token returned by /api/resource-download — never the raw Sanity URL.
+  const [downloadToken, setDownloadToken] = useState<string | null>(null);
 
   const validate = () => {
     const e: Record<string, string> = {};
@@ -40,7 +43,7 @@ export function DownloadModal({ resource, onClose }: DownloadModalProps) {
 
     setLoading(true);
     try {
-      await fetch("/api/resource-download", {
+      const apiRes = await fetch("/api/resource-download", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -53,25 +56,44 @@ export function DownloadModal({ resource, onClose }: DownloadModalProps) {
         }),
       });
 
+      const data = await apiRes.json() as { downloadToken?: string | null };
+      const token = data.downloadToken ?? null;
+      setDownloadToken(token);
+
       setLoading(false);
       setSubmitted(true);
 
-      // Auto-trigger download if pdfUrl is present
-      if (resource.pdfUrl) {
-        const link = document.createElement("a");
-        link.href = resource.pdfUrl;
-        link.download = `${resource.title.toLowerCase().replace(/[^a-z0-9]/g, "-")}.pdf`;
-        link.target = "_blank";
-        link.rel = "noopener noreferrer";
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+      // Auto-trigger a silent background blob download via the proxy — the
+      // raw Sanity URL is never fetched from the browser.
+      if (token) {
+        triggerBlobDownload(`/api/resource-proxy?token=${token}`, resource.title);
       }
     } catch (err: unknown) {
       console.error("Resource download submit error:", err);
       // Even if network fails, unlock download for visitor satisfaction
       setLoading(false);
       setSubmitted(true);
+    }
+  };
+
+  /** Fetch the PDF as a blob via the server-side proxy and trigger a save-to-device download. */
+  const triggerBlobDownload = async (proxyUrl: string, title: string) => {
+    setDownloadStatus("downloading");
+    try {
+      const res = await fetch(proxyUrl);
+      const blob = await res.blob();
+      const objectUrl = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = objectUrl;
+      a.download = `${title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(objectUrl);
+      setDownloadStatus("done");
+    } catch {
+      // Fallback: if blob fetch fails (e.g. CORS), surface a gentle error
+      setDownloadStatus("idle");
     }
   };
 
@@ -230,18 +252,39 @@ export function DownloadModal({ resource, onClose }: DownloadModalProps) {
               <h3 className="text-[1.15rem] font-extrabold text-neutral-900">{downloadModal.successHeading}</h3>
               <p className="mt-1.5 text-[13px] leading-relaxed text-neutral-500">{downloadModal.successSubtext}</p>
             </div>
+            {/* Download status toast */}
+            {downloadStatus !== "idle" && (
+              <div
+                className="flex items-center gap-2 rounded-full px-4 py-2 text-[12px] font-semibold"
+                style={{
+                  background: downloadStatus === "done" ? "#ecfdf5" : "#fff7ed",
+                  color: downloadStatus === "done" ? "#059669" : "#c2410c",
+                  border: `1px solid ${downloadStatus === "done" ? "#a7f3d0" : "#fed7aa"}`,
+                }}
+              >
+                {downloadStatus === "downloading" ? (
+                  <><span className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-current border-t-transparent" /> Downloading…</>
+                ) : (
+                  <><LucideIcon name="check-circle-2" className="h-3.5 w-3.5" /> Saved to your device</>  
+                )}
+              </div>
+            )}
+
             {resource.pdfUrl ? (
-              <a
-                href={resource.pdfUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                download
-                className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-[14px] font-bold text-white"
+              <button
+                onClick={() => {
+                  if (!downloadToken) return;
+                  triggerBlobDownload(`/api/resource-proxy?token=${downloadToken}`, resource.title);
+                }}
+                disabled={downloadStatus === "downloading" || !downloadToken}
+                className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-[14px] font-bold text-white transition-all disabled:opacity-60"
                 style={{ background: "var(--color-brand)", boxShadow: "0 4px 20px rgba(246,93,1,0.28)" }}
+                onMouseEnter={(e) => { if (downloadStatus !== "downloading") { e.currentTarget.style.background = "var(--color-brand-hover)"; e.currentTarget.style.transform = "translateY(-1px)"; } }}
+                onMouseLeave={(e) => { e.currentTarget.style.background = "var(--color-brand)"; e.currentTarget.style.transform = ""; }}
               >
                 <LucideIcon name="download" className="h-4 w-4" />
                 {downloadModal.downloadButtonText}
-              </a>
+              </button>
             ) : (
               <p className="text-[12px] text-neutral-400">The resource will be emailed to you shortly.</p>
             )}

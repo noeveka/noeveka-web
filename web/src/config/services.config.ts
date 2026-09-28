@@ -66,7 +66,7 @@ export const SERVICES_CONFIG = {
       accentColor: "orange",
       badgeText: "Architecture Foundation",
       ctaText: "Learn More",
-      ctaLink: "/contact?topic=architecture",
+      ctaLink: "/services/enterprise-data-ai-architecture",
     },
     {
       id: "ai-agentic-systems",
@@ -89,7 +89,7 @@ export const SERVICES_CONFIG = {
       accentColor: "blue",
       badgeText: "Autonomous Systems",
       ctaText: "Learn More",
-      ctaLink: "/contact?topic=agentic-ai",
+      ctaLink: "/services/enterprise-ai-agentic-systems",
     },
     {
       id: "ai-governance-assurance",
@@ -112,7 +112,7 @@ export const SERVICES_CONFIG = {
       accentColor: "orange",
       badgeText: "Enterprise Trust",
       ctaText: "Learn More",
-      ctaLink: "/contact?topic=governance",
+      ctaLink: "/services/ai-governance-architecture-assurance",
     },
     {
       id: "transformation-advisory",
@@ -135,7 +135,7 @@ export const SERVICES_CONFIG = {
       accentColor: "navy",
       badgeText: "Strategic Execution",
       ctaText: "Learn More",
-      ctaLink: "/contact?topic=advisory",
+      ctaLink: "/services/data-ai-transformation-advisory",
     },
   ] as const satisfies readonly ServiceFocusArea[],
 

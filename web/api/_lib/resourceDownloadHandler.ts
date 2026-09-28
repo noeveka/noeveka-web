@@ -1,8 +1,9 @@
 // Shared resource download gate handler using standard Web Request / Response and Resend REST API
 import {
   renderResourceDownloadTeamNotificationEmail,
-  // renderResourceDownloadUserConfirmationEmail,
+  renderResourceDownloadUserConfirmationEmail,
 } from "./email-templates/index.js";
+import { issueDownloadToken } from "./downloadTokenStore.js";
 
 export interface ResourceDownloadRequestBody {
   name: string;
@@ -22,9 +23,10 @@ export async function handleResourceDownloadSubmission(
     RESEND_AUDIENCE_ID?: string;
     LOGO_ICON_URL?: string;
     LOGO_TEXT_URL?: string;
+    DOWNLOAD_TOKEN_SECRET?: string;
   }
 ) {
-  const { name, email, consent, resourceTitle = "Resource Document", resourceId } = body;
+  const { name, email, consent, resourceTitle = "Resource Document", resourceId, pdfUrl } = body;
 
   // 1. Strict Validation per User Flow
   if (!name?.trim()) {
@@ -41,14 +43,18 @@ export async function handleResourceDownloadSubmission(
   const toEmail = env.CONTACT_INBOX_EMAIL || "team@noeveka.com";
   const fromEmail = env.FROM_EMAIL || "Noeveka Website <onboarding@resend.dev>";
   const audienceId = env.RESEND_AUDIENCE_ID;
+  const tokenSecret = env.DOWNLOAD_TOKEN_SECRET;
 
   if (!resendApiKey) {
     console.warn("[Resource Download API] RESEND_API_KEY is not set. Simulating success in development.");
+    // Still issue a real token in dev so the proxy flow works end-to-end.
+    const devToken = pdfUrl ? await issueDownloadToken(pdfUrl, tokenSecret) : null;
     return {
       status: 200,
       body: {
         success: true,
         message: "Resource unlocked (dev mode: RESEND_API_KEY not configured)",
+        downloadToken: devToken,
       },
     };
   }
@@ -90,13 +96,13 @@ export async function handleResourceDownloadSubmission(
     logoTextUrl: env.LOGO_TEXT_URL,
   });
 
-  // const userConfirmationHtml = renderResourceDownloadUserConfirmationEmail({
-  //   name,
-  //   resourceTitle,
-  //   pdfUrl,
-  //   logoIconUrl: env.LOGO_ICON_URL,
-  //   logoTextUrl: env.LOGO_TEXT_URL,
-  // });
+  const userConfirmationHtml = renderResourceDownloadUserConfirmationEmail({
+    name,
+    resourceTitle,
+    pdfUrl,
+    logoIconUrl: env.LOGO_ICON_URL,
+    logoTextUrl: env.LOGO_TEXT_URL,
+  });
 
   // 4. Send Notifications in parallel
   try {
@@ -118,31 +124,38 @@ export async function handleResourceDownloadSubmission(
       }),
 
       // 4B. User confirmation copy with direct download link
-      // fetch("https://api.resend.com/emails", {
-      //   method: "POST",
-      //   headers: {
-      //     Authorization: `Bearer ${resendApiKey}`,
-      //     "Content-Type": "application/json",
-      //   },
-      //   body: JSON.stringify({
-      //     from: fromEmail,
-      //     to: [email.trim()],
-      //     reply_to: toEmail,
-      //     subject: `Your download: ${resourceTitle} — Noeveka`,
-      //     html: userConfirmationHtml,
-      //   }),
-      // }),
+      fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${resendApiKey}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          from: fromEmail,
+          to: [email.trim()],
+          reply_to: toEmail,
+          subject: `Your download: ${resourceTitle} — Noeveka`,
+          html: userConfirmationHtml,
+        }),
+      }),
     ]);
+
+    // Issue a signed token so the client can proxy-download without ever
+    // seeing the raw Sanity CDN URL in its Network tab.
+    const downloadToken = pdfUrl ? await issueDownloadToken(pdfUrl, tokenSecret) : null;
 
     return {
       status: 200,
-      body: { success: true, message: "Resource unlocked successfully." },
+      body: { success: true, message: "Resource unlocked successfully.", downloadToken },
     };
   } catch (err: unknown) {
     console.error("[Resource Download API] Error:", err);
+    // Still issue a token on email-send failure — the gate has already been
+    // cleared (contact added, validation passed).
+    const downloadToken = pdfUrl ? await issueDownloadToken(pdfUrl, tokenSecret) : null;
     return {
       status: 200,
-      body: { success: true, message: "Resource unlocked." },
+      body: { success: true, message: "Resource unlocked.", downloadToken },
     };
   }
 }

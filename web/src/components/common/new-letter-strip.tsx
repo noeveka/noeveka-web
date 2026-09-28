@@ -26,7 +26,8 @@ export default function NewsLetterStrip({
   } | null>(null);
 
   const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "success">("idle");
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [errorMsg, setErrorMsg] = useState<string | null>(null);
 
   useEffect(() => {
     getSiteSettings()
@@ -58,14 +59,36 @@ export default function NewsLetterStrip({
     settings?.newsletterPlaceholder ??
     FOOTER_CONFIG.newsletterPlaceholder;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email) return;
-    setStatus("success");
-    setTimeout(() => {
-      setStatus("idle");
+    if (!email || status === "loading") return;
+
+    setStatus("loading");
+    setErrorMsg(null);
+
+    try {
+      const res = await fetch("/api/newsletter", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        setErrorMsg(data?.error || "Something went wrong. Please try again.");
+        setStatus("error");
+        setTimeout(() => { setStatus("idle"); setErrorMsg(null); }, 3500);
+        return;
+      }
+
+      setStatus("success");
       setEmail("");
-    }, 3500);
+      setTimeout(() => setStatus("idle"), 3500);
+    } catch {
+      setErrorMsg("Network error. Please check your connection.");
+      setStatus("error");
+      setTimeout(() => { setStatus("idle"); setErrorMsg(null); }, 3500);
+    }
   };
 
   return (
@@ -109,32 +132,41 @@ export default function NewsLetterStrip({
             {/* Right: Input & Submit Button */}
             <form
               onSubmit={handleSubmit}
-              className="flex items-center gap-2.5 sm:gap-3 w-full lg:w-auto shrink-0"
+              className="flex flex-col gap-1.5 w-full lg:w-auto shrink-0"
             >
-              <div className="relative flex-1 sm:w-64 lg:w-72">
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  placeholder={placeholder}
-                  required
-                  className="w-full rounded-full border border-neutral-200/90 bg-[#fafafa] px-4.5 py-2.5 sm:py-3 text-[13px] text-[#1e212b] placeholder:text-neutral-400 focus:border-neutral-400 focus:bg-white focus:outline-none transition-colors"
-                />
-              </div>
-              <button
-                type="submit"
-                aria-label="Subscribe"
-                className="flex h-10 w-10 sm:h-11 sm:w-11 shrink-0 cursor-pointer items-center justify-center rounded-full bg-[#f65d01] text-white shadow-[0_4px_14px_rgba(246,93,1,0.28)] transition-all duration-200 hover:bg-[#d94e00] hover:scale-105 active:scale-95"
-              >
-                {status === "success" ? (
-                  <LucideIcon name="check" className="h-4.5 w-4.5 stroke-[2.5]" />
-                ) : (
-                  <LucideIcon
-                    name="arrow-right"
-                    className="h-4.5 w-4.5 stroke-[2.2]"
+              <div className="flex items-center gap-2.5 sm:gap-3">
+                <div className="relative flex-1 sm:w-64 lg:w-72">
+                  <input
+                    type="email"
+                    value={email}
+                    onChange={(e) => { setEmail(e.target.value); if (status === "error") { setStatus("idle"); setErrorMsg(null); } }}
+                    placeholder={placeholder}
+                    required
+                    disabled={status === "loading" || status === "success"}
+                    className="w-full rounded-full border border-neutral-200/90 bg-[#fafafa] px-4.5 py-2.5 sm:py-3 text-[13px] text-[#1e212b] placeholder:text-neutral-400 focus:border-neutral-400 focus:bg-white focus:outline-none transition-colors disabled:opacity-60"
                   />
-                )}
-              </button>
+                </div>
+                <button
+                  type="submit"
+                  aria-label="Subscribe"
+                  disabled={status === "loading" || status === "success"}
+                  className="flex h-10 w-10 sm:h-11 sm:w-11 shrink-0 cursor-pointer items-center justify-center rounded-full bg-[#f65d01] text-white shadow-[0_4px_14px_rgba(246,93,1,0.28)] transition-all duration-200 hover:bg-[#d94e00] hover:scale-105 active:scale-95 disabled:opacity-70 disabled:cursor-not-allowed disabled:hover:scale-100"
+                >
+                  {status === "loading" ? (
+                    <span className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                  ) : status === "success" ? (
+                    <LucideIcon name="check" className="h-4.5 w-4.5 stroke-[2.5]" />
+                  ) : (
+                    <LucideIcon
+                      name="arrow-right"
+                      className="h-4.5 w-4.5 stroke-[2.2]"
+                    />
+                  )}
+                </button>
+              </div>
+              {errorMsg && (
+                <p className="pl-4 text-[11.5px] text-red-500 leading-tight">{errorMsg}</p>
+              )}
             </form>
           </div>
         </div>
