@@ -130,27 +130,31 @@ export default function ServicesHero({
           </div>
 
           {/* Top-Right Arrow Buttons */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.4, delay: 0.2 }}
-            className="mt-6 flex justify-center sm:absolute sm:right-0 sm:top-2 sm:mt-0 items-center gap-2.5 z-30"
+
+        </div>
+        <div className="pb-8">
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.4, delay: 0.2 }}
+          className="mt-6 flex justify-center items-center gap-2.5 z-30"
+        >
+          <button
+            onClick={prev}
+            aria-label="Previous service"
+            className="flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full border border-neutral-200 bg-white text-[#1e212b] shadow-sm transition-all duration-200 hover:border-[#f65d01] hover:text-[#f65d01] hover:shadow-md active:scale-95 cursor-pointer"
           >
-            <button
-              onClick={prev}
-              aria-label="Previous service"
-              className="flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full border border-neutral-200 bg-white text-[#1e212b] shadow-sm transition-all duration-200 hover:border-[#f65d01] hover:text-[#f65d01] hover:shadow-md active:scale-95 cursor-pointer"
-            >
-              <LucideIcon name={lucideIconRegistry.ArrowLeft} className="h-4 w-4 sm:h-4.5 sm:w-4.5" />
-            </button>
-            <button
-              onClick={next}
-              aria-label="Next service"
-              className="flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full border border-neutral-200 bg-white text-[#1e212b] shadow-sm transition-all duration-200 hover:border-[#f65d01] hover:text-[#f65d01] hover:shadow-md active:scale-95 cursor-pointer"
-            >
-              <LucideIcon name={lucideIconRegistry.ArrowRight} className="h-4 w-4 sm:h-4.5 sm:w-4.5" />
-            </button>
-          </motion.div>
+            <LucideIcon name={lucideIconRegistry.ArrowLeft} className="h-4 w-4 sm:h-4.5 sm:w-4.5" />
+          </button>
+          <button
+            onClick={next}
+            aria-label="Next service"
+            className="flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full border border-neutral-200 bg-white text-[#1e212b] shadow-sm transition-all duration-200 hover:border-[#f65d01] hover:text-[#f65d01] hover:shadow-md active:scale-95 cursor-pointer"
+          >
+            <LucideIcon name={lucideIconRegistry.ArrowRight} className="h-4 w-4 sm:h-4.5 sm:w-4.5" />
+          </button>
+        </motion.div>
         </div>
 
         {/* ── Mobile View: Smooth Animated Single Card (< sm) ── */}
@@ -357,6 +361,7 @@ export default function ServicesHero({
             />
           ))}
         </div>
+
       </div>
     </section>
   );

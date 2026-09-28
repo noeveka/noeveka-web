@@ -20,7 +20,7 @@ export const ENTERPRISE_AI_AGENTIC_SYSTEMS_CONFIG: ServiceDetailPageData = {
     primaryCtaLink: "/contact?topic=agentic-ai",
     secondaryCtaText: "Explore Our Approach",
     secondaryCtaLink: "#what-we-do",
-    heroImageUrl: "/assets/services/service_three_hero_image.png",
+    heroImageUrl: "/assets/services/service_three_hero_image.jpeg",
     stackAnnotations: [
       { tier: "ORCHESTRATION", label: "Multi-Agent Coordination & Workflow" },
       { tier: "INTEGRATION", label: "Enterprise Data, APIs & Tools" },

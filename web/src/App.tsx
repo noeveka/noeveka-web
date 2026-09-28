@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { BrowserRouter } from "react-router";
 
 import { ThemeProvider } from "@/components/theme-provider";
+import { ScrollToTop } from "@/components/common/scroll-to-top";
 import { AppRouter } from "@/routes";
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
   return (
     <ThemeProvider defaultTheme="light">
       <BrowserRouter>
+        <ScrollToTop />
         <AppRouter />
       </BrowserRouter>
     </ThemeProvider>

@@ -110,7 +110,7 @@ export const ABOUT_CONFIG = {
       { label: "Clients Trained", value: "5,000+ Leaders" },
     ],
     photoFallbackUrl:
-      "/assets/about-page/ajay_image_for_founder_section_about_page.png",
+      "/assets/about-page/ajay_image_for_founder_section_about_page.jpg",
     photoAlt: "Ajay Kumar — Founder & Principal Data, AI & Enterprise Architect, Noeveka",
     linkedinUrl: "https://www.linkedin.com/company/noeveka",
     email: "hello@noeveka.com",
