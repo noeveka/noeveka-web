@@ -170,6 +170,8 @@ export default function Footer() {
     { label: "About", href: "/about" },
     { label: "Contact", href: "/contact" },
     { label: "Services", href: "/services" },
+    { label: "Privacy Policy", href: "/privacy-policy" },
+    { label: "Terms & Conditions", href: "/terms" },
   ];
 
   return (
@@ -587,13 +589,28 @@ export default function Footer() {
           className="relative z-10 border-t"
           style={{ borderColor: "var(--color-stroke-default)" }}
         >
-          <div className="lp-container lp-px flex items-center justify-between gap-3 py-4">
-            <p
-              className="text-[11.5px]"
-              style={{ color: "var(--color-text-muted)" }}
-            >
-              {copyrightText}
-            </p>
+          <div className="lp-container lp-px flex flex-wrap items-center justify-between gap-3 py-4">
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11.5px]">
+              <p style={{ color: "var(--color-text-muted)" }}>
+                {copyrightText}
+              </p>
+              <span className="text-neutral-300">·</span>
+              <Link
+                to="/privacy-policy"
+                className="transition-colors hover:text-[#f65d01]"
+                style={{ color: "var(--color-text-muted)" }}
+              >
+                Privacy Policy
+              </Link>
+              <span className="text-neutral-300">·</span>
+              <Link
+                to="/terms"
+                className="transition-colors hover:text-[#f65d01]"
+                style={{ color: "var(--color-text-muted)" }}
+              >
+                Terms & Conditions
+              </Link>
+            </div>
 
             {/* Mobile logo icon (visible only on small screens) */}
             <Link
