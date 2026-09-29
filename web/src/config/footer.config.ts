@@ -29,6 +29,8 @@ export const FOOTER_CONFIG = {
     { label: "Services", href: "/services" },
     { label: "Resources", href: "/resources" },
     { label: "Contact", href: "/contact" },
+    { label: "Privacy Policy", href: "/privacy-policy" },
+    { label: "Terms & Conditions", href: "/terms" },
   ],
 
   servicesColumnHeading: "Services",

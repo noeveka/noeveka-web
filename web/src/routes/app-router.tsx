@@ -1,7 +1,5 @@
-// import * as React from "react";
-import { Route, Routes } from "react-router";
+import { Navigate, Route, Routes } from "react-router";
 
-// import logoUrl from "@/assets/logo/exaannum-logo-fullcolor.svg";
 import MainLayout from "@/layouts/main-layout";
 import { NotFoundPage } from "@/pages/errors";
 import LandingPage from "@/pages/landing/page";
@@ -10,9 +8,9 @@ import ServicesPage from "@/pages/services/page";
 import ServiceDetailPage from "@/pages/services/service-detail-page";
 import ResourcesPage from "@/pages/resources/page";
 import ContactPage from "@/pages/contact/page";
+import PrivacyPolicyPage from "@/pages/privacy-policy/page";
+import TermsPage from "@/pages/terms/page";
 
-// import { ProtectedRoute } from "./protected-route";
-// import { PublicOnlyRoute } from "./public-only-route";
 import { routesRegistry } from "./routes-config";
 
 export function AppRouter() {
@@ -26,6 +24,9 @@ export function AppRouter() {
         <Route path={routesRegistry.serviceDetail} element={<ServiceDetailPage />} />
         <Route path={routesRegistry.resources} element={<ResourcesPage />} />
         <Route path={routesRegistry.contact} element={<ContactPage />} />
+        <Route path={routesRegistry.privacyPolicy} element={<PrivacyPolicyPage />} />
+        <Route path="/privacy" element={<Navigate to={routesRegistry.privacyPolicy} replace />} />
+        <Route path={routesRegistry.terms} element={<TermsPage />} />
       </Route>
 
       {/* Catch-all */}
