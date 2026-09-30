@@ -3,7 +3,7 @@
 export const BRAND = {
   name: "Noeveka",
   websiteUrl: "https://noeveka.com",
-  supportEmail: "team@noeveka.com",
+  supportEmail: "connect@noeveka.com",
   // Public URL constants — user can update or pass via env
   logoIconUrl: "https://noeveka.com/images/logo-icon.png",
   logoTextUrl: "https://noeveka.com/images/logo-text.png",

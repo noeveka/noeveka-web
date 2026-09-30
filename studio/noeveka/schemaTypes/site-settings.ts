@@ -1,4 +1,4 @@
-import { defineField, defineType } from 'sanity'
+import {defineField, defineType} from 'sanity'
 
 export const siteSettings = defineType({
   name: 'siteSettings',
@@ -11,20 +11,16 @@ export const siteSettings = defineType({
       title: 'Logo Icon Image',
       type: 'image',
       description: 'Small icon/symbol logo (e.g. the Noeveka icon from Cloudinary)',
-      options: { hotspot: true },
-      fields: [
-        defineField({ name: 'alt', title: 'Alt Text', type: 'string' }),
-      ],
+      options: {hotspot: true},
+      fields: [defineField({name: 'alt', title: 'Alt Text', type: 'string'})],
     }),
     defineField({
       name: 'logoText',
       title: 'Logo Text Image',
       type: 'image',
       description: 'Wordmark / text logo (e.g. noeveka_black_text_logo.png)',
-      options: { hotspot: true },
-      fields: [
-        defineField({ name: 'alt', title: 'Alt Text', type: 'string' }),
-      ],
+      options: {hotspot: true},
+      fields: [defineField({name: 'alt', title: 'Alt Text', type: 'string'})],
     }),
     defineField({
       name: 'navItems',
@@ -34,10 +30,10 @@ export const siteSettings = defineType({
         {
           type: 'object',
           fields: [
-            defineField({ name: 'label', title: 'Label', type: 'string' }),
-            defineField({ name: 'href', title: 'URL / Path', type: 'string' }),
+            defineField({name: 'label', title: 'Label', type: 'string'}),
+            defineField({name: 'href', title: 'URL / Path', type: 'string'}),
           ],
-          preview: { select: { title: 'label', subtitle: 'href' } },
+          preview: {select: {title: 'label', subtitle: 'href'}},
         },
       ],
     }),
@@ -77,9 +73,9 @@ export const siteSettings = defineType({
                 list: ['LinkedIn', 'X / Twitter', 'YouTube', 'Instagram', 'Facebook', 'GitHub'],
               },
             }),
-            defineField({ name: 'href', title: 'URL', type: 'url' }),
+            defineField({name: 'href', title: 'URL', type: 'url'}),
           ],
-          preview: { select: { title: 'platform', subtitle: 'href' } },
+          preview: {select: {title: 'platform', subtitle: 'href'}},
         },
       ],
     }),
@@ -99,10 +95,10 @@ export const siteSettings = defineType({
         {
           type: 'object',
           fields: [
-            defineField({ name: 'label', title: 'Label', type: 'string' }),
-            defineField({ name: 'href', title: 'URL / Path', type: 'string' }),
+            defineField({name: 'label', title: 'Label', type: 'string'}),
+            defineField({name: 'href', title: 'URL / Path', type: 'string'}),
           ],
-          preview: { select: { title: 'label', subtitle: 'href' } },
+          preview: {select: {title: 'label', subtitle: 'href'}},
         },
       ],
     }),
@@ -122,10 +118,10 @@ export const siteSettings = defineType({
         {
           type: 'object',
           fields: [
-            defineField({ name: 'label', title: 'Label', type: 'string' }),
-            defineField({ name: 'href', title: 'URL / Path', type: 'string' }),
+            defineField({name: 'label', title: 'Label', type: 'string'}),
+            defineField({name: 'href', title: 'URL / Path', type: 'string'}),
           ],
-          preview: { select: { title: 'label', subtitle: 'href' } },
+          preview: {select: {title: 'label', subtitle: 'href'}},
         },
       ],
     }),
@@ -141,7 +137,7 @@ export const siteSettings = defineType({
       name: 'contactEmail',
       title: 'Contact Email',
       type: 'string',
-      initialValue: 'hello@noeveka.com',
+      initialValue: 'connect@noeveka.com',
     }),
     defineField({
       name: 'contactPhone',
@@ -180,7 +176,7 @@ export const siteSettings = defineType({
       name: 'newsletterPlaceholder',
       title: 'Newsletter Input Placeholder',
       type: 'string',
-      initialValue: 'hello@noeveka.com',
+      initialValue: 'connect@noeveka.com',
     }),
 
     // Bottom bar
@@ -199,10 +195,10 @@ export const siteSettings = defineType({
         {
           type: 'object',
           fields: [
-            defineField({ name: 'label', title: 'Label', type: 'string' }),
-            defineField({ name: 'href', title: 'URL / Path', type: 'string' }),
+            defineField({name: 'label', title: 'Label', type: 'string'}),
+            defineField({name: 'href', title: 'URL / Path', type: 'string'}),
           ],
-          preview: { select: { title: 'label', subtitle: 'href' } },
+          preview: {select: {title: 'label', subtitle: 'href'}},
         },
       ],
     }),
@@ -210,7 +206,7 @@ export const siteSettings = defineType({
 
   preview: {
     prepare() {
-      return { title: 'Site Settings' }
+      return {title: 'Site Settings'}
     },
   },
 })

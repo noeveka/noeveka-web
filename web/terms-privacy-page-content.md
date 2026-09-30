@@ -3,6 +3,7 @@
 > **Before you publish:** replace everything in [SQUARE BRACKETS] with your real details. This is a draft based on how your site works (resource download form, contact form, email marketing tool, Google Analytics 4, Cloudflare, Resend, Sanity). Have a lawyer review it before go-live. It is not legal advice.
 
 ---
+
 ---
 
 # PAGE 1: PRIVACY POLICY
@@ -15,7 +16,7 @@ This website, noeveka.com (the "Site"), is operated by **[Legal entity name, e.g
 
 We provide enterprise data and AI advisory, architecture services and workshops. This Privacy Policy explains what personal data we collect through the Site, why we collect it, how we use and protect it, and what rights you have.
 
-For privacy questions, contact us at **[privacy@noeveka.com]**.
+For privacy questions, contact us at **[connect@noeveka.com]**.
 
 ## 2. What information we collect
 
@@ -35,14 +36,14 @@ We do **not** ask for payment details, passwords or government IDs. The Site has
 
 ## 3. How and why we use your information
 
-| Purpose | Data used | Basis |
-| --- | --- | --- |
-| Give you access to the resource you requested | Name, email | Your consent / to fulfil your request |
-| Send you emails about Noeveka, including newsletters, updates and marketing communications | Name, email | Your explicit consent (the checkbox you tick on the download form) |
-| Reply to your enquiry and send an acknowledgement email | Name, email, message | Your request / our legitimate interest in responding |
-| Understand how the Site is used and improve it | Analytics data | Your consent (where required) / our legitimate interest |
-| Keep the Site secure and prevent abuse | Technical logs | Our legitimate interest |
-| Comply with legal obligations | As required | Legal obligation |
+| Purpose                                                                                    | Data used            | Basis                                                              |
+| ------------------------------------------------------------------------------------------ | -------------------- | ------------------------------------------------------------------ |
+| Give you access to the resource you requested                                              | Name, email          | Your consent / to fulfil your request                              |
+| Send you emails about Noeveka, including newsletters, updates and marketing communications | Name, email          | Your explicit consent (the checkbox you tick on the download form) |
+| Reply to your enquiry and send an acknowledgement email                                    | Name, email, message | Your request / our legitimate interest in responding               |
+| Understand how the Site is used and improve it                                             | Analytics data       | Your consent (where required) / our legitimate interest            |
+| Keep the Site secure and prevent abuse                                                     | Technical logs       | Our legitimate interest                                            |
+| Comply with legal obligations                                                              | As required          | Legal obligation                                                   |
 
 ## 4. Consent and marketing emails
 
@@ -52,7 +53,7 @@ When you download a resource, you are asked to tick a checkbox that says:
 
 This box is **never pre-ticked**. We only add you to our mailing list if you tick it and submit the form.
 
-You can **withdraw your consent and unsubscribe at any time** by clicking the "unsubscribe" link at the bottom of any marketing email, or by writing to [privacy@noeveka.com]. Withdrawing consent does not affect the lawfulness of anything we did before you withdrew. We may still send you essential non-marketing messages if needed, for example a reply to a question you asked.
+You can **withdraw your consent and unsubscribe at any time** by clicking the "unsubscribe" link at the bottom of any marketing email, or by writing to [connect@noeveka.com]. Withdrawing consent does not affect the lawfulness of anything we did before you withdrew. We may still send you essential non-marketing messages if needed, for example a reply to a question you asked.
 
 ## 5. Who we share your information with
 
@@ -101,14 +102,14 @@ Under India's **Digital Personal Data Protection Act, 2023** and other applicabl
 - **Nominate** another person to exercise your rights in the event of your death or incapacity.
 - **Raise a grievance** with us, and if unresolved, complain to the **Data Protection Board of India** (or your local data protection authority if you are outside India).
 
-To use any of these rights, email **[privacy@noeveka.com]** from the address you used with us. We will respond within a reasonable time, and in any case within the period required by law.
+To use any of these rights, email **[connect@noeveka.com]** from the address you used with us. We will respond within a reasonable time, and in any case within the period required by law.
 
 ## 10. Grievance officer
 
 If you have a concern about how your data is handled, contact:
 
 **[Name of grievance officer / Ajay Kumar]**
-Email: [privacy@noeveka.com]
+Email: [connect@noeveka.com]
 Address: [address]
 
 ## 11. Children
@@ -125,9 +126,10 @@ We may update this Privacy Policy from time to time. The "Last updated" date at 
 
 ## 14. Contact us
 
-Questions about this policy? Email **[privacy@noeveka.com]** or use our Contact page.
+Questions about this policy? Email **[connect@noeveka.com]** or use our Contact page.
 
 ---
+
 ---
 
 # PAGE 2: TERMS AND CONDITIONS
@@ -211,9 +213,10 @@ If any part of these Terms is found unenforceable, the rest stays in effect. Our
 
 ## 16. Contact
 
-Questions about these Terms? Email **[hello@noeveka.com]** or use our Contact page.
+Questions about these Terms? Email **[connect@noeveka.com]** or use our Contact page.
 
 ---
+
 ---
 
 # IMPLEMENTATION CHECKLIST (do not publish this section)

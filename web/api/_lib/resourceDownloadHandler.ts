@@ -1,9 +1,9 @@
 // Shared resource download gate handler using standard Web Request / Response and Resend REST API
+import { issueDownloadToken } from "./downloadTokenStore.js";
 import {
   renderResourceDownloadTeamNotificationEmail,
   renderResourceDownloadUserConfirmationEmail,
 } from "./email-templates/index.js";
-import { issueDownloadToken } from "./downloadTokenStore.js";
 
 export interface ResourceDownloadRequestBody {
   name: string;
@@ -26,29 +26,46 @@ export async function handleResourceDownloadSubmission(
     DOWNLOAD_TOKEN_SECRET?: string;
   }
 ) {
-  const { name, email, consent, resourceTitle = "Resource Document", resourceId, pdfUrl } = body;
+  const {
+    name,
+    email,
+    consent,
+    resourceTitle = "Resource Document",
+    resourceId,
+    pdfUrl,
+  } = body;
 
   // 1. Strict Validation per User Flow
   if (!name?.trim()) {
     return { status: 400, body: { error: "Name is required." } };
   }
   if (!email?.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    return { status: 400, body: { error: "A valid email address is required." } };
+    return {
+      status: 400,
+      body: { error: "A valid email address is required." },
+    };
   }
   if (!consent) {
-    return { status: 400, body: { error: "Consent is required to download this resource." } };
+    return {
+      status: 400,
+      body: { error: "Consent is required to download this resource." },
+    };
   }
 
   const resendApiKey = env.RESEND_API_KEY;
-  const toEmail = env.CONTACT_INBOX_EMAIL || "team@noeveka.com";
+  const toEmail = env.CONTACT_INBOX_EMAIL || "connect@noeveka.com";
   const fromEmail = env.FROM_EMAIL || "Noeveka Website <onboarding@resend.dev>";
   const audienceId = env.RESEND_AUDIENCE_ID;
   const tokenSecret = env.DOWNLOAD_TOKEN_SECRET;
 
   if (!resendApiKey) {
-    console.warn("[Resource Download API] RESEND_API_KEY is not set. Simulating success in development.");
+    console.warn(
+      "[Resource Download API] RESEND_API_KEY is not set. Simulating success in development."
+    );
     // Still issue a real token in dev so the proxy flow works end-to-end.
-    const devToken = pdfUrl ? await issueDownloadToken(pdfUrl, tokenSecret) : null;
+    const devToken = pdfUrl
+      ? await issueDownloadToken(pdfUrl, tokenSecret)
+      : null;
     return {
       status: 200,
       body: {
@@ -83,7 +100,10 @@ export async function handleResourceDownloadSubmission(
       }),
     });
   } catch (err) {
-    console.warn("[Resource Download API] Failed to add contact to Resend Audience:", err);
+    console.warn(
+      "[Resource Download API] Failed to add contact to Resend Audience:",
+      err
+    );
   }
 
   // 3. Render HTML Templates
@@ -142,17 +162,25 @@ export async function handleResourceDownloadSubmission(
 
     // Issue a signed token so the client can proxy-download without ever
     // seeing the raw Sanity CDN URL in its Network tab.
-    const downloadToken = pdfUrl ? await issueDownloadToken(pdfUrl, tokenSecret) : null;
+    const downloadToken = pdfUrl
+      ? await issueDownloadToken(pdfUrl, tokenSecret)
+      : null;
 
     return {
       status: 200,
-      body: { success: true, message: "Resource unlocked successfully.", downloadToken },
+      body: {
+        success: true,
+        message: "Resource unlocked successfully.",
+        downloadToken,
+      },
     };
   } catch (err: unknown) {
     console.error("[Resource Download API] Error:", err);
     // Still issue a token on email-send failure — the gate has already been
     // cleared (contact added, validation passed).
-    const downloadToken = pdfUrl ? await issueDownloadToken(pdfUrl, tokenSecret) : null;
+    const downloadToken = pdfUrl
+      ? await issueDownloadToken(pdfUrl, tokenSecret)
+      : null;
     return {
       status: 200,
       body: { success: true, message: "Resource unlocked.", downloadToken },

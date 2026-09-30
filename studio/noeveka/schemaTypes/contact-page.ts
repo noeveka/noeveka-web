@@ -1,4 +1,4 @@
-import { defineField, defineType } from 'sanity'
+import {defineField, defineType} from 'sanity'
 
 /**
  * contactPage — Sanity document type
@@ -11,9 +11,9 @@ export const contactPage = defineType({
   title: 'Contact Page',
   type: 'document',
   groups: [
-    { name: 'hero', title: '1 · Hero Section' },
-    { name: 'form', title: '2 · Form Settings & Copy' },
-    { name: 'channels', title: '3 · Direct Contact Channels' },
+    {name: 'hero', title: '1 · Hero Section'},
+    {name: 'form', title: '2 · Form Settings & Copy'},
+    {name: 'channels', title: '3 · Direct Contact Channels'},
   ],
 
   fields: [
@@ -127,18 +127,18 @@ export const contactPage = defineType({
               title: 'Service Option',
               type: 'object',
               fields: [
-                defineField({ name: 'id', title: 'Identifier', type: 'string' }),
-                defineField({ name: 'label', title: 'Display Label', type: 'string' }),
+                defineField({name: 'id', title: 'Identifier', type: 'string'}),
+                defineField({name: 'label', title: 'Display Label', type: 'string'}),
               ],
             }),
           ],
           initialValue: [
-            { id: 'fabric', label: 'Fabric Architecture' },
-            { id: 'databricks', label: 'Databricks & Lakehouse' },
-            { id: 'ai_advisory', label: 'AI & GenAI Advisory' },
-            { id: 'finops', label: 'FinOps & Cost Audit' },
-            { id: 'training', label: 'Corporate Training' },
-            { id: 'other', label: 'Other' },
+            {id: 'fabric', label: 'Fabric Architecture'},
+            {id: 'databricks', label: 'Databricks & Lakehouse'},
+            {id: 'ai_advisory', label: 'AI & GenAI Advisory'},
+            {id: 'finops', label: 'FinOps & Cost Audit'},
+            {id: 'training', label: 'Corporate Training'},
+            {id: 'other', label: 'Other'},
           ],
         }),
         defineField({
@@ -189,7 +189,12 @@ export const contactPage = defineType({
           title: 'Chat With Us Group',
           type: 'object',
           fields: [
-            defineField({ name: 'title', title: 'Group Title', type: 'string', initialValue: 'Chat with us' }),
+            defineField({
+              name: 'title',
+              title: 'Group Title',
+              type: 'string',
+              initialValue: 'Chat with us',
+            }),
             defineField({
               name: 'subtext',
               title: 'Group Subtext',
@@ -210,12 +215,18 @@ export const contactPage = defineType({
                       name: 'icon',
                       title: 'Icon Name',
                       type: 'string',
-                      description: 'Lucide icon name (e.g. "mail", "linkedin", "message-square", "phone")',
+                      description:
+                        'Lucide icon name (e.g. "mail", "linkedin", "message-square", "phone")',
                       initialValue: 'mail',
                     }),
-                    defineField({ name: 'label', title: 'Link Label', type: 'string' }),
-                    defineField({ name: 'href', title: 'Link URL / mailto / tel', type: 'string' }),
-                    defineField({ name: 'external', title: 'Open in new tab?', type: 'boolean', initialValue: false }),
+                    defineField({name: 'label', title: 'Link Label', type: 'string'}),
+                    defineField({name: 'href', title: 'Link URL / mailto / tel', type: 'string'}),
+                    defineField({
+                      name: 'external',
+                      title: 'Open in new tab?',
+                      type: 'boolean',
+                      initialValue: false,
+                    }),
                   ],
                 }),
               ],
@@ -223,7 +234,7 @@ export const contactPage = defineType({
                 {
                   icon: 'mail',
                   label: 'Shoot us an email',
-                  href: 'mailto:hello@noeveka.com',
+                  href: 'mailto:connect@noeveka.com',
                   external: false,
                 },
                 {
@@ -241,7 +252,12 @@ export const contactPage = defineType({
           title: 'Call Us Group',
           type: 'object',
           fields: [
-            defineField({ name: 'title', title: 'Group Title', type: 'string', initialValue: 'Call us' }),
+            defineField({
+              name: 'title',
+              title: 'Group Title',
+              type: 'string',
+              initialValue: 'Call us',
+            }),
             defineField({
               name: 'subtext',
               title: 'Group Subtext',
@@ -258,9 +274,14 @@ export const contactPage = defineType({
                   title: 'Phone Link',
                   type: 'object',
                   fields: [
-                    defineField({ name: 'icon', title: 'Icon Name', type: 'string', initialValue: 'phone' }),
-                    defineField({ name: 'label', title: 'Phone Number / Display', type: 'string' }),
-                    defineField({ name: 'href', title: 'tel: URL', type: 'string' }),
+                    defineField({
+                      name: 'icon',
+                      title: 'Icon Name',
+                      type: 'string',
+                      initialValue: 'phone',
+                    }),
+                    defineField({name: 'label', title: 'Phone Number / Display', type: 'string'}),
+                    defineField({name: 'href', title: 'tel: URL', type: 'string'}),
                   ],
                 }),
               ],
@@ -283,7 +304,7 @@ export const contactPage = defineType({
       title: 'hero.heading',
       subtitle: 'hero.subtext',
     },
-    prepare({ title, subtitle }) {
+    prepare({title, subtitle}) {
       return {
         title: title || 'Contact Page Settings',
         subtitle: subtitle || 'Contact Page Copy and Form Settings',

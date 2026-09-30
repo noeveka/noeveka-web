@@ -35,14 +35,26 @@ export const FOOTER_CONFIG = {
 
   servicesColumnHeading: "Services",
   servicesLinks: [
-    { label: "Data & AI Architecture", href: "/services/enterprise-data-ai-architecture" },
-    { label: "AI & Agentic Systems", href: "/services/enterprise-ai-agentic-systems" },
-    { label: "AI Governance & Assurance", href: "/services/ai-governance-architecture-assurance" },
-    { label: "Transformation Advisory", href: "/services/data-ai-transformation-advisory" },
+    {
+      label: "Data & AI Architecture",
+      href: "/services/enterprise-data-ai-architecture",
+    },
+    {
+      label: "AI & Agentic Systems",
+      href: "/services/enterprise-ai-agentic-systems",
+    },
+    {
+      label: "AI Governance & Assurance",
+      href: "/services/ai-governance-architecture-assurance",
+    },
+    {
+      label: "Transformation Advisory",
+      href: "/services/data-ai-transformation-advisory",
+    },
   ],
 
   contactHeading: "Contact",
-  contactEmail: "hello@noeveka.com",
+  contactEmail: "connect@noeveka.com",
   contactPhone: "+91 98765 43210",
   contactAddress: "India · Serving Global Enterprise Teams",
 
@@ -50,7 +62,7 @@ export const FOOTER_CONFIG = {
   newsletterHeading: "Join our newsletter",
   newsletterSubtext:
     "Get the latest insights on data, AI architecture, resources and product updates — straight to your inbox.",
-  newsletterPlaceholder: "hello@noeveka.com",
+  newsletterPlaceholder: "connect@noeveka.com",
 
   copyrightText: "© {year} Noeveka Data & AI Solutions. All rights reserved.",
 

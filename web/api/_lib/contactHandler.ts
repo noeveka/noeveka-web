@@ -25,7 +25,15 @@ export async function handleContactSubmission(
     LOGO_TEXT_URL?: string;
   }
 ) {
-  const { firstName, lastName, email, countryCode = "US", phone = "", message, services = [] } = body;
+  const {
+    firstName,
+    lastName,
+    email,
+    countryCode = "US",
+    phone = "",
+    message,
+    services = [],
+  } = body;
 
   // 1. Validation
   if (!firstName?.trim()) {
@@ -35,19 +43,24 @@ export async function handleContactSubmission(
     return { status: 400, body: { error: "Last name is required." } };
   }
   if (!email?.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    return { status: 400, body: { error: "A valid email address is required." } };
+    return {
+      status: 400,
+      body: { error: "A valid email address is required." },
+    };
   }
   if (!message?.trim()) {
     return { status: 400, body: { error: "Message is required." } };
   }
 
   const resendApiKey = env.RESEND_API_KEY;
-  const toEmail = env.CONTACT_INBOX_EMAIL || "team@noeveka.com";
+  const toEmail = env.CONTACT_INBOX_EMAIL || "connect@noeveka.com";
   // Default to Resend testing sender if custom domain is not yet verified
   const fromEmail = env.FROM_EMAIL || "Noeveka Website <onboarding@resend.dev>";
 
   if (!resendApiKey) {
-    console.warn("[Contact API] RESEND_API_KEY is not set. Simulating success in development.");
+    console.warn(
+      "[Contact API] RESEND_API_KEY is not set. Simulating success in development."
+    );
     return {
       status: 200,
       body: {
@@ -79,7 +92,10 @@ export async function handleContactSubmission(
       }),
     });
   } catch (err) {
-    console.warn("[Contact API] Failed to add contact to Resend Audience:", err);
+    console.warn(
+      "[Contact API] Failed to add contact to Resend Audience:",
+      err
+    );
   }
 
   // 3. Generate HTML Templates
@@ -147,7 +163,10 @@ export async function handleContactSubmission(
 
     if (userRes.status === "fulfilled" && !userRes.value.ok) {
       const userErrText = await userRes.value.text();
-      console.warn("[Contact API] Resend User Confirmation error:", userErrText);
+      console.warn(
+        "[Contact API] Resend User Confirmation error:",
+        userErrText
+      );
     }
 
     return {

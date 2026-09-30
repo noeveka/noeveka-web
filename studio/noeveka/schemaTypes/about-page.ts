@@ -1,4 +1,4 @@
-import { defineField, defineType } from 'sanity'
+import {defineField, defineType} from 'sanity'
 
 /**
  * aboutPage — Sanity document type
@@ -20,25 +20,25 @@ export const aboutPage = defineType({
   title: 'About Page',
   type: 'document',
   groups: [
-    { name: 'hero',      title: '1 · Hero' },
-    { name: 'narrative', title: '2 · Origin Narrative' },
-    { name: 'stats',     title: '3 · Stats Bar' },
-    { name: 'journey',   title: '4 · Global Journey Timeline' },
-    { name: 'founder',   title: '5 · Founder' },
-    { name: 'mission',   title: '6 · Mission' },
-    { name: 'values',    title: '7 · Values' },
-    { name: 'cta',       title: '8 · CTA' },
+    {name: 'hero', title: '1 · Hero'},
+    {name: 'narrative', title: '2 · Origin Narrative'},
+    {name: 'stats', title: '3 · Stats Bar'},
+    {name: 'journey', title: '4 · Global Journey Timeline'},
+    {name: 'founder', title: '5 · Founder'},
+    {name: 'mission', title: '6 · Mission'},
+    {name: 'values', title: '7 · Values'},
+    {name: 'cta', title: '8 · CTA'},
   ],
 
   fields: [
-
     // ─── 1. HERO ──────────────────────────────────────────────────────────────
     defineField({
       name: 'hero',
       title: 'Hero Section',
       type: 'object',
       group: 'hero',
-      description: 'Cinematic hero with founder photo background, dual aspect ratios for desktop and mobile, and clear value narrative.',
+      description:
+        'Cinematic hero with founder photo background, dual aspect ratios for desktop and mobile, and clear value narrative.',
       fields: [
         defineField({
           name: 'badge',
@@ -109,27 +109,38 @@ export const aboutPage = defineType({
           name: 'bgImage',
           title: 'Hero Background Image (Desktop - 16:9 / Landscape)',
           type: 'image',
-          options: { hotspot: true },
-          description: 'Main cinematic background featuring founder in studio/office setting. Recommended landscape ratio 16:9 or 21:9.',
+          options: {hotspot: true},
+          description:
+            'Main cinematic background featuring founder in studio/office setting. Recommended landscape ratio 16:9 or 21:9.',
           fields: [
-            defineField({ name: 'alt', title: 'Alt Text', type: 'string', initialValue: 'Ajay Kumar — Founder & CEO, Noeveka' }),
+            defineField({
+              name: 'alt',
+              title: 'Alt Text',
+              type: 'string',
+              initialValue: 'Ajay Kumar — Founder & CEO, Noeveka',
+            }),
           ],
         }),
         defineField({
           name: 'mobileBgImage',
           title: 'Hero Background Image (Mobile - 4:3 / 1:1 Portrait)',
           type: 'image',
-          options: { hotspot: true },
+          options: {hotspot: true},
           description: 'Optional tailored portrait or square image optimized for mobile viewports.',
           fields: [
-            defineField({ name: 'alt', title: 'Alt Text', type: 'string', initialValue: 'Ajay Kumar — Founder & CEO, Noeveka' }),
+            defineField({
+              name: 'alt',
+              title: 'Alt Text',
+              type: 'string',
+              initialValue: 'Ajay Kumar — Founder & CEO, Noeveka',
+            }),
           ],
         }),
         defineField({
           name: 'badgeTags',
           title: 'Feature Tags / Accreditations',
           type: 'array',
-          of: [{ type: 'string' }],
+          of: [{type: 'string'}],
           description: 'Credibility badges shown in hero overlay.',
           initialValue: ['Independent Advisory', 'Global Architecture', '15+ Yrs Exp'],
         }),
@@ -141,17 +152,27 @@ export const aboutPage = defineType({
             {
               type: 'object',
               fields: [
-                defineField({ name: 'value', title: 'Value', type: 'string', description: 'e.g. "15+"' }),
-                defineField({ name: 'label', title: 'Label', type: 'string', description: 'e.g. "Years Experience"' }),
+                defineField({
+                  name: 'value',
+                  title: 'Value',
+                  type: 'string',
+                  description: 'e.g. "15+"',
+                }),
+                defineField({
+                  name: 'label',
+                  title: 'Label',
+                  type: 'string',
+                  description: 'e.g. "Years Experience"',
+                }),
               ],
-              preview: { select: { title: 'value', subtitle: 'label' } },
+              preview: {select: {title: 'value', subtitle: 'label'}},
             },
           ],
           initialValue: [
-            { value: '15+', label: 'Years Experience' },
-            { value: '3', label: 'Global Hubs' },
-            { value: '5K+', label: 'Leaders Trained' },
-            { value: '100%', label: 'Independent' },
+            {value: '15+', label: 'Years Experience'},
+            {value: '3', label: 'Global Hubs'},
+            {value: '5K+', label: 'Leaders Trained'},
+            {value: '100%', label: 'Independent'},
           ],
         }),
         defineField({
@@ -163,16 +184,26 @@ export const aboutPage = defineType({
             {
               type: 'object',
               fields: [
-                defineField({ name: 'value', title: 'Value', type: 'string', description: 'e.g. "15+"' }),
-                defineField({ name: 'label', title: 'Label', type: 'string', description: 'e.g. "Yrs experience"' }),
+                defineField({
+                  name: 'value',
+                  title: 'Value',
+                  type: 'string',
+                  description: 'e.g. "15+"',
+                }),
+                defineField({
+                  name: 'label',
+                  title: 'Label',
+                  type: 'string',
+                  description: 'e.g. "Yrs experience"',
+                }),
               ],
-              preview: { select: { title: 'value', subtitle: 'label' } },
+              preview: {select: {title: 'value', subtitle: 'label'}},
             },
           ],
           initialValue: [
-            { value: '15+', label: 'Yrs experience' },
-            { value: '5K+', label: 'Leaders trained' },
-            { value: '100%', label: 'Independent' },
+            {value: '15+', label: 'Yrs experience'},
+            {value: '5K+', label: 'Leaders trained'},
+            {value: '100%', label: 'Independent'},
           ],
         }),
       ],
@@ -184,7 +215,8 @@ export const aboutPage = defineType({
       title: 'Origin Narrative Section',
       type: 'object',
       group: 'narrative',
-      description: 'The editorial story section following the hero: Problem/Frustration -> Workspace Desk Image -> The Realisation.',
+      description:
+        'The editorial story section following the hero: Problem/Frustration -> Workspace Desk Image -> The Realisation.',
       fields: [
         defineField({
           name: 'topBlock',
@@ -250,10 +282,15 @@ export const aboutPage = defineType({
           name: 'image',
           title: 'Middle Media Banner (Workspace / Desk Photo)',
           type: 'image',
-          options: { hotspot: true },
+          options: {hotspot: true},
           description: 'Editorial workspace or architectural desk photo with no faces.',
           fields: [
-            defineField({ name: 'alt', title: 'Alt Text', type: 'string', initialValue: 'Noeveka enterprise architecture workspace desk' }),
+            defineField({
+              name: 'alt',
+              title: 'Alt Text',
+              type: 'string',
+              initialValue: 'Noeveka enterprise architecture workspace desk',
+            }),
           ],
         }),
 
@@ -322,11 +359,26 @@ export const aboutPage = defineType({
             {
               type: 'object',
               fields: [
-                defineField({ name: 'value', title: 'Value', type: 'string', description: 'e.g. "15+"' }),
-                defineField({ name: 'label', title: 'Label', type: 'string', description: 'e.g. "Years"' }),
-                defineField({ name: 'sub',   title: 'Sub-label', type: 'string', description: 'Short supporting line.' }),
+                defineField({
+                  name: 'value',
+                  title: 'Value',
+                  type: 'string',
+                  description: 'e.g. "15+"',
+                }),
+                defineField({
+                  name: 'label',
+                  title: 'Label',
+                  type: 'string',
+                  description: 'e.g. "Years"',
+                }),
+                defineField({
+                  name: 'sub',
+                  title: 'Sub-label',
+                  type: 'string',
+                  description: 'Short supporting line.',
+                }),
               ],
-              preview: { select: { title: 'value', subtitle: 'label' } },
+              preview: {select: {title: 'value', subtitle: 'label'}},
             },
           ],
         }),
@@ -339,7 +391,8 @@ export const aboutPage = defineType({
       title: 'Global Journey Timeline',
       type: 'object',
       group: 'journey',
-      description: 'Timeline illustrating Noeveka evolution from Singapore (2020) to UAE (2022) to Netherlands (2024) to Today.',
+      description:
+        'Timeline illustrating Noeveka evolution from Singapore (2020) to UAE (2022) to Netherlands (2024) to Today.',
       fields: [
         defineField({
           name: 'eyebrow',
@@ -369,12 +422,21 @@ export const aboutPage = defineType({
             {
               type: 'object',
               fields: [
-                defineField({ name: 'year', title: 'Year (e.g. 2020)', type: 'string' }),
-                defineField({ name: 'stage', title: 'Stage Badge (e.g. LEARN, GROW, SCALE)', type: 'string' }),
-                defineField({ name: 'location', title: 'Location (e.g. Singapore)', type: 'string' }),
-                defineField({ name: 'title', title: 'Title', type: 'string' }),
-                defineField({ name: 'description', title: 'Description', type: 'text', rows: 2 }),
-                defineField({ name: 'isHighlight', title: 'Is Highlight Card (Orange accent)', type: 'boolean', initialValue: false }),
+                defineField({name: 'year', title: 'Year (e.g. 2020)', type: 'string'}),
+                defineField({
+                  name: 'stage',
+                  title: 'Stage Badge (e.g. LEARN, GROW, SCALE)',
+                  type: 'string',
+                }),
+                defineField({name: 'location', title: 'Location (e.g. Singapore)', type: 'string'}),
+                defineField({name: 'title', title: 'Title', type: 'string'}),
+                defineField({name: 'description', title: 'Description', type: 'text', rows: 2}),
+                defineField({
+                  name: 'isHighlight',
+                  title: 'Is Highlight Card (Orange accent)',
+                  type: 'boolean',
+                  initialValue: false,
+                }),
               ],
               preview: {
                 select: {
@@ -394,7 +456,8 @@ export const aboutPage = defineType({
       title: 'Founder Section',
       type: 'object',
       group: 'founder',
-      description: 'Editorial 2-column section: photo left, bio & quote right. Photo also appears in the Hero.',
+      description:
+        'Editorial 2-column section: photo left, bio & quote right. Photo also appears in the Hero.',
       fields: [
         defineField({
           name: 'eyebrow',
@@ -438,25 +501,27 @@ export const aboutPage = defineType({
           title: 'Pull Quote',
           type: 'text',
           rows: 2,
-          description: 'Displayed as a large blockquote. Do not include surrounding quotes — they are added automatically.',
-          initialValue: 'Good architecture is not about the tool. It\'s about the judgment behind it.',
+          description:
+            'Displayed as a large blockquote. Do not include surrounding quotes — they are added automatically.',
+          initialValue:
+            "Good architecture is not about the tool. It's about the judgment behind it.",
         }),
         defineField({
           name: 'bio',
           title: 'Bio Paragraphs',
-          description: 'Each item becomes a separate paragraph. Only the first paragraph is shown in the Founder section. Keep to 3 max.',
+          description:
+            'Each item becomes a separate paragraph. Only the first paragraph is shown in the Founder section. Keep to 3 max.',
           type: 'array',
-          of: [{ type: 'text' }],
+          of: [{type: 'text'}],
         }),
         defineField({
           name: 'photo',
           title: 'Founder Photo',
           type: 'image',
-          options: { hotspot: true },
-          description: 'Portrait orientation works best (3:4 ratio). Used in both the Hero and Founder sections.',
-          fields: [
-            defineField({ name: 'alt', title: 'Alt Text', type: 'string' }),
-          ],
+          options: {hotspot: true},
+          description:
+            'Portrait orientation works best (3:4 ratio). Used in both the Hero and Founder sections.',
+          fields: [defineField({name: 'alt', title: 'Alt Text', type: 'string'})],
         }),
         defineField({
           name: 'credentials',
@@ -467,17 +532,27 @@ export const aboutPage = defineType({
             {
               type: 'object',
               fields: [
-                defineField({ name: 'label', title: 'Label (small uppercase)', type: 'string', description: 'e.g. "Microsoft Certified"' }),
-                defineField({ name: 'value', title: 'Value (bold)', type: 'string', description: 'e.g. "Fabric & Azure Expert"' }),
+                defineField({
+                  name: 'label',
+                  title: 'Label (small uppercase)',
+                  type: 'string',
+                  description: 'e.g. "Microsoft Certified"',
+                }),
+                defineField({
+                  name: 'value',
+                  title: 'Value (bold)',
+                  type: 'string',
+                  description: 'e.g. "Fabric & Azure Expert"',
+                }),
               ],
-              preview: { select: { title: 'label', subtitle: 'value' } },
+              preview: {select: {title: 'label', subtitle: 'value'}},
             },
           ],
           initialValue: [
-            { label: 'Microsoft Certified', value: 'Fabric & Azure Expert' },
-            { label: 'Databricks Certified', value: 'Data Engineer & Architect' },
-            { label: 'Enterprise Experience', value: '15+ Years' },
-            { label: 'Clients Trained', value: '5,000+ Leaders' },
+            {label: 'Microsoft Certified', value: 'Fabric & Azure Expert'},
+            {label: 'Databricks Certified', value: 'Data Engineer & Architect'},
+            {label: 'Enterprise Experience', value: '15+ Years'},
+            {label: 'Clients Trained', value: '5,000+ Leaders'},
           ],
         }),
         defineField({
@@ -504,22 +579,28 @@ export const aboutPage = defineType({
           name: 'email',
           title: 'Direct Email',
           type: 'string',
-          initialValue: 'hello@noeveka.com',
+          initialValue: 'connect@noeveka.com',
         }),
         defineField({
           name: 'statusBadges',
           title: 'Status Badges',
-          description: 'Status items displayed to the right of the bio (e.g. Netherlands, Open to Global Opportunities, Remote First, Advisory).',
+          description:
+            'Status items displayed to the right of the bio (e.g. Netherlands, Open to Global Opportunities, Remote First, Advisory).',
           type: 'array',
           of: [
             {
               type: 'object',
               fields: [
-                defineField({ name: 'icon', title: 'Icon Name', type: 'string', description: 'map-pin, globe, laptop, handshake' }),
-                defineField({ name: 'title', title: 'Title', type: 'string' }),
-                defineField({ name: 'subtext', title: 'Subtext', type: 'string' }),
+                defineField({
+                  name: 'icon',
+                  title: 'Icon Name',
+                  type: 'string',
+                  description: 'map-pin, globe, laptop, handshake',
+                }),
+                defineField({name: 'title', title: 'Title', type: 'string'}),
+                defineField({name: 'subtext', title: 'Subtext', type: 'string'}),
               ],
-              preview: { select: { title: 'title', subtitle: 'subtext' } },
+              preview: {select: {title: 'title', subtitle: 'subtext'}},
             },
           ],
         }),
@@ -532,12 +613,22 @@ export const aboutPage = defineType({
             {
               type: 'object',
               fields: [
-                defineField({ name: 'icon', title: 'Icon Name', type: 'string', description: 'layers-3, bar-chart-3, shield-check, users' }),
-                defineField({ name: 'title', title: 'Title', type: 'string' }),
-                defineField({ name: 'desc', title: 'Description', type: 'text', rows: 2 }),
-                defineField({ name: 'color', title: 'Color', type: 'string', initialValue: 'neutral' }),
+                defineField({
+                  name: 'icon',
+                  title: 'Icon Name',
+                  type: 'string',
+                  description: 'layers-3, bar-chart-3, shield-check, users',
+                }),
+                defineField({name: 'title', title: 'Title', type: 'string'}),
+                defineField({name: 'desc', title: 'Description', type: 'text', rows: 2}),
+                defineField({
+                  name: 'color',
+                  title: 'Color',
+                  type: 'string',
+                  initialValue: 'neutral',
+                }),
               ],
-              preview: { select: { title: 'title', subtitle: 'desc' } },
+              preview: {select: {title: 'title', subtitle: 'desc'}},
             },
           ],
         }),
@@ -564,17 +655,18 @@ export const aboutPage = defineType({
         defineField({
           name: 'pillars',
           title: 'Mission Pillars',
-          description: 'Exactly 3 pillars recommended. Each has a number, title, and short description.',
+          description:
+            'Exactly 3 pillars recommended. Each has a number, title, and short description.',
           type: 'array',
           of: [
             {
               type: 'object',
               fields: [
-                defineField({ name: 'number', title: 'Number (e.g. "01")', type: 'string' }),
-                defineField({ name: 'title',  title: 'Pillar Title', type: 'string' }),
-                defineField({ name: 'desc',   title: 'Description', type: 'text', rows: 3 }),
+                defineField({name: 'number', title: 'Number (e.g. "01")', type: 'string'}),
+                defineField({name: 'title', title: 'Pillar Title', type: 'string'}),
+                defineField({name: 'desc', title: 'Description', type: 'text', rows: 3}),
               ],
-              preview: { select: { title: 'title', subtitle: 'number' } },
+              preview: {select: {title: 'title', subtitle: 'number'}},
             },
           ],
         }),
@@ -598,7 +690,8 @@ export const aboutPage = defineType({
         defineField({
           name: 'items',
           title: 'Value Cards',
-          description: '4 items recommended. Icon must be a valid Lucide icon name (e.g. "Scale", "Lightbulb", "ShieldCheck", "TrendingUp").',
+          description:
+            '4 items recommended. Icon must be a valid Lucide icon name (e.g. "Scale", "Lightbulb", "ShieldCheck", "TrendingUp").',
           type: 'array',
           of: [
             {
@@ -608,12 +701,13 @@ export const aboutPage = defineType({
                   name: 'icon',
                   title: 'Icon Name (Lucide)',
                   type: 'string',
-                  description: 'See lucide.dev for icon names. Examples: "Scale", "Lightbulb", "ShieldCheck", "TrendingUp".',
+                  description:
+                    'See lucide.dev for icon names. Examples: "Scale", "Lightbulb", "ShieldCheck", "TrendingUp".',
                 }),
-                defineField({ name: 'title', title: 'Value Title', type: 'string' }),
-                defineField({ name: 'desc',  title: 'Description', type: 'text', rows: 2 }),
+                defineField({name: 'title', title: 'Value Title', type: 'string'}),
+                defineField({name: 'desc', title: 'Description', type: 'text', rows: 2}),
               ],
-              preview: { select: { title: 'title', subtitle: 'icon' } },
+              preview: {select: {title: 'title', subtitle: 'icon'}},
             },
           ],
         }),
@@ -696,7 +790,7 @@ export const aboutPage = defineType({
 
   preview: {
     prepare() {
-      return { title: 'About Page' }
+      return {title: 'About Page'}
     },
   },
 })

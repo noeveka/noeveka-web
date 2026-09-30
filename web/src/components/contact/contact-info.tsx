@@ -35,11 +35,11 @@ export default function ContactInfo({ data }: ContactInfoProps) {
     links: data?.chat?.links && data.chat.links.length > 0 ? data.chat.links : CONTACT_CONFIG.channels.chat.links,
   };
 
-  const call = {
-    title: data?.call?.title ?? CONTACT_CONFIG.channels.call.title,
-    subtext: data?.call?.subtext ?? CONTACT_CONFIG.channels.call.subtext,
-    links: data?.call?.links && data.call.links.length > 0 ? data.call.links : CONTACT_CONFIG.channels.call.links,
-  };
+  // const call = {
+  //   title: data?.call?.title ?? CONTACT_CONFIG.channels.call.title,
+  //   subtext: data?.call?.subtext ?? CONTACT_CONFIG.channels.call.subtext,
+  //   links: data?.call?.links && data.call.links.length > 0 ? data.call.links : CONTACT_CONFIG.channels.call.links,
+  // };
 
   const renderIcon = (name: string) => {
     switch (name) {
@@ -122,7 +122,7 @@ export default function ContactInfo({ data }: ContactInfoProps) {
       </div>
 
       {/* 2. Call us */}
-      <div className="flex flex-col">
+      {/* <div className="flex flex-col">
         <h3 className="text-lg font-bold tracking-tight text-neutral-900">
           {call.title}
         </h3>
@@ -142,7 +142,7 @@ export default function ContactInfo({ data }: ContactInfoProps) {
             </a>
           ))}
         </div>
-      </div>
+      </div> */}
 
       {/* 3. Visit us */}
       {/* <div className="flex flex-col">

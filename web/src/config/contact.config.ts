@@ -11,7 +11,8 @@ export interface ServiceOption {
 }
 
 export interface ContactChannel {
-  icon: "message-circle" | "mail" | "twitter" | "linkedin" | "phone" | "map-pin";
+  icon:
+    "message-circle" | "mail" | "twitter" | "linkedin" | "phone" | "map-pin";
   label: string;
   value?: string;
   href: string;
@@ -73,7 +74,7 @@ export const CONTACT_CONFIG = {
         {
           icon: "mail",
           label: "Shoot us an email",
-          href: "mailto:hello@noeveka.com",
+          href: "mailto:connect@noeveka.com",
         },
         {
           icon: "linkedin",
