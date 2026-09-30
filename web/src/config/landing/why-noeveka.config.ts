@@ -18,33 +18,33 @@ export const WHY_NOEVEKA_CONFIG = {
     {
       number: "01",
       icon: "ShieldCheck",
-      title: "Architect-Led Experience",
-      desc: "Real enterprise decisions, made by people who've shipped at scale — not generalists.",
+      title: "Architect-led from the start",
+      desc: "Senior architecture expertise stays close to the engagement, from understanding the problem through to shaping the solution and critical decisions.",
     },
     {
       number: "02",
       icon: "TrendingUp",
-      title: "Measurable Outcomes",
-      desc: "Every engagement is tied to KPIs. We track results, not just deliverables.",
+      title: "Designed for measurable outcomes",
+      desc: "We connect architecture and technology decisions to the business outcomes they are intended to create, not technology for technology’s sake.",
     },
     {
       number: "03",
       icon: "Layers3",
-      title: "Vendor-Unbiased Advice",
-      desc: "No vendor lock-in, no hidden incentives. We recommend what's right for you.",
+      title: "Independent by design",
+      desc: "Our recommendations are shaped by your enterprise needs, existing landscape and long-term interests, not by a preferred platform or vendor.",
     },
   ],
 
   features: [
     {
-      icon: "MessageSquare",
-      title: "Dedicated Support",
-      desc: "Responsive guidance from senior architects whenever you need it.",
+      icon: "Compass",
+      title: "Enterprise-first thinking",
+      desc: "Architecture shaped around business context, operating realities and long-term enterprise value.",
     },
     {
-      icon: "Users",
-      title: "Professional Team",
-      desc: "Skilled experts delivering best-in-class enterprise solutions.",
+      icon: "GraduationCap",
+      title: "Knowledge that stays with you",
+      desc: "We work collaboratively so capability, understanding and decision-making remain within your organisation.",
     },
   ],
 } as const;

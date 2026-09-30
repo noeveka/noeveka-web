@@ -3,23 +3,23 @@
  */
 
 export const HERO_CONFIG = {
-  eyebrow: "ARCHITECT LED",
+  eyebrow: "ARCHITECT-LED",
 
-  headingLine1: "Enterprise Data &",
+  headingLine1: "Architecting Enterprise Data &",
   headingHighlight: "AI",
-  headingLine2: "Solutions",
+  headingLine2: "for Better Decisions",
 
   // Backward compatibility with legacy schema fields
-  headingPart1: "Enterprise Data &",
+  headingPart1: "Architecting Enterprise Data &",
   headingHighlight1: "",
   headingPart2: "",
   headingHighlight2: "AI",
-  headingPart3: " Solutions",
+  headingPart3: " for Better Decisions",
 
   subtitle:
-    "Noeveka empowers data leaders with independent, enterprise-grade architecture advisory, practical bootcamps, and premium digital playbooks — built by architects, for architects.",
+    "Independent advisory, practical architectures, and measurable outcomes that help enterprises create lasting value from data and AI.",
 
-  primaryCtaText: "Book a Strategy Call",
+  primaryCtaText: "Book a Strategy Call →",
   primaryCtaLink: "/contact",
 
   /** Fallback local background image (used when Sanity bgImage is not set) */

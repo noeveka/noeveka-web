@@ -207,7 +207,7 @@ export default function Footer() {
               textTransform: "uppercase",
               letterSpacing: "0.08em",
               color: "transparent",
-              WebkitTextStroke: "1px rgba(15,17,23,0.05)",
+              WebkitTextStroke: "1px rgba(13,15,22,0.05)",
               whiteSpace: "nowrap",
             }}
           >

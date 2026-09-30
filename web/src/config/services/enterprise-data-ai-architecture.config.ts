@@ -1,60 +1,64 @@
 import type { ServiceDetailPageData } from "@/types/service-detail.types";
 
 /**
- * Fallback static configuration for "Enterprise Data & AI Architecture"
- * Matches the structure and content from the client design and screenshot.
+ * Static configuration for "Enterprise Data & AI Architecture"
+ * Source: noeveka_service_page_content.md (01 — Enterprise Data & AI Architecture)
  */
 export const ENTERPRISE_DATA_AI_ARCHITECTURE_CONFIG: ServiceDetailPageData = {
-  title: "Enterprise Data & AI Architecture",
+  title: "Enterprise Data & AI Architecture Advisory",
+  navLabel: "Enterprise Data & AI Architecture",
   slug: "enterprise-data-ai-architecture",
   seoDescription:
-    "Architect the foundation for data and AI at enterprise scale. Connect business strategy with modern, scalable data platforms (Fabric, Databricks, Azure).",
+    "Independent architecture advisory to define target architecture, platform strategy and standards for enterprise data and AI.",
 
   hero: {
     badge: "ENTERPRISE DATA & AI ARCHITECTURE",
     heading: "Architect the foundation for data and AI at",
     headingHighlight: "enterprise scale.",
     description:
-      "We turn fragmented platforms and growing AI demands into a coherent, future-ready architecture that connects business strategy with data, technology and AI — built for scale, trust and real business value.",
+      "Turn fragmented platforms, competing priorities and growing AI demands into a coherent architecture designed around business strategy, scalability and long-term value.",
     primaryCtaText: "Discuss Your Architecture",
     primaryCtaLink: "/contact?topic=architecture",
     secondaryCtaText: "Explore Our Approach",
     secondaryCtaLink: "#what-we-do",
     heroImageUrl: "/assets/services/service_one_hero_image.jpeg",
     stackAnnotations: [
-      { tier: "BUSINESS", label: "Business strategy and outcomes" },
-      { tier: "DATA", label: "Trusted, integrated data foundations" },
-      { tier: "PLATFORM", label: "Scalable technology and platforms" },
-      { tier: "AI", label: "AI capabilities and real-world applications" },
+      { tier: "BUSINESS", label: "Objectives, outcomes, operating priorities" },
+      { tier: "DATA", label: "Domains, governance, information architecture" },
+      { tier: "PLATFORM", label: "Cloud, storage, processing, integration" },
+      { tier: "AI", label: "BI, analytics, AI and agentic systems" },
     ],
   },
 
   challenge: {
-    heading: "The Challenge",
+    eyebrow: "The Challenge",
+    heading: "Technology grows quickly. Architecture rarely keeps pace.",
     paragraphs: [
-      "Many organizations are investing in data and AI, but progress is often slowed by fragmented systems, unclear ownership and a lack of architectural coherence. Without a clear enterprise architecture, it becomes difficult to scale initiatives, ensure data trust or turn AI potential into measurable business impact.",
+      "Enterprise data estates often evolve incrementally. New platforms, cloud services, analytics solutions and AI capabilities are added over time, creating complexity that becomes increasingly difficult to govern and scale. The result can be duplicated capability, unclear ownership, inconsistent standards, unnecessary cost and an architecture that makes transformation harder instead of enabling it.",
     ],
-    signalsHeading: "COMMON SIGNALS WE SEE",
+    signalsHeading: "Common signals:",
     signals: [
-      "Fragmented data platforms and point solutions",
-      "Unclear data ownership and governance",
-      "Inconsistent architecture across business units",
-      "Growing AI demand without a solid foundation",
-      "Duplication of data and analytics capabilities",
-      "Difficulty scaling from pilot to production",
+      "Multiple overlapping data platforms or tools",
+      "Unclear target architecture",
+      "Data engineering and BI operating independently",
+      "AI initiatives progressing without a common foundation",
+      "Increasing cloud and platform costs",
+      "Technical debt slowing delivery",
+      "Semantic models and business logic duplicated across solutions",
     ],
   },
 
   whatWeDo: {
-    heading: "What We Do",
+    eyebrow: "What We Do",
+    heading: "Architecture that connects strategy to execution.",
     subtext:
-      "We design enterprise-grade Data & AI architectures that connect business strategy with scalable, future-ready technology foundations.",
+      "We help organisations define enterprise data and AI architectures that connect business priorities with practical technology decisions. Our role is not simply to produce architecture diagrams. We help establish the principles, decisions and operating structures required to make the architecture implementable.",
     items: [
       {
         icon: "database",
         title: "Target Architecture & Roadmap",
         description:
-          "Define a clear target architecture and pragmatic roadmap aligned to business outcomes.",
+          "Define the future-state architecture and the sequence required to reach it.",
         linkText: "Learn More",
         linkUrl: "/contact?topic=target-architecture",
       },
@@ -62,7 +66,7 @@ export const ENTERPRISE_DATA_AI_ARCHITECTURE_CONFIG: ServiceDetailPageData = {
         icon: "layers-3",
         title: "Platform Strategy",
         description:
-          "Advise on modern data and AI platforms tailored to your enterprise context.",
+          "Assess technologies such as Fabric, Databricks, Snowflake and cloud-native services based on enterprise requirements rather than vendor preference.",
         linkText: "Learn More",
         linkUrl: "/contact?topic=platform-strategy",
       },
@@ -70,7 +74,7 @@ export const ENTERPRISE_DATA_AI_ARCHITECTURE_CONFIG: ServiceDetailPageData = {
         icon: "network",
         title: "Data Integration & Semantic Architecture",
         description:
-          "Design integrated, trusted data foundations with a semantic layer for enterprise use.",
+          "Create clear patterns for data movement, transformation, analytical consumption and enterprise semantics.",
         linkText: "Learn More",
         linkUrl: "/contact?topic=semantic-architecture",
       },
@@ -78,7 +82,7 @@ export const ENTERPRISE_DATA_AI_ARCHITECTURE_CONFIG: ServiceDetailPageData = {
         icon: "shield-check",
         title: "Architecture Standards & Principles",
         description:
-          "Establish standards, reference architectures and governance principles for long-term scale.",
+          "Establish reusable patterns that reduce fragmentation and improve consistency across teams.",
         linkText: "Learn More",
         linkUrl: "/contact?topic=architecture-standards",
       },
@@ -86,123 +90,130 @@ export const ENTERPRISE_DATA_AI_ARCHITECTURE_CONFIG: ServiceDetailPageData = {
   },
 
   architectureLens: {
+    eyebrow: "Visual Model",
     heading: "Our Architecture Lens",
     subtext:
-      "A holistic view from business strategy to AI consumption — ensuring every layer supports the decisions above it and the capabilities below it.",
+      "A structured four-layer model ensuring every layer supports the decisions above it and enables scalable capabilities.",
     layers: [
       {
         icon: "crosshair",
         title: "BUSINESS",
-        description: "Strategy, goals and value outcomes",
+        description: "Objectives, outcomes, operating priorities",
         variant: "navy",
       },
       {
         icon: "database",
         title: "DATA",
-        description: "Trusted, integrated and governed data",
+        description: "Domains, governance, information architecture",
         variant: "navy",
       },
       {
         icon: "layers",
         title: "PLATFORM",
-        description: "Scalable technology and infrastructure",
+        description: "Cloud, storage, processing, integration",
         variant: "slate",
       },
       {
         icon: "sparkles",
         title: "CONSUMPTION & AI",
-        description: "Analytics, AI/ML and business applications",
+        description: "BI, analytics, AI and agentic systems",
         variant: "orange",
       },
     ],
-    footerNote:
-      "EVERY LAYER SUPPORTS THE DECISIONS ABOVE IT AND THE CAPABILITIES BELOW IT.",
+    footerNote: "Architecture works when every layer supports the decisions above it.",
   },
 
   howWeEngage: {
-    heading: "How We Engage",
+    eyebrow: "How We Engage",
+    heading: "From current state to executable architecture.",
     subtext:
-      "A structured, collaborative process designed to deliver practical, actionable architecture outcomes.",
+      "A structured, practical pathway designed to transition your architecture from fragmented initiatives to unified enterprise execution.",
     steps: [
       {
         number: "01",
         title: "Understand",
-        description: "Clarify business goals, current state and key challenges.",
+        description:
+          "Business priorities, existing landscape, constraints and transformation ambitions.",
       },
       {
         number: "02",
         title: "Assess",
-        description: "Evaluate existing architecture, data and technology landscape.",
+        description:
+          "Architecture maturity, technical debt, platform decisions and capability gaps.",
       },
       {
         number: "03",
         title: "Design",
-        description: "Define target architecture and guiding principles.",
+        description:
+          "Target architecture, principles, patterns and technology choices.",
       },
       {
         number: "04",
         title: "Roadmap",
-        description: "Create a phased implementation plan with clear value milestones.",
+        description:
+          "Translate architecture into sequenced, practical transformation initiatives.",
       },
       {
         number: "05",
         title: "Govern",
-        description: "Establish standards, governance and ongoing architecture assurance.",
+        description:
+          "Establish architecture decision-making and guardrails for ongoing evolution.",
       },
     ],
   },
 
   deliverables: {
+    eyebrow: "Deliverables",
     heading: "Typical Deliverables",
-    subtext: "We provide clear, practical deliverables tailored to your organization's needs.",
+    subtext: "Pragmatic, high-value architecture blueprints and governance models.",
     items: [
-      "Current state architecture assessment",
-      "Target architecture and reference models",
-      "Strategic technology and platform recommendations",
-      "Data integration and semantic architecture design",
-      "Phased roadmap with business value milestones",
-      "Architecture standards and design principles",
-      "Governance framework and operating model",
-      "Platform evaluation and vendor guidance",
-      "Implementation planning and effort estimation",
-      "Executive briefing and stakeholder materials",
+      "Current state architecture assessment & gap analysis",
+      "Target architecture blueprints and reference models",
+      "Platform evaluation (Fabric, Databricks, Snowflake, Cloud-native)",
+      "Data integration and enterprise semantic architecture designs",
+      "Sequenced transformation roadmap with milestone values",
+      "Reusable architecture principles and standards library",
+      "Architecture governance framework & decision-making guardrails",
+      "Executive briefing materials and stakeholder alignment artifacts",
     ],
   },
 
   outcomes: {
-    heading: "Outcomes",
+    eyebrow: "Outcomes",
+    heading: "Architecture should reduce complexity, not document it.",
     subtext:
-      "A strong data and AI architecture enables faster innovation, greater trust and measurable business value.",
+      "A foundation built for real operational velocity, governance, and sustained enterprise scale.",
     items: [
       {
         icon: "lightbulb",
-        title: "Clarity",
-        description: "A clear path from strategy to execution.",
+        title: "Greater clarity",
+        description: "A shared view of the enterprise architecture and its evolution.",
       },
       {
         icon: "layers-3",
-        title: "Reduced Duplication",
-        description: "Consolidated platforms and data assets.",
+        title: "Reduced duplication",
+        description: "Clear ownership and reusable platform patterns.",
       },
       {
         icon: "bar-chart-3",
-        title: "Better Decisions",
-        description: "Trusted, accessible data for all stakeholders.",
+        title: "Better technology decisions",
+        description: "Investment aligned to enterprise needs rather than isolated projects.",
       },
       {
         icon: "zap",
-        title: "Faster Delivery",
-        description: "Shorter time from idea to impact.",
+        title: "Faster delivery",
+        description: "Teams operate within known architectural standards.",
       },
       {
         icon: "star",
-        title: "AI Readiness",
-        description: "A solid foundation for scalable AI adoption.",
+        title: "AI readiness",
+        description: "A scalable data and platform foundation capable of supporting emerging AI use cases.",
       },
     ],
   },
 
   relatedExpertise: {
+    eyebrow: "Related Expertise",
     heading: "Related Expertise",
     subtext: "Explore our other services to address your broader data and AI needs.",
     services: [
@@ -211,7 +222,7 @@ export const ENTERPRISE_DATA_AI_ARCHITECTURE_CONFIG: ServiceDetailPageData = {
         icon: "bot",
         title: "Enterprise AI & Agentic Systems",
         description:
-          "Architect and enable production-ready AI and agentic systems.",
+          "Architect AI capabilities on top of a trusted enterprise foundation.",
         linkUrl: "/services/enterprise-ai-agentic-systems",
         linkText: "Learn More",
       },
@@ -220,7 +231,7 @@ export const ENTERPRISE_DATA_AI_ARCHITECTURE_CONFIG: ServiceDetailPageData = {
         icon: "shield-check",
         title: "AI Governance & Architecture Assurance",
         description:
-          "Build trust, reduce risk and ensure responsible AI at scale.",
+          "Ensure architecture decisions meet enterprise governance and risk requirements.",
         linkUrl: "/services/ai-governance-architecture-assurance",
         linkText: "Learn More",
       },
@@ -229,7 +240,7 @@ export const ENTERPRISE_DATA_AI_ARCHITECTURE_CONFIG: ServiceDetailPageData = {
         icon: "trending-up",
         title: "Data & AI Transformation Advisory",
         description:
-          "Turn ambition into execution with practical transformation strategies.",
+          "Turn architecture direction into a practical enterprise transformation.",
         linkUrl: "/services/data-ai-transformation-advisory",
         linkText: "Learn More",
       },
@@ -237,10 +248,11 @@ export const ENTERPRISE_DATA_AI_ARCHITECTURE_CONFIG: ServiceDetailPageData = {
   },
 
   bottomCta: {
+    eyebrow: "Next Steps",
     headingLine1: "Complex Data & AI decisions",
     headingLine2: "deserve experienced judgement.",
     subtext:
-      "Partner with Noeveka to design an enterprise architecture that turns ambition into real business outcomes.",
+      "Start with a focused conversation about your current landscape, priorities and the decisions ahead.",
     primaryCtaText: "Start a Conversation",
     primaryCtaLink: "/contact",
     secondaryCtaText: "Explore All Services",

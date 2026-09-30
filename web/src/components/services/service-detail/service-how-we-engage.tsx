@@ -15,7 +15,7 @@ export default function ServiceHowWeEngage({ howWeEngage }: ServiceHowWeEngagePr
           <motion.div {...fu(0.04)} className="flex items-center gap-2 mb-3">
             <span className="w-6 h-[2px] bg-[#F65D01] inline-block" />
             <span className="text-[11.5px] font-bold tracking-[0.2em] uppercase text-[#F65D01]">
-              Process
+              {howWeEngage.eyebrow || "How We Engage"}
             </span>
           </motion.div>
           <motion.h2
@@ -24,12 +24,14 @@ export default function ServiceHowWeEngage({ howWeEngage }: ServiceHowWeEngagePr
           >
             {howWeEngage.heading}
           </motion.h2>
-          <motion.p
-            {...fu(0.12)}
-            className="text-[15px] sm:text-[16px] leading-relaxed text-[#555D6E] font-normal"
-          >
-            {howWeEngage.subtext}
-          </motion.p>
+          {howWeEngage.subtext && (
+            <motion.p
+              {...fu(0.12)}
+              className="text-[15px] sm:text-[16px] leading-relaxed text-[#555D6E] font-normal"
+            >
+              {howWeEngage.subtext}
+            </motion.p>
+          )}
         </div>
 
         {/* 5-Step Process Timeline / Stepper */}

@@ -4,22 +4,22 @@
 
 export const WHO_WE_ARE_CONFIG = {
   eyebrow: "Who We Are",
-  heading: "Comprehensive solution for enterprise data excellence",
-  body: "Enterprises invest millions in tools but struggle with poor architecture, fragmented data, and lack of governance. Noeveka bridges this gap — delivering architect-led, authority-driven education, advisory, and enterprise-grade playbooks.",
+  heading: "Senior expertise stays close to the work.",
+  body: "Noeveka was built around a simple principle: complex enterprise decisions deserve experienced architectural judgement. Engagements remain architect-led, ensuring strategy, architecture and execution stay connected.",
   ctaText: "More About Us",
   ctaLink: undefined as string | undefined,
 
   founderName: "Ajay Kumar",
-  founderRole: "Founder & Chief Architect — Noeveka",
+  founderRole: "Founder & CEO | Enterprise Data & AI Architect",
   founderPhotoFallbackUrl:
     "/assets/team-pictures/founder_image_about_us_section.jpeg",
-  founderPhotoAlt: "Ajay Kumar — Founder, Noeveka",
+  founderPhotoAlt: "Ajay Kumar — Founder & CEO, Noeveka",
 
   statBadgeValue: "15+",
-  statBadgeLabel: "Years Enterprise Experience",
+  statBadgeLabel: "Enterprise Data & Architecture Experience",
 
-  ratingValue: "4.9",
-  ratingLabel: "Avg. client rating",
+  ratingValue: undefined as string | undefined,
+  ratingLabel: undefined as string | undefined,
 
   skillsHeading: "Core Expertise",
   skills: ["Architecture", "Microsoft Fabric", "Databricks", "FinOps", "AI Strategy", "Governance"],

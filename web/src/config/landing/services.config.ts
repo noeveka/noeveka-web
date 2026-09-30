@@ -3,8 +3,8 @@
  */
 
 export const SERVICES_CONFIG = {
-  eyebrow: "Our Services",
-  heading: "End-to-end AI & Data Solutions for Enterprise Growth",
+  eyebrow: "OUR CORE EXPERTISE",
+  heading: "Expertise for complex enterprise data and AI decisions",
   subtext:
     "We help organizations design, build and scale modern data and AI systems — from strategy to production, with a focus on real business impact.",
   cardCtaText: "Learn More",

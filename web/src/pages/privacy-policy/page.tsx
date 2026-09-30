@@ -2,7 +2,7 @@ import { Link } from "react-router";
 import { PageHead } from "@/components/seo";
 
 const styles = {
-  container: "relative w-full bg-white py-14 sm:py-16 lg:py-18",
+  container: "relative w-full bg-white py-14 sm:py-20 lg:py-24",
   inner: "mx-auto max-w-3xl px-4 sm:px-6 lg:px-8",
   header: "mb-10 sm:mb-14 pb-8 border-b border-neutral-100",
   eyebrow: "text-xs font-bold uppercase tracking-wider text-[#f65d01] mb-2",
@@ -26,7 +26,7 @@ export default function PrivacyPolicyPage() {
     <>
       <PageHead
         title="Privacy Policy"
-        description="Learn how Noeveka collects, uses, and protects your personal data in accordance with applicable data protection laws."
+        description="Learn how NOEVEKA FZC LLC collects, uses, and protects your personal data in accordance with UAE PDPL and international data protection standards."
         canonicalUrl="/privacy-policy"
       />
 
@@ -36,7 +36,7 @@ export default function PrivacyPolicyPage() {
           <header className={styles.header}>
             <p className={styles.eyebrow}>LEGAL & PRIVACY</p>
             <h1 className={styles.title}>Privacy Policy</h1>
-            <p className={styles.meta}>Last updated: September 2026</p>
+            <p className={styles.meta}>Last updated: 01 October 2026</p>
           </header>
 
           {/* Policy Body */}
@@ -45,18 +45,19 @@ export default function PrivacyPolicyPage() {
               <h2 className={styles.h2}>1. Who we are</h2>
               <p className={styles.p}>
                 This website, noeveka.com (the &ldquo;Site&rdquo;), is operated by{" "}
-                <strong>Noeveka</strong> (&ldquo;Noeveka&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;,
-                &ldquo;our&rdquo;), located in India and serving global enterprise teams.
+                <strong>NOEVEKA FZC LLC</strong>, a company registered in Sharjah, United Arab Emirates
+                (&ldquo;Noeveka&rdquo;, &ldquo;we&rdquo;, &ldquo;us&rdquo;, &ldquo;our&rdquo;), located
+                at Sharjah Publishing City Free Zone, Sharjah, United Arab Emirates.
               </p>
               <p className={styles.p}>
-                We provide enterprise data and AI advisory, architecture services, and workshops.
-                This Privacy Policy explains what personal data we collect through the Site, why we
-                collect it, how we use and protect it, and what rights you have.
+                We provide enterprise data and AI advisory, architecture services and workshops. This
+                Privacy Policy explains what personal data we collect through the Site, why we collect
+                it, how we use and protect it, and what rights you have.
               </p>
               <p className={styles.p}>
                 For privacy questions, contact us at{" "}
-                <a href="mailto:privacy@noeveka.com" className={styles.link}>
-                  privacy@noeveka.com
+                <a href="mailto:connect@noeveka.com" className={styles.link}>
+                  connect@noeveka.com
                 </a>
                 .
               </p>
@@ -75,8 +76,8 @@ export default function PrivacyPolicyPage() {
                   record of your consent to receive emails from us.
                 </li>
                 <li>
-                  <strong>When you use the Contact form:</strong> your name, email address, phone number
-                  (optional), and the message you write.
+                  <strong>When you use the Contact form:</strong> your name, email address, and the
+                  message you write.
                 </li>
               </ul>
 
@@ -85,16 +86,16 @@ export default function PrivacyPolicyPage() {
                 <li>
                   <strong>Usage and device data</strong> through Google Analytics 4 (GA4): pages
                   visited, time on site, approximate location (city or country level), browser type,
-                  device type, referring website, and similar technical data.
+                  device type, referring website, and similar technical data. This data is collected
+                  through cookies or similar technologies.
                 </li>
                 <li>
-                  <strong>Basic technical logs</strong> processed by our hosting provider
-                  (Cloudflare/Vercel), such as IP address and request details, for security and to keep
-                  the Site running reliably.
+                  <strong>Basic technical logs</strong> processed by our hosting provider (Cloudflare),
+                  such as IP address and request details, for security and to keep the Site running.
                 </li>
               </ul>
               <p className={styles.p}>
-                We do <strong>not</strong> ask for payment details, passwords, or government IDs. The
+                We do <strong>not</strong> ask for payment details, passwords or government IDs. The
                 Site has no user accounts. We do not knowingly collect sensitive personal data.
               </p>
             </section>
@@ -118,7 +119,8 @@ export default function PrivacyPolicyPage() {
                     </tr>
                     <tr>
                       <td className={styles.td}>
-                        Send you emails about Noeveka, including newsletters, architecture updates, and insights
+                        Send you emails about Noeveka, including newsletters, updates and marketing
+                        communications
                       </td>
                       <td className={styles.td}>Name, email</td>
                       <td className={styles.td}>
@@ -130,12 +132,16 @@ export default function PrivacyPolicyPage() {
                         Reply to your enquiry and send an acknowledgement email
                       </td>
                       <td className={styles.td}>Name, email, message</td>
-                      <td className={styles.td}>Your request / our legitimate interest in responding</td>
+                      <td className={styles.td}>
+                        Your request / our legitimate interest in responding
+                      </td>
                     </tr>
                     <tr>
                       <td className={styles.td}>Understand how the Site is used and improve it</td>
                       <td className={styles.td}>Analytics data</td>
-                      <td className={styles.td}>Our legitimate interest</td>
+                      <td className={styles.td}>
+                        Your consent (where required) / our legitimate interest
+                      </td>
                     </tr>
                     <tr>
                       <td className={styles.td}>Keep the Site secure and prevent abuse</td>
@@ -155,7 +161,7 @@ export default function PrivacyPolicyPage() {
             <section>
               <h2 className={styles.h2}>4. Consent and marketing emails</h2>
               <p className={styles.p}>
-                When you download a resource, you are asked to tick a checkbox that states:
+                When you download a resource, you are asked to tick a checkbox that says:
               </p>
               <div className={styles.quote}>
                 &ldquo;I agree to receive emails from Noeveka, including marketing communications.
@@ -169,52 +175,82 @@ export default function PrivacyPolicyPage() {
                 You can <strong>withdraw your consent and unsubscribe at any time</strong> by clicking
                 the &ldquo;unsubscribe&rdquo; link at the bottom of any marketing email, or by
                 writing to{" "}
-                <a href="mailto:privacy@noeveka.com" className={styles.link}>
-                  privacy@noeveka.com
+                <a href="mailto:connect@noeveka.com" className={styles.link}>
+                  connect@noeveka.com
                 </a>
-                . Withdrawing consent does not affect the lawfulness of processing carried out before
-                withdrawal.
+                . Withdrawing consent does not affect the lawfulness of anything we did before you
+                withdrew. We may still send you essential non-marketing messages if needed, for
+                example a reply to a question you asked.
               </p>
             </section>
 
             <section>
               <h2 className={styles.h2}>5. Who we share your information with</h2>
               <p className={styles.p}>
-                We do <strong>not sell</strong> your personal data. We share it only with trusted service
-                providers who help us run the Site and our communications:
+                We do <strong>not sell</strong> your personal data. We share it only with service
+                providers who help us run the Site and our communications, and only as needed for those
+                purposes:
               </p>
               <ul className={styles.list}>
                 <li>
-                  <strong>Resend / Email platform:</strong> to deliver transactional messages, such as
-                  resource download links and enquiry notifications.
+                  <strong>Resend:</strong> to store your contact details, send our newsletters and
+                  marketing emails (Resend Broadcasts and Audiences), and deliver transactional emails
+                  such as contact form messages to our inbox and acknowledgement emails to you.
                 </li>
                 <li>
-                  <strong>Hosting & CDN (Cloudflare/Vercel):</strong> website hosting, security, and edge
-                  delivery.
+                  <strong>Cloudflare:</strong> website hosting, security and delivery.
                 </li>
                 <li>
-                  <strong>Sanity CMS:</strong> content management system for Site content (does not
-                  receive visitor form submissions).
+                  <strong>Sanity:</strong> the content management system we use to manage Site
+                  content (it does not receive your form data).
                 </li>
                 <li>
-                  <strong>Google (Google Analytics 4):</strong> aggregated website usage analytics.
+                  <strong>Google (Google Analytics 4):</strong> website analytics.
                 </li>
               </ul>
               <p className={styles.p}>
-                These providers act on our instructions and are bound by appropriate confidentiality and
-                security commitments. We may also disclose information if required by law, a court
-                order, or a government authority.
+                These providers act on our instructions and are bound by their own privacy and security
+                commitments. Some of them are located outside the United Arab Emirates, so your data may
+                be transferred to and processed in other countries, including the United States and the
+                European Union. We take reasonable steps to ensure it stays protected when it is.
+              </p>
+              <p className={styles.p}>
+                We may also disclose information if required by law, a court order or a government
+                authority, or to protect our rights, safety or property.
               </p>
             </section>
 
             <section>
               <h2 className={styles.h2}>6. Cookies and analytics</h2>
               <p className={styles.p}>
-                We use Google Analytics 4 to understand how visitors use the Site. GA4 uses cookies and
-                similar technologies to collect aggregated analytics data. You can block or delete
-                cookies in your browser settings, or install Google&apos;s opt-out browser add-on. Blocking
-                cookies will not stop you from using the Site. We do not use cookies for advertising or
-                cross-site tracking.
+                We use <strong>Google Analytics 4</strong> to understand how visitors use the Site. GA4
+                uses cookies and similar technologies to collect the analytics data described in Section
+                2.
+              </p>
+              <ul className={styles.list}>
+                <li>
+                  We display a cookie consent banner on your first visit. Analytics cookies are only
+                  set after you choose &ldquo;Accept&rdquo; or enable the Analytics category; if you
+                  choose &ldquo;Reject&rdquo; or take no action, GA4 does not load. You can change your
+                  choice at any time using the &ldquo;Manage cookie preferences&rdquo; link in the site
+                  footer.
+                </li>
+                <li>
+                  You can block or delete cookies in your browser settings, or install Google&apos;s
+                  opt-out browser add-on:{" "}
+                  <a
+                    href="https://tools.google.com/dlpage/gaoptout"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.link}
+                  >
+                    https://tools.google.com/dlpage/gaoptout
+                  </a>
+                </li>
+                <li>Blocking cookies will not stop you from using the Site.</li>
+              </ul>
+              <p className={styles.p}>
+                We do not use cookies for advertising or to sell your data.
               </p>
             </section>
 
@@ -223,69 +259,92 @@ export default function PrivacyPolicyPage() {
               <ul className={styles.list}>
                 <li>
                   <strong>Email marketing contacts:</strong> until you unsubscribe or ask us to delete
-                  your data.
+                  your data, or until we stop using that list.
                 </li>
                 <li>
                   <strong>Contact form messages:</strong> for as long as needed to handle your enquiry
-                  and follow up, typically up to 24 months.
+                  and follow up, usually up to 24 months, unless a longer period is needed for legal
+                  reasons.
                 </li>
                 <li>
-                  <strong>Analytics data:</strong> according to standard GA4 retention settings (14
-                  months).
+                  <strong>Analytics data:</strong> 14 months, the longest retention period GA4 offers
+                  on a standard (non-360) account.
                 </li>
               </ul>
+              <p className={styles.p}>
+                When data is no longer needed, we delete it or anonymise it.
+              </p>
             </section>
 
             <section>
               <h2 className={styles.h2}>8. How we protect your data</h2>
               <p className={styles.p}>
-                We use appropriate technical and organisational safeguards. The Site is served
-                strictly over HTTPS/SSL, and form data is processed server-side. Access to our tools is
-                restricted to authorised personnel.
+                We use reasonable technical and organisational safeguards. The Site is served over
+                HTTPS/SSL, and form data is processed on the server side. Access to our systems and
+                email tools is restricted to authorised people. No method of transmission or storage
+                over the internet is completely secure, so we cannot guarantee absolute security.
               </p>
             </section>
 
             <section>
               <h2 className={styles.h2}>9. Your rights</h2>
               <p className={styles.p}>
-                Under India&apos;s <strong>Digital Personal Data Protection Act, 2023</strong> and other
-                applicable international frameworks (such as GDPR for EU/UK visitors), you have the
-                right to:
+                Under the <strong>UAE Federal Decree-Law No. 45 of 2021 on the Protection of Personal
+                Data</strong> (&ldquo;UAE PDPL&rdquo;) and other applicable laws (and, for visitors in
+                the EU/UK, the GDPR), you may have the right to:
               </p>
               <ul className={styles.list}>
-                <li>Access the personal data we hold about you.</li>
-                <li>Correct or update inaccurate or incomplete data.</li>
-                <li>Request erasure of your data.</li>
-                <li>Withdraw consent at any time.</li>
-                <li>Raise a grievance with us or file a complaint with the Data Protection Board.</li>
+                <li>
+                  <strong>Be informed</strong> about how your personal data is processed.
+                </li>
+                <li>
+                  <strong>Access</strong> the personal data we hold about you.
+                </li>
+                <li>
+                  <strong>Correct or update</strong> inaccurate or incomplete data.
+                </li>
+                <li>
+                  <strong>Erase</strong> your data, in certain circumstances.
+                </li>
+                <li>
+                  <strong>Restrict or object to</strong> certain processing of your data.
+                </li>
+                <li>
+                  <strong>Withdraw consent</strong> at any time (see Section 4).
+                </li>
+                <li>
+                  <strong>Raise a complaint</strong> with us, and if unresolved, with the{" "}
+                  <strong>UAE Data Office</strong> (or your local data protection authority if you are
+                  outside the UAE).
+                </li>
               </ul>
               <p className={styles.p}>
-                To exercise any of these rights, email{" "}
-                <a href="mailto:privacy@noeveka.com" className={styles.link}>
-                  privacy@noeveka.com
-                </a>
-                .
+                To use any of these rights, email{" "}
+                <a href="mailto:connect@noeveka.com" className={styles.link}>
+                  connect@noeveka.com
+                </a>{" "}
+                from the address you used with us. We will respond within a reasonable time, and in any
+                case within the period required by law.
               </p>
             </section>
 
             <section>
-              <h2 className={styles.h2}>10. Grievance officer</h2>
+              <h2 className={styles.h2}>10. Data protection contact</h2>
               <p className={styles.p}>
-                If you have a concern about how your data is handled, you may reach our Grievance
-                Officer:
+                If you have a concern about how your data is handled, contact:
               </p>
               <ul className={styles.list}>
                 <li>
-                  <strong>Officer:</strong> Ajay Kumar
+                  <strong>Ajay Kumar</strong>
                 </li>
                 <li>
-                  <strong>Email:</strong>{" "}
-                  <a href="mailto:privacy@noeveka.com" className={styles.link}>
-                    privacy@noeveka.com
+                  Email:{" "}
+                  <a href="mailto:connect@noeveka.com" className={styles.link}>
+                    connect@noeveka.com
                   </a>
                 </li>
                 <li>
-                  <strong>Address:</strong> India · Serving Global Enterprise Teams
+                  Address: Sharjah Publishing City Free Zone, Sharjah, United Arab Emirates
                 </li>
               </ul>
             </section>
@@ -293,26 +352,35 @@ export default function PrivacyPolicyPage() {
             <section>
               <h2 className={styles.h2}>11. Children</h2>
               <p className={styles.p}>
-                This Site is intended for business professionals and is not directed at anyone under 18.
-                We do not knowingly collect personal data from children.
+                This Site is intended for business professionals and is not directed at anyone under
+                18. We do not knowingly collect personal data from children. If you believe a child has
+                given us their data, contact us and we will delete it.
               </p>
             </section>
 
             <section>
-              <h2 className={styles.h2}>12. Changes to this policy</h2>
+              <h2 className={styles.h2}>12. Links to other websites</h2>
               <p className={styles.p}>
-                We may update this Privacy Policy periodically. The &ldquo;Last updated&rdquo; date at the top
-                reflects the current version. Continued use of the Site represents your acceptance of the
-                updated terms.
+                The Site may link to third-party websites. We do not control them and are not
+                responsible for their privacy practices. Please read their policies.
               </p>
             </section>
 
             <section>
-              <h2 className={styles.h2}>13. Contact us</h2>
+              <h2 className={styles.h2}>13. Changes to this policy</h2>
+              <p className={styles.p}>
+                We may update this Privacy Policy from time to time. The &ldquo;Last updated&rdquo; date
+                at the top shows the latest version. If we make material changes, we will take
+                reasonable steps to let you know, for example by a notice on the Site.
+              </p>
+            </section>
+
+            <section>
+              <h2 className={styles.h2}>14. Contact us</h2>
               <p className={styles.p}>
                 Questions about this policy? Email{" "}
-                <a href="mailto:privacy@noeveka.com" className={styles.link}>
-                  privacy@noeveka.com
+                <a href="mailto:connect@noeveka.com" className={styles.link}>
+                  connect@noeveka.com
                 </a>{" "}
                 or use our{" "}
                 <Link to="/contact" className={styles.link}>

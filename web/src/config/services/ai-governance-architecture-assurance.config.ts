@@ -1,14 +1,15 @@
 import type { ServiceDetailPageData } from "@/types/service-detail.types";
 
 /**
- * Fallback static configuration for "AI Governance & Architecture Assurance"
- * Matches the structure and content from the client design and screenshot.
+ * Static configuration for "AI Governance & Architecture Assurance"
+ * Source: noeveka_service_page_content.md (03 — AI Governance & Architecture Assurance)
  */
 export const AI_GOVERNANCE_ARCHITECTURE_ASSURANCE_CONFIG: ServiceDetailPageData = {
   title: "AI Governance & Architecture Assurance",
+  navLabel: "AI Governance & Architecture Assurance",
   slug: "ai-governance-architecture-assurance",
   seoDescription:
-    "Innovate with AI without losing control. Build the governance, architecture assurance and accountability required to adopt AI confidently.",
+    "Build the governance, architecture assurance and accountability to adopt AI confidently while managing risk and compliance.",
 
   hero: {
     badge: "AI GOVERNANCE & ARCHITECTURE ASSURANCE",
@@ -22,38 +23,40 @@ export const AI_GOVERNANCE_ARCHITECTURE_ASSURANCE_CONFIG: ServiceDetailPageData 
     secondaryCtaLink: "#what-we-do",
     heroImageUrl: "/assets/services/service_two_hero_image.jpeg",
     stackAnnotations: [
-      { tier: "TRUST", label: "Responsible AI & Ethics" },
-      { tier: "CONTROL", label: "Risk Management & Compliance" },
-      { tier: "ASSURANCE", label: "Architecture Assurance & Review" },
+      { tier: "TRUST", label: "Responsible AI, Transparency & Human Accountability" },
+      { tier: "CONTROL", label: "Security, Risk, Identity & Data Access" },
+      { tier: "ASSURANCE", label: "Architecture Review, Monitoring, Auditability & Compliance" },
     ],
   },
 
   challenge: {
-    heading: "The Challenge",
+    eyebrow: "The Challenge",
+    heading: "AI introduces new capabilities, and new forms of enterprise risk.",
     paragraphs: [
-      "As AI adoption accelerates, organizations face increasing complexity, risk and scrutiny. Without a clear governance framework and architectural assurance, it is easy to lose control — leading to model risks, regulatory exposure, ethical concerns and inconsistent implementation across the enterprise.",
+      "Traditional technology governance was not designed for systems that generate content, make recommendations, reason across information and increasingly perform actions. Organisations need mechanisms that allow innovation to continue while ensuring AI remains secure, explainable, compliant and aligned with organisational values. Governance should create confidence to scale, not bureaucracy that prevents progress.",
     ],
-    signalsHeading: "COMMON RISKS AND CONCERNS",
+    signalsHeading: "Common governance concerns:",
     signals: [
-      "Lack of clear governance and accountability",
-      "Inconsistent standards and fragmented oversight",
-      "Model risks, bias and unintended outcomes",
-      "Regulatory non-compliance and audit challenges",
-      "Limited visibility into AI systems and decisions",
-      "Difficulty scaling responsible AI across the organization",
+      "Lack of clear accountability and decision rights for AI",
+      "Inconsistent architecture standards and fragmented oversight",
+      "Model risks, hallucinations, bias and unintended outcomes",
+      "Regulatory compliance readiness and upcoming audit scrutiny",
+      "Limited visibility and traceability into automated decisions",
+      "Governance bottlenecks slowing down high-value deployment",
     ],
   },
 
   whatWeDo: {
-    heading: "What We Do",
+    eyebrow: "What We Do",
+    heading: "Governance built into architecture.",
     subtext:
-      "We help organizations adopt AI with confidence through practical governance frameworks, independent architecture assurance and responsible AI practices — tailored to your industry, risk profile and business goals.",
+      "We help organisations establish practical governance frameworks, independent architecture assurance and responsible AI practices tailored to business risk and innovation goals.",
     items: [
       {
         icon: "shield-check",
         title: "AI Governance Frameworks",
         description:
-          "Define policies, roles and decision rights for responsible AI adoption.",
+          "Define decision rights, responsibilities, policies and governance mechanisms.",
         linkText: "Learn More",
         linkUrl: "/contact?topic=governance-frameworks",
       },
@@ -61,7 +64,7 @@ export const AI_GOVERNANCE_ARCHITECTURE_ASSURANCE_CONFIG: ServiceDetailPageData 
         icon: "book-open",
         title: "Architecture & Design Reviews",
         description:
-          "Independent review of AI architectures, models and data pipelines.",
+          "Review proposed AI solutions before they become embedded in the technology landscape.",
         linkText: "Learn More",
         linkUrl: "/contact?topic=architecture-reviews",
       },
@@ -69,7 +72,7 @@ export const AI_GOVERNANCE_ARCHITECTURE_ASSURANCE_CONFIG: ServiceDetailPageData 
         icon: "settings",
         title: "Risk & Control Design",
         description:
-          "Design risk management frameworks and control mechanisms for AI systems.",
+          "Identify appropriate controls based on use-case risk and operational impact.",
         linkText: "Learn More",
         linkUrl: "/contact?topic=risk-control",
       },
@@ -77,7 +80,7 @@ export const AI_GOVERNANCE_ARCHITECTURE_ASSURANCE_CONFIG: ServiceDetailPageData 
         icon: "users",
         title: "Responsible AI & Ethics",
         description:
-          "Embed ethical principles, fairness and human-centric AI practices.",
+          "Translate responsible-AI principles into practical architecture and delivery decisions.",
         linkText: "Learn More",
         linkUrl: "/contact?topic=responsible-ai",
       },
@@ -85,15 +88,15 @@ export const AI_GOVERNANCE_ARCHITECTURE_ASSURANCE_CONFIG: ServiceDetailPageData 
         icon: "check-circle-2",
         title: "Auditability & Compliance",
         description:
-          "Enable traceability, explainability and compliance with regulatory requirements.",
+          "Design traceability, documentation and evidence into AI solutions.",
         linkText: "Learn More",
         linkUrl: "/contact?topic=compliance",
       },
       {
         icon: "layers-3",
-        title: "Architecture Review Board (ARB)",
+        title: "Architecture Review Board",
         description:
-          "Establish independent review governance for AI initiatives.",
+          "Establish governance structures capable of reviewing evolving AI capabilities.",
         linkText: "Learn More",
         linkUrl: "/contact?topic=arb",
       },
@@ -101,123 +104,132 @@ export const AI_GOVERNANCE_ARCHITECTURE_ASSURANCE_CONFIG: ServiceDetailPageData 
   },
 
   architectureLens: {
+    eyebrow: "Visual Model",
     heading: "Governance Model",
     subtext:
-      "A holistic framework that aligns people, processes, technology and oversight to enable responsible, scalable and trusted AI across your enterprise.",
+      "Three concentric rings centred on Responsible Enterprise AI to provide trust, control, and architectural assurance.",
     layers: [
       {
         icon: "shield",
         title: "TRUST",
-        description: "Build confidence with stakeholders, customers and regulators.",
+        description: "Responsible AI, Transparency, and Human accountability.",
         variant: "orange",
       },
       {
         icon: "settings",
         title: "CONTROL",
-        description: "Manage risk with clear policies, standards and governance mechanisms.",
+        description: "Security, Risk management, Identity, and Data access boundaries.",
         variant: "navy",
       },
       {
         icon: "check-circle-2",
         title: "ASSURANCE",
-        description:
-          "Validate architectures, controls and outcomes through independent review and continuous oversight.",
+        description: "Architecture review, Continuous monitoring, Auditability, and Compliance.",
         variant: "slate",
       },
     ],
-    footerNote: "RESPONSIBLE ENTERPRISE AI: TRUST · CONTROL · ASSURANCE",
+    footerNote: "Governance that enables responsible adoption, not governance that slows it down.",
   },
 
   howWeEngage: {
-    heading: "Governance without paralysis",
+    eyebrow: "How We Engage",
+    heading: "Governance without paralysis.",
     subtext:
-      "A practical, phased approach to help you establish effective AI governance and architecture assurance — enabling responsible innovation without slowing down progress.",
+      "A structured, risk-based approach that introduces checkpoints and clarity without impeding innovation velocity.",
     steps: [
       {
         number: "01",
         title: "Classify",
-        description: "Understand AI use cases, risk profiles and regulatory requirements.",
+        description:
+          "Understand AI use cases and their level of enterprise risk.",
       },
       {
         number: "02",
         title: "Define",
-        description: "Establish governance frameworks, standards and decision rights.",
+        description:
+          "Establish appropriate policies, standards and controls.",
       },
       {
         number: "03",
         title: "Review",
-        description: "Assess architectures, models and controls independently.",
+        description:
+          "Introduce architecture and governance checkpoints.",
       },
       {
         number: "04",
         title: "Monitor",
-        description: "Track performance, risks and compliance continuously.",
+        description:
+          "Track behaviour, compliance and emerging risks.",
       },
       {
         number: "05",
         title: "Evolve",
-        description: "Refine and scale governance as AI matures and regulations change.",
+        description:
+          "Adapt governance as technologies and regulation change.",
       },
     ],
   },
 
   deliverables: {
+    eyebrow: "Deliverables",
     heading: "Typical Deliverables",
-    subtext:
-      "We provide clear, practical outputs to help you operationalize AI governance and architecture assurance.",
+    subtext: "Clear, practical governance blueprints, review frameworks, and compliance playbooks.",
     items: [
-      "AI governance framework and policy set",
-      "Architecture review assessments and reports",
-      "Risk and control design documentation",
-      "Responsible AI principles and ethical guidelines",
-      "Model auditability and explainability standards",
-      "AI compliance readiness assessment",
-      "Architecture Review Board (ARB) charter and process",
-      "Governance operating model and RACI",
-      "Monitoring and reporting frameworks",
-      "Training and enablement materials",
+      "AI governance framework and enterprise policy set",
+      "Architecture review assessments and risk reports",
+      "Risk and control design matrix across use-case tiers",
+      "Responsible AI principles and implementation checklists",
+      "Model traceability, lineage and auditability standards",
+      "Regulatory compliance readiness assessments",
+      "Architecture Review Board (ARB) charter and evaluation rubric",
     ],
   },
 
   outcomes: {
-    heading: "Outcomes",
-    subtext:
-      "A stronger foundation for AI adoption that balances innovation with risk management, compliance and trust.",
+    eyebrow: "Outcomes",
+    heading: "Governance that enables responsible adoption.",
+    subtext: "Delivering confidence, accountability, and regulatory trust across enterprise AI initiatives.",
     items: [
       {
         icon: "users",
-        title: "Clear accountability",
-        description: "Defined roles, decision rights and ownership.",
+        title: "Clear accountability for AI decisions",
+        description: "Explicit roles, decision rights and escalation paths across stakeholders.",
       },
       {
         icon: "book-open",
-        title: "Consistent standards",
-        description: "Enterprise-wide architecture practices.",
+        title: "Consistent architecture standards",
+        description: "Unified principles preventing fragmentation across departments.",
       },
       {
         icon: "shield-check",
-        title: "Risk-based controls",
-        description: "Proactive risk management and mitigation.",
+        title: "Risk-based rather than blanket controls",
+        description: "Proportionate safeguards tailored to operational and reputational impact.",
       },
       {
         icon: "scale",
-        title: "Regulatory readiness",
-        description: "Alignment with current and emerging regulations.",
+        title: "Improved regulatory readiness",
+        description: "Full auditability and evidence alignment with global AI regulations.",
       },
       {
         icon: "star",
-        title: "Transparency",
-        description: "Greater visibility into AI systems and decisions.",
+        title: "Greater transparency and auditability",
+        description: "Verifiable model decisions, prompts, data lineage and outputs.",
       },
       {
         icon: "sparkles",
-        title: "Stronger trust",
-        description: "Increased confidence with customers, regulators and stakeholders.",
+        title: "Stronger trust in enterprise AI",
+        description: "Heightened confidence among customers, partners, and board members.",
+      },
+      {
+        icon: "zap",
+        title: "Faster approval of well-designed solutions",
+        description: "Clear pathways for teams delivering compliant, high-quality architectures.",
       },
     ],
   },
 
   relatedExpertise: {
+    eyebrow: "Related Expertise",
     heading: "Related Expertise",
     subtext: "Explore our other services to address your broader data and AI needs.",
     services: [
@@ -226,7 +238,7 @@ export const AI_GOVERNANCE_ARCHITECTURE_ASSURANCE_CONFIG: ServiceDetailPageData 
         icon: "layers-3",
         title: "Enterprise Data & AI Architecture",
         description:
-          "Design scalable, future-ready architectures that connect data and AI with your business strategy.",
+          "Apply governance to a well-designed, trusted enterprise foundation.",
         linkUrl: "/services/enterprise-data-ai-architecture",
         linkText: "Learn More",
       },
@@ -235,7 +247,7 @@ export const AI_GOVERNANCE_ARCHITECTURE_ASSURANCE_CONFIG: ServiceDetailPageData 
         icon: "bot",
         title: "Enterprise AI & Agentic Systems",
         description:
-          "Architect and enable production-ready AI and agentic systems.",
+          "Build agentic systems with governance and control designed in from the start.",
         linkUrl: "/services/enterprise-ai-agentic-systems",
         linkText: "Learn More",
       },
@@ -244,7 +256,7 @@ export const AI_GOVERNANCE_ARCHITECTURE_ASSURANCE_CONFIG: ServiceDetailPageData 
         icon: "trending-up",
         title: "Data & AI Transformation Advisory",
         description:
-          "Turn ambition into execution with practical transformation strategies.",
+          "Embed governance into a wider transformation roadmap.",
         linkUrl: "/services/data-ai-transformation-advisory",
         linkText: "Learn More",
       },
@@ -252,13 +264,14 @@ export const AI_GOVERNANCE_ARCHITECTURE_ASSURANCE_CONFIG: ServiceDetailPageData 
   },
 
   bottomCta: {
-    headingLine1: "Turn responsible AI into",
-    headingLine2: "a competitive advantage.",
+    eyebrow: "Next Steps",
+    headingLine1: "Complex Data & AI decisions",
+    headingLine2: "deserve experienced judgement.",
     subtext:
-      "Let's assess your AI governance needs and design a practical roadmap for confident, scalable adoption.",
-    primaryCtaText: "Assess Your AI Governance",
-    primaryCtaLink: "/contact?topic=ai-governance",
-    secondaryCtaText: "Explore Our Approach",
+      "Start with a focused conversation about your current landscape, priorities and the decisions ahead.",
+    primaryCtaText: "Start a Conversation",
+    primaryCtaLink: "/contact",
+    secondaryCtaText: "Explore All Services",
     secondaryCtaLink: "/services",
   },
 };

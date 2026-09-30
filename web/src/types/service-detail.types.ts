@@ -5,14 +5,14 @@
  */
 
 export interface ServiceDetailHero {
-  badge: string;
+  badge?: string;
   heading: string;
-  headingHighlight: string;
+  headingHighlight?: string;
   description: string;
   primaryCtaText: string;
   primaryCtaLink: string;
-  secondaryCtaText: string;
-  secondaryCtaLink: string;
+  secondaryCtaText?: string;
+  secondaryCtaLink?: string;
   heroImage?: {
     asset?: unknown;
     alt?: string;
@@ -25,10 +25,11 @@ export interface ServiceDetailHero {
 }
 
 export interface ServiceDetailChallenge {
+  eyebrow?: string;
   heading: string;
   paragraphs: string[];
-  signalsHeading: string;
-  signals: string[];
+  signalsHeading?: string;
+  signals?: string[];
 }
 
 export interface ServiceDetailCapability {
@@ -40,8 +41,9 @@ export interface ServiceDetailCapability {
 }
 
 export interface ServiceDetailWhatWeDo {
+  eyebrow?: string;
   heading: string;
-  subtext: string;
+  subtext?: string;
   items: ServiceDetailCapability[];
 }
 
@@ -53,8 +55,9 @@ export interface ServiceDetailArchitectureLayer {
 }
 
 export interface ServiceDetailArchitectureLens {
+  eyebrow?: string;
   heading: string;
-  subtext: string;
+  subtext?: string;
   layers: ServiceDetailArchitectureLayer[];
   footerNote?: string;
 }
@@ -66,26 +69,29 @@ export interface ServiceDetailEngagementStep {
 }
 
 export interface ServiceDetailHowWeEngage {
+  eyebrow?: string;
   heading: string;
-  subtext: string;
+  subtext?: string;
   steps: ServiceDetailEngagementStep[];
 }
 
 export interface ServiceDetailDeliverables {
+  eyebrow?: string;
   heading: string;
-  subtext: string;
+  subtext?: string;
   items: string[];
 }
 
 export interface ServiceDetailOutcome {
-  icon: string;
+  icon?: string;
   title: string;
-  description: string;
+  description?: string;
 }
 
 export interface ServiceDetailOutcomes {
+  eyebrow?: string;
   heading: string;
-  subtext: string;
+  subtext?: string;
   items: ServiceDetailOutcome[];
 }
 
@@ -99,24 +105,27 @@ export interface ServiceDetailRelatedCard {
 }
 
 export interface ServiceDetailRelatedExpertise {
+  eyebrow?: string;
   heading: string;
-  subtext: string;
+  subtext?: string;
   services: ServiceDetailRelatedCard[];
 }
 
 export interface ServiceDetailBottomCta {
+  eyebrow?: string;
   headingLine1: string;
-  headingLine2: string;
+  headingLine2?: string;
   subtext: string;
   primaryCtaText: string;
   primaryCtaLink: string;
-  secondaryCtaText: string;
-  secondaryCtaLink: string;
+  secondaryCtaText?: string;
+  secondaryCtaLink?: string;
 }
 
 export interface ServiceDetailPageData {
   title: string;
   slug: string;
+  navLabel?: string;
   seoDescription?: string;
   hero: ServiceDetailHero;
   challenge: ServiceDetailChallenge;

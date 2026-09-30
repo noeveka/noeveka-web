@@ -97,19 +97,33 @@ export default function WhoWeAre({
               </div>
             </motion.div>
 
-            {/* Rating + Skills cards */}
+            {/* Experience Badge / Rating + Skills cards */}
             <motion.div {...fu(0.22)} className="flex flex-col sm:flex-row gap-4">
-              <div className="flex-1 p-4 rounded-xl" style={{ background: "var(--color-bg-subtle)", border: "1px solid var(--color-stroke-default)" }}>
-                <div className="flex items-center gap-1 mb-1.5">
-                  {[1, 2, 3, 4, 5].map((n) => (
-                    <LucideIcon key={n} name="star" className="w-3.5 h-3.5 fill-amber-400" style={{ color: "#FBBF24" }} />
-                  ))}
+              {ratingValue ? (
+                <div className="flex-1 p-4 rounded-xl" style={{ background: "var(--color-bg-subtle)", border: "1px solid var(--color-stroke-default)" }}>
+                  <div className="flex items-center gap-1 mb-1.5">
+                    {[1, 2, 3, 4, 5].map((n) => (
+                      <LucideIcon key={n} name="star" className="w-3.5 h-3.5 fill-amber-400" style={{ color: "#FBBF24" }} />
+                    ))}
+                  </div>
+                  <p className="text-[22px] font-extrabold" style={{ color: "var(--color-text-primary)" }}>
+                    {ratingValue}<span className="text-sm font-semibold" style={{ color: "var(--color-text-muted)" }}>/5.0</span>
+                  </p>
+                  <p className="text-[11px]" style={{ color: "var(--color-text-muted)" }}>{ratingLabel}</p>
                 </div>
-                <p className="text-[22px] font-extrabold" style={{ color: "var(--color-text-primary)" }}>
-                  {ratingValue}<span className="text-sm font-semibold" style={{ color: "var(--color-text-muted)" }}>/5.0</span>
-                </p>
-                <p className="text-[11px]" style={{ color: "var(--color-text-muted)" }}>{ratingLabel}</p>
-              </div>
+              ) : (
+                <div className="flex-1 p-4 rounded-xl flex flex-col justify-center" style={{ background: "var(--color-bg-subtle)", border: "1px solid var(--color-stroke-default)" }}>
+                  <p className="text-[26px] font-black leading-none mb-1.5" style={{ color: "var(--color-brand)" }}>
+                    15+
+                  </p>
+                  <p className="text-[12px] font-bold" style={{ color: "var(--color-text-primary)" }}>
+                    Enterprise Data & Architecture
+                  </p>
+                  <p className="text-[11px]" style={{ color: "var(--color-text-muted)" }}>
+                    Senior Experience
+                  </p>
+                </div>
+              )}
               <div className="flex-1 p-4 rounded-xl" style={{ background: "var(--color-bg-subtle)", border: "1px solid var(--color-stroke-default)" }}>
                 <p className="text-[11px] font-bold mb-2.5" style={{ color: "var(--color-text-primary)" }}>{skillsHeading}</p>
                 <div className="flex flex-wrap gap-1.5">

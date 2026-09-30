@@ -5,9 +5,9 @@
 export const TESTIMONIALS_CONFIG = {
   /** Section header copy */
   eyebrow: "TESTIMONIALS",
-  heading: "What our satisfied clients say",
+  heading: "What clients say",
   subtext:
-    "Real enterprise leaders sharing their experience with Noeveka's independent and flexible advisory.",
+    "Experiences from enterprise leaders who have worked with Noeveka’s independent, architect-led approach.",
 
   /** Fallback testimonial cards (shown when Sanity returns no testimonial documents) */
   testimonials: [

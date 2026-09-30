@@ -10,14 +10,14 @@ export interface ServiceBottomCtaProps {
 
 /**
  * Reusable, clean and minimal CTA card component for Service Pages.
- * Clean white card with soft shadow, minimal border, and subtle brand orange touch.
  */
 export default function ServiceBottomCta({
   cta,
-  eyebrow = "Next Steps",
+  eyebrow,
 }: ServiceBottomCtaProps) {
-  const isPrimaryExternal = cta.primaryCtaLink.startsWith("http");
-  const isSecondaryExternal = cta.secondaryCtaLink.startsWith("http");
+  const displayEyebrow = cta.eyebrow || eyebrow;
+  const isPrimaryExternal = cta.primaryCtaLink?.startsWith("http");
+  const isSecondaryExternal = cta.secondaryCtaLink?.startsWith("http");
 
   return (
     <section className="relative overflow-hidden bg-[#FAFAFA] py-16 sm:py-20 lg:py-24 border-t border-neutral-200/70 selection:bg-[#F65D01]/15">
@@ -34,12 +34,12 @@ export default function ServiceBottomCta({
           />
 
           <div className="relative z-10 max-w-2xl mx-auto flex flex-col items-center">
-            {/* Optional Small Eyebrow */}
-            {eyebrow && (
+            {/* Optional Eyebrow */}
+            {displayEyebrow && (
               <div className="flex items-center gap-1.5 mb-4">
                 <span className="w-1.5 h-1.5 rounded-full bg-[#F65D01]" />
                 <span className="text-[11px] font-bold tracking-[0.2em] uppercase text-[#F65D01]">
-                  {eyebrow}
+                  {displayEyebrow}
                 </span>
               </div>
             )}
@@ -47,9 +47,11 @@ export default function ServiceBottomCta({
             {/* Main Headline */}
             <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-[#161922] leading-[1.2] mb-4">
               {cta.headingLine1}{" "}
-              <span className="text-[#F65D01]">
-                {cta.headingLine2}
-              </span>
+              {cta.headingLine2 && (
+                <span className="text-[#F65D01]">
+                  {cta.headingLine2}
+                </span>
+              )}
             </h2>
 
             {/* Subtext description */}
@@ -57,40 +59,44 @@ export default function ServiceBottomCta({
               {cta.subtext}
             </p>
 
-            {/* Action Buttons: Minimal outline + Clean dark or orange pill */}
+            {/* Action Buttons */}
             <div className="flex flex-wrap items-center justify-center gap-3.5 sm:gap-4">
-              {isPrimaryExternal ? (
-                <a
-                  href={cta.primaryCtaLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center rounded-full bg-[#161922] px-7 py-3 text-[14px] sm:text-[14.5px] font-semibold text-white shadow-sm transition-all duration-200 hover:bg-[#F65D01] hover:shadow-[0_4px_16px_rgba(246,93,1,0.25)] hover:-translate-y-0.5 active:translate-y-0"
-                >
-                  {cta.primaryCtaText}
-                </a>
-              ) : (
-                <Link
-                  to={cta.primaryCtaLink}
-                  className="inline-flex items-center justify-center rounded-full bg-[#161922] px-7 py-3 text-[14px] sm:text-[14.5px] font-semibold text-white shadow-sm transition-all duration-200 hover:bg-[#F65D01] hover:shadow-[0_4px_16px_rgba(246,93,1,0.25)] hover:-translate-y-0.5 active:translate-y-0"
-                >
-                  {cta.primaryCtaText}
-                </Link>
+              {cta.primaryCtaText && (
+                isPrimaryExternal ? (
+                  <a
+                    href={cta.primaryCtaLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center rounded-full bg-[#161922] px-7 py-3 text-[14px] sm:text-[14.5px] font-semibold text-white shadow-sm transition-all duration-200 hover:bg-[#F65D01] hover:shadow-[0_4px_16px_rgba(246,93,1,0.25)] hover:-translate-y-0.5 active:translate-y-0"
+                  >
+                    {cta.primaryCtaText}
+                  </a>
+                ) : (
+                  <Link
+                    to={cta.primaryCtaLink}
+                    className="inline-flex items-center justify-center rounded-full bg-[#161922] px-7 py-3 text-[14px] sm:text-[14.5px] font-semibold text-white shadow-sm transition-all duration-200 hover:bg-[#F65D01] hover:shadow-[0_4px_16px_rgba(246,93,1,0.25)] hover:-translate-y-0.5 active:translate-y-0"
+                  >
+                    {cta.primaryCtaText}
+                  </Link>
+                )
               )}
 
-              {isSecondaryExternal ? (
-                <a
-                  href={cta.secondaryCtaLink}
-                  className="inline-flex items-center justify-center rounded-full border border-neutral-300 bg-white px-6 py-3 text-[14px] sm:text-[14.5px] font-semibold text-[#161922] transition-all duration-200 hover:border-neutral-400 hover:bg-neutral-50 shadow-xs"
-                >
-                  {cta.secondaryCtaText}
-                </a>
-              ) : (
-                <Link
-                  to={cta.secondaryCtaLink}
-                  className="inline-flex items-center justify-center rounded-full border border-neutral-300 bg-white px-6 py-3 text-[14px] sm:text-[14.5px] font-semibold text-[#161922] transition-all duration-200 hover:border-neutral-400 hover:bg-neutral-50 shadow-xs"
-                >
-                  {cta.secondaryCtaText}
-                </Link>
+              {cta.secondaryCtaText && cta.secondaryCtaLink && (
+                isSecondaryExternal ? (
+                  <a
+                    href={cta.secondaryCtaLink}
+                    className="inline-flex items-center justify-center rounded-full border border-neutral-300 bg-white px-6 py-3 text-[14px] sm:text-[14.5px] font-semibold text-[#161922] transition-all duration-200 hover:border-neutral-400 hover:bg-neutral-50 shadow-xs"
+                  >
+                    {cta.secondaryCtaText}
+                  </a>
+                ) : (
+                  <Link
+                    to={cta.secondaryCtaLink}
+                    className="inline-flex items-center justify-center rounded-full border border-neutral-300 bg-white px-6 py-3 text-[14px] sm:text-[14.5px] font-semibold text-[#161922] transition-all duration-200 hover:border-neutral-400 hover:bg-neutral-50 shadow-xs"
+                  >
+                    {cta.secondaryCtaText}
+                  </Link>
+                )
               )}
             </div>
           </div>

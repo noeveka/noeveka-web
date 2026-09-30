@@ -22,6 +22,23 @@ export function AppRouter() {
         <Route path={routesRegistry.about} element={<AboutPage />} />
         <Route path={routesRegistry.services} element={<ServicesPage />} />
         <Route path={routesRegistry.serviceDetail} element={<ServiceDetailPage />} />
+        {/* Alias direct slugs to canonical service detail URLs */}
+        <Route
+          path="/enterprise-data-ai-architecture"
+          element={<Navigate to={routesRegistry.serviceDataAiArchitecture} replace />}
+        />
+        <Route
+          path="/enterprise-ai-agentic-systems"
+          element={<Navigate to={routesRegistry.serviceAiAgenticSystems} replace />}
+        />
+        <Route
+          path="/ai-governance-architecture-assurance"
+          element={<Navigate to={routesRegistry.serviceAiGovernanceAssurance} replace />}
+        />
+        <Route
+          path="/data-ai-transformation-advisory"
+          element={<Navigate to={routesRegistry.serviceDataAiTransformation} replace />}
+        />
         <Route path={routesRegistry.resources} element={<ResourcesPage />} />
         <Route path={routesRegistry.contact} element={<ContactPage />} />
         <Route path={routesRegistry.privacyPolicy} element={<PrivacyPolicyPage />} />

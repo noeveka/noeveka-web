@@ -1,85 +1,95 @@
 import type { ServiceDetailPageData } from "@/types/service-detail.types";
 
 /**
- * Fallback static configuration for "Enterprise AI & Agentic Systems"
- * Matches the structure and content tailored for Enterprise AI, GenAI & Agentic Systems.
+ * Static configuration for "Enterprise AI & Agentic Systems"
+ * Source: noeveka_service_page_content.md (02 — Enterprise AI & Agentic Systems)
  */
 export const ENTERPRISE_AI_AGENTIC_SYSTEMS_CONFIG: ServiceDetailPageData = {
-  title: "Enterprise AI & Agentic Systems",
+  title: "Enterprise AI & Agentic Systems Architecture",
+  navLabel: "Enterprise AI & Agentic Systems",
   slug: "enterprise-ai-agentic-systems",
   seoDescription:
-    "Architect and enable production-ready AI and agentic systems with governance, security, and enterprise integration by design.",
+    "Design and enable production-ready AI and agentic systems with the architecture, governance and enterprise integration to operate at scale.",
 
   hero: {
     badge: "ENTERPRISE AI & AGENTIC SYSTEMS",
-    heading: "Architect and enable production-ready",
-    headingHighlight: "AI & agentic systems.",
+    heading: "Move AI from experimentation to",
+    headingHighlight: "enterprise capability.",
     description:
-      "Move beyond experiments and isolated models to production-grade agentic architectures. We design secure, scalable multi-agent systems, robust RAG pipelines, and enterprise tool integrations built for measurable business value.",
-    primaryCtaText: "Discuss Your AI Systems",
-    primaryCtaLink: "/contact?topic=agentic-ai",
+      "Design and enable production-ready AI and agentic systems with the architecture, governance, security and enterprise integration required to operate reliably at scale.",
+    primaryCtaText: "Discuss Your AI Architecture",
+    primaryCtaLink: "/contact?topic=ai-architecture",
     secondaryCtaText: "Explore Our Approach",
     secondaryCtaLink: "#what-we-do",
     heroImageUrl: "/assets/services/service_three_hero_image.jpeg",
     stackAnnotations: [
-      { tier: "ORCHESTRATION", label: "Multi-Agent Coordination & Workflow" },
-      { tier: "INTEGRATION", label: "Enterprise Data, APIs & Tools" },
-      { tier: "GOVERNANCE", label: "Security, Identity & Human Oversight" },
-      { tier: "OBSERVABILITY", label: "Continuous Evaluation & Monitoring" },
+      { tier: "DATA & KNOWLEDGE", label: "Enterprise Data, Knowledge & Models" },
+      { tier: "AI AGENTS", label: "Autonomous Reasoning & Task Execution" },
+      { tier: "APIS & TOOLS", label: "Business Applications & API Connectors" },
+      { tier: "GOVERNANCE", label: "Security, Identity, Observability & Oversight" },
     ],
   },
 
   challenge: {
-    heading: "The Challenge",
+    eyebrow: "The Challenge",
+    heading: "Building an AI demo is easy. Building an enterprise AI capability is not.",
     paragraphs: [
-      "While generative AI demos and basic prompts are quick to assemble, deploying reliable, production-ready AI agents across the enterprise introduces steep hurdles. Fragile context windows, hallucination risks, tool authorization vulnerabilities, and unpredictable latency frequently stall initiatives before they reach real business scale.",
-      "Without a unified agentic architecture connecting foundation models to enterprise data, access controls, and operational workflows, organizations struggle to deliver trusted autonomy and sustained ROI.",
+      "Many organisations can demonstrate generative AI use cases. The harder questions come next: how will agents access enterprise data securely, how are models selected and governed, how are actions authorised, how are outputs monitored, how do multiple agents coordinate, and how does AI become part of existing enterprise processes. Without architecture, experimentation quickly creates another layer of technology fragmentation.",
     ],
-    signalsHeading: "COMMON AGENTIC AI ROADBLOCKS",
+    signalsHeading: "Common operational hurdles:",
     signals: [
-      "Prototypes failing to transition into reliable production workflows",
-      "Hallucinations, unpredictable reasoning, and lack of deterministic guardrails",
-      "Siloed model deployments without enterprise data access or tool integration",
-      "Unclear identity, permissions, and security risks when agents invoke APIs",
-      "Absence of human-in-the-loop oversight and audit trails",
-      "Spiraling inference compute costs and untracked token usage",
+      "Securing enterprise data access without context leakage",
+      "Selecting and governing models across distributed teams",
+      "Authorising autonomous actions and API execution safely",
+      "Monitoring agent outputs, hallucinations, cost and drift",
+      "Coordinating multi-agent collaboration and delegation",
+      "Embedding agentic capabilities into mission-critical processes",
     ],
   },
 
   whatWeDo: {
-    heading: "What We Do",
+    eyebrow: "What We Do",
+    heading: "Architect AI as part of the enterprise, not beside it.",
     subtext:
-      "We design and build production-grade AI and agentic architectures that connect foundation models to enterprise systems with safety, determinism, and scale.",
+      "We design and build production-grade agentic architectures that connect foundation models to enterprise systems with safety, determinism, and scale.",
     items: [
       {
         icon: "bot",
-        title: "Enterprise AI Agents & RAG",
+        title: "GenAI & RAG Architecture",
         description:
-          "Architect robust Retrieval-Augmented Generation (RAG) and domain-specific agents connected to your data foundations.",
+          "Design enterprise patterns for grounding AI models in trusted organisational knowledge.",
         linkText: "Learn More",
-        linkUrl: "/contact?topic=rag-agents",
+        linkUrl: "/contact?topic=rag-architecture",
+      },
+      {
+        icon: "cpu",
+        title: "Enterprise AI Agents",
+        description:
+          "Architect agents capable of reasoning, retrieving information and executing controlled tasks.",
+        linkText: "Learn More",
+        linkUrl: "/contact?topic=enterprise-agents",
       },
       {
         icon: "network",
         title: "Multi-Agent Orchestration",
         description:
-          "Design hierarchical, collaborative multi-agent workflows with state machines and deterministic handoffs.",
+          "Define how specialised agents collaborate, delegate and coordinate.",
         linkText: "Learn More",
-        linkUrl: "/contact?topic=orchestration",
+        linkUrl: "/contact?topic=multi-agent-orchestration",
       },
       {
         icon: "key",
         title: "Tool Integration & Identity",
         description:
-          "Enable agents to invoke enterprise APIs safely with granular permissions, authentication, and boundary controls.",
+          "Connect agents securely with enterprise applications, APIs and data.",
         linkText: "Learn More",
-        linkUrl: "/contact?topic=tool-identity",
+        linkUrl: "/contact?topic=tool-integration-identity",
       },
       {
         icon: "user",
         title: "Human-in-the-Loop Design",
         description:
-          "Embed proactive review, approval gates, and escalation protocols for sensitive, high-impact business decisions.",
+          "Identify where human judgement, approval and intervention must remain part of the process.",
         linkText: "Learn More",
         linkUrl: "/contact?topic=human-in-the-loop",
       },
@@ -87,91 +97,91 @@ export const ENTERPRISE_AI_AGENTIC_SYSTEMS_CONFIG: ServiceDetailPageData = {
         icon: "activity",
         title: "Observability & Monitoring",
         description:
-          "Implement end-to-end tracing, prompt logging, latency benchmarks, and continuous automated quality evaluations.",
+          "Define how agent behaviour, quality, cost and performance are measured.",
         linkText: "Learn More",
-        linkUrl: "/contact?topic=observability",
-      },
-      {
-        icon: "shield-check",
-        title: "Security & Guardrails",
-        description:
-          "Deploy prompt injection defenses, PII redaction filters, and safety boundaries to safeguard enterprise assets.",
-        linkText: "Learn More",
-        linkUrl: "/contact?topic=security-guardrails",
+        linkUrl: "/contact?topic=agent-observability",
       },
     ],
   },
 
   architectureLens: {
-    heading: "Agentic Architecture Stack",
+    eyebrow: "Visual Model",
+    heading: "Enterprise Agent Architecture",
     subtext:
-      "A comprehensive architecture framework connecting intelligence to enterprise execution with security and oversight at every tier.",
+      "A signature hub-and-spoke agent architecture connecting models to enterprise systems with control and oversight.",
     layers: [
       {
         icon: "database",
-        title: "ENTERPRISE DATA",
-        description: "Curated vector indices, semantic layers, and structured knowledge graphs.",
+        title: "ENTERPRISE DATA & KNOWLEDGE",
+        description: "Enterprise Data, Knowledge graphs and curated context foundations.",
         variant: "navy",
       },
       {
-        icon: "cpu",
-        title: "ORCHESTRATION",
-        description: "Multi-agent planning, state preservation, memory, and model dispatch.",
+        icon: "bot",
+        title: "AI AGENTS",
+        description: "Reasoning engines, specialized agents, delegation and planning loops.",
         variant: "orange",
       },
       {
         icon: "network",
         title: "APIS & TOOLS",
-        description: "Enterprise connectors, CRM/ERP integrations, and autonomous task execution.",
+        description: "Enterprise systems, CRM/ERP connectors, databases and tools.",
         variant: "slate",
       },
       {
         icon: "shield-check",
-        title: "GOVERNANCE & TRUST",
-        description: "Identity boundaries, prompt firewalls, audit logs, and human-in-the-loop gates.",
+        title: "GOVERNANCE & CONTROL",
+        description: "Security, identity boundaries, observability and human oversight.",
         variant: "navy",
       },
     ],
-    footerNote: "END-TO-END AUTONOMY POWERED BY ENTERPRISE DATA, PROTOCOLS & GOVERNANCE",
+    footerNote:
+      "Core Hub: AI Agents connected to Enterprise Data, Tools & APIs with Governance & Human Oversight.",
   },
 
   howWeEngage: {
-    heading: "How We Engage",
+    eyebrow: "How We Engage",
+    heading: "From AI use case to operating capability.",
     subtext:
-      "A pragmatic engineering roadmap to take agentic initiatives from concept validation to resilient, production-ready enterprise execution.",
+      "A structured pathway taking agentic initiatives from concept validation to resilient, production-ready enterprise execution.",
     steps: [
       {
         number: "01",
-        title: "Assess",
-        description: "Evaluate use case viability, data readiness, latency needs, and security constraints.",
+        title: "Identify",
+        description:
+          "Prioritise business problems where AI can create meaningful value.",
       },
       {
         number: "02",
         title: "Architect",
-        description: "Design agent topologies, memory structures, tool interfaces, and guardrails.",
+        description:
+          "Define data, model, agent, integration and security requirements.",
       },
       {
         number: "03",
         title: "Prototype",
-        description: "Build rapid proof-of-value implementations to benchmark accuracy and performance.",
+        description:
+          "Validate the architecture and value proposition rapidly.",
       },
       {
         number: "04",
-        title: "Integrate",
-        description: "Connect agents with enterprise IAM, event streams, APIs, and observability stacks.",
+        title: "Industrialise",
+        description:
+          "Introduce reliability, monitoring, identity and enterprise controls.",
       },
       {
         number: "05",
         title: "Scale",
-        description: "Optimize inference costs, harden failovers, and institute automated evaluation loops.",
+        description:
+          "Create reusable patterns for future AI capabilities.",
       },
     ],
   },
 
   deliverables: {
+    eyebrow: "Deliverables",
     heading: "Typical Deliverables",
-    subtext:
-      "We provide actionable engineering blueprints and reference implementations tailored to your tech stack.",
+    subtext: "Engineering blueprints, integration protocols, and evaluation frameworks.",
     items: [
       "Enterprise AI & Agentic Architecture Blueprint",
       "Production RAG & vector retrieval architecture specifications",
@@ -180,51 +190,55 @@ export const ENTERPRISE_AI_AGENTIC_SYSTEMS_CONFIG: ServiceDetailPageData = {
       "Human-in-the-loop review workflow & escalation framework",
       "Agent security, prompt firewall & data access policy",
       "Continuous observability, tracing & evaluation pipeline",
-      "Inference compute cost optimization & caching strategy",
       "Model evaluation benchmarks & ground-truth validation set",
-      "Developer enablement playbooks and reference codebases",
     ],
   },
 
   outcomes: {
-    heading: "Outcomes",
-    subtext:
-      "Deliver measurable operational efficiency, automated precision, and faster time-to-value with dependable agentic systems.",
+    eyebrow: "Outcomes",
+    heading: "AI that can operate beyond the prototype.",
+    subtext: "Transitioning AI from fragile proof-of-concept into hardened enterprise capability.",
     items: [
       {
-        icon: "zap",
-        title: "Operational Velocity",
-        description: "Accelerate multi-step business workflows through autonomous execution.",
+        icon: "shield-check",
+        title: "Production-ready architecture",
+        description: "Hardened infrastructure built to support real enterprise load and concurrency.",
       },
       {
-        icon: "shield-check",
-        title: "Trusted Execution",
-        description: "Minimize hallucinations with grounded enterprise RAG and guardrails.",
+        icon: "network",
+        title: "Secure enterprise integration",
+        description: "Safe data and tool access boundaries complying with enterprise security standards.",
       },
       {
         icon: "layers-3",
-        title: "Seamless Integration",
-        description: "Connect agents natively into existing CRM, ERP, and database systems.",
+        title: "Reusable AI patterns",
+        description: "Shared components that accelerate subsequent AI initiatives across teams.",
       },
       {
-        icon: "bar-chart-3",
-        title: "Cost Efficiency",
-        description: "Optimize token usage and route tasks efficiently across model tiers.",
+        icon: "crosshair",
+        title: "Better model and platform decisions",
+        description: "Objective technology selection tailored to latency, cost and governance needs.",
       },
       {
-        icon: "user",
-        title: "Human Empowerment",
-        description: "Automate repetitive tasks while preserving critical human judgment.",
+        icon: "cpu",
+        title: "Controlled autonomous execution",
+        description: "Deterministic guardrails keeping agent tasks verifiable and accountable.",
       },
       {
-        icon: "trending-up",
-        title: "Scalable Foundation",
-        description: "A flexible architecture ready for future model breakthroughs.",
+        icon: "zap",
+        title: "Reduced AI experimentation debt",
+        description: "Elimination of brittle point solutions through unified architectural standards.",
+      },
+      {
+        icon: "star",
+        title: "Confidence scaling across organisation",
+        description: "Executive and operational clarity to deploy AI capabilities enterprise-wide.",
       },
     ],
   },
 
   relatedExpertise: {
+    eyebrow: "Related Expertise",
     heading: "Related Expertise",
     subtext: "Explore our other services to address your broader data and AI needs.",
     services: [
@@ -233,7 +247,7 @@ export const ENTERPRISE_AI_AGENTIC_SYSTEMS_CONFIG: ServiceDetailPageData = {
         icon: "layers-3",
         title: "Enterprise Data & AI Architecture",
         description:
-          "Design enterprise-grade Data & AI architectures that connect business strategy with scalable, future-ready technology foundations.",
+          "Give AI a trusted, well-governed enterprise foundation to build on.",
         linkUrl: "/services/enterprise-data-ai-architecture",
         linkText: "Learn More",
       },
@@ -242,7 +256,7 @@ export const ENTERPRISE_AI_AGENTIC_SYSTEMS_CONFIG: ServiceDetailPageData = {
         icon: "shield-check",
         title: "AI Governance & Architecture Assurance",
         description:
-          "Build trust, reduce risk and ensure responsible AI at scale with independent architecture reviews.",
+          "Build the trust and control layer around agentic systems as they scale.",
         linkUrl: "/services/ai-governance-architecture-assurance",
         linkText: "Learn More",
       },
@@ -251,7 +265,7 @@ export const ENTERPRISE_AI_AGENTIC_SYSTEMS_CONFIG: ServiceDetailPageData = {
         icon: "trending-up",
         title: "Data & AI Transformation Advisory",
         description:
-          "Turn ambition into execution with practical transformation strategies and leadership.",
+          "Turn a working AI capability into an enterprise-wide programme.",
         linkUrl: "/services/data-ai-transformation-advisory",
         linkText: "Learn More",
       },
@@ -259,12 +273,13 @@ export const ENTERPRISE_AI_AGENTIC_SYSTEMS_CONFIG: ServiceDetailPageData = {
   },
 
   bottomCta: {
-    headingLine1: "Ready to deploy production-grade",
-    headingLine2: "AI & agentic systems?",
+    eyebrow: "Next Steps",
+    headingLine1: "Complex Data & AI decisions",
+    headingLine2: "deserve experienced judgement.",
     subtext:
-      "Partner with Noeveka to design secure, scalable agentic architectures that deliver measurable enterprise impact.",
-    primaryCtaText: "Discuss Your AI Systems",
-    primaryCtaLink: "/contact?topic=agentic-ai",
+      "Start with a focused conversation about your current landscape, priorities and the decisions ahead.",
+    primaryCtaText: "Start a Conversation",
+    primaryCtaLink: "/contact",
     secondaryCtaText: "Explore All Services",
     secondaryCtaLink: "/services",
   },

@@ -52,11 +52,11 @@ export default function AboutNarrative({
     (image as { alt?: string })?.alt ?? ABOUT_CONFIG.narrativeSection.image.alt;
 
   return (
-    <section className="relative w-full overflow-hidden bg-white py-20 lg:py-32">
-      <div className="lp-container lp-px mx-auto">
+    <section className="relative w-full overflow-hidden bg-white py-20 lg:py-28">
+      <div className="lp-container lp-px mx-auto max-w-6xl">
         {/* ── UPPER BLOCK: The Frustration We Saw ── */}
         <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-12 lg:gap-14">
-          {/* Left Column: Eyebrow + Huge Headline */}
+          {/* Left Column: Standardized Eyebrow + Huge Headline */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -65,20 +65,34 @@ export default function AboutNarrative({
             className="lg:col-span-7"
           >
             {top.eyebrow && (
-              <p className="mb-4 text-xs font-bold tracking-widest text-neutral-500 uppercase">
-                {top.eyebrow}
-              </p>
+              <div className="mb-4 flex items-center gap-2">
+                <div className="h-[2px] w-5 bg-[#f65d01]" />
+                <span className="text-[11.5px] font-bold tracking-[0.2em] uppercase text-[#f65d01]">
+                  {top.eyebrow}
+                </span>
+              </div>
             )}
 
-            <h2 className="text-3xl font-extrabold tracking-tight text-[#1e212b] sm:text-4xl lg:text-[46px] leading-[1.12]">
+            <h2 className="text-3xl font-extrabold tracking-tight text-[#1e212b] sm:text-4xl lg:text-[46px] leading-[1.15]">
               {top.headingLine1}
-              <br />
-              {top.headingLine2}
-              <br />
-              {top.headingLine3}{" "}
-              <span className="">
-                {top.headingHighlight}
-              </span>
+              {top.headingLine2 && (
+                <>
+                  <br />
+                  {top.headingLine2}
+                </>
+              )}
+              {top.headingLine3 && (
+                <>
+                  <br />
+                  {top.headingLine3}
+                </>
+              )}
+              {top.headingHighlight && (
+                <>
+                  {" "}
+                  <span className="text-[#f65d01]">{top.headingHighlight}</span>
+                </>
+              )}
             </h2>
           </motion.div>
 
@@ -100,7 +114,7 @@ export default function AboutNarrative({
           </motion.div>
         </div>
 
-        {/* ── MIDDLE MEDIA BANNER: Editorial Workspace Desk Photo ── */}
+        {/* ── MIDDLE MEDIA BANNER: Architectural Visual ── */}
         <motion.div
           initial={{ opacity: 0, y: 28 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -122,7 +136,7 @@ export default function AboutNarrative({
 
         {/* ── LOWER BLOCK: The Moment We Realised It ── */}
         <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-12 lg:gap-14">
-          {/* Left Column: Eyebrow + Huge Two-Tone Headline */}
+          {/* Left Column: Standardized Eyebrow + Huge Headline */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -131,15 +145,17 @@ export default function AboutNarrative({
             className="lg:col-span-7"
           >
             {(bottom.eyebrowPart1 || bottom.eyebrowHighlight) && (
-              <p className="mb-4 text-xs font-bold tracking-widest uppercase">
-                <span className="text-[#f65d01]">{bottom.eyebrowPart1}</span>{" "}
-                <span className="text-[#f65d01]">{bottom.eyebrowHighlight}</span>
-              </p>
+              <div className="mb-4 flex items-center gap-2">
+                <div className="h-[2px] w-5 bg-[#f65d01]" />
+                <span className="text-[11.5px] font-bold tracking-[0.2em] uppercase text-[#f65d01]">
+                  {[bottom.eyebrowPart1, bottom.eyebrowHighlight].filter(Boolean).join(" ")}
+                </span>
+              </div>
             )}
 
-            <h2 className="text-3xl font-extrabold tracking-tight text-[#1e212b] sm:text-4xl lg:text-[46px] leading-[1.12]">
+            <h2 className="text-3xl font-extrabold tracking-tight text-[#1e212b] sm:text-4xl lg:text-[46px] leading-[1.15]">
               {bottom.headingPlain}{" "}
-              <span className="block text-[#f65d01]">
+              <span className="block text-[#f65d01] sm:inline">
                 {bottom.headingHighlight}
               </span>
             </h2>

@@ -17,7 +17,7 @@ export default function ServiceRelatedExpertise({ related }: ServiceRelatedExper
           <motion.div {...fu(0.04)} className="flex items-center gap-2 mb-3">
             <span className="w-6 h-[2px] bg-[#F65D01] inline-block" />
             <span className="text-[11.5px] font-bold tracking-[0.2em] uppercase text-[#F65D01]">
-              Other Practices
+              {related.eyebrow || "Related Expertise"}
             </span>
           </motion.div>
           <motion.h2
@@ -26,12 +26,14 @@ export default function ServiceRelatedExpertise({ related }: ServiceRelatedExper
           >
             {related.heading}
           </motion.h2>
-          <motion.p
-            {...fu(0.12)}
-            className="text-[15px] sm:text-[16px] leading-relaxed text-[#555D6E] font-normal"
-          >
-            {related.subtext}
-          </motion.p>
+          {related.subtext && (
+            <motion.p
+              {...fu(0.12)}
+              className="text-[15px] sm:text-[16px] leading-relaxed text-[#555D6E] font-normal"
+            >
+              {related.subtext}
+            </motion.p>
+          )}
         </div>
 
         {/* 3 Related Service Cards */}

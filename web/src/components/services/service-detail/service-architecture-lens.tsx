@@ -37,7 +37,7 @@ const variantStyles = {
     text: "text-[#161922]",
     desc: "text-[#64748B]",
     iconBg: "bg-orange-50",
-    iconColor: "text-[#F65D01]",
+    iconColor: "#F65D01",
     border: "border-neutral-200",
   },
 };
@@ -51,7 +51,7 @@ export default function ServiceArchitectureLens({ lens }: ServiceArchitectureLen
           <motion.div {...fu(0.04)} className="flex items-center gap-2 mb-3">
             <span className="w-6 h-[2px] bg-[#F65D01] inline-block" />
             <span className="text-[11.5px] font-bold tracking-[0.2em] uppercase text-[#F65D01]">
-              Architectural Framework
+              {lens.eyebrow || "Visual Model"}
             </span>
           </motion.div>
           <motion.h2
@@ -60,12 +60,14 @@ export default function ServiceArchitectureLens({ lens }: ServiceArchitectureLen
           >
             {lens.heading}
           </motion.h2>
-          <motion.p
-            {...fu(0.12)}
-            className="text-[15px] sm:text-[16px] leading-relaxed text-[#555D6E] font-normal"
-          >
-            {lens.subtext}
-          </motion.p>
+          {lens.subtext && (
+            <motion.p
+              {...fu(0.12)}
+              className="text-[15px] sm:text-[16px] leading-relaxed text-[#555D6E] font-normal"
+            >
+              {lens.subtext}
+            </motion.p>
+          )}
         </div>
 
         {/* Connected Layer Cards Flow (3 or 4 columns) */}
@@ -107,10 +109,10 @@ export default function ServiceArchitectureLens({ lens }: ServiceArchitectureLen
           })}
         </div>
 
-        {/* Footer Connecting Note */}
+        {/* Footer Connecting Note / Caption */}
         {lens.footerNote && (
           <motion.div {...fu(0.24)} className="mt-8 text-center">
-            <span className="inline-block text-[11px] sm:text-[11.5px] font-mono tracking-[0.16em] uppercase text-[#64748B] px-4 py-2 rounded-full bg-white border border-neutral-200/80">
+            <span className="inline-block text-[11px] sm:text-[12px] font-medium text-[#475569] px-5 py-2.5 rounded-full bg-white border border-neutral-200/80 shadow-2xs">
               {lens.footerNote}
             </span>
           </motion.div>

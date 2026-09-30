@@ -17,7 +17,7 @@ export default function ServiceWhatWeDo({ whatWeDo }: ServiceWhatWeDoProps) {
           <motion.div {...fu(0.04)} className="flex items-center gap-2 mb-3">
             <span className="w-6 h-[2px] bg-[#F65D01] inline-block" />
             <span className="text-[11.5px] font-bold tracking-[0.2em] uppercase text-[#F65D01]">
-              Capabilities
+              {whatWeDo.eyebrow || "What We Do"}
             </span>
           </motion.div>
           <motion.h2
@@ -26,12 +26,14 @@ export default function ServiceWhatWeDo({ whatWeDo }: ServiceWhatWeDoProps) {
           >
             {whatWeDo.heading}
           </motion.h2>
-          <motion.p
-            {...fu(0.12)}
-            className="text-[15px] sm:text-[16px] leading-relaxed text-[#555D6E] font-normal"
-          >
-            {whatWeDo.subtext}
-          </motion.p>
+          {whatWeDo.subtext && (
+            <motion.p
+              {...fu(0.12)}
+              className="text-[15px] sm:text-[16px] leading-relaxed text-[#555D6E] font-normal"
+            >
+              {whatWeDo.subtext}
+            </motion.p>
+          )}
         </div>
 
         {/* Cards Grid: dynamic columns depending on count */}
