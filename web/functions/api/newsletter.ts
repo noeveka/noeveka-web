@@ -1,19 +1,17 @@
-import { handleResourceDownloadSubmission, ResourceDownloadRequestBody } from "../../api/_lib/resourceDownloadHandler";
+import { handleNewsletterSubscription, NewsletterRequestBody } from "../../api/_lib/newsletterHandler";
 
 interface Env {
   RESEND_API_KEY?: string;
-  CONTACT_INBOX_EMAIL?: string;
-  FROM_EMAIL?: string;
   RESEND_AUDIENCE_ID?: string;
+  FROM_EMAIL?: string;
   LOGO_ICON_URL?: string;
   LOGO_TEXT_URL?: string;
-  DOWNLOAD_TOKEN_SECRET?: string;
 }
 
 export async function onRequestPost(context: { request: Request; env: Env }) {
   try {
-    const body = (await context.request.json()) as ResourceDownloadRequestBody;
-    const result = await handleResourceDownloadSubmission(body, context.env);
+    const body = (await context.request.json()) as NewsletterRequestBody;
+    const result = await handleNewsletterSubscription(body, context.env);
 
     return new Response(JSON.stringify(result.body), {
       status: result.status,
