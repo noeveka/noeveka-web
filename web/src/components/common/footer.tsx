@@ -330,12 +330,12 @@ export default function Footer() {
               >
                 {contactEmail}
               </a>
-              <p
+              {/* <p
                 className="text-[13px]"
                 style={{ color: "var(--color-text-muted)" }}
               >
                 {contactPhone}
-              </p>
+              </p> */}
               <p
                 className="text-[13px] leading-snug"
                 style={{ color: "var(--color-text-muted)" }}
@@ -628,8 +628,9 @@ export default function Footer() {
             {/* Navigation links (hidden on small screens, visible on sm+) */}
             <nav className="hidden items-center gap-5 sm:flex">
               {footerNavLinks.map((l) => (
-                <button
+                <Link
                   key={l.label}
+                  to={l.href}
                   className="cursor-pointer border-none bg-transparent text-[11px] font-medium transition-colors"
                   style={{ color: "var(--color-text-muted)" }}
                   onMouseEnter={(e) =>
@@ -640,7 +641,7 @@ export default function Footer() {
                   }
                 >
                   {l.label}
-                </button>
+                </Link>
               ))}
             </nav>
           </div>
