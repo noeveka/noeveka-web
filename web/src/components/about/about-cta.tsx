@@ -43,7 +43,7 @@ export default function AboutCta({
   const primaryText = primaryCtaText || ABOUT_CONFIG.cta.primaryCtaText;
   const primaryHref = primaryCtaLink || ABOUT_CONFIG.cta.primaryCtaLink;
   const secondaryText = secondaryCtaText || ABOUT_CONFIG.cta.secondaryCtaText;
-  const secondaryHref = secondaryCtaLink || ABOUT_CONFIG.cta.secondaryCtaLink;
+  const secondaryHref =
     secondaryCtaLink && secondaryCtaLink !== "/"
       ? secondaryCtaLink
       : ABOUT_CONFIG.cta.secondaryCtaLink;

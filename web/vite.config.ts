@@ -63,7 +63,7 @@ function localApiPlugin(env: Record<string, string>): Plugin {
             } else {
               res.end();
             }
-          } catch (err) {
+          } catch {
             res.statusCode = 502;
             res.setHeader("Content-Type", "application/json");
             res.end(JSON.stringify({ error: "Failed to stream resource." }));
