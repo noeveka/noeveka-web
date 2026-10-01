@@ -10,6 +10,7 @@ import AboutCta from "@/components/about/about-cta";
 import { PageHead } from "@/components/seo";
 import { SEO_CONFIG } from "@/config/seo.config";
 import { getAboutPage } from "@/lib/sanity";
+import TrustCompanyLogoBar from "@/components/landing/trust-company-logo-bar";
 
 interface AboutPageData {
   hero?: {
@@ -140,6 +141,7 @@ export default function AboutPage() {
         photo={data?.founder?.photo}
         photoAlt={data?.founder?.photoAlt}
       />
+      <TrustCompanyLogoBar/>
       <AboutNarrative
         topBlock={data?.narrativeSection?.topBlock}
         image={data?.narrativeSection?.image}

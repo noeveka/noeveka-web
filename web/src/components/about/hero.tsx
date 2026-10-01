@@ -200,46 +200,6 @@ export default function Hero({
           </div>
         </motion.div>
 
-        {/* ── Trusted Partners Row Underneath Stairs ── */}
-        <motion.div {...fu(0.2)} className="mt-10 text-center sm:mt-12">
-          <p className="mb-6 text-[14px] text-[#555d6e] italic sm:text-base">
-            Experience across leading enterprise platforms
-          </p>
-
-          <div className="mx-auto flex flex-wrap items-center justify-center gap-7 sm:gap-12 lg:gap-16">
-            {/* Microsoft */}
-            <div className="group flex items-center gap-2.5 transition-transform duration-200 hover:scale-105">
-              <MicrosoftSvg />
-              <span className="text-[15px] font-bold tracking-tight text-[#161922] sm:text-lg">
-                Microsoft
-              </span>
-            </div>
-
-            {/* Databricks */}
-            <div className="group flex items-center gap-2.5 transition-transform duration-200 hover:scale-105">
-              <DatabricksSvg />
-              <span className="text-[15px] font-bold tracking-tight text-[#161922] sm:text-lg">
-                Databricks
-              </span>
-            </div>
-
-            {/* Snowflake */}
-            <div className="group flex items-center gap-2.5 transition-transform duration-200 hover:scale-105">
-              <SnowflakeSvg />
-              <span className="text-[15px] font-bold tracking-tight text-[#161922] sm:text-lg">
-                Snowflake
-              </span>
-            </div>
-
-            {/* Azure */}
-            <div className="group flex items-center gap-2.5 transition-transform duration-200 hover:scale-105">
-              <AzureSvg />
-              <span className="text-[15px] font-bold tracking-tight text-[#161922] sm:text-lg">
-                Azure
-              </span>
-            </div>
-          </div>
-        </motion.div>
       </div>
     </section>
   );

@@ -8,8 +8,7 @@ import { MicrosoftFabricSvg } from "@/components/svgs/microsoft-fabric-svg";
 import DatabricksSvg from "../svgs/databricks-svg";
 import AzureSvg from "../svgs/Azure-svg";
 import PowerBISvg from "../svgs/powerbi-svg";
-
-
+import TrustCompanyLogoBar from "../landing/trust-company-logo-bar";
 interface ResourcesHeroProps {
   eyebrow?: string;
   heading?: string;
@@ -97,12 +96,12 @@ const ARC_NODES = [
 ];
 
 /* Platform logos strip */
-const PLATFORMS = [
-  { name: "Microsoft Fabric", Svg: MicrosoftFabricSvg },
-  { name: "Databricks", Svg: DatabricksSvg },
-  { name: "Microsoft Azure", Svg: AzureSvg },
-  { name: "Power BI", Svg: PowerBISvg },
-];
+// const PLATFORMS = [
+//   { name: "Microsoft Fabric", Svg: MicrosoftFabricSvg },
+//   { name: "Databricks", Svg: DatabricksSvg },
+//   { name: "Microsoft Azure", Svg: AzureSvg },
+//   { name: "Power BI", Svg: PowerBISvg },
+// ];
 
 export default function ResourcesHero({
   heading = RESOURCES_CONFIG.hero.heading,
@@ -292,7 +291,7 @@ export default function ResourcesHero({
       </section>
 
       {/* ─── PLATFORM TRUST STRIP ──────────────────────────────── */}
-      <div
+      {/* <div
         className="flex justify-center overflow-hidden border-b"
         style={{
           background: "#faf9f7",
@@ -316,7 +315,8 @@ export default function ResourcesHero({
             ))}
           </div>
         </div>
-      </div>
+      </div> */}
+      <TrustCompanyLogoBar/>
     </div>
   );
 }
