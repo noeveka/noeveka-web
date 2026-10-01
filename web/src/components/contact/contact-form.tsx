@@ -73,7 +73,7 @@ export default function ContactForm({ data }: ContactFormProps) {
     firstName: "",
     lastName: "",
     email: "",
-    countryCode: "US",
+    countryCode: "",
     phone: "",
     message: "",
     services: [],
@@ -164,7 +164,7 @@ export default function ContactForm({ data }: ContactFormProps) {
       firstName: "",
       lastName: "",
       email: "",
-      countryCode: "US",
+      countryCode: "",
       phone: "",
       message: "",
       services: [],
@@ -318,7 +318,7 @@ export default function ContactForm({ data }: ContactFormProps) {
             >
               {countryCodes.map((item) => (
                 <option key={item.code} value={item.code}>
-                  {item.code} {item.dialCode}
+                  {item.flag} {item.label}
                 </option>
               ))}
             </select>

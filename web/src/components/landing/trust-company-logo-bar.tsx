@@ -1,11 +1,14 @@
 import AzureSvg from "../svgs/Azure-svg";
 import DatabricksSvg from "../svgs/databricks-svg";
-import MicrosoftSvg from "../svgs/microsoft-svg";
+import MicrosoftFabricSvg from "../svgs/microsoft-fabric-svg";
 import PowerBISvg from "../svgs/powerbi-svg";
 import SnowflakeSvg from "../svgs/snowflake-svg";
 
 const LOGOS = [
-  { name: "Microsoft", Logo: MicrosoftSvg },
+  {
+    name: "Microsoft Fabric",
+    Logo: MicrosoftFabricSvg,
+  },
   { name: "Databricks", Logo: DatabricksSvg },
   { name: "Snowflake", Logo: SnowflakeSvg },
   { name: "Azure", Logo: AzureSvg },
@@ -22,9 +25,9 @@ export default function TrustCompanyLogoBar() {
       }}
     >
       <div className="lp-container lp-px py-8">
-        <div className="text-center mb-5">
+        <div className="mb-5 text-center">
           <p
-            className="text-[14px] sm:text-[15px] font-bold tracking-tight mb-1"
+            className="mb-1 text-[14px] font-bold tracking-tight sm:text-[15px]"
             style={{ color: "var(--color-text-primary)" }}
           >
             Experience across leading enterprise platforms
@@ -60,4 +63,3 @@ export default function TrustCompanyLogoBar() {
     </section>
   );
 }
-

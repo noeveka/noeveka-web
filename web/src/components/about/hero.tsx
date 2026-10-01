@@ -203,7 +203,7 @@ export default function Hero({
         {/* ── Trusted Partners Row Underneath Stairs ── */}
         <motion.div {...fu(0.2)} className="mt-10 text-center sm:mt-12">
           <p className="mb-6 text-[14px] text-[#555d6e] italic sm:text-base">
-            Trusted partners
+            Experience across leading enterprise platforms
           </p>
 
           <div className="mx-auto flex flex-wrap items-center justify-center gap-7 sm:gap-12 lg:gap-16">
