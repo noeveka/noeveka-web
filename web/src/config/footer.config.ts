@@ -16,10 +16,16 @@ export const FOOTER_CONFIG = {
     "At Noeveka, we believe enterprises deserve more than expensive tools with poor architecture — we deliver clarity, authority, and real impact.",
 
   socialLinks: [
-    { platform: "LinkedIn", href: "#" },
+    {
+      platform: "LinkedIn",
+      href: "https://www.linkedin.com/company/noeveka/home/",
+    },
     { platform: "X / Twitter", href: "#" },
-    { platform: "YouTube", href: "#" },
-    { platform: "Instagram", href: "#" },
+    {
+      platform: "YouTube",
+      href: "https://www.linkedin.com/company/noeveka/home/",
+    },
+    { platform: "Instagram", href: "https://www.instagram.com/noeveka.ai" },
   ],
 
   companyColumnHeading: "Company",
