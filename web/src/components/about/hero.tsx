@@ -1,11 +1,6 @@
 import { Link } from "react-router";
 
 import { motion } from "framer-motion";
-
-import AzureSvg from "@/components/svgs/Azure-svg";
-import DatabricksSvg from "@/components/svgs/databricks-svg";
-import MicrosoftSvg from "@/components/svgs/microsoft-svg";
-import SnowflakeSvg from "@/components/svgs/snowflake-svg";
 import { ABOUT_CONFIG } from "@/config/about.config";
 import { fu } from "@/lib/motion";
 import { urlFor } from "@/lib/sanity";
