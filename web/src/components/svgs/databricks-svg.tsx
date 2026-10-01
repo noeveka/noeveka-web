@@ -1,10 +1,24 @@
-const DatabricksSvg = () => (
-    <svg width="22" height="22" viewBox="0 0 24 24" role="img" aria-label="Databricks">
-        <path d="M12 2L22 7.5V16.5L12 22L2 16.5V7.5Z" fill="#FF3621" />
-        <path d="M12 6L19 10V14L12 18L5 14V10Z" fill="#fff" opacity="0.15" />
-        <line x1="7" y1="9.5" x2="12" y2="12.5" stroke="#fff" strokeWidth="1.4" strokeLinecap="round" opacity="0.8" />
-        <line x1="17" y1="9.5" x2="12" y2="12.5" stroke="#fff" strokeWidth="1.4" strokeLinecap="round" opacity="0.8" />
-        <line x1="12" y1="12.5" x2="12" y2="17" stroke="#fff" strokeWidth="1.4" strokeLinecap="round" opacity="0.8" />
+export default function DatabricksSvg({
+  className = "h-6 w-6",
+  fill = "#FF3621",
+  ...props
+}: React.SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      className={className}
+      width="24"
+      height="24"
+      viewBox="0 0 24 24"
+      fill={fill}
+      role="img"
+      aria-label="Databricks"
+      xmlns="http://www.w3.org/2000/svg"
+      {...props}
+    >
+      <title>Databricks</title>
+      <path d="M.95 14.184L12 20.403l9.919-5.55v2.21L12 22.662l-10.484-5.96-.565.308v.77L12 24l11.05-6.218v-4.317l-.515-.309L12 19.118l-9.867-5.653v-2.21L12 16.805l11.05-6.218V6.32l-.515-.308L12 11.974 2.647 6.681 12 1.388l7.76 4.368.668-.411v-.566L12 0 .95 6.27v.72L12 13.207l9.919-5.55v2.26L12 15.52 1.516 9.56l-.565.308Z" />
     </svg>
-)
-export default DatabricksSvg
+  );
+}
+
+export { DatabricksSvg };
