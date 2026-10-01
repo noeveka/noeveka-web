@@ -86,7 +86,7 @@ export default function Founder({
   eyebrow = ABOUT_CONFIG.founder.eyebrow,
   name = ABOUT_CONFIG.founder.name,
   title = ABOUT_CONFIG.founder.title,
-  tagline = ABOUT_CONFIG.founder.tagline,
+  // tagline = ABOUT_CONFIG.founder.tagline,
   bio = ABOUT_CONFIG.founder.bio,
   photo = ABOUT_CONFIG.founder.photoFallbackUrl,
   photoAlt = ABOUT_CONFIG.founder.photoAlt,
@@ -167,13 +167,13 @@ export default function Founder({
             <img
               src={imgSrc}
               alt={photoAlt}
-              className="absolute inset-0 h-full w-full object-cover object-left-top"
+              className="absolute inset-0 h-full w-full object-cover object-top-left"
             />
 
             {/* If custom photo provided from Sanity, overlay quote typography */}
             {isCustomPhoto && (
               <div className="relative z-10 bg-linear-to-t from-black/90 via-black/40 to-transparent p-6 sm:p-8">
-                <span className="text-3xl font-serif font-black leading-none text-[#f65d01]">
+                {/* <span className="text-3xl font-serif font-black leading-none text-[#f65d01]">
                   “
                 </span>
                 <p className="mt-2 text-lg font-bold leading-snug tracking-tight text-white sm:text-xl">
@@ -187,7 +187,7 @@ export default function Founder({
                       <span className="text-[#f65d01]">lasting advantage.</span>
                     </>
                   )}
-                </p>
+                </p> */}
                 <div className="mt-3.5 h-[2px] w-8 bg-[#f65d01]" />
               </div>
             )}
