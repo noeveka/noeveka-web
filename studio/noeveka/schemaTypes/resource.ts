@@ -15,9 +15,9 @@ export const resource = defineType({
   type: 'document',
 
   groups: [
-    {name: 'content', title: '1 · Content'},
-    {name: 'asset', title: '2 · PDF & Thumbnail'},
-    {name: 'meta', title: '3 · Display & SEO'},
+    {name: 'content', title: '1. Content & Details'},
+    {name: 'asset', title: '2. PDF File & Thumbnail'},
+    {name: 'meta', title: '3. Display & Publishing'},
   ],
 
   fields: [

@@ -226,6 +226,22 @@ export async function getResourcesPage() {
       authorName,
       authorAvatar{ asset, alt },
       emptyStateText
+    },
+    seo{
+      title,
+      description
+    },
+    "resources": *[_type == "resource"] | order(order asc, _createdAt desc){
+      _id,
+      title,
+      description,
+      category,
+      pageCount,
+      isFeatured,
+      thumbnail{ asset->{ url }, alt },
+      "pdfUrl": pdfFile.asset->url,
+      publishedAt,
+      order
     }
   }`);
 }

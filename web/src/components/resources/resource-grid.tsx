@@ -7,7 +7,7 @@ import type { ResourceItem, DownloadModalState, ResourceSectionCopy } from "./re
 
 export type { ResourceItem } from "./resource.types";
 
-interface ResourceGridProps {
+export interface ResourceGridProps {
   resources?: ResourceItem[];
   copy?: ResourceSectionCopy;
 }
@@ -32,27 +32,30 @@ export default function ResourceGrid({ resources, copy }: ResourceGridProps) {
     formatLabel: copy?.formatLabel || RESOURCES_CONFIG.section.formatLabel,
   };
 
-  const [activeCategory, setActiveCategory] = useState("All");
+  const defaultCategory = RESOURCES_CONFIG.allCategoryLabel || "All";
+  const [activeCategory, setActiveCategory] = useState<string>(defaultCategory);
   const [modal, setModal] = useState<DownloadModalState>({ open: false, resource: null });
 
   const openModal = useCallback((resource: ResourceItem) => setModal({ open: true, resource }), []);
   const closeModal = useCallback(() => setModal({ open: false, resource: null }), []);
 
   const filtered =
-    activeCategory === "All" ? items : items.filter((r) => r.category === activeCategory);
+    activeCategory === defaultCategory
+      ? items
+      : items.filter((resourceItem) => resourceItem.category === activeCategory);
 
   const isSingleItem = filtered.length === 1;
-  const featuredItem = isSingleItem ? filtered[0] : filtered.find((r) => r.isFeatured);
-  const restItems = isSingleItem ? [] : filtered.filter((r) => r !== featuredItem);
+  const featuredItem = isSingleItem ? filtered[0] : filtered.find((resourceItem) => resourceItem.isFeatured);
+  const restItems = isSingleItem ? [] : filtered.filter((resourceItem) => resourceItem !== featuredItem);
 
   const rawCategories =
     copy?.categories && copy.categories.length > 0
       ? copy.categories
       : (RESOURCES_CONFIG.categories as unknown as string[]);
 
-  const categoriesList = rawCategories.includes("All")
+  const categoriesList = rawCategories.includes(defaultCategory)
     ? rawCategories
-    : ["All", ...rawCategories];
+    : [defaultCategory, ...rawCategories];
 
   return (
     <section id="resources" className="resource-grid-section">
@@ -66,13 +69,13 @@ export default function ResourceGrid({ resources, copy }: ResourceGridProps) {
 
           {/* Category filter pills */}
           <div className="mt-8 flex flex-wrap gap-2">
-            {categoriesList.map((cat) => (
+            {categoriesList.map((categoryName) => (
               <button
-                key={cat}
-                onClick={() => setActiveCategory(cat)}
-                className={`resource-filter-pill ${cat === activeCategory ? "resource-filter-pill-active" : ""}`}
+                key={categoryName}
+                onClick={() => setActiveCategory(categoryName)}
+                className={`resource-filter-pill ${categoryName === activeCategory ? "resource-filter-pill-active" : ""}`}
               >
-                {cat}
+                {categoryName}
               </button>
             ))}
           </div>
@@ -107,11 +110,11 @@ export default function ResourceGrid({ resources, copy }: ResourceGridProps) {
                   )}
                   {restItems.length > 0 && (
                     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                      {restItems.map((resource, i) => (
+                      {restItems.map((resourceItem, resourceIndex) => (
                         <ResourceCard
-                          key={resource._id}
-                          resource={resource}
-                          index={i + 1}
+                          key={resourceItem._id}
+                          resource={resourceItem}
+                          index={resourceIndex + 1}
                           onDownload={openModal}
                           copy={sectionCopy}
                         />

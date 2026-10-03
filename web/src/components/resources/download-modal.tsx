@@ -4,7 +4,7 @@ import { LucideIcon, lucideIconRegistry } from "@/components/lucide-icons";
 import { RESOURCES_CONFIG } from "@/config/resources.config";
 import type { ResourceItem } from "./resource.types";
 
-interface DownloadModalProps {
+export interface DownloadModalProps {
   resource: ResourceItem;
   onClose: () => void;
 }
@@ -21,20 +21,23 @@ export function DownloadModal({ resource, onClose }: DownloadModalProps) {
   const [serverError, setServerError] = useState<string | null>(null);
 
   const validate = () => {
-    const e: Record<string, string> = {};
-    if (!form.name.trim()) e.name = "Name is required.";
-    if (!form.email.trim()) e.email = "Email is required.";
+    const errorMap: Record<string, string> = {};
+    if (!form.name.trim()) errorMap.name = downloadModal.requiredNameError || "Name is required.";
+    if (!form.email.trim()) errorMap.email = downloadModal.requiredEmailError || "Email is required.";
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))
-      e.email = "Please enter a valid email address.";
-    if (!form.consent) e.consent = "Consent is required to download.";
-    return e;
+      errorMap.email = downloadModal.invalidEmailError || "Please enter a valid email address.";
+    if (!form.consent) errorMap.consent = downloadModal.consentError || "Consent is required to download.";
+    return errorMap;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setServerError(null);
-    const errs = validate();
-    if (Object.keys(errs).length) { setErrors(errs); return; }
+    const validationErrors = validate();
+    if (Object.keys(validationErrors).length) {
+      setErrors(validationErrors);
+      return;
+    }
 
     setLoading(true);
     try {
@@ -51,7 +54,7 @@ export function DownloadModal({ resource, onClose }: DownloadModalProps) {
         }),
       });
 
-      const data = await apiRes.json() as { downloadToken?: string | null };
+      const data = (await apiRes.json()) as { downloadToken?: string | null };
       const token = data.downloadToken ?? null;
       setDownloadToken(token);
       setLoading(false);
@@ -73,12 +76,12 @@ export function DownloadModal({ resource, onClose }: DownloadModalProps) {
       const res = await fetch(proxyUrl);
       const blob = await res.blob();
       const objectUrl = URL.createObjectURL(blob);
-      const a = document.createElement("a");
-      a.href = objectUrl;
-      a.download = `${title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}.pdf`;
-      document.body.appendChild(a);
-      a.click();
-      document.body.removeChild(a);
+      const anchorElement = document.createElement("a");
+      anchorElement.href = objectUrl;
+      anchorElement.download = `${title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}.pdf`;
+      document.body.appendChild(anchorElement);
+      anchorElement.click();
+      document.body.removeChild(anchorElement);
       URL.revokeObjectURL(objectUrl);
       setDownloadStatus("done");
     } catch {
@@ -114,7 +117,9 @@ export function DownloadModal({ resource, onClose }: DownloadModalProps) {
                 />
               </div>
               <div>
-                <p className="dl-modal-preview-label">Free Download</p>
+                <p className="dl-modal-preview-label">
+                  {downloadModal.previewBadgeLabel || "Free Download"}
+                </p>
                 <p className="dl-modal-preview-title">{resource.title}</p>
               </div>
             </div>
@@ -133,14 +138,20 @@ export function DownloadModal({ resource, onClose }: DownloadModalProps) {
 
               {/* Name */}
               <div className="dl-modal-field">
-                <label className="dl-modal-label" htmlFor="dl-name">Full Name</label>
+                <label className="dl-modal-label" htmlFor="dl-name">
+                  {downloadModal.nameLabel || "Full Name"}
+                </label>
                 <input
                   id="dl-name"
                   type="text"
                   autoComplete="name"
-                  placeholder="Ajay Kumar"
+                  placeholder={downloadModal.namePlaceholder || "Ajay Kumar"}
                   value={form.name}
-                  onChange={(e) => { setForm((f) => ({ ...f, name: e.target.value })); setErrors((er) => ({ ...er, name: "" })); }}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    setForm((prevForm) => ({ ...prevForm, name: value }));
+                    setErrors((prevErrors) => ({ ...prevErrors, name: "" }));
+                  }}
                   className={`dl-modal-input ${errors.name ? "dl-modal-input-error" : ""}`}
                 />
                 {errors.name && <p className="dl-modal-field-error">{errors.name}</p>}
@@ -148,14 +159,20 @@ export function DownloadModal({ resource, onClose }: DownloadModalProps) {
 
               {/* Email */}
               <div className="dl-modal-field">
-                <label className="dl-modal-label" htmlFor="dl-email">Work Email</label>
+                <label className="dl-modal-label" htmlFor="dl-email">
+                  {downloadModal.emailLabel || "Work Email"}
+                </label>
                 <input
                   id="dl-email"
                   type="email"
                   autoComplete="email"
-                  placeholder="you@company.com"
+                  placeholder={downloadModal.emailPlaceholder || "you@company.com"}
                   value={form.email}
-                  onChange={(e) => { setForm((f) => ({ ...f, email: e.target.value })); setErrors((er) => ({ ...er, email: "" })); }}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    setForm((prevForm) => ({ ...prevForm, email: value }));
+                    setErrors((prevErrors) => ({ ...prevErrors, email: "" }));
+                  }}
                   className={`dl-modal-input ${errors.email ? "dl-modal-input-error" : ""}`}
                 />
                 {errors.email && <p className="dl-modal-field-error">{errors.email}</p>}
@@ -167,7 +184,11 @@ export function DownloadModal({ resource, onClose }: DownloadModalProps) {
                   id="dl-consent"
                   type="checkbox"
                   checked={form.consent}
-                  onChange={(e) => { setForm((f) => ({ ...f, consent: e.target.checked })); setErrors((er) => ({ ...er, consent: "" })); }}
+                  onChange={(e) => {
+                    const checked = e.target.checked;
+                    setForm((prevForm) => ({ ...prevForm, consent: checked }));
+                    setErrors((prevErrors) => ({ ...prevErrors, consent: "" }));
+                  }}
                   className="mt-0.5 h-4 w-4 shrink-0 cursor-pointer accent-orange-500"
                 />
                 <label htmlFor="dl-consent" className="dl-modal-consent-text">
@@ -185,7 +206,7 @@ export function DownloadModal({ resource, onClose }: DownloadModalProps) {
                 {loading ? (
                   <>
                     <span className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
-                    Processing…
+                    {downloadModal.processingText || "Processing…"}
                   </>
                 ) : (
                   <>
@@ -213,12 +234,12 @@ export function DownloadModal({ resource, onClose }: DownloadModalProps) {
                 {downloadStatus === "downloading" ? (
                   <>
                     <span className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-current border-t-transparent" />
-                    Downloading…
+                    {downloadModal.downloadingText || "Downloading…"}
                   </>
                 ) : (
                   <>
                     <LucideIcon name={lucideIconRegistry.CheckCircle2} className="h-3.5 w-3.5" />
-                    Saved to your device
+                    {downloadModal.savedText || "Saved to your device"}
                   </>
                 )}
               </div>
@@ -241,7 +262,7 @@ export function DownloadModal({ resource, onClose }: DownloadModalProps) {
                 className="text-[12px]"
                 style={{ color: "var(--color-text-muted)" }}
               >
-                The resource will be emailed to you shortly.
+                {downloadModal.emailFollowupText || "The resource will be emailed to you shortly."}
               </p>
             )}
 
@@ -250,7 +271,7 @@ export function DownloadModal({ resource, onClose }: DownloadModalProps) {
               className="text-[13px] underline underline-offset-2 transition-opacity hover:opacity-70"
               style={{ color: "var(--color-text-muted)" }}
             >
-              Close
+              {downloadModal.closeButtonText || "Close"}
             </button>
           </div>
         )}

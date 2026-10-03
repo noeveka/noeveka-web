@@ -11,12 +11,13 @@ export const resourcesPage = defineType({
   title: 'Resources Page',
   type: 'document',
   groups: [
-    {name: 'hero', title: '1 · Hero Section'},
-    {name: 'grid', title: '2 · Grid & Copy'},
+    {name: 'hero', title: '1. Hero Section (Top Banner & Highlights)'},
+    {name: 'grid', title: '2. Resource Grid & Categories'},
+    {name: 'seo', title: '3. SEO & Metadata'},
   ],
 
   fields: [
-    // ─── 1. HERO -─────
+    // ─── 1. HERO ─────────────────────────────────────────────────────────────
     defineField({
       name: 'hero',
       title: 'Hero Section',
@@ -79,7 +80,7 @@ export const resourcesPage = defineType({
       ],
     }),
 
-    // ─── 2. GRID & COPY -─────
+    // ─── 2. GRID & COPY ──────────────────────────────────────────────────────
     defineField({
       name: 'gridSection',
       title: 'Resource Grid Section Copy & Settings',
@@ -129,6 +130,33 @@ export const resourcesPage = defineType({
           title: 'Empty Category Message',
           type: 'string',
           initialValue: 'No resources in this category yet - check back soon.',
+        }),
+      ],
+    }),
+
+    // ─── 3. SEO & METADATA ───────────────────────────────────────────────────
+    defineField({
+      name: 'seo',
+      title: 'SEO & Metadata',
+      type: 'object',
+      group: 'seo',
+      description: 'Search engine optimization tags and social sharing metadata.',
+      fields: [
+        defineField({
+          name: 'title',
+          title: 'Meta Title',
+          type: 'string',
+          description: 'Title displayed in search engine results and browser tabs.',
+          initialValue: 'Enterprise Data & AI Architecture Resources | Noeveka',
+        }),
+        defineField({
+          name: 'description',
+          title: 'Meta Description',
+          type: 'text',
+          rows: 3,
+          description: 'Summary shown in search engine snippets (150-160 characters recommended).',
+          initialValue:
+            'Free enterprise checklists, playbooks, and decision guides for Power BI, Microsoft Fabric, Databricks, and GenAI platforms. Built by enterprise architects.',
         }),
       ],
     }),

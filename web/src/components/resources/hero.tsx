@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router";
 import { LucideIcon, lucideIconRegistry } from "@/components/lucide-icons";
 import { RESOURCES_CONFIG } from "@/config/resources.config";
+import { fadeUp } from "@/lib/motion";
 
 import { MicrosoftFabricSvg } from "@/components/svgs/microsoft-fabric-svg";
 import DatabricksSvg from "../svgs/databricks-svg";
@@ -10,7 +11,7 @@ import AzureSvg from "../svgs/Azure-svg";
 import PowerBISvg from "../svgs/powerbi-svg";
 import TrustCompanyLogoBar from "../landing/trust-company-logo-bar";
 
-interface ResourcesHeroProps {
+export interface ResourcesHeroProps {
   eyebrow?: string;
   heading?: string;
   headingHighlight?: string;
@@ -35,7 +36,7 @@ interface ArcBadge {
   delay: number;
 }
 
-/* 5 Main platform badges sitting ON the 3 curved arc lines (Opero-style) */
+/* 4 Main platform badges sitting ON the 3 curved arc lines */
 const ARC_BADGES: ArcBadge[] = [
   {
     key: "powerbi",
@@ -100,10 +101,10 @@ export default function ResourcesHero({
   heading = RESOURCES_CONFIG.hero.heading,
   headingHighlight = RESOURCES_CONFIG.hero.headingHighlight,
   subtext = RESOURCES_CONFIG.hero.subtext,
-  ctaPrimaryText = "Browse Resources",
-  ctaPrimaryLink = "#resources",
-  ctaSecondaryText = "Talk to an Architect",
-  ctaSecondaryLink = "/contact",
+  ctaPrimaryText = RESOURCES_CONFIG.hero.ctaPrimaryText,
+  ctaPrimaryLink = RESOURCES_CONFIG.hero.ctaPrimaryLink,
+  ctaSecondaryText = RESOURCES_CONFIG.hero.ctaSecondaryText,
+  ctaSecondaryLink = RESOURCES_CONFIG.hero.ctaSecondaryLink,
 }: ResourcesHeroProps) {
   return (
     <div>
@@ -160,9 +161,9 @@ export default function ResourcesHero({
           </svg>
 
           {/* Decorative hollow node dots */}
-          {ARC_NODES.map((node, idx) => (
+          {ARC_NODES.map((node, nodeIndex) => (
             <div
-              key={idx}
+              key={nodeIndex}
               className="resources-arc-node"
               style={{
                 left: node.left,
@@ -174,42 +175,42 @@ export default function ResourcesHero({
           ))}
 
           {/* Platform SVG Circular Badges */}
-          {ARC_BADGES.map((b, i) => (
+          {ARC_BADGES.map((badge, badgeIndex) => (
             <motion.div
-              key={b.key}
+              key={badge.key}
               className="pointer-events-none absolute z-20 hidden lg:flex"
               style={{
-                top: b.top,
-                left: b.left,
-                right: b.right,
+                top: badge.top,
+                left: badge.left,
+                right: badge.right,
                 transform: "translate(-50%, -50%)",
               }}
               initial={{ opacity: 0, scale: 0.5 }}
               animate={{
                 opacity: 1,
                 scale: 1,
-                y: [0, i % 2 === 0 ? -6 : 6, 0],
+                y: [0, badgeIndex % 2 === 0 ? -6 : 6, 0],
               }}
               transition={{
-                opacity: { duration: 0.5, delay: b.delay },
-                scale: { duration: 0.5, delay: b.delay },
+                opacity: { duration: 0.5, delay: badge.delay },
+                scale: { duration: 0.5, delay: badge.delay },
                 y: {
-                  duration: 3.5 + i * 0.4,
+                  duration: 3.5 + badgeIndex * 0.4,
                   repeat: Infinity,
                   ease: "easeInOut",
-                  delay: b.delay + 0.3,
+                  delay: badge.delay + 0.3,
                 },
               }}
             >
               <div
                 className="group relative flex h-14 w-14 items-center justify-center rounded-full bg-white shadow-lg transition-all duration-300 hover:scale-110"
                 style={{
-                  border: `1.5px solid ${b.border}`,
-                  boxShadow: `0 10px 24px -2px ${b.shadow}, 0 2px 8px rgba(0,0,0,0.06)`,
+                  border: `1.5px solid ${badge.border}`,
+                  boxShadow: `0 10px 24px -2px ${badge.shadow}, 0 2px 8px rgba(0,0,0,0.06)`,
                 }}
               >
-                <b.Svg className="h-7 w-7" />
-                <span className="resources-badge-tooltip">{b.name}</span>
+                <badge.Svg className="h-7 w-7" />
+                <span className="resources-badge-tooltip">{badge.name}</span>
               </div>
             </motion.div>
           ))}
@@ -218,9 +219,7 @@ export default function ResourcesHero({
           <div className="relative z-10 flex flex-col items-center py-20 text-center lg:py-28">
             {/* H1 Heading */}
             <motion.h1
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.08 }}
+              {...fadeUp(0.08)}
               className="about-narrative-heading mb-5 max-w-[720px] text-[3rem] sm:text-[3.8rem] lg:text-[4.8rem]"
             >
               {heading}{" "}
@@ -234,9 +233,7 @@ export default function ResourcesHero({
 
             {/* Subtext */}
             <motion.p
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.16 }}
+              {...fadeUp(0.16)}
               className="mb-9 max-w-[520px] text-[16px] leading-relaxed sm:text-[17px]"
               style={{ color: "var(--color-text-secondary)" }}
             >
@@ -245,9 +242,7 @@ export default function ResourcesHero({
 
             {/* CTAs */}
             <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: 0.24 }}
+              {...fadeUp(0.24)}
               className="flex flex-wrap items-center justify-center gap-3"
             >
               {/* Primary - brand filled pill */}

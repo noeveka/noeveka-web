@@ -1,14 +1,15 @@
 import { motion } from "framer-motion";
 import { LucideIcon, lucideIconRegistry } from "@/components/lucide-icons";
 import { RESOURCES_CONFIG } from "@/config/resources.config";
+import { fadeUp } from "@/lib/motion";
 import { ResourceCoverGraphic } from "./resource-cover";
 import type { ResourceItem, ResourceSectionCopy } from "./resource.types";
 
-interface ResourceCardProps {
+export interface ResourceCardProps {
   resource: ResourceItem;
   index: number;
   featured?: boolean;
-  onDownload: (r: ResourceItem) => void;
+  onDownload: (resourceItem: ResourceItem) => void;
   copy?: ResourceSectionCopy;
 }
 
@@ -25,10 +26,8 @@ export function ResourceCard({
 
   return (
     <motion.article
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      {...fadeUp(0.05 * (index % 6))}
       viewport={{ once: true, amount: 0.12 }}
-      transition={{ duration: 0.45, delay: 0.05 * (index % 6) }}
       onClick={() => onDownload(resource)}
       className={`resource-card group ${featured ? "flex-col lg:flex-row" : "flex-col"}`}
     >

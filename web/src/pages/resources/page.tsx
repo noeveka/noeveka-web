@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
-import ResourcesHero from "@/components/resources/hero";
-import ResourceGrid from "@/components/resources/resource-grid";
-import type { ResourceItem, ResourceSectionCopy } from "@/components/resources/resource.types";
+import {
+  ResourcesHero,
+  ResourceGrid,
+  type ResourceItem,
+  type ResourceSectionCopy,
+} from "@/components/resources";
 import { PageHead } from "@/components/seo";
 import { RESOURCES_CONFIG } from "@/config/resources.config";
 import { SEO_CONFIG } from "@/config/seo.config";
-import { getResources, getResourcesPage, urlFor } from "@/lib/sanity";
+import { getResourcesPage, urlFor } from "@/lib/sanity";
 
 interface SanityResourcesPageData {
   hero?: {
@@ -26,6 +29,11 @@ interface SanityResourcesPageData {
     authorAvatar?: { asset?: unknown; alt?: string };
     emptyStateText?: string;
   };
+  seo?: {
+    title?: string;
+    description?: string;
+  };
+  resources?: Array<Record<string, unknown>>;
 }
 
 function mapSanityResource(raw: Record<string, unknown>): ResourceItem {
@@ -54,28 +62,18 @@ export default function ResourcesPage() {
   useEffect(() => {
     let isMounted = true;
 
-    // Fetch resources page copy from Sanity
+    // Single round-trip fetch: retrieves page copy, SEO, and projected resources
     getResourcesPage()
       .then((data: SanityResourcesPageData) => {
-        if (isMounted && data) {
-          setPageData(data);
+        if (!isMounted || !data) return;
+        setPageData(data);
+
+        if (Array.isArray(data.resources) && data.resources.length > 0) {
+          setResources(data.resources.map(mapSanityResource));
         }
       })
       .catch((err) => {
         console.warn("Sanity getResourcesPage fetch error:", err);
-      });
-
-    // Fetch resource documents from Sanity
-    getResources()
-      .then((data: unknown) => {
-        if (isMounted && Array.isArray(data) && data.length > 0) {
-          setResources(
-            data.map((item) => mapSanityResource(item as Record<string, unknown>))
-          );
-        }
-      })
-      .catch((err) => {
-        console.warn("Sanity getResources fetch error:", err);
       });
 
     return () => {
@@ -84,14 +82,14 @@ export default function ResourcesPage() {
   }, []);
 
   const heroCopy = {
-    eyebrow: pageData?.hero?.eyebrow,
+    eyebrow: pageData?.hero?.eyebrow ?? RESOURCES_CONFIG.hero.eyebrow,
     heading: pageData?.hero?.heading ?? RESOURCES_CONFIG.hero.heading,
     headingHighlight: pageData?.hero?.headingHighlight ?? RESOURCES_CONFIG.hero.headingHighlight,
     subtext: pageData?.hero?.subtext ?? RESOURCES_CONFIG.hero.subtext,
-    ctaPrimaryText: pageData?.hero?.ctaPrimaryText,
-    ctaPrimaryLink: pageData?.hero?.ctaPrimaryLink,
-    ctaSecondaryText: pageData?.hero?.ctaSecondaryText,
-    ctaSecondaryLink: pageData?.hero?.ctaSecondaryLink,
+    ctaPrimaryText: pageData?.hero?.ctaPrimaryText ?? RESOURCES_CONFIG.hero.ctaPrimaryText,
+    ctaPrimaryLink: pageData?.hero?.ctaPrimaryLink ?? RESOURCES_CONFIG.hero.ctaPrimaryLink,
+    ctaSecondaryText: pageData?.hero?.ctaSecondaryText ?? RESOURCES_CONFIG.hero.ctaSecondaryText,
+    ctaSecondaryLink: pageData?.hero?.ctaSecondaryLink ?? RESOURCES_CONFIG.hero.ctaSecondaryLink,
   };
 
   const authorAvatarUrl = pageData?.gridSection?.authorAvatar?.asset
@@ -104,16 +102,17 @@ export default function ResourcesPage() {
     emptyStateText: pageData?.gridSection?.emptyStateText || RESOURCES_CONFIG.section.emptyStateText,
     authorName: pageData?.gridSection?.authorName || RESOURCES_CONFIG.section.authorName,
     authorAvatar: authorAvatarUrl || RESOURCES_CONFIG.section.authorAvatar,
-    categories: pageData?.gridSection?.categories && pageData.gridSection.categories.length > 0
-      ? pageData.gridSection.categories
-      : [...RESOURCES_CONFIG.categories],
+    categories:
+      pageData?.gridSection?.categories && pageData.gridSection.categories.length > 0
+        ? pageData.gridSection.categories
+        : [...RESOURCES_CONFIG.categories],
   };
 
   return (
     <>
       <PageHead
-        title={SEO_CONFIG.pages.resources.title}
-        description={SEO_CONFIG.pages.resources.description}
+        title={pageData?.seo?.title || SEO_CONFIG.pages.resources.title}
+        description={pageData?.seo?.description || SEO_CONFIG.pages.resources.description}
       />
       <ResourcesHero {...heroCopy} />
       <ResourceGrid resources={resources ?? undefined} copy={gridCopy} />

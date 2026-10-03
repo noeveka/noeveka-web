@@ -1,4 +1,4 @@
-import { LucideIcon } from "@/components/lucide-icons";
+import { LucideIcon, lucideIconRegistry } from "@/components/lucide-icons";
 import { RESOURCES_CONFIG } from "@/config/resources.config";
 import {
   PowerBISvg,
@@ -9,7 +9,7 @@ import {
   GovernanceSvg,
 } from "@/components/svgs/tech-svgs";
 
-interface ResourceCoverProps {
+export interface ResourceCoverProps {
   title: string;
   category?: string;
   tech?: string;
@@ -35,23 +35,23 @@ export function ResourceCoverGraphic({
   downloadHoverText = RESOURCES_CONFIG.section.downloadHoverText,
 }: ResourceCoverProps) {
   // Match tech keyword
-  const t = (tech || title).toLowerCase();
+  const techOrTitle = (tech || title).toLowerCase();
   let SvgIcon = GovernanceSvg;
   let bgGradient = "linear-gradient(135deg, #fff7ed 0%, #ffedd5 50%, #fef3c7 100%)";
 
-  if (t.includes("power bi") || t.includes("powerbi")) {
+  if (techOrTitle.includes("power bi") || techOrTitle.includes("powerbi")) {
     SvgIcon = PowerBISvg;
     bgGradient = "linear-gradient(135deg, #fefce8 0%, #fef08a 40%, #fde047 100%)";
-  } else if (t.includes("fabric")) {
+  } else if (techOrTitle.includes("fabric")) {
     SvgIcon = FabricSvg;
     bgGradient = "linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 50%, #bae6fd 100%)";
-  } else if (t.includes("databricks")) {
+  } else if (techOrTitle.includes("databricks")) {
     SvgIcon = DatabricksSvg;
     bgGradient = "linear-gradient(135deg, #fff1f2 0%, #ffe4e6 50%, #fecdd3 100%)";
-  } else if (t.includes("azure")) {
+  } else if (techOrTitle.includes("azure")) {
     SvgIcon = AzureSvg;
     bgGradient = "linear-gradient(135deg, #eff6ff 0%, #dbeafe 50%, #bfdbfe 100%)";
-  } else if (t.includes("genai") || t.includes("ai") || t.includes("openai")) {
+  } else if (techOrTitle.includes("genai") || techOrTitle.includes("ai") || techOrTitle.includes("openai")) {
     SvgIcon = GenAISvg;
     bgGradient = "linear-gradient(135deg, #ecfdf5 0%, #d1fae5 50%, #a7f3d0 100%)";
   }
@@ -121,7 +121,7 @@ export function ResourceCoverGraphic({
         <div className="flex items-center gap-1.5 drop-shadow-xs">
           {isFeatured && (
             <LucideIcon
-              name="star"
+              name={lucideIconRegistry.Star}
               className="h-3.5 w-3.5 fill-[#ffc107] text-[#ffc107]"
             />
           )}
@@ -154,7 +154,11 @@ export function ResourceCoverGraphic({
       {/* Hover Action Overlay */}
       <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
         <div className="resource-cover-hover-btn">
-          <LucideIcon name="download" className="h-4 w-4" style={{ color: "var(--color-brand)" }} />
+          <LucideIcon
+            name={lucideIconRegistry.Download}
+            className="h-4 w-4"
+            style={{ color: "var(--color-brand)" }}
+          />
           <span>{downloadHoverText}</span>
         </div>
       </div>
