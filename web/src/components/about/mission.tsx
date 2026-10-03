@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
-
 import { ABOUT_CONFIG } from "@/config/about.config";
-import { fs, fu } from "@/lib/motion";
+import { fadeScale, fadeUp } from "@/lib/motion";
 
 export interface Pillar {
   number: string;
@@ -9,7 +8,7 @@ export interface Pillar {
   desc: string;
 }
 
-interface MissionProps {
+export interface MissionProps {
   eyebrow?: string;
   statement?: string;
   pillars?: Pillar[];
@@ -26,7 +25,7 @@ export default function Mission({
         <div className="mb-14 flex flex-col gap-8 lg:flex-row lg:items-end">
           <div className="flex-1">
             <motion.p
-              {...fu(0.07)}
+              {...fadeUp(0.07)}
               className="about-narrative-heading max-w-[640px] sm:text-[1.9rem]"
               style={{ color: "var(--color-text-inverse)" }}
             >
@@ -37,16 +36,16 @@ export default function Mission({
 
         {/* Pillars */}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-          {pillars.map(({ number, title, desc }, i) => (
+          {pillars.map((pillar, pillarIndex) => (
             <motion.div
-              key={title}
-              {...fs(0.06 + i * 0.1)}
+              key={pillar.title}
+              {...fadeScale(0.06 + pillarIndex * 0.1)}
               className="about-mission-pillar"
             >
-              <span className="about-mission-number">{number}</span>
+              <span className="about-mission-number">{pillar.number}</span>
               <div className="about-mission-bar" />
-              <p className="about-mission-title">{title}</p>
-              <p className="about-mission-desc">{desc}</p>
+              <p className="about-mission-title">{pillar.title}</p>
+              <p className="about-mission-desc">{pillar.desc}</p>
             </motion.div>
           ))}
         </div>

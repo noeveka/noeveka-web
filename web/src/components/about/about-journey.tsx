@@ -48,18 +48,19 @@ function resolveGraphic(item: JourneyMilestone): string {
 }
 
 /* Horizontal position of dots in percent (even: left of center, odd: right of center) */
-const DOT_X = [44, 56];
-const dotX = (i: number) => DOT_X[i % 2];
+const DOT_HORIZONTAL_PERCENT = [44, 56];
+const getDotHorizontalPercent = (milestoneIndex: number) =>
+  DOT_HORIZONTAL_PERCENT[milestoneIndex % 2];
 
-/* S-curve connecting the dots */
-function buildPath(n: number): string {
-  const cy = (i: number) => i * 100 + 50;
-  let d = `M${dotX(0)} ${cy(0)}`;
-  for (let i = 1; i < n; i += 1) {
-    const mid = (cy(i - 1) + cy(i)) / 2;
-    d += ` C ${dotX(i - 1)} ${mid}, ${dotX(i)} ${mid}, ${dotX(i)} ${cy(i)}`;
+/* S-curve connecting the timeline milestone dots */
+function buildTimelinePath(totalMilestones: number): string {
+  const getCenterY = (milestoneIndex: number) => milestoneIndex * 100 + 50;
+  let pathData = `M${getDotHorizontalPercent(0)} ${getCenterY(0)}`;
+  for (let index = 1; index < totalMilestones; index += 1) {
+    const midY = (getCenterY(index - 1) + getCenterY(index)) / 2;
+    pathData += ` C ${getDotHorizontalPercent(index - 1)} ${midY}, ${getDotHorizontalPercent(index)} ${midY}, ${getDotHorizontalPercent(index)} ${getCenterY(index)}`;
   }
-  return d;
+  return pathData;
 }
 
 const styles = {
@@ -165,7 +166,7 @@ export default function AboutJourney({
             focusable="false"
           >
             <path
-              d={buildPath(displayMilestones.length)}
+              d={buildTimelinePath(displayMilestones.length)}
               fill="none"
               stroke="#f65d01"
               strokeWidth={1.8}

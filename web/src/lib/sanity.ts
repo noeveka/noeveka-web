@@ -324,6 +324,10 @@ export async function getAboutPage() {
       primaryCtaLink,
       secondaryCtaText,
       secondaryCtaLink
+    },
+    seo{
+      title,
+      description
     }
   }`);
 }

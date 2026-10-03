@@ -1,3 +1,5 @@
+import { lucideIconRegistry } from "@/components/lucide-icons";
+
 export const ABOUT_CONFIG = {
   // Page Hero
   hero: {
@@ -61,45 +63,45 @@ export const ABOUT_CONFIG = {
     ],
     statusBadges: [
       {
-        icon: "map-pin",
+        icon: lucideIconRegistry.MapPin,
         title: "Netherlands",
         subtext: "Based in Europe\nGlobal Experience",
       },
       {
-        icon: "globe",
+        icon: lucideIconRegistry.Globe,
         title: "Open to Global Opportunities",
       },
       {
-        icon: "laptop",
+        icon: lucideIconRegistry.Laptop,
         title: "Remote First",
         subtext: "(with occasional travel)",
       },
       {
-        icon: "handshake",
+        icon: lucideIconRegistry.Handshake,
         title: "Advisory | Architecture | Delivery Support",
       },
     ],
     focusPillars: [
       {
-        icon: "layers-3",
+        icon: lucideIconRegistry.Layers,
         title: "Enterprise Architecture",
         desc: "From strategy to execution across data, AI and digital platforms.",
         color: "orange",
       },
       {
-        icon: "bar-chart-3",
+        icon: lucideIconRegistry.BarChart3,
         title: "Data & AI Platforms",
         desc: "Designing modern, scalable and governed platforms.",
         color: "blue",
       },
       {
-        icon: "shield-check",
+        icon: lucideIconRegistry.ShieldCheck,
         title: "Governed & Agentic AI",
         desc: "Responsible, secure and production-grade AI solutions.",
         color: "purple",
       },
       {
-        icon: "users",
+        icon: lucideIconRegistry.Users,
         title: "Engineering Leadership",
         desc: "Building and leading high-performing, global teams.",
         color: "green",
@@ -194,22 +196,22 @@ export const ABOUT_CONFIG = {
     heading: "Principles we refuse to compromise.",
     items: [
       {
-        icon: "Scale",
+        icon: lucideIconRegistry.Scale,
         title: "Independence",
         desc: "No vendor partnerships. No hidden incentives. Just honest architectural judgment.",
       },
       {
-        icon: "Lightbulb",
+        icon: lucideIconRegistry.Lightbulb,
         title: "Clarity",
         desc: "Complex data architecture translated into clear, actionable decisions for your team.",
       },
       {
-        icon: "ShieldCheck",
+        icon: lucideIconRegistry.ShieldCheck,
         title: "Integrity",
         desc: "We tell clients what they need to hear, not what they want to hear.",
       },
       {
-        icon: "TrendingUp",
+        icon: lucideIconRegistry.TrendingUp,
         title: "Impact",
         desc: "Every engagement is measured by real-world outcomes, not deliverable counts.",
       },

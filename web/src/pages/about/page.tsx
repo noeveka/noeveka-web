@@ -1,16 +1,25 @@
 import { useEffect, useState } from "react";
-import Hero from "@/components/about/hero";
-import AboutNarrative from "@/components/about/about-narrative";
-import StatsBar from "@/components/about/stats-bar";
-import AboutJourney from "@/components/about/about-journey";
-import Founder from "@/components/about/founder";
-import Mission from "@/components/about/mission";
-import Values from "@/components/about/values";
-import AboutCta from "@/components/about/about-cta";
+import {
+  Hero,
+  AboutNarrative,
+  StatsBar,
+  AboutJourney,
+  Founder,
+  Mission,
+  Values,
+  AboutCta,
+  type HeroStat,
+  type JourneyMilestone,
+  type StatusBadgeItem,
+  type FocusPillarItem,
+  type Pillar,
+  type ValueItem,
+  type StatItem,
+} from "@/components/about";
+import TrustCompanyLogoBar from "@/components/landing/trust-company-logo-bar";
 import { PageHead } from "@/components/seo";
 import { SEO_CONFIG } from "@/config/seo.config";
 import { getAboutPage } from "@/lib/sanity";
-import TrustCompanyLogoBar from "@/components/landing/trust-company-logo-bar";
 
 interface AboutPageData {
   hero?: {
@@ -27,8 +36,8 @@ interface AboutPageData {
     bgImage?: { asset?: unknown; alt?: string };
     mobileBgImage?: { asset?: unknown; alt?: string };
     badgeTags?: string[];
-    stats?: Array<{ value: string; label: string }>;
-    mobileStats?: Array<{ value: string; label: string }>;
+    stats?: HeroStat[];
+    mobileStats?: HeroStat[];
   };
   narrativeSection?: {
     topBlock?: {
@@ -52,20 +61,13 @@ interface AboutPageData {
     };
   };
   stats?: {
-    items?: Array<{ value: string; label: string; sub: string }>;
+    items?: StatItem[];
   };
   journey?: {
     eyebrow?: string;
     heading?: string;
     subtext?: string;
-    milestones?: Array<{
-      year: string;
-      stage?: string;
-      location?: string;
-      title: string;
-      description: string;
-      isHighlight?: boolean;
-    }>;
+    milestones?: JourneyMilestone[];
   };
   founder?: {
     eyebrow?: string;
@@ -82,18 +84,18 @@ interface AboutPageData {
     whyFoundedHeading?: string;
     whyFoundedText?: string;
     whyFoundedParagraphs?: string[];
-    statusBadges?: Array<{ icon: string; title: string; subtext?: string }>;
-    focusPillars?: Array<{ icon: string; title: string; desc: string; color: string }>;
+    statusBadges?: StatusBadgeItem[];
+    focusPillars?: FocusPillarItem[];
     linkedinUrl?: string;
     email?: string;
   };
   mission?: {
     statement?: string;
-    pillars?: Array<{ number: string; title: string; desc: string }>;
+    pillars?: Pillar[];
   };
   values?: {
     heading?: string;
-    items?: Array<{ icon: string; title: string; desc: string }>;
+    items?: ValueItem[];
   };
   cta?: {
     headingLine1?: string;
@@ -107,6 +109,10 @@ interface AboutPageData {
     secondaryCtaText?: string;
     secondaryCtaLink?: string;
   };
+  seo?: {
+    title?: string;
+    description?: string;
+  };
 }
 
 export default function AboutPage() {
@@ -119,8 +125,8 @@ export default function AboutPage() {
   return (
     <>
       <PageHead
-        title={SEO_CONFIG.pages.about.title}
-        description={SEO_CONFIG.pages.about.description}
+        title={data?.seo?.title || SEO_CONFIG.pages.about.title}
+        description={data?.seo?.description || SEO_CONFIG.pages.about.description}
       />
       <Hero
         badge={data?.hero?.badge}

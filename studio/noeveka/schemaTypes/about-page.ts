@@ -20,14 +20,15 @@ export const aboutPage = defineType({
   title: 'About Page',
   type: 'document',
   groups: [
-    {name: 'hero', title: '1 · Hero'},
-    {name: 'narrative', title: '2 · Origin Narrative'},
-    {name: 'stats', title: '3 · Stats Bar'},
-    {name: 'journey', title: '4 · Global Journey Timeline'},
-    {name: 'founder', title: '5 · Founder'},
-    {name: 'mission', title: '6 · Mission'},
-    {name: 'values', title: '7 · Values'},
-    {name: 'cta', title: '8 · CTA'},
+    {name: 'hero', title: '1. Hero Section (Top Banner & Highlights)'},
+    {name: 'narrative', title: '2. Origin Narrative (Frustration & Realisation)'},
+    {name: 'stats', title: '3. Stats Bar (Impact Numbers)'},
+    {name: 'journey', title: '4. Journey Timeline (Global Evolution)'},
+    {name: 'founder', title: '5. Founder Profile (Ajay Kumar & Focus Areas)'},
+    {name: 'mission', title: '6. Mission (Manifesto & Pillars)'},
+    {name: 'values', title: '7. Values (Guiding Principles)'},
+    {name: 'cta', title: '8. Call to Action (Bottom Banner)'},
+    {name: 'seo', title: '9. SEO & Metadata'},
   ],
 
   fields: [
@@ -385,7 +386,7 @@ export const aboutPage = defineType({
       ],
     }),
 
-    // ─── 4. GLOBAL JOURNEY TIMELINE ───────────────────────────────────────────
+    // ─── 4. GLOBAL JOURNEY TIMELINE 
     defineField({
       name: 'journey',
       title: 'Global Journey Timeline',
@@ -783,6 +784,33 @@ export const aboutPage = defineType({
           title: 'Secondary CTA - Link',
           type: 'string',
           initialValue: '/services',
+        }),
+      ],
+    }),
+
+    // ─── 9. SEO & METADATA 
+    defineField({
+      name: 'seo',
+      title: 'SEO & Metadata',
+      type: 'object',
+      group: 'seo',
+      description: 'Search engine optimization tags and social sharing metadata.',
+      fields: [
+        defineField({
+          name: 'title',
+          title: 'Meta Title',
+          type: 'string',
+          description: 'Title displayed in search engine results and browser tabs.',
+          initialValue: 'About Noeveka | Enterprise Data & AI Architecture',
+        }),
+        defineField({
+          name: 'description',
+          title: 'Meta Description',
+          type: 'text',
+          rows: 3,
+          description: 'Summary shown in search engine snippet preview (150-160 characters recommended).',
+          initialValue:
+            'Independent enterprise Data & AI advisory firm built by architects. Senior architectural expertise, sound judgment, and practical execution.',
         }),
       ],
     }),

@@ -1,9 +1,7 @@
 import { motion } from "framer-motion";
-
 import { ABOUT_CONFIG } from "@/config/about.config";
-import { fu } from "@/lib/motion";
+import { fadeUp } from "@/lib/motion";
 import { urlFor } from "@/lib/sanity";
-
 import { LucideIcon, lucideIconRegistry } from "../lucide-icons";
 
 export interface StatusBadgeItem {
@@ -19,7 +17,7 @@ export interface FocusPillarItem {
   color: string;
 }
 
-interface FounderProps {
+export interface FounderProps {
   eyebrow?: string;
   heading?: string;
   name?: string;
@@ -42,98 +40,25 @@ interface FounderProps {
 }
 
 function renderStatusIcon(icon: string) {
-  const cls = "h-[18px] w-[18px]";
-  const style = { color: "var(--color-text-primary)" };
-  switch (icon) {
-    case "map-pin":
-      return (
-        <LucideIcon
-          name={lucideIconRegistry.MapPin}
-          className={cls}
-          style={style}
-        />
-      );
-    case "globe":
-      return (
-        <LucideIcon
-          name={lucideIconRegistry.Globe}
-          className={cls}
-          style={style}
-        />
-      );
-    case "laptop":
-      return (
-        <LucideIcon
-          name={lucideIconRegistry.Laptop}
-          className={cls}
-          style={style}
-        />
-      );
-    case "handshake":
-      return (
-        <LucideIcon
-          name={lucideIconRegistry.Handshake}
-          className={cls}
-          style={style}
-        />
-      );
-    default:
-      return (
-        <LucideIcon
-          name={lucideIconRegistry.MapPin}
-          className={cls}
-          style={style}
-        />
-      );
-  }
+  return (
+    <LucideIcon
+      name={icon}
+      fallback={lucideIconRegistry.MapPin}
+      className="h-[18px] w-[18px]"
+      style={{ color: "var(--color-text-primary)" }}
+    />
+  );
 }
 
 function renderPillarIcon(icon: string) {
-  const cls = "h-5 w-5";
-  const style = { color: "var(--color-text-primary)" };
-  switch (icon) {
-    case "layers-3":
-    case "layers":
-      return (
-        <LucideIcon
-          name={lucideIconRegistry.Layers}
-          className={cls}
-          style={style}
-        />
-      );
-    case "bar-chart-3":
-      return (
-        <LucideIcon
-          name={lucideIconRegistry.BarChart3}
-          className={cls}
-          style={style}
-        />
-      );
-    case "shield-check":
-      return (
-        <LucideIcon
-          name={lucideIconRegistry.ShieldCheck}
-          className={cls}
-          style={style}
-        />
-      );
-    case "users":
-      return (
-        <LucideIcon
-          name={lucideIconRegistry.Users}
-          className={cls}
-          style={style}
-        />
-      );
-    default:
-      return (
-        <LucideIcon
-          name={lucideIconRegistry.Layers}
-          className={cls}
-          style={style}
-        />
-      );
-  }
+  return (
+    <LucideIcon
+      name={icon}
+      fallback={lucideIconRegistry.Layers}
+      className="h-5 w-5"
+      style={{ color: "var(--color-text-primary)" }}
+    />
+  );
 }
 
 export default function Founder({
@@ -212,7 +137,7 @@ export default function Founder({
         <div className="grid grid-cols-1 items-stretch gap-8 lg:grid-cols-[400px_1fr] xl:grid-cols-[430px_1fr] xl:gap-12">
           {/* ── LEFT: Founder Portrait ── */}
           <motion.div
-            {...fu(0.04)}
+            {...fadeUp(0.04)}
             className="relative flex min-h-[460px] w-full flex-col justify-end overflow-hidden sm:min-h-[500px] lg:h-full lg:min-h-[540px]"
             style={{ backgroundColor: "var(--color-navy-900)" }}
           >
@@ -233,7 +158,7 @@ export default function Founder({
           </motion.div>
 
           {/* ── RIGHT: Editorial Content & Badges ── */}
-          <motion.div {...fu(0.08)} className="flex flex-col justify-between">
+          <motion.div {...fadeUp(0.08)} className="flex flex-col justify-between">
             <div>
               {/* Top Subgrid: Header/Bio left, Status Badges right */}
               <div className="grid grid-cols-1 gap-6 md:grid-cols-[1fr_210px] xl:grid-cols-[1fr_225px] xl:gap-8">
@@ -278,24 +203,24 @@ export default function Founder({
 
                 {/* Right: Status Badges */}
                 <div className="flex flex-col justify-center space-y-3.5">
-                  {resolvedStatusBadges.map((badge, idx) => (
-                    <div key={idx} className="flex items-start gap-2.5">
+                  {resolvedStatusBadges.map((badgeItem, badgeIndex) => (
+                    <div key={badgeIndex} className="flex items-start gap-2.5">
                       <div className="about-founder-status-icon">
-                        {renderStatusIcon(badge.icon)}
+                        {renderStatusIcon(badgeItem.icon)}
                       </div>
                       <div className="pt-0.5">
                         <div
                           className="text-[12.5px] leading-snug font-bold"
                           style={{ color: "var(--color-text-primary)" }}
                         >
-                          {badge.title}
+                          {badgeItem.title}
                         </div>
-                        {badge.subtext && (
+                        {badgeItem.subtext && (
                           <div
                             className="mt-0.5 text-[11px] leading-snug whitespace-pre-line"
                             style={{ color: "var(--color-text-muted)" }}
                           >
-                            {badge.subtext}
+                            {badgeItem.subtext}
                           </div>
                         )}
                       </div>
@@ -331,13 +256,13 @@ export default function Founder({
 
             {/* Bottom: Focus Pillar Cards */}
             <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
-              {resolvedFocusPillars.map((pillar, idx) => (
-                <div key={idx} className="about-founder-pillar-card">
-                  <div className="mb-2">{renderPillarIcon(pillar.icon)}</div>
+              {resolvedFocusPillars.map((pillarItem, pillarIndex) => (
+                <div key={pillarIndex} className="about-founder-pillar-card">
+                  <div className="mb-2">{renderPillarIcon(pillarItem.icon)}</div>
                   <div className="about-founder-pillar-title">
-                    {pillar.title}
+                    {pillarItem.title}
                   </div>
-                  <p className="about-founder-pillar-desc">{pillar.desc}</p>
+                  <p className="about-founder-pillar-desc">{pillarItem.desc}</p>
                 </div>
               ))}
             </div>

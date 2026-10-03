@@ -1,8 +1,7 @@
 import { motion } from "framer-motion";
-
-import { LucideIcon } from "@/components/lucide-icons";
+import { LucideIcon, lucideIconRegistry } from "@/components/lucide-icons";
 import { ABOUT_CONFIG } from "@/config/about.config";
-import { fs, fu } from "@/lib/motion";
+import { fadeScale, fadeUp } from "@/lib/motion";
 
 export interface ValueItem {
   icon: string;
@@ -10,7 +9,7 @@ export interface ValueItem {
   desc: string;
 }
 
-interface ValuesProps {
+export interface ValuesProps {
   heading?: string;
   items?: ValueItem[];
 }
@@ -26,7 +25,7 @@ export default function Values({
           {/* Left: heading */}
           <div className="self-start lg:sticky lg:top-24">
             <motion.h2
-              {...fu(0.07)}
+              {...fadeUp(0.07)}
               className="about-section-heading mb-6"
             >
               {heading}
@@ -42,23 +41,23 @@ export default function Values({
 
           {/* Right: value cards */}
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            {items.map(({ icon, title, desc }, i) => (
+            {items.map((valueItem, index) => (
               <motion.div
-                key={title}
-                {...fs(0.06 + i * 0.08)}
+                key={valueItem.title}
+                {...fadeScale(0.06 + index * 0.08)}
                 className="about-value-card"
               >
                 <div className="about-value-icon">
                   <LucideIcon
-                    name={icon}
-                    fallback="layers"
+                    name={valueItem.icon}
+                    fallback={lucideIconRegistry.Layers}
                     className="h-6 w-6"
                     style={{ color: "var(--color-brand)" }}
                   />
                 </div>
                 <div>
-                  <p className="about-value-title">{title}</p>
-                  <p className="about-value-desc">{desc}</p>
+                  <p className="about-value-title">{valueItem.title}</p>
+                  <p className="about-value-desc">{valueItem.desc}</p>
                 </div>
               </motion.div>
             ))}
