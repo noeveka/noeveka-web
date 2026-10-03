@@ -5,7 +5,7 @@ export const siteSettings = defineType({
   title: 'Site Settings',
   type: 'document',
   fields: [
-    // ─── Navbar ─────────────────────────────────────────────────────────────
+    // ─── Navbar -────
     defineField({
       name: 'logoIcon',
       title: 'Logo Icon Image',
@@ -50,7 +50,7 @@ export const siteSettings = defineType({
       initialValue: '/#contact',
     }),
 
-    // ─── Footer ─────────────────────────────────────────────────────────────
+    // ─── Footer -────
     defineField({
       name: 'footerTagline',
       title: 'Footer Tagline',

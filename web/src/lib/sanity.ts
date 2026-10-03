@@ -1,4 +1,3 @@
-// web/src/lib/sanity.ts
 import { createClient } from "@sanity/client";
 import imageUrlBuilder from "@sanity/image-url";
 
@@ -13,34 +12,48 @@ const builder = imageUrlBuilder(client);
 export const urlFor = (source: unknown) =>
   builder.image(source as Parameters<typeof builder.image>[0]);
 
-// ─── Site Settings (Navbar + Footer) ─────────────────────────────────────────
+// ─── Site Settings (Navbar + Footer)
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+let siteSettingsCachePromise: Promise<Record<string, any>> | null = null;
+
 export async function getSiteSettings() {
-  return client.fetch(`*[_type == "siteSettings"][0]{
-    logoIcon{ asset, alt },
-    logoText{ asset, alt },
-    navItems[]{ label, href },
-    navCtaText,
-    navCtaLink,
-    footerTagline,
-    socialLinks[]{ platform, href },
-    companyColumnHeading,
-    companyLinks[]{ label, href },
-    servicesColumnHeading,
-    servicesLinks[]{ label, href },
-    contactHeading,
-    contactEmail,
-    contactPhone,
-    contactAddress,
-    newsletterTag,
-    newsletterHeading,
-    newsletterSubtext,
-    newsletterPlaceholder,
-    copyrightText,
-    footerNavLinks[]{ label, href }
-  }`);
+  if (!siteSettingsCachePromise) {
+    siteSettingsCachePromise = client
+      .fetch(
+        `*[_type == "siteSettings"][0]{
+      logoIcon{ asset, alt },
+      logoText{ asset, alt },
+      navItems[]{ label, href },
+      navCtaText,
+      navCtaLink,
+      footerTagline,
+      socialLinks[]{ platform, href },
+      companyColumnHeading,
+      companyLinks[]{ label, href },
+      servicesColumnHeading,
+      servicesLinks[]{ label, href },
+      contactHeading,
+      contactEmail,
+      contactPhone,
+      contactAddress,
+      newsletterTag,
+      newsletterHeading,
+      newsletterSubtext,
+      newsletterPlaceholder,
+      copyrightText,
+      footerNavLinks[]{ label, href }
+    }`
+      )
+      .catch((error) => {
+        // Allow retry if fetch failed
+        siteSettingsCachePromise = null;
+        throw error;
+      });
+  }
+  return siteSettingsCachePromise;
 }
 
-// ─── Home Page (all section copy in one request) ──────────────────────────────
+// ─── Home Page (all section copy in one request) 
 export async function getHomePage() {
   return client.fetch(`*[_type == "homePage"][0]{
     hero{
@@ -68,15 +81,18 @@ export async function getHomePage() {
       heading,
       subtext,
       cardCtaText,
-      services[]{
+      "services": coalesce(services, *[_type == "service"] | order(order asc){
+        _id,
         title,
+        "slug": slug.current,
         description,
         icon,
         variant,
         ctaText,
         ctaLink,
-        featured
-      }
+        featured,
+        order
+      })
     },
     aboutSection{
       eyebrow,
@@ -94,10 +110,23 @@ export async function getHomePage() {
       skillsHeading,
       skills
     },
+    trustCompanyLogoBarSection{
+      title,
+      subtitle
+    },
     testimonialsSection{
       eyebrow,
       heading,
-      subtext
+      subtext,
+      "testimonials": *[_type == "testimonial"] | order(order asc){
+        _id,
+        company,
+        abbr,
+        quote,
+        authorName,
+        authorRole,
+        rating
+      }
     },
     metricsSection{
       metrics[]{ value, label, sub }
@@ -177,7 +206,7 @@ export async function getResources() {
   }`);
 }
 
-// ─── Resources Page Copy ───────────────────────────────────────────────────────
+// ─── Resources Page Copy -─────
 export async function getResourcesPage() {
   return client.fetch(`*[_type == "resourcesPage"][0]{
     hero{
@@ -201,7 +230,7 @@ export async function getResourcesPage() {
   }`);
 }
 
-// ─── About Page ───────────────────────────────────────────────────────────────
+// ─── About Page -──────
 export async function getAboutPage() {
   return client.fetch(`*[_type == "aboutPage"][0]{
     hero{
@@ -299,7 +328,7 @@ export async function getAboutPage() {
   }`);
 }
 
-// ─── Contact Page ────────────────────────────────────────────────────────────
+// ─── Contact Page -───
 export async function getContactPage() {
   return client.fetch(`*[_type == "contactPage"][0]{
     hero{
@@ -340,7 +369,7 @@ export async function getContactPage() {
   }`);
 }
 
-// ─── Services Page ───────────────────────────────────────────────────────────
+// ─── Services Page -──
 export async function getServicesPage() {
   return client.fetch(`*[_type == "servicesPage"][0]{
     hero{
@@ -404,7 +433,7 @@ export async function getServicesPage() {
   }`);
 }
 
-// ─── Service Detail Page ──────────────────────────────────────────────────
+// ─── Service Detail Page -
 export async function getServiceDetailPage(slug: string) {
   const detail = await client.fetch(
     `*[_type == "serviceDetailPage" && slug.current == $slug][0]{
@@ -519,8 +548,12 @@ export async function getServiceDetailPage(slug: string) {
   const base = detail || {};
   const hero = {
     ...(base.hero || {}),
-    heroImage: base.hero?.heroImage?.asset ? base.hero.heroImage : serviceDoc?.heroImage,
-    heroMobileImage: base.hero?.heroMobileImage?.asset ? base.hero.heroMobileImage : serviceDoc?.heroMobileImage,
+    heroImage: base.hero?.heroImage?.asset
+      ? base.hero.heroImage
+      : serviceDoc?.heroImage,
+    heroMobileImage: base.hero?.heroMobileImage?.asset
+      ? base.hero.heroMobileImage
+      : serviceDoc?.heroMobileImage,
   };
 
   return {
@@ -529,5 +562,3 @@ export async function getServiceDetailPage(slug: string) {
     hero,
   };
 }
-
-

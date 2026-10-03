@@ -1,10 +1,9 @@
 import { motion } from "framer-motion";
-
 import { LucideIcon, lucideIconRegistry } from "@/components/lucide-icons";
 import { CTA_STRIP_CONFIG } from "@/config/landing/cta-strip.config";
-import { fu } from "@/lib/motion";
+import { fadeUp } from "@/lib/motion";
 
-interface CtaStripProps {
+export interface CtaStripProps {
   eyebrow?: string;
   headingPart?: string;
   headingHighlight?: string;
@@ -34,12 +33,12 @@ export default function CtaStrip({
 
           {/* Text copy */}
           <div className="relative max-w-xl text-left">
-            <motion.h2 {...fu(0.07)} className="cta-hero-heading">
+            <motion.h2 {...fadeUp(0.07)} className="cta-hero-heading">
               {headingPart}
               <span className="text-brand">{headingHighlight}</span>
             </motion.h2>
             <motion.p
-              {...fu(0.13)}
+              {...fadeUp(0.13)}
               className="lp-section-subtext text-text-secondary"
             >
               {body}
@@ -48,7 +47,7 @@ export default function CtaStrip({
 
           {/* CTAs */}
           <motion.div
-            {...fu(0.19)}
+            {...fadeUp(0.19)}
             className="relative flex shrink-0 flex-col items-stretch gap-3 sm:flex-row sm:items-center lg:flex-col lg:items-stretch"
           >
             {primaryCtaLink ? (
@@ -60,7 +59,7 @@ export default function CtaStrip({
                 />
               </a>
             ) : (
-              <button className="btn-hero">
+              <button type="button" className="btn-hero">
                 {primaryCtaText}{" "}
                 <LucideIcon
                   name={lucideIconRegistry.ArrowRight}
@@ -74,7 +73,7 @@ export default function CtaStrip({
                 {secondaryCtaText}
               </a>
             ) : (
-              <button className="btn-outline-pill">{secondaryCtaText}</button>
+              <button type="button" className="btn-outline-pill">{secondaryCtaText}</button>
             )}
           </motion.div>
         </div>
@@ -82,3 +81,4 @@ export default function CtaStrip({
     </section>
   );
 }
+

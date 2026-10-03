@@ -1,7 +1,7 @@
 /* LAYOUT UTILITIES
    Landing page container, section wrappers, and hero overlays.
    Use .lp-container .lp-px together for centred page sections.
-   ─────────────────────────────────────────────────────────── */
+   -── */
 
 @layer components {
   /* ── LANDING PAGE LAYOUT UTILITIES ─────────────────────────

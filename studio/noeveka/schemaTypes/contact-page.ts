@@ -17,7 +17,7 @@ export const contactPage = defineType({
   ],
 
   fields: [
-    // ─── 1. HERO ──────────────────────────────────────────────────────────────
+    // ─── 1. HERO -─────
     defineField({
       name: 'hero',
       title: 'Hero Header Section',
@@ -176,7 +176,7 @@ export const contactPage = defineType({
       ],
     }),
 
-    // ─── 3. DIRECT CHANNELS ───────────────────────────────────────────────────
+    // ─── 3. DIRECT CHANNELS -─
     defineField({
       name: 'channels',
       title: 'Direct Reachout Channels',

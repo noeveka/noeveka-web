@@ -1,91 +1,150 @@
 import { useEffect, useState } from "react";
-import CtaStrip from "@/components/landing/cta-strip";
-import Faq from "@/components/landing/faq";
-import Hero from "@/components/landing/hero";
-import MetricsBar from "@/components/landing/metrics-bar";
-import Testimonials from "@/components/landing/testimonials";
-import WhatWeDo from "@/components/landing/what-we-do";
-import WhoWeAre from "@/components/landing/who-we-are";
-import WhyNoeveka from "@/components/landing/why-noeveka";
+
+import CtaStrip, { type CtaStripProps } from "@/components/landing/cta-strip";
+import Faq, { type FaqItem } from "@/components/landing/faq";
+import Hero, { type HeroProps } from "@/components/landing/hero";
+import MetricsBar, { type MetricItem } from "@/components/landing/metrics-bar";
+import Testimonials, {
+  type Testimonial,
+} from "@/components/landing/testimonials";
+import TrustCompanyLogoBar from "@/components/landing/trust-company-logo-bar";
+import WhatWeDo, { type ServiceItem } from "@/components/landing/what-we-do";
+import WhoWeAre, { type WhoWeAreProps } from "@/components/landing/who-we-are";
+import WhyNoeveka, {
+  type WhyNoevekaDifferentiator,
+  type WhyNoevekaFeature,
+  type WhyNoevekaStat,
+} from "@/components/landing/why-noeveka";
 import { PageHead } from "@/components/seo";
 import { SEO_CONFIG } from "@/config/seo.config";
 import { getHomePage } from "@/lib/sanity";
-import TrustCompanyLogoBar from "@/components/landing/trust-company-logo-bar";
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-type HomePageData = Record<string, any>;
+interface HomePageContent {
+  seo?: {
+    metaTitle?: string;
+    metaDescription?: string;
+  };
+  hero?: HeroProps;
+  servicesSection?: {
+    eyebrow?: string;
+    heading?: string;
+    subtext?: string;
+    cardCtaText?: string;
+    services?: ServiceItem[];
+  };
+  aboutSection?: WhoWeAreProps;
+  trustCompanyLogoBarSection?: {
+    title?: string;
+    subtitle?: string;
+  };
+  testimonialsSection?: {
+    eyebrow?: string;
+    heading?: string;
+    subtext?: string;
+    testimonials?: Testimonial[];
+  };
+  metricsSection?: {
+    metrics?: MetricItem[];
+  };
+  whySection?: {
+    eyebrow?: string;
+    heading?: string;
+    body?: string;
+    stats?: WhyNoevekaStat[];
+    differentiators?: WhyNoevekaDifferentiator[];
+    features?: WhyNoevekaFeature[];
+    ctaText?: string;
+    ctaLink?: string;
+  };
+  faqSection?: {
+    eyebrow?: string;
+    heading?: string;
+    subtext?: string;
+    faqs?: FaqItem[];
+  };
+  ctaStrip?: CtaStripProps;
+}
 
 export default function LandingPage() {
-  const [page, setPage] = useState<HomePageData | null>(null);
+  const [homePageData, setHomePageData] = useState<HomePageContent | null>(
+    null
+  );
 
   useEffect(() => {
-    getHomePage().then(setPage).catch(console.error);
+    getHomePage()
+      .then((data) => setHomePageData(data))
+      .catch(console.error);
   }, []);
 
   return (
     <>
       <PageHead
-        title={page?.seo?.metaTitle ?? SEO_CONFIG.pages.landing.title}
+        title={homePageData?.seo?.metaTitle ?? SEO_CONFIG.pages.landing.title}
         description={
-          page?.seo?.metaDescription ?? SEO_CONFIG.pages.landing.description
+          homePageData?.seo?.metaDescription ??
+          SEO_CONFIG.pages.landing.description
         }
       />
-      <Hero {...(page?.hero ?? {})} />
+      <Hero {...(homePageData?.hero ?? {})} />
       <WhatWeDo
-        eyebrow={page?.servicesSection?.eyebrow}
-        heading={page?.servicesSection?.heading}
-        subtext={page?.servicesSection?.subtext}
-        cardCtaText={page?.servicesSection?.cardCtaText}
-        services={page?.servicesSection?.services}
+        eyebrow={homePageData?.servicesSection?.eyebrow}
+        heading={homePageData?.servicesSection?.heading}
+        subtext={homePageData?.servicesSection?.subtext}
+        cardCtaText={homePageData?.servicesSection?.cardCtaText}
+        services={homePageData?.servicesSection?.services}
       />
       <WhoWeAre
-        eyebrow={page?.aboutSection?.eyebrow}
-        heading={page?.aboutSection?.heading}
-        body={page?.aboutSection?.body}
-        ctaText={page?.aboutSection?.ctaText}
-        ctaLink={page?.aboutSection?.ctaLink}
-        founderName={page?.aboutSection?.founderName}
-        founderRole={page?.aboutSection?.founderRole}
-        founderPhoto={page?.aboutSection?.founderPhoto}
-        statBadgeValue={page?.aboutSection?.statBadgeValue}
-        statBadgeLabel={page?.aboutSection?.statBadgeLabel}
-        ratingValue={page?.aboutSection?.ratingValue}
-        ratingLabel={page?.aboutSection?.ratingLabel}
-        skillsHeading={page?.aboutSection?.skillsHeading}
-        skills={page?.aboutSection?.skills}
+        eyebrow={homePageData?.aboutSection?.eyebrow}
+        heading={homePageData?.aboutSection?.heading}
+        body={homePageData?.aboutSection?.body}
+        ctaText={homePageData?.aboutSection?.ctaText}
+        ctaLink={homePageData?.aboutSection?.ctaLink}
+        founderName={homePageData?.aboutSection?.founderName}
+        founderRole={homePageData?.aboutSection?.founderRole}
+        founderPhoto={homePageData?.aboutSection?.founderPhoto}
+        statBadgeValue={homePageData?.aboutSection?.statBadgeValue}
+        statBadgeLabel={homePageData?.aboutSection?.statBadgeLabel}
+        ratingValue={homePageData?.aboutSection?.ratingValue}
+        ratingLabel={homePageData?.aboutSection?.ratingLabel}
+        skillsHeading={homePageData?.aboutSection?.skillsHeading}
+        skills={homePageData?.aboutSection?.skills}
       />
-      <TrustCompanyLogoBar />
+      <TrustCompanyLogoBar
+        title={homePageData?.trustCompanyLogoBarSection?.title}
+        subtitle={homePageData?.trustCompanyLogoBarSection?.subtitle}
+      />
       <Testimonials
-        eyebrow={page?.testimonialsSection?.eyebrow}
-        heading={page?.testimonialsSection?.heading}
-        subtext={page?.testimonialsSection?.subtext}
+        eyebrow={homePageData?.testimonialsSection?.eyebrow}
+        heading={homePageData?.testimonialsSection?.heading}
+        subtext={homePageData?.testimonialsSection?.subtext}
+        testimonials={homePageData?.testimonialsSection?.testimonials}
       />
-      <MetricsBar metrics={page?.metricsSection?.metrics} />
+      <MetricsBar metrics={homePageData?.metricsSection?.metrics} />
       <WhyNoeveka
-        eyebrow={page?.whySection?.eyebrow}
-        heading={page?.whySection?.heading}
-        body={page?.whySection?.body}
-        stats={page?.whySection?.stats}
-        differentiators={page?.whySection?.differentiators}
-        features={page?.whySection?.features}
-        ctaText={page?.whySection?.ctaText}
-        ctaLink={page?.whySection?.ctaLink}
+        eyebrow={homePageData?.whySection?.eyebrow}
+        heading={homePageData?.whySection?.heading}
+        body={homePageData?.whySection?.body}
+        stats={homePageData?.whySection?.stats}
+        differentiators={homePageData?.whySection?.differentiators}
+        features={homePageData?.whySection?.features}
+        ctaText={homePageData?.whySection?.ctaText}
+        ctaLink={homePageData?.whySection?.ctaLink}
       />
       <Faq
-        eyebrow={page?.faqSection?.eyebrow}
-        heading={page?.faqSection?.heading}
-        subtext={page?.faqSection?.subtext}
-        faqs={page?.faqSection?.faqs}
+        eyebrow={homePageData?.faqSection?.eyebrow}
+        heading={homePageData?.faqSection?.heading}
+        subtext={homePageData?.faqSection?.subtext}
+        faqs={homePageData?.faqSection?.faqs}
       />
       <CtaStrip
-        eyebrow={page?.ctaStrip?.eyebrow}
-        headingPart={page?.ctaStrip?.headingPart}
-        headingHighlight={page?.ctaStrip?.headingHighlight}
-        body={page?.ctaStrip?.body}
-        primaryCtaText={page?.ctaStrip?.primaryCtaText}
-        primaryCtaLink={page?.ctaStrip?.primaryCtaLink}
-        secondaryCtaText={page?.ctaStrip?.secondaryCtaText}
-        secondaryCtaLink={page?.ctaStrip?.secondaryCtaLink}
+        eyebrow={homePageData?.ctaStrip?.eyebrow}
+        headingPart={homePageData?.ctaStrip?.headingPart}
+        headingHighlight={homePageData?.ctaStrip?.headingHighlight}
+        body={homePageData?.ctaStrip?.body}
+        primaryCtaText={homePageData?.ctaStrip?.primaryCtaText}
+        primaryCtaLink={homePageData?.ctaStrip?.primaryCtaLink}
+        secondaryCtaText={homePageData?.ctaStrip?.secondaryCtaText}
+        secondaryCtaLink={homePageData?.ctaStrip?.secondaryCtaLink}
       />
     </>
   );

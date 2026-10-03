@@ -3,7 +3,7 @@
    Add new component groups as sub-files in ./components/.
 
    Load order matters: primitives → layout → landing
-   ─────────────────────────────────────────────────────── */
+   -───── */
 
 @import "./components/primitives.css"; /* Buttons, inputs, cards, nav, badges, chips, stat-tiles, etc. */
 @import "./components/layout.css"; /* lp-container, lp-px, section wrappers, hero overlays        */

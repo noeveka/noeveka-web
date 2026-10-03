@@ -1,7 +1,7 @@
 /* CONTACT PAGE COMPONENT CLASSES
    Form inputs, channel links, service checkboxes, submit button,
    success card. All colours reference design tokens - no hardcoded hex.
-   ─────────────────────────────────────────────────────────────────── */
+   -────────── */
 
 @layer components {
   /* ── PAGE SHELL ──────────────────────────────────────────────── */

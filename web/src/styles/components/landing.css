@@ -1,7 +1,7 @@
 /* LANDING PAGE COMPONENT CLASSES
    Section headers, CTA buttons, service cards, feature/
    differentiator/testimonial/FAQ/metric/cta/logo-bar patterns.
-   ─────────────────────────────────────────────────────────── */
+   -── */
 
 @layer components {
   /* ── SECTION HEADER PATTERN (eyebrow + h2 + subtext) ────────── */
@@ -580,7 +580,7 @@
     margin-bottom: 1rem;
   }
 
-  /* ── LOGO BAR ────────────────────────────────────────────────── */
+  /* ── LOGO BAR - */
   .logo-bar-title {
     font-size: var(--text-base);
     font-weight: var(--font-weight-semibold);

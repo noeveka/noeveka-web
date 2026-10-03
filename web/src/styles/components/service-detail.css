@@ -2,10 +2,9 @@
    Hero, Challenge, Bento What We Do, Architecture Lens,
    How We Engage, Deliverables, Outcomes, Related Expertise, Bottom CTA.
    All colours and layout metrics use design tokens — zero hardcoded hex.
-   ─────────────────────────────────────────────────────────────── */
+   -────── */
 
 @layer components {
-
   /* ── 1. COMMON SECTION HEADER & TYPOGRAPHY ──────────────────── */
   .service-section-eyebrow {
     display: inline-flex;
@@ -50,7 +49,6 @@
       font-size: 16px;
     }
   }
-
 
   /* ── 2. SERVICE HERO ────────────────────────────────────────── */
   .service-hero-section {
@@ -189,7 +187,6 @@
     }
   }
 
-
   /* ── 3. SERVICE CHALLENGE ───────────────────────────────────── */
   .service-challenge-section {
     position: relative;
@@ -250,7 +247,6 @@
     flex-shrink: 0;
     margin-top: 0.125rem;
   }
-
 
   /* ── 4. SERVICE WHAT WE DO (BENTO GRID) ─────────────────────── */
   .service-bento-card {
@@ -361,7 +357,6 @@
     transform: translateX(4px);
   }
 
-
   /* ── 5. SERVICE ARCHITECTURE LENS ───────────────────────────── */
   .service-lens-section {
     position: relative;
@@ -408,7 +403,6 @@
     transform: translateY(-4px);
   }
 
-
   /* ── 6. SERVICE HOW WE ENGAGE ───────────────────────────────── */
   .service-timeline-step {
     position: relative;
@@ -452,7 +446,6 @@
     box-shadow: 0 0 0 4px var(--color-brand-tint);
   }
 
-
   /* ── 7. SERVICE DELIVERABLES ────────────────────────────────── */
   .service-deliverables-section {
     position: relative;
@@ -493,7 +486,6 @@
     border-color: rgba(246, 93, 1, 0.3);
   }
 
-
   /* ── 8. SERVICE OUTCOMES ────────────────────────────────────── */
   .service-outcome-card {
     display: flex;
@@ -533,7 +525,6 @@
     transform: scale(1.05);
   }
 
-
   /* ── 9. SERVICE RELATED EXPERTISE ───────────────────────────── */
   .service-related-card {
     position: relative;
@@ -562,7 +553,6 @@
     box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
     border-color: rgba(246, 93, 1, 0.3);
   }
-
 
   /* ── 10. SERVICE BOTTOM CTA ─────────────────────────────────── */
   .service-bottom-cta-box {
@@ -634,5 +624,4 @@
     background-color: var(--color-bg-subtle);
     border-color: var(--color-text-muted);
   }
-
 }

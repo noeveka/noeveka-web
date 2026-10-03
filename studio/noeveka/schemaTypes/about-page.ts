@@ -31,7 +31,7 @@ export const aboutPage = defineType({
   ],
 
   fields: [
-    // ─── 1. HERO ──────────────────────────────────────────────────────────────
+    // ─── 1. HERO -─────
     defineField({
       name: 'hero',
       title: 'Hero Section',
@@ -342,7 +342,7 @@ export const aboutPage = defineType({
       ],
     }),
 
-    // ─── 3. STATS BAR ─────────────────────────────────────────────────────────
+    // ─── 3. STATS BAR -
     defineField({
       name: 'stats',
       title: 'Stats Bar',
@@ -450,7 +450,7 @@ export const aboutPage = defineType({
       ],
     }),
 
-    // ─── 4. FOUNDER ──────────────────────────────────────────────────────────
+    // ─── 4. FOUNDER -─
     defineField({
       name: 'founder',
       title: 'Founder Section',
@@ -635,7 +635,7 @@ export const aboutPage = defineType({
       ],
     }),
 
-    // ─── 5. MISSION ──────────────────────────────────────────────────────────
+    // ─── 5. MISSION -─
     defineField({
       name: 'mission',
       title: 'Mission Section',
@@ -673,7 +673,7 @@ export const aboutPage = defineType({
       ],
     }),
 
-    // ─── 6. VALUES ────────────────────────────────────────────────────────────
+    // ─── 6. VALUES -───
     defineField({
       name: 'values',
       title: 'Values Section',
@@ -714,7 +714,7 @@ export const aboutPage = defineType({
       ],
     }),
 
-    // ─── 7. CTA ───────────────────────────────────────────────────────────────
+    // ─── 7. CTA -──────
     defineField({
       name: 'cta',
       title: 'CTA Section',

@@ -2,14 +2,14 @@ import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { LucideIcon, lucideIconRegistry } from "@/components/lucide-icons";
 import { FAQ_CONFIG } from "@/config/landing/faq.config";
-import { fu } from "@/lib/motion";
+import { fadeUp } from "@/lib/motion";
 
-interface FaqItem {
+export interface FaqItem {
   question: string;
   answer: string;
 }
 
-interface FaqProps {
+export interface FaqProps {
   eyebrow?: string;
   heading?: string;
   subtext?: string;
@@ -22,7 +22,7 @@ export default function Faq({
   subtext = FAQ_CONFIG.subtext,
   faqs,
 }: FaqProps) {
-  const [open, setOpen] = useState<number | null>(null);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
   const displayFaqs: FaqItem[] = faqs?.length ? faqs : [...FAQ_CONFIG.faqs];
 
   return (
@@ -30,26 +30,26 @@ export default function Faq({
       <div className="lp-container lp-px pb-16">
         {/* Section Header */}
         <div className="mb-12 text-center sm:mb-16">
-          <motion.div {...fu()} className="mb-3.5 inline-flex items-center gap-2">
+          <motion.div {...fadeUp()} className="mb-3.5 inline-flex items-center gap-2">
             <span className="lp-eyebrow">✳ {eyebrow}</span>
           </motion.div>
 
-          <motion.h2 {...fu(0.07)} className="lp-section-heading mb-4">
+          <motion.h2 {...fadeUp(0.07)} className="lp-section-heading mb-4">
             {heading}
           </motion.h2>
 
-          <motion.p {...fu(0.12)} className="lp-section-subtext mx-auto max-w-xl">
+          <motion.p {...fadeUp(0.12)} className="lp-section-subtext mx-auto max-w-xl">
             {subtext}
           </motion.p>
         </div>
 
         {/* FAQ Accordion List */}
         <div className="mx-auto flex max-w-[840px] flex-col gap-3.5 sm:gap-4">
-          {displayFaqs.map((faq, i) => {
-            const isOpen = open === i;
+          {displayFaqs.map((faq, faqIndex) => {
+            const isOpen = openIndex === faqIndex;
             const questionText = /^\d+[.\-\s]/.test(faq.question)
               ? faq.question
-              : `${i + 1}. ${faq.question}`;
+              : `${faqIndex + 1}. ${faq.question}`;
 
             return (
               <motion.div
@@ -57,12 +57,12 @@ export default function Faq({
                 initial={{ opacity: 0, y: 14 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.35, delay: i * 0.05 }}
+                transition={{ duration: 0.35, delay: faqIndex * 0.05 }}
                 className={`faq-item${isOpen ? " faq-item-open" : ""}`}
               >
                 <button
                   type="button"
-                  onClick={() => setOpen(isOpen ? null : i)}
+                  onClick={() => setOpenIndex(isOpen ? null : faqIndex)}
                   className="faq-toggle-btn"
                 >
                   <span className="faq-question">{questionText}</span>

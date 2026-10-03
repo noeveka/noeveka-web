@@ -1,31 +1,33 @@
 import { motion } from "framer-motion";
-import { LucideIcon } from "@/components/lucide-icons";
-import { fu, fs, fsl } from "@/lib/motion";
+import { LucideIcon, lucideIconRegistry } from "@/components/lucide-icons";
+import { fadeUp, fadeScale, fadeSlideLeft } from "@/lib/motion";
 import { WHY_NOEVEKA_CONFIG } from "@/config/landing/why-noeveka.config";
 
-interface Stat {
+export interface WhyNoevekaStat {
   value: string;
   label: string;
 }
-interface Differentiator {
+
+export interface WhyNoevekaDifferentiator {
   number: string;
   icon: string;
   title: string;
   desc: string;
 }
-interface Feature {
+
+export interface WhyNoevekaFeature {
   icon: string;
   title: string;
   desc: string;
 }
 
-interface WhyNoevekaProps {
+export interface WhyNoevekaProps {
   eyebrow?: string;
   heading?: string;
   body?: string;
-  stats?: Stat[];
-  differentiators?: Differentiator[];
-  features?: Feature[];
+  stats?: WhyNoevekaStat[];
+  differentiators?: WhyNoevekaDifferentiator[];
+  features?: WhyNoevekaFeature[];
   ctaText?: string;
   ctaLink?: string;
 }
@@ -55,31 +57,31 @@ export default function WhyNoeveka({
           {/* ── LEFT COLUMN - Copy + 2 Feature Cards + CTA ── */}
           <div>
             {/* Eyebrow */}
-            <motion.div {...fu()} className="mb-3.5 inline-flex items-center gap-2">
+            <motion.div {...fadeUp()} className="mb-3.5 inline-flex items-center gap-2">
               <span className="lp-eyebrow">✳ {eyebrow}</span>
             </motion.div>
 
             {/* Heading */}
-            <motion.h2 {...fu(0.07)} className="lp-section-heading mb-5">
+            <motion.h2 {...fadeUp(0.07)} className="lp-section-heading mb-5">
               {heading}
             </motion.h2>
 
             {/* Body */}
-            <motion.p {...fu(0.12)} className="lp-section-subtext mb-8 max-w-xl text-text-secondary">
+            <motion.p {...fadeUp(0.12)} className="lp-section-subtext mb-8 max-w-xl text-text-secondary">
               {body}
             </motion.p>
 
             {/* 2 Feature Cards side-by-side */}
             <motion.div
-              {...fu(0.17)}
+              {...fadeUp(0.17)}
               className="mb-8 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5"
             >
               {displayFeatures.map(({ icon, title, desc }) => (
                 <div key={title} className="feature-card">
                   <div className="feature-card-icon">
                     <LucideIcon
-                      name={icon.toLowerCase()}
-                      fallback="message-square"
+                      name={icon}
+                      fallback={lucideIconRegistry.MessageSquare}
                       className="h-4 w-4 text-brand"
                     />
                   </div>
@@ -92,34 +94,34 @@ export default function WhyNoeveka({
             </motion.div>
 
             {/* CTA Button */}
-            <motion.div {...fu(0.22)}>
+            <motion.div {...fadeUp(0.22)}>
               {ctaLink ? (
                 <a href={ctaLink} className="btn-outline-pill">
                   {ctaText}{" "}
-                  <LucideIcon name="arrow-right" className="h-3.5 w-3.5" />
+                  <LucideIcon name={lucideIconRegistry.ArrowRight} className="h-3.5 w-3.5" />
                 </a>
               ) : (
                 <button type="button" className="btn-outline-pill">
                   {ctaText}{" "}
-                  <LucideIcon name="arrow-right" className="h-3.5 w-3.5" />
+                  <LucideIcon name={lucideIconRegistry.ArrowRight} className="h-3.5 w-3.5" />
                 </button>
               )}
             </motion.div>
           </div>
 
           {/* ── RIGHT COLUMN - 3 Differentiator Cards Stacked ── */}
-          <motion.div {...fsl()} className="flex flex-col gap-4 sm:gap-5">
-            {displayDifferentiators.map(({ number, icon, title, desc }, idx) => (
+          <motion.div {...fadeSlideLeft()} className="flex flex-col gap-4 sm:gap-5">
+            {displayDifferentiators.map(({ number, icon, title, desc }, index) => (
               <motion.div
                 key={title}
-                {...fs(idx * 0.08)}
+                {...fadeScale(index * 0.08)}
                 className="differentiator-card"
               >
                 {/* Left icon */}
                 <div className="differentiator-card-icon">
                   <LucideIcon
-                    name={icon.toLowerCase()}
-                    fallback="shield-check"
+                    name={icon}
+                    fallback={lucideIconRegistry.ShieldCheck}
                     className="h-5 w-5 text-brand"
                   />
                 </div>
@@ -140,3 +142,4 @@ export default function WhyNoeveka({
     </section>
   );
 }
+

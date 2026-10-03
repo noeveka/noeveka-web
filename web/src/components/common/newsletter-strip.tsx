@@ -3,7 +3,7 @@ import { LucideIcon, lucideIconRegistry } from "@/components/lucide-icons";
 import { FOOTER_CONFIG } from "@/config/footer.config";
 import { getSiteSettings } from "@/lib/sanity";
 
-export interface NewsLetterStripProps {
+export interface NewsletterStripProps {
   tag?: string;
   heading?: string;
   subtext?: string;
@@ -11,13 +11,13 @@ export interface NewsLetterStripProps {
   className?: string;
 }
 
-export default function NewsLetterStrip({
+export default function NewsletterStrip({
   tag: propTag,
   heading: propHeading,
   subtext: propSubtext,
   placeholder: propPlaceholder,
   className = "",
-}: NewsLetterStripProps) {
+}: NewsletterStripProps) {
   const [settings, setSettings] = useState<{
     newsletterTag?: string;
     newsletterHeading?: string;
@@ -26,8 +26,8 @@ export default function NewsLetterStrip({
   } | null>(null);
 
   const [email, setEmail] = useState("");
-  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
-  const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [submissionStatus, setSubmissionStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   useEffect(() => {
     getSiteSettings()
@@ -59,35 +59,41 @@ export default function NewsLetterStrip({
     settings?.newsletterPlaceholder ??
     FOOTER_CONFIG.newsletterPlaceholder;
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!email || status === "loading") return;
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+    if (!email || submissionStatus === "loading") return;
 
-    setStatus("loading");
-    setErrorMsg(null);
+    setSubmissionStatus("loading");
+    setErrorMessage(null);
 
     try {
-      const res = await fetch("/api/newsletter", {
+      const response = await fetch("/api/newsletter", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
       });
 
-      if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
-        setErrorMsg(data?.error || "Something went wrong. Please try again.");
-        setStatus("error");
-        setTimeout(() => { setStatus("idle"); setErrorMsg(null); }, 3500);
+      if (!response.ok) {
+        const responseData = await response.json().catch(() => ({}));
+        setErrorMessage(responseData?.error || "Something went wrong. Please try again.");
+        setSubmissionStatus("error");
+        setTimeout(() => {
+          setSubmissionStatus("idle");
+          setErrorMessage(null);
+        }, 3500);
         return;
       }
 
-      setStatus("success");
+      setSubmissionStatus("success");
       setEmail("");
-      setTimeout(() => setStatus("idle"), 3500);
+      setTimeout(() => setSubmissionStatus("idle"), 3500);
     } catch {
-      setErrorMsg("Network error. Please check your connection.");
-      setStatus("error");
-      setTimeout(() => { setStatus("idle"); setErrorMsg(null); }, 3500);
+      setErrorMessage("Network error. Please check your connection.");
+      setSubmissionStatus("error");
+      setTimeout(() => {
+        setSubmissionStatus("idle");
+        setErrorMessage(null);
+      }, 3500);
     }
   };
 
@@ -134,22 +140,28 @@ export default function NewsLetterStrip({
                   <input
                     type="email"
                     value={email}
-                    onChange={(e) => { setEmail(e.target.value); if (status === "error") { setStatus("idle"); setErrorMsg(null); } }}
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                      if (submissionStatus === "error") {
+                        setSubmissionStatus("idle");
+                        setErrorMessage(null);
+                      }
+                    }}
                     placeholder={placeholder}
                     required
-                    disabled={status === "loading" || status === "success"}
+                    disabled={submissionStatus === "loading" || submissionStatus === "success"}
                     className="newsletter-strip-input"
                   />
                 </div>
                 <button
                   type="submit"
                   aria-label="Subscribe"
-                  disabled={status === "loading" || status === "success"}
+                  disabled={submissionStatus === "loading" || submissionStatus === "success"}
                   className="newsletter-strip-submit"
                 >
-                  {status === "loading" ? (
+                  {submissionStatus === "loading" ? (
                     <span className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
-                  ) : status === "success" ? (
+                  ) : submissionStatus === "success" ? (
                     <LucideIcon name={lucideIconRegistry.Check} className="h-4.5 w-4.5 stroke-[2.5]" />
                   ) : (
                     <LucideIcon
@@ -159,8 +171,8 @@ export default function NewsLetterStrip({
                   )}
                 </button>
               </div>
-              {errorMsg && (
-                <p className="newsletter-strip-error">{errorMsg}</p>
+              {errorMessage && (
+                <p className="newsletter-strip-error">{errorMessage}</p>
               )}
             </form>
           </div>
@@ -170,4 +182,4 @@ export default function NewsLetterStrip({
   );
 }
 
-export { NewsLetterStrip };
+export { NewsletterStrip };

@@ -25,7 +25,7 @@ interface TokenPayload {
   exp: number; // Unix ms timestamp
 }
 
-// ─── Signing ──────────────────────────────────────────────────────────────────
+// ─── Signing -─────────
 
 async function getKey(secret: string): Promise<CryptoKey> {
   const enc = new TextEncoder();
@@ -53,7 +53,7 @@ function base64urlDecode(str: string): Uint8Array<ArrayBuffer> {
   ) as Uint8Array<ArrayBuffer>;
 }
 
-// ─── Public API ───────────────────────────────────────────────────────────────
+// ─── Public API -──────
 
 /**
  * Issue a signed download token for the given PDF URL.

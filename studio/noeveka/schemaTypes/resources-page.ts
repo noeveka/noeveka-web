@@ -16,7 +16,7 @@ export const resourcesPage = defineType({
   ],
 
   fields: [
-    // ─── 1. HERO ──────────────────────────────────────────────────────────────
+    // ─── 1. HERO -─────
     defineField({
       name: 'hero',
       title: 'Hero Section',
@@ -79,7 +79,7 @@ export const resourcesPage = defineType({
       ],
     }),
 
-    // ─── 2. GRID & COPY ───────────────────────────────────────────────────────
+    // ─── 2. GRID & COPY -─────
     defineField({
       name: 'gridSection',
       title: 'Resource Grid Section Copy & Settings',

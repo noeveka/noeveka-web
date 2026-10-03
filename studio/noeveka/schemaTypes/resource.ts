@@ -21,7 +21,7 @@ export const resource = defineType({
   ],
 
   fields: [
-    // ─── 1. CONTENT ───────────────────────────────────────────────────────────
+    // ─── 1. CONTENT -──
     defineField({
       name: 'title',
       title: 'Resource Title',
@@ -84,7 +84,7 @@ export const resource = defineType({
       initialValue: 99,
     }),
 
-    // ─── 2. PDF & THUMBNAIL ───────────────────────────────────────────────────
+    // ─── 2. PDF & THUMBNAIL -─
     defineField({
       name: 'pdfFile',
       title: 'PDF File',
@@ -108,7 +108,7 @@ export const resource = defineType({
       fields: [defineField({name: 'alt', title: 'Alt Text', type: 'string'})],
     }),
 
-    // ─── 3. DISPLAY & SEO ─────────────────────────────────────────────────────
+    // ─── 3. DISPLAY & SEO -───
     defineField({
       name: 'slug',
       title: 'Slug',

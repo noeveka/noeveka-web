@@ -1,7 +1,7 @@
 /* RESOURCES PAGE COMPONENT CLASSES
    Resource grid, filter pills, resource card, download modal,
    cover graphic. All colours use design tokens - no hardcoded hex.
-   ─────────────────────────────────────────────────────────────── */
+   -────── */
 
 @layer components {
   /* ── RESOURCE GRID SECTION ───────────────────────────────────── */

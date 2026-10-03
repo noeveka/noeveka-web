@@ -1,7 +1,7 @@
 /* COMMON COMPONENTS CLASSES
    Navbar, Footer, Newsletter Strip, Global Layout Chrome.
    All colours and layout metrics use design tokens - zero hardcoded hex.
-   ─────────────────────────────────────────────────────────────── */
+   -────── */
 
 @layer components {
   /* ── 1. SITE NAVBAR ─────────────────────────────────────────── */

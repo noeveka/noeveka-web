@@ -5,17 +5,18 @@ export const homePage = defineType({
   title: 'Home Page',
   type: 'document',
   groups: [
-    {name: 'hero', title: 'Hero'},
-    {name: 'services', title: 'Services Section'},
-    {name: 'about', title: 'Who We Are'},
-    {name: 'testimonials', title: 'Testimonials'},
-    {name: 'metrics', title: 'Metrics Bar'},
-    {name: 'why', title: 'Why Noeveka'},
-    {name: 'cta', title: 'CTA Strip'},
-    {name: 'faq', title: 'FAQ'},
+    {name: 'hero', title: '1. Hero Section (Top of Page)'},
+    {name: 'services', title: '2. Services Section (What We Do)'},
+    {name: 'about', title: '3. Who We Are (Founder & Core Expertise)'},
+    {name: 'partnerLogos', title: '4. Enterprise Platforms (Logo Bar)'},
+    {name: 'testimonials', title: '5. Testimonials (Client Reviews)'},
+    {name: 'metrics', title: '6. Metrics Bar (Impact Numbers)'},
+    {name: 'why', title: '7. Why Noeveka (Differentiators & Features)'},
+    {name: 'faq', title: '8. FAQ (Frequently Asked Questions)'},
+    {name: 'cta', title: '9. Call To Action Strip (Bottom Banner)'},
   ],
   fields: [
-    // ─── HERO ────────────────────────────────────────────────────────────────
+    // ─── HERO -
     defineField({
       name: 'hero',
       title: 'Hero',
@@ -46,63 +47,55 @@ export const homePage = defineType({
         }),
         defineField({
           name: 'headingLine1',
-          title: 'Heading - Line 1',
+          title: 'Main Headline - First Line',
+          description:
+            'White text before the highlighted word (e.g. "Architecting Enterprise Data &")',
           type: 'string',
-          initialValue: 'Enterprise Data &',
+          initialValue: 'Architecting Enterprise Data &',
         }),
         defineField({
           name: 'headingHighlight',
-          title: 'Heading - Highlight (orange)',
+          title: 'Main Headline - Orange Highlight Word',
+          description: 'Highlighted in brand orange (e.g. "AI")',
           type: 'string',
           initialValue: 'AI',
         }),
         defineField({
           name: 'headingLine2',
-          title: 'Heading - Line 2',
+          title: 'Main Headline - Ending Line',
+          description: 'White text following the highlighted word (e.g. "for Better Decisions")',
           type: 'string',
-          initialValue: 'Solutions',
-        }),
-        defineField({
-          name: 'trustBadgeRating',
-          title: 'Trust Badge - Rating',
-          type: 'string',
-          initialValue: '4.9',
-        }),
-        defineField({
-          name: 'trustBadgeDescriptor',
-          title: 'Trust Badge - Descriptor',
-          type: 'string',
-          initialValue: '5K+ Enterprise Leaders Trained',
+          initialValue: 'for Better Decisions',
         }),
         defineField({
           name: 'headingPart1',
-          title: 'Heading - Part 1 (plain)',
+          title: 'Legacy: Heading Part 1',
+          description: 'Optional legacy field (use Main Headline fields above)',
           type: 'string',
-          initialValue: 'Architect-Led ',
         }),
         defineField({
           name: 'headingHighlight1',
-          title: 'Heading - Highlight 1 (orange)',
+          title: 'Legacy: Heading Highlight 1',
+          description: 'Optional legacy field',
           type: 'string',
-          initialValue: 'Enterprise',
         }),
         defineField({
           name: 'headingPart2',
-          title: 'Heading - Part 2 (plain)',
+          title: 'Legacy: Heading Part 2',
+          description: 'Optional legacy field',
           type: 'string',
-          initialValue: 'Data & ',
         }),
         defineField({
           name: 'headingHighlight2',
-          title: 'Heading - Highlight 2 (orange)',
+          title: 'Legacy: Heading Highlight 2',
+          description: 'Optional legacy field',
           type: 'string',
-          initialValue: 'AI',
         }),
         defineField({
           name: 'headingPart3',
-          title: 'Heading - Part 3 (plain)',
+          title: 'Legacy: Heading Part 3',
+          description: 'Optional legacy field',
           type: 'string',
-          initialValue: ' Solutions',
         }),
         defineField({
           name: 'subtitle',
@@ -157,7 +150,7 @@ export const homePage = defineType({
       ],
     }),
 
-    // ─── SERVICES SECTION ────────────────────────────────────────────────────
+    // ─── SERVICES SECTION ─
     defineField({
       name: 'servicesSection',
       title: 'Services Section',
@@ -254,7 +247,7 @@ export const homePage = defineType({
       ],
     }),
 
-    // ─── WHO WE ARE (About) ──────────────────────────────────────────────────
+    // ─── WHO WE ARE (About) -
     defineField({
       name: 'aboutSection',
       title: 'Who We Are Section',
@@ -347,7 +340,33 @@ export const homePage = defineType({
       ],
     }),
 
-    // ─── TESTIMONIALS SECTION ────────────────────────────────────────────────
+    // ─── PARTNER LOGOS / PLATFORMS BAR 
+    defineField({
+      name: 'trustCompanyLogoBarSection',
+      title: 'Enterprise Platforms Logo Bar',
+      description:
+        'The horizontal strip showcasing experience across leading enterprise data and AI platforms.',
+      type: 'object',
+      group: 'partnerLogos',
+      fields: [
+        defineField({
+          name: 'title',
+          title: 'Section Title',
+          description: 'e.g. "Experience across leading enterprise platforms"',
+          type: 'string',
+          initialValue: 'Experience across leading enterprise platforms',
+        }),
+        defineField({
+          name: 'subtitle',
+          title: 'Section Subtitle',
+          description: 'e.g. "Technology choices guided by enterprise fit, not vendor preference."',
+          type: 'string',
+          initialValue: 'Technology choices guided by enterprise fit, not vendor preference.',
+        }),
+      ],
+    }),
+
+    // ─── TESTIMONIALS SECTION 
     defineField({
       name: 'testimonialsSection',
       title: 'Testimonials Section',
@@ -375,7 +394,7 @@ export const homePage = defineType({
       ],
     }),
 
-    // ─── METRICS BAR ────────────────────────────────────────────────────────
+    // ─── METRICS BAR
     defineField({
       name: 'metricsSection',
       title: 'Metrics Bar',
@@ -401,7 +420,7 @@ export const homePage = defineType({
       ],
     }),
 
-    // ─── WHY NOEVEKA ─────────────────────────────────────────────────────────
+    // ─── WHY NOEVEKA -
     defineField({
       name: 'whySection',
       title: 'Why Noeveka Section',
@@ -497,7 +516,7 @@ export const homePage = defineType({
       ],
     }),
 
-    // ─── CTA STRIP ───────────────────────────────────────────────────────────
+    // ─── CTA STRIP -──
     defineField({
       name: 'ctaStrip',
       title: 'CTA Strip',
@@ -553,7 +572,7 @@ export const homePage = defineType({
       ],
     }),
 
-    // ─── FAQ ─────────────────────────────────────────────────────────────────
+    // ─── FAQ -────────
     defineField({
       name: 'faqSection',
       title: 'FAQ Section',

@@ -1,0 +1,9 @@
+export { HERO_CONFIG } from "./hero.config";
+export { SERVICES_CONFIG } from "./services.config";
+export { WHO_WE_ARE_CONFIG } from "./who-we-are.config";
+export { TRUST_COMPANY_LOGO_BAR_CONFIG } from "./trust-company-logo-bar.config";
+export { TESTIMONIALS_CONFIG } from "./testimonials.config";
+export { METRICS_CONFIG } from "./metrics.config";
+export { WHY_NOEVEKA_CONFIG } from "./why-noeveka.config";
+export { FAQ_CONFIG } from "./faq.config";
+export { CTA_STRIP_CONFIG } from "./cta-strip.config";

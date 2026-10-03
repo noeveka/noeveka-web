@@ -1,8 +1,8 @@
 import { useEffect, useState, useRef, useCallback } from "react";
 import { Link } from "react-router";
 import { motion } from "framer-motion";
-import { LucideIcon } from "@/components/lucide-icons";
-import { fu, fs } from "@/lib/motion";
+import { LucideIcon, lucideIconRegistry } from "@/components/lucide-icons";
+import { fadeUp, fadeScale } from "@/lib/motion";
 import { getServices } from "@/lib/sanity";
 import { SERVICES_CONFIG } from "@/config/landing/services.config";
 
@@ -20,7 +20,7 @@ export interface ServiceItem {
   order?: number;
 }
 
-interface WhatWeDoProps {
+export interface WhatWeDoProps {
   eyebrow?: string;
   heading?: string;
   subtext?: string;
@@ -90,12 +90,12 @@ export default function WhatWeDo({
       let closestIndex = 0;
       let minDistance = Infinity;
 
-      children.forEach((child, idx) => {
+      children.forEach((child, index) => {
         const childCenter = child.offsetLeft + child.offsetWidth / 2;
         const dist = Math.abs(containerCenter - childCenter);
         if (dist < minDistance) {
           minDistance = dist;
-          closestIndex = idx;
+          closestIndex = index;
         }
       });
 
@@ -111,11 +111,11 @@ export default function WhatWeDo({
     };
   }, []);
 
-  const scrollToCard = (index: number) => {
+  const scrollToCard = (targetIndex: number) => {
     const container = sliderRef.current;
     if (!container) return;
     const children = Array.from(container.children) as HTMLElement[];
-    const target = children[index];
+    const target = children[targetIndex];
     if (!target) return;
 
     const scrollLeft = target.offsetLeft - (container.offsetWidth - target.offsetWidth) / 2;
@@ -123,7 +123,7 @@ export default function WhatWeDo({
       left: Math.max(0, scrollLeft),
       behavior: "smooth",
     });
-    setActiveIndex(index);
+    setActiveIndex(targetIndex);
   };
 
   const handlePrev = () => {
@@ -138,34 +138,34 @@ export default function WhatWeDo({
     }
   };
 
-  const handlePointerDown = (e: React.PointerEvent<HTMLDivElement>) => {
+  const handlePointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
     // Only drag with mouse on desktop/emulators; let mobile browser handle touch + vertical page scroll natively!
-    if (e.pointerType !== "mouse" || e.button !== 0) return;
+    if (event.pointerType !== "mouse" || event.button !== 0) return;
     if (!sliderRef.current) return;
     isPointerDownRef.current = true;
     hasMovedRef.current = false;
-    startXRef.current = e.pageX - sliderRef.current.offsetLeft;
+    startXRef.current = event.pageX - sliderRef.current.offsetLeft;
     scrollLeftRef.current = sliderRef.current.scrollLeft;
   };
 
-  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+  const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
     if (!isPointerDownRef.current || !sliderRef.current) return;
-    const x = e.pageX - sliderRef.current.offsetLeft;
-    const walk = x - startXRef.current;
-    if (Math.abs(walk) > 6) {
+    const currentX = event.pageX - sliderRef.current.offsetLeft;
+    const walkDistance = currentX - startXRef.current;
+    if (Math.abs(walkDistance) > 6) {
       hasMovedRef.current = true;
     }
-    sliderRef.current.scrollLeft = scrollLeftRef.current - walk;
+    sliderRef.current.scrollLeft = scrollLeftRef.current - walkDistance;
   };
 
   const handlePointerUpOrLeave = () => {
     isPointerDownRef.current = false;
   };
 
-  const handleLinkClick = (e: React.MouseEvent) => {
+  const handleLinkClick = (event: React.MouseEvent) => {
     if (hasMovedRef.current) {
-      e.preventDefault();
-      e.stopPropagation();
+      event.preventDefault();
+      event.stopPropagation();
     }
   };
 
@@ -179,22 +179,22 @@ export default function WhatWeDo({
     const mapped = SERVICE_ROUTE_MAP[service.title.trim()];
     if (mapped) return mapped;
 
-    const lower = service.title.toLowerCase();
-    if (lower.includes("governance") || lower.includes("assurance"))
+    const lowerTitle = service.title.toLowerCase();
+    if (lowerTitle.includes("governance") || lowerTitle.includes("assurance"))
       return "/services/ai-governance-architecture-assurance";
-    if (lower.includes("agentic") || (lower.includes("ai") && lower.includes("systems")))
+    if (lowerTitle.includes("agentic") || (lowerTitle.includes("ai") && lowerTitle.includes("systems")))
       return "/services/enterprise-ai-agentic-systems";
-    if (lower.includes("transformation") || lower.includes("advisory"))
+    if (lowerTitle.includes("transformation") || lowerTitle.includes("advisory"))
       return "/services/data-ai-transformation-advisory";
-    if (lower.includes("data") && lower.includes("architecture"))
+    if (lowerTitle.includes("data") && lowerTitle.includes("architecture"))
       return "/services/enterprise-data-ai-architecture";
 
     return service.ctaLink && service.ctaLink !== "#" ? service.ctaLink : "/services";
   };
 
-  const renderCardContent = (s: ServiceItem, isMobile = false) => {
-    const buttonText = s.ctaText || cardCtaText || "Learn More";
-    const targetLink = resolveServiceLink(s);
+  const renderCardContent = (service: ServiceItem, isMobile = false) => {
+    const buttonText = service.ctaText || cardCtaText || "Learn More";
+    const targetLink = resolveServiceLink(service);
 
     return (
       <>
@@ -205,17 +205,17 @@ export default function WhatWeDo({
           {/* Icon */}
           <div className="service-card-icon-wrap">
             <LucideIcon
-              name={s.icon}
-              fallback="layers"
+              name={service.icon}
+              fallback={lucideIconRegistry.Layers}
               className="service-card-icon h-6 w-6"
             />
           </div>
 
           {/* Title */}
-          <h3 className="service-card-title">{s.title}</h3>
+          <h3 className="service-card-title">{service.title}</h3>
 
           {/* Description */}
-          <p className="service-card-desc">{s.description}</p>
+          <p className="service-card-desc">{service.description}</p>
         </div>
 
         {/* CTA Button */}
@@ -230,7 +230,7 @@ export default function WhatWeDo({
             >
               {buttonText}{" "}
               <LucideIcon
-                name="arrow-right"
+                name={lucideIconRegistry.ArrowRight}
                 className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5"
               />
             </a>
@@ -242,7 +242,7 @@ export default function WhatWeDo({
             >
               {buttonText}{" "}
               <LucideIcon
-                name="arrow-right"
+                name={lucideIconRegistry.ArrowRight}
                 className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5"
               />
             </Link>
@@ -266,29 +266,29 @@ export default function WhatWeDo({
       <div className="lp-container lp-px relative z-10 py-16 lg:py-24">
         {/* Centered Header */}
         <div className="mx-auto mb-12 max-w-3xl text-center sm:mb-14">
-          <motion.p {...fu()} className="lp-eyebrow mb-3 justify-center">
+          <motion.p {...fadeUp()} className="lp-eyebrow mb-3 justify-center">
             <span className="text-[13px] leading-none">✳</span> {eyebrow}
           </motion.p>
-          <motion.h2 {...fu(0.06)} className="lp-section-heading mb-4">
+          <motion.h2 {...fadeUp(0.06)} className="lp-section-heading mb-4">
             {heading}
           </motion.h2>
-          <motion.p {...fu(0.1)} className="lp-section-subtext mx-auto max-w-2xl">
+          <motion.p {...fadeUp(0.1)} className="lp-section-subtext mx-auto max-w-2xl">
             {subtext}
           </motion.p>
         </div>
 
-        {/* 1. TABLETS & BIG SCREENS: 2x2 Grid of Services (Unchanged) */}
+        {/* 1. TABLETS & BIG SCREENS: 2x2 Grid of Services */}
         <div className="mx-auto hidden max-w-5xl grid-cols-1 gap-6 md:grid md:grid-cols-2">
-          {displayServices.map((s, i) => {
-            const variantClass = `service-card-${s.variant}` as const;
+          {displayServices.map((service, serviceIndex) => {
+            const variantClass = `service-card-${service.variant}` as const;
 
             return (
               <motion.div
-                key={s._id ?? `service-${i}`}
-                {...fs(0.06 + i * 0.08)}
+                key={service._id ?? `service-${serviceIndex}`}
+                {...fadeScale(0.06 + serviceIndex * 0.08)}
                 className={`service-card ${variantClass}`}
               >
-                {renderCardContent(s, false)}
+                {renderCardContent(service, false)}
               </motion.div>
             );
           })}
@@ -307,15 +307,15 @@ export default function WhatWeDo({
             className="flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth touch-pan-y py-2 px-4 -mx-4 sm:-mx-6 sm:px-6 select-none [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden active:cursor-grabbing"
             style={{ WebkitOverflowScrolling: "touch" }}
           >
-            {displayServices.map((s, idx) => {
-              const variantClass = `service-card-${s.variant}` as const;
+            {displayServices.map((service, serviceIndex) => {
+              const variantClass = `service-card-${service.variant}` as const;
 
               return (
                 <div
-                  key={s._id ?? `mobile-service-${idx}`}
+                  key={service._id ?? `mobile-service-${serviceIndex}`}
                   className={`service-card ${variantClass} snap-center shrink-0 w-[84vw] max-w-[320px] transition-all duration-300`}
                 >
-                  {renderCardContent(s, true)}
+                  {renderCardContent(service, true)}
                 </div>
               );
             })}
@@ -335,14 +335,14 @@ export default function WhatWeDo({
 
             {/* Dot / Pill Indicators */}
             <div className="flex items-center gap-1.5">
-              {displayServices.map((_, dotIdx) => (
+              {displayServices.map((_, dotIndex) => (
                 <button
-                  key={dotIdx}
+                  key={dotIndex}
                   type="button"
-                  onClick={() => scrollToCard(dotIdx)}
-                  aria-label={`Go to card ${dotIdx + 1}`}
+                  onClick={() => scrollToCard(dotIndex)}
+                  aria-label={`Go to card ${dotIndex + 1}`}
                   className={`h-2 rounded-full transition-all duration-300 ${
-                    dotIdx === activeIndex
+                    dotIndex === activeIndex
                       ? "w-6 bg-[#F65D01]"
                       : "w-2 bg-neutral-300 hover:bg-neutral-400"
                   }`}
@@ -359,7 +359,7 @@ export default function WhatWeDo({
                 aria-label="Previous card"
                 className="w-9 h-9 rounded-full border border-neutral-200 bg-white flex items-center justify-center text-[#161922] shadow-sm transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed hover:enabled:border-[#F65D01] hover:enabled:text-[#F65D01] active:enabled:scale-95"
               >
-                <LucideIcon name="chevron-left" className="w-4 h-4" />
+                <LucideIcon name={lucideIconRegistry.ChevronLeft} className="w-4 h-4" />
               </button>
               <button
                 type="button"
@@ -368,7 +368,7 @@ export default function WhatWeDo({
                 aria-label="Next card"
                 className="w-9 h-9 rounded-full border border-neutral-200 bg-white flex items-center justify-center text-[#161922] shadow-sm transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed hover:enabled:border-[#F65D01] hover:enabled:text-[#F65D01] active:enabled:scale-95"
               >
-                <LucideIcon name="chevron-right" className="w-4 h-4" />
+                <LucideIcon name={lucideIconRegistry.ChevronRight} className="w-4 h-4" />
               </button>
             </div>
           </div>

@@ -57,7 +57,9 @@ import {
   Crosshair,
   Globe,
   Laptop,
-  Handshake
+  Handshake,
+  Compass,
+  GraduationCap
 } from "lucide-react";
 
 // Icon map
@@ -142,6 +144,9 @@ export const iconMap = {
   // status
   "alert-circle": AlertCircle,
 
+  // features
+  compass: Compass,
+  "graduation-cap": GraduationCap,
 } as const;
 
 export const lucideIconRegistry = {
@@ -207,6 +212,10 @@ export const lucideIconRegistry = {
   Globe: "globe",
   Laptop: "laptop",
   Handshake: "handshake",
+
+  // features
+  Compass: "compass",
+  GraduationCap: "graduation-cap",
 } as const satisfies Record<string, IconName>;
 
 // Types

@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { LucideIcon } from "@/components/lucide-icons";
+import { LucideIcon, lucideIconRegistry } from "@/components/lucide-icons";
 import { HERO_CONFIG } from "@/config/landing/hero.config";
 import { urlFor } from "@/lib/sanity";
 
@@ -7,7 +7,7 @@ import { urlFor } from "@/lib/sanity";
 const LARGE_BG = "/assets/team-pictures/home_hero_large_screen_bg_image.png";
 const SMALL_BG = "/assets/team-pictures/hero_section_bg_image_sm_screen.png";
 
-interface HeroProps {
+export interface HeroProps {
   bgImage?: { asset?: unknown; alt?: string };
   bgImageMobile?: { asset?: unknown; alt?: string };
   eyebrow?: string;
@@ -22,9 +22,6 @@ interface HeroProps {
   subtitle?: string;
   primaryCtaText?: string;
   primaryCtaLink?: string;
-  // Retained for backward-compat - not rendered
-  trustBadgeRating?: string;
-  trustBadgeDescriptor?: string;
   secondaryCtaText?: string;
   secondaryCtaLink?: string;
   trustBullets?: string[];
@@ -48,40 +45,44 @@ export default function Hero({
   const kicker = eyebrow || HERO_CONFIG.eyebrow;
 
   // Resolve background images - Sanity takes priority, fallback to local statics
-  const largeSrc = bgImage?.asset
+  const largeScreenBackground = bgImage?.asset
     ? urlFor(bgImage).width(1800).url()
     : LARGE_BG;
-  const mobileSrc = bgImageMobile?.asset
+  const mobileScreenBackground = bgImageMobile?.asset
     ? urlFor(bgImageMobile).width(900).url()
     : SMALL_BG;
 
-  let line1 = headingLine1;
-  let highlight = headingHighlight;
-  let line2 = headingLine2;
+  let resolvedHeadingLine1 = headingLine1;
+  let resolvedHighlight = headingHighlight;
+  let resolvedHeadingLine2 = headingLine2;
 
-  if (!line1) {
+  if (!resolvedHeadingLine1) {
     if (headingPart1 && !headingPart1.toLowerCase().includes("architect")) {
-      line1 = headingPart1.trim();
+      resolvedHeadingLine1 = headingPart1.trim();
     } else {
-      line1 = HERO_CONFIG.headingLine1;
+      resolvedHeadingLine1 = HERO_CONFIG.headingLine1;
     }
   }
-  if (!highlight) highlight = headingHighlight2 || HERO_CONFIG.headingHighlight;
-  if (!line2) line2 = headingPart3?.trim() || HERO_CONFIG.headingLine2;
+  if (!resolvedHighlight) {
+    resolvedHighlight = headingHighlight2 || HERO_CONFIG.headingHighlight;
+  }
+  if (!resolvedHeadingLine2) {
+    resolvedHeadingLine2 = headingPart3?.trim() || HERO_CONFIG.headingLine2;
+  }
 
-  const ctaClass = "btn-hero";
+  const ctaButtonClass = "btn-hero";
 
   return (
     <section className="relative flex h-dvh flex-col overflow-hidden">
       {/* ── Background: portrait on phones, landscape on tablet/desktop ── */}
       <img
-        src={mobileSrc}
+        src={mobileScreenBackground}
         alt="Noeveka - Enterprise Data & AI Architecture"
         className="absolute inset-0 h-full w-full object-cover object-center md:hidden"
         fetchPriority="high"
       />
       <img
-        src={largeSrc}
+        src={largeScreenBackground}
         alt="Noeveka - Enterprise Data & AI Architecture"
         className="absolute inset-0 hidden h-full w-full object-cover md:block"
         style={{ objectPosition: "65% center" }}
@@ -115,10 +116,10 @@ export default function Hero({
             transition={{ duration: 0.55, delay: 0.08 }}
             className="mb-5 text-[2.55rem] font-extrabold leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-[3.6rem] xl:text-[3.85rem]"
           >
-            {line1}{" "}
-            <span className="text-brand">{highlight}</span>
+            {resolvedHeadingLine1}{" "}
+            <span className="text-brand">{resolvedHighlight}</span>
             {" "}
-            {line2}
+            {resolvedHeadingLine2}
           </motion.h1>
 
           <motion.p
@@ -136,14 +137,14 @@ export default function Hero({
             transition={{ duration: 0.45, delay: 0.24 }}
           >
             {primaryCtaLink ? (
-              <a href={primaryCtaLink} className={ctaClass}>
+              <a href={primaryCtaLink} className={ctaButtonClass}>
                 {primaryCtaText}{" "}
-                <LucideIcon name="arrow-right" className="h-4 w-4" />
+                <LucideIcon name={lucideIconRegistry.ArrowRight} className="h-4 w-4" />
               </a>
             ) : (
-              <button type="button" className={ctaClass}>
+              <button type="button" className={ctaButtonClass}>
                 {primaryCtaText}{" "}
-                <LucideIcon name="arrow-right" className="h-4 w-4" />
+                <LucideIcon name={lucideIconRegistry.ArrowRight} className="h-4 w-4" />
               </button>
             )}
           </motion.div>
