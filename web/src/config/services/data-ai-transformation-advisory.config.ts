@@ -21,7 +21,8 @@ export const DATA_AI_TRANSFORMATION_ADVISORY_CONFIG: ServiceDetailPageData = {
     primaryCtaLink: "/contact?topic=transformation",
     secondaryCtaText: "Explore Our Approach",
     secondaryCtaLink: "#what-we-do",
-    heroImageUrl: "/assets/services/service_four_hero_image.jpeg",
+    heroImageUrl: "/assets/services/data_ai_transformation_advisory.jpeg",
+    heroMobileImageUrl: "/assets/services/data-ai-transformation-advisory_mobile.png",
     stackAnnotations: [
       {
         tier: "ASSESS",

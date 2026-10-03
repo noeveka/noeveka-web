@@ -149,13 +149,16 @@ export async function getServices() {
   return client.fetch(`*[_type == "service"] | order(order asc){
     _id,
     title,
+    "slug": slug.current,
     description,
     icon,
     variant,
     featured,
     ctaText,
     ctaLink,
-    order
+    order,
+    heroImage{ asset, alt },
+    heroMobileImage{ asset, alt }
   }`);
 }
 
@@ -403,7 +406,7 @@ export async function getServicesPage() {
 
 // ─── Service Detail Page ──────────────────────────────────────────────────
 export async function getServiceDetailPage(slug: string) {
-  return client.fetch(
+  const detail = await client.fetch(
     `*[_type == "serviceDetailPage" && slug.current == $slug][0]{
     title,
     "slug": slug.current,
@@ -418,6 +421,7 @@ export async function getServiceDetailPage(slug: string) {
       secondaryCtaText,
       secondaryCtaLink,
       heroImage{ asset, alt },
+      heroMobileImage{ asset, alt },
       stackAnnotations[]{ tier, label }
     },
     challenge{
@@ -495,6 +499,35 @@ export async function getServiceDetailPage(slug: string) {
   }`,
     { slug }
   );
+
+  // Also query service document to get any heroImage/heroMobileImage uploaded on the service doc
+  const serviceDoc = await client.fetch(
+    `*[_type == "service" && (slug.current == $slug || ctaLink match $slug)][0]{
+      title,
+      "slug": slug.current,
+      description,
+      heroImage{ asset, alt },
+      heroMobileImage{ asset, alt }
+    }`,
+    { slug }
+  );
+
+  if (!detail && !serviceDoc) {
+    return null;
+  }
+
+  const base = detail || {};
+  const hero = {
+    ...(base.hero || {}),
+    heroImage: base.hero?.heroImage?.asset ? base.hero.heroImage : serviceDoc?.heroImage,
+    heroMobileImage: base.hero?.heroMobileImage?.asset ? base.hero.heroMobileImage : serviceDoc?.heroMobileImage,
+  };
+
+  return {
+    ...base,
+    title: base.title || serviceDoc?.title,
+    hero,
+  };
 }
 
 

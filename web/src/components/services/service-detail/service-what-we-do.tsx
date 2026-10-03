@@ -247,7 +247,7 @@ export default function ServiceWhatWeDo({ whatWeDo }: ServiceWhatWeDoProps) {
             onPointerMove={handlePointerMove}
             onPointerUp={handlePointerUpOrLeave}
             onPointerLeave={handlePointerUpOrLeave}
-            className="flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth touch-pan-y py-2 px-4 -mx-4 sm:-mx-6 sm:px-6 select-none [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden cursor-grab active:cursor-grabbing"
+            className="flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth touch-pan-y py-2 px-4 -mx-4 sm:-mx-6 sm:px-6 select-none scrollbar-none [-ms-overflow-style:none] active:cursor-grabbing"
             style={{ WebkitOverflowScrolling: "touch" }}
           >
             {whatWeDo.items.map((item, idx) => (

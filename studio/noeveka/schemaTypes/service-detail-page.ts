@@ -113,8 +113,9 @@ export const serviceDetailPage = defineType({
         }),
         defineField({
           name: 'heroImage',
-          title: 'Hero Graphic / Architecture Image',
+          title: 'Hero Graphic / Architecture Image (Desktop / Large Screens)',
           type: 'image',
+          description: 'Background graphic for desktop and large screens',
           options: {hotspot: true},
           fields: [
             defineField({
@@ -122,6 +123,21 @@ export const serviceDetailPage = defineType({
               title: 'Alt Text',
               type: 'string',
               initialValue: 'Enterprise Data and AI Architecture Stack',
+            }),
+          ],
+        }),
+        defineField({
+          name: 'heroMobileImage',
+          title: 'Hero Graphic (Mobile / Small Screens)',
+          type: 'image',
+          description: 'Alternative vertical / stacked layout graphic displayed on small screens and mobile devices',
+          options: {hotspot: true},
+          fields: [
+            defineField({
+              name: 'alt',
+              title: 'Alt Text',
+              type: 'string',
+              initialValue: 'Enterprise Data and AI Architecture Stack - Mobile',
             }),
           ],
         }),
@@ -533,11 +549,13 @@ export const serviceDetailPage = defineType({
     select: {
       title: 'title',
       subtitle: 'slug.current',
+      media: 'hero.heroImage',
     },
-    prepare({title, subtitle}) {
+    prepare({title, subtitle, media}) {
       return {
         title: title || 'Untitled Service Detail Page',
         subtitle: subtitle ? `/services/${subtitle}` : '',
+        media,
       }
     },
   },

@@ -20,8 +20,8 @@ export const ENTERPRISE_AI_AGENTIC_SYSTEMS_CONFIG: ServiceDetailPageData = {
     primaryCtaText: "Discuss Your AI Architecture",
     primaryCtaLink: "/contact?topic=ai-architecture",
     secondaryCtaText: "Explore Our Approach",
-    secondaryCtaLink: "#what-we-do",
-    heroImageUrl: "/assets/services/service_three_hero_image.jpeg",
+    heroImageUrl: "/assets/services/enterprise_ai_agentic_systems.jpeg",
+    heroMobileImageUrl: "/assets/services/enterprise_ai_agentic_systems_mobile.png",
     stackAnnotations: [
       {
         tier: "DATA & KNOWLEDGE",

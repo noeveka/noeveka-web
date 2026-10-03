@@ -20,8 +20,8 @@ export const ENTERPRISE_DATA_AI_ARCHITECTURE_CONFIG: ServiceDetailPageData = {
     primaryCtaText: "Discuss Your Architecture",
     primaryCtaLink: "/contact?topic=architecture",
     secondaryCtaText: "Explore Our Approach",
-    secondaryCtaLink: "#what-we-do",
-    heroImageUrl: "/assets/services/service_one_hero_image.jpeg",
+    heroImageUrl: "/assets/services/enterprise_data_ai_architecture.jpeg",
+    heroMobileImageUrl: "/assets/services/enterprise_data_ai_architecture_mobile.png",
     stackAnnotations: [
       { tier: "BUSINESS", label: "Objectives, outcomes, operating priorities" },
       { tier: "DATA", label: "Domains, governance, information architecture" },

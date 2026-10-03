@@ -22,7 +22,8 @@ export const AI_GOVERNANCE_ARCHITECTURE_ASSURANCE_CONFIG: ServiceDetailPageData 
       primaryCtaLink: "/contact?topic=ai-governance",
       secondaryCtaText: "Explore Our Approach",
       secondaryCtaLink: "#what-we-do",
-      heroImageUrl: "/assets/services/service_two_hero_image.jpeg",
+      heroImageUrl: "/assets/services/ai_governance_architecture_assurance.jpeg",
+      heroMobileImageUrl: "/assets/services/ai_governance_architecture_assurance_mobile.png",
       stackAnnotations: [
         {
           tier: "TRUST",

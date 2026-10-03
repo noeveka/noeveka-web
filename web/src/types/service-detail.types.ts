@@ -18,6 +18,11 @@ export interface ServiceDetailHero {
     alt?: string;
   };
   heroImageUrl?: string;
+  heroMobileImage?: {
+    asset?: unknown;
+    alt?: string;
+  };
+  heroMobileImageUrl?: string;
   stackAnnotations?: Array<{
     tier: string;
     label: string;

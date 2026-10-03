@@ -12,6 +12,53 @@ export const service = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: 'slug',
+      title: 'Page Slug',
+      type: 'slug',
+      description: 'Unique URL slug for this service detail page (e.g. "enterprise-data-ai-architecture")',
+      options: {
+        source: 'title',
+        maxLength: 96,
+      },
+    }),
+    defineField({
+      name: 'heroImage',
+      title: 'Hero Graphic / Image (Desktop / Large Screens)',
+      type: 'image',
+      description: 'Hero background / diagram graphic on desktop and large screens',
+      options: { hotspot: true },
+      fields: [
+        defineField({
+          name: 'alt',
+          title: 'Alt Text',
+          type: 'string',
+          initialValue: 'Service Hero Graphic - Desktop',
+        }),
+      ],
+    }),
+    defineField({
+      name: 'heroMobileImage',
+      title: 'Hero Graphic / Image (Mobile / Small Screens)',
+      type: 'image',
+      description: 'Vertical / mobile stack graphic displayed on small screens',
+      options: { hotspot: true },
+      fields: [
+        defineField({
+          name: 'alt',
+          title: 'Alt Text',
+          type: 'string',
+          initialValue: 'Service Hero Graphic - Mobile',
+        }),
+      ],
+    }),
+    defineField({
+      name: 'detailPage',
+      title: 'Linked Service Detail Page',
+      type: 'reference',
+      to: [{ type: 'serviceDetailPage' }],
+      description: 'Direct reference to the full dedicated Service Detail Page document for managing in-depth content',
+    }),
+    defineField({
       name: 'description',
       title: 'Description',
       type: 'text',
@@ -52,7 +99,7 @@ export const service = defineType({
       name: 'ctaLink',
       title: 'CTA Link',
       type: 'string',
-      description: 'URL or section anchor (e.g. "/services#data-ai-architecture")',
+      description: 'URL or section anchor (e.g. "/services/enterprise-data-ai-architecture")',
     }),
     defineField({
       name: 'featured',
@@ -72,12 +119,15 @@ export const service = defineType({
   preview: {
     select: {
       title: 'title',
-      subtitle: 'variant',
+      subtitle: 'slug.current',
+      variant: 'variant',
+      media: 'heroImage',
     },
-    prepare({ title, subtitle }) {
+    prepare({ title, subtitle, variant, media }) {
       return {
         title,
-        subtitle: subtitle ? `variant: ${subtitle}` : '',
+        subtitle: subtitle ? `/services/${subtitle}` : (variant ? `variant: ${variant}` : ''),
+        media,
       }
     },
   },
