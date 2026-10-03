@@ -41,7 +41,7 @@ export default function ServiceHero({ hero }: ServiceHeroProps) {
         )}
 
         {/* ── Desktop overlay ── */}
-        <div className="hidden lg:block absolute inset-0 bg-linear-to-r from-black/80 via-black/60 to-transparent pointer-events-none" />
+        {/* <div className="hidden lg:block absolute inset-0 bg-linear-to-r from-black/80 via-black/60 to-transparent pointer-events-none" /> */}
 
         {/* ── Foreground Content ── */}
         <div className="lp-container lp-px relative z-10 mx-auto w-full py-10 sm:py-12 lg:py-28">
