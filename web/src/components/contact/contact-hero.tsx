@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 
 import { CONTACT_CONFIG } from "@/config/contact.config";
+import { fadeUp } from "@/lib/motion";
 
 export interface ContactHeroProps {
   data?: {
@@ -40,18 +41,14 @@ export default function ContactHero({ data }: ContactHeroProps) {
 
       <div className="lp-container lp-px relative z-10 mx-auto text-center">
         <motion.h1
-          initial={{ opacity: 0, y: 16 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
+          {...fadeUp(0)}
           className="about-narrative-heading text-3xl sm:text-4xl md:text-5xl lg:text-[3.4rem]"
         >
           {heading}
         </motion.h1>
 
         <motion.p
-          initial={{ opacity: 0, y: 12 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
+          {...fadeUp(0.1)}
           className="mx-auto mt-4 max-w-2xl px-2 text-sm leading-relaxed sm:text-base md:text-lg"
           style={{ color: "var(--color-text-secondary)" }}
         >

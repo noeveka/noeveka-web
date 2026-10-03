@@ -351,6 +351,10 @@ export async function getAboutPage() {
 // ─── Contact Page -───
 export async function getContactPage() {
   return client.fetch(`*[_type == "contactPage"][0]{
+    seo{
+      title,
+      description
+    },
     hero{
       heading,
       subtext

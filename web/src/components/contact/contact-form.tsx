@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 
 import { LucideIcon, lucideIconRegistry } from "@/components/lucide-icons";
 import { CONTACT_CONFIG } from "@/config/contact.config";
+import { fadeScale } from "@/lib/motion";
 
 interface FormState {
   firstName: string;
@@ -97,15 +98,16 @@ export default function ContactForm({ data }: ContactFormProps) {
   const validate = (): boolean => {
     const nextErrors: FormErrors = {};
     if (!formState.firstName.trim())
-      nextErrors.firstName = "First name is required.";
+      nextErrors.firstName = CONTACT_CONFIG.form.errors.firstNameRequired;
     if (!formState.lastName.trim())
-      nextErrors.lastName = "Last name is required.";
+      nextErrors.lastName = CONTACT_CONFIG.form.errors.lastNameRequired;
     if (!formState.email.trim()) {
-      nextErrors.email = "Email is required.";
+      nextErrors.email = CONTACT_CONFIG.form.errors.emailRequired;
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formState.email)) {
-      nextErrors.email = "Please enter a valid email address.";
+      nextErrors.email = CONTACT_CONFIG.form.errors.emailInvalid;
     }
-    if (!formState.message.trim()) nextErrors.message = "Message is required.";
+    if (!formState.message.trim())
+      nextErrors.message = CONTACT_CONFIG.form.errors.messageRequired;
     setErrors(nextErrors);
     return Object.keys(nextErrors).length === 0;
   };
@@ -146,8 +148,7 @@ export default function ContactForm({ data }: ContactFormProps) {
 
       if (!res.ok) {
         setServerError(
-          responseData?.error ||
-            "Unable to send your message right now. Please try again or email us directly."
+          responseData?.error || CONTACT_CONFIG.form.errors.serverErrorDefault
         );
         setIsSubmitting(false);
         return;
@@ -157,9 +158,7 @@ export default function ContactForm({ data }: ContactFormProps) {
       setIsSubmitted(true);
     } catch (err: unknown) {
       console.error("Contact form submit error:", err);
-      setServerError(
-        "Network error. Please check your connection and try again."
-      );
+      setServerError(CONTACT_CONFIG.form.errors.networkError);
       setIsSubmitting(false);
     }
   };
@@ -175,13 +174,14 @@ export default function ContactForm({ data }: ContactFormProps) {
   if (isSubmitted) {
     return (
       <motion.div
-        initial={{ opacity: 0, scale: 0.96 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.4, ease: "easeOut" }}
+        {...fadeScale(0)}
         className="contact-success-card"
       >
         <div className="contact-success-icon">
-          <LucideIcon name="check-circle-2" className="h-8 w-8" />
+          <LucideIcon
+            name={lucideIconRegistry.CheckCircle2}
+            className="h-8 w-8"
+          />
         </div>
 
         <h3 className="contact-success-heading">{cfg.successHeading}</h3>
@@ -204,7 +204,10 @@ export default function ContactForm({ data }: ContactFormProps) {
       {/* Server error banner */}
       {serverError && (
         <div className="contact-server-error">
-          <LucideIcon name="alert-circle" className="h-4 w-4 shrink-0" />
+          <LucideIcon
+            name={lucideIconRegistry.AlertCircle}
+            className="h-4 w-4 shrink-0"
+          />
           <span>{serverError}</span>
         </div>
       )}

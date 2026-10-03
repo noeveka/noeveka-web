@@ -61,6 +61,15 @@ export default function ContactInfo({ data }: ContactInfoProps) {
         : CONTACT_CONFIG.channels.chat.links,
   };
 
+  const call = {
+    title: data?.call?.title ?? CONTACT_CONFIG.channels.call.title,
+    subtext: data?.call?.subtext ?? CONTACT_CONFIG.channels.call.subtext,
+    links:
+      data?.call?.links && data.call.links.length > 0
+        ? data.call.links
+        : CONTACT_CONFIG.channels.call.links,
+  };
+
   return (
     <div className="flex flex-col gap-10 lg:pl-6">
       {/* Chat with us */}
@@ -91,6 +100,29 @@ export default function ContactInfo({ data }: ContactInfoProps) {
           ))}
         </div>
       </div>
+
+      {/* Call us */}
+      {call.links && call.links.length > 0 && (
+        <div className="flex flex-col">
+          <h3 className="contact-info-section-title">{call.title}</h3>
+          <p className="contact-info-section-sub">{call.subtext}</p>
+
+          <div className="mt-4 flex flex-col gap-3">
+            {call.links.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                className="contact-info-link group"
+              >
+                <span className="contact-info-link-icon">
+                  <ChannelIcon name={link.icon ?? "phone"} />
+                </span>
+                <span className="contact-info-link-underline">{link.label}</span>
+              </a>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
