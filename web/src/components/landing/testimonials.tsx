@@ -5,7 +5,6 @@ import { fu, fs } from "@/lib/motion";
 import { getTestimonials } from "@/lib/sanity";
 import { TESTIMONIALS_CONFIG } from "@/config/landing/testimonials.config";
 
-
 interface Testimonial {
   _id: string;
   company: string;
@@ -30,9 +29,7 @@ function getBadgeIcon(company: string): string {
   if (lower.includes("group") || lower.includes("retail") || lower.includes("team")) {
     return "users";
   }
-  if (lower.includes("health")) {
-    return "users";
-  }
+  if (lower.includes("health")) return "users";
   return "trending-up";
 }
 
@@ -58,7 +55,7 @@ export default function Testimonials({
       return (
         <>
           {parts[0]}
-          <span style={{ color: "var(--color-brand)" }}>satisfied</span>
+          <span className="text-brand">satisfied</span>
           {parts[1]}
         </>
       );
@@ -68,55 +65,30 @@ export default function Testimonials({
 
   return (
     <>
-      {/* ── Trust logo bar ── */}
-
-
       {/* ── Testimonials section ── */}
-      <section className="flex justify-center bg-[#fafafa]">
+      <section className="lp-section lp-section-subtle">
         <div className="lp-container lp-px py-20 lg:py-24">
           {/* Section Header */}
-          <div className="text-center mb-12 sm:mb-16">
-            <motion.div
-              {...fu()}
-              className="inline-flex items-center gap-2 mb-3"
-            >
-              <span
-                className="text-sm font-semibold select-none"
-                style={{ color: "var(--color-brand)" }}
-              >
-                —
-              </span>
-              <span
-                className="text-xs font-bold tracking-[0.2em] uppercase"
-                style={{ color: "var(--color-brand)" }}
-              >
-                {eyebrow}
-              </span>
+          <div className="mb-12 text-center sm:mb-16">
+            <motion.div {...fu()} className="mb-3 inline-flex items-center gap-2">
+              <span className="text-sm font-semibold text-brand select-none">—</span>
+              <span className="lp-eyebrow">{eyebrow}</span>
             </motion.div>
 
-            <motion.h2
-              {...fu(0.07)}
-              className="text-3xl sm:text-4xl lg:text-[2.65rem] font-extrabold tracking-tight text-[#0f172a] mb-4"
-            >
+            <motion.h2 {...fu(0.07)} className="lp-section-heading mb-4">
               {renderHeading(heading)}
             </motion.h2>
 
-            <motion.p
-              {...fu(0.13)}
-              className="text-[15px] sm:text-[16px] max-w-lg mx-auto leading-relaxed text-[#64748b]"
-            >
+            <motion.p {...fu(0.13)} className="lp-section-subtext mx-auto max-w-lg">
               {subtext}
             </motion.p>
           </div>
 
           {/* Testimonial Cards Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-7">
+          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-7">
             {displayTestimonials.map(
-              (
-                { _id, company, abbr, quote, authorName, authorRole, rating },
-                i
-              ) => {
-                const cleanedQuote = quote.replace(/^["“\s]+|["”\s]+$/g, "");
+              ({ _id, company, abbr, quote, authorName, authorRole, rating }, i) => {
+                const cleanedQuote = quote.replace(/^[""'\s]+|[""'\s]+$/g, "");
                 const initials =
                   abbr ||
                   authorName
@@ -136,82 +108,63 @@ export default function Testimonials({
                   <motion.div
                     key={_id}
                     {...fs(0.06 + i * 0.1)}
-                    className={`flex flex-col justify-between rounded-2xl bg-white p-6 sm:p-7 xl:p-8 transition-all duration-300 hover:-translate-y-1 ${
+                    className={`testimonial-card ${
                       isLastAndOdd
-                        ? "md:col-span-2 md:max-w-xl md:w-full md:mx-auto lg:col-span-1 lg:max-w-none"
+                        ? "md:col-span-2 md:mx-auto md:w-full md:max-w-xl lg:col-span-1 lg:max-w-none"
                         : ""
                     }`}
-                    style={{
-                      border: "1px solid rgba(226, 232, 240, 0.8)",
-                      boxShadow: "0 4px 20px rgba(15, 23, 42, 0.04)",
-                    }}
                   >
                     {/* Top Row: Quote Badge & Category Tag */}
-                    <div className="flex items-center justify-between gap-3 mb-5 sm:mb-6">
-                      <div
-                        className="flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-xl"
-                        style={{ background: "#fff4ed" }}
-                      >
+                    <div className="mb-5 flex items-center justify-between gap-3 sm:mb-6">
+                      <div className="testimonial-card-icon-wrap">
                         <svg
-                          className="h-3.5 w-3.5 sm:h-4 sm:w-4"
                           viewBox="0 0 24 24"
-                          fill="var(--color-brand)"
-                          style={{ color: "var(--color-brand)" }}
+                          fill="currentColor"
+                          className="text-brand h-3.5 w-3.5 sm:h-4 sm:w-4"
                         >
                           <path d="M4.583 17.321C3.553 16.227 3 15 3 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179zm10 0C13.553 16.227 13 15 13 13.011c0-3.5 2.457-6.637 6.03-8.188l.893 1.378c-3.335 1.804-3.987 4.145-4.247 5.621.537-.278 1.24-.375 1.929-.311 1.804.167 3.226 1.648 3.226 3.489a3.5 3.5 0 01-3.5 3.5c-1.073 0-2.099-.49-2.748-1.179z" />
                         </svg>
                       </div>
 
-                      <div
-                        className="inline-flex items-center gap-1.5 rounded-full px-2.5 sm:px-3 py-1 text-[11px] sm:text-[11.5px] font-semibold text-slate-700 shrink-0"
-                        style={{ background: "#fff4ed" }}
-                      >
+                      <div className="testimonial-card-company-pill shrink-0">
                         <LucideIcon
                           name={badgeIcon}
-                          className="h-3.5 w-3.5 shrink-0"
-                          style={{ color: "var(--color-brand)" }}
+                          className="h-3.5 w-3.5 shrink-0 text-brand"
                         />
                         <span>{company}</span>
                       </div>
                     </div>
 
                     {/* Middle: Testimonial Quote */}
-                    <p className="flex-1 text-[13.5px] sm:text-[14px] lg:text-[14.5px] leading-[1.65] text-slate-600 font-normal mb-6 sm:mb-8">
+                    <p className="testimonial-card-quote">
                       &ldquo;{cleanedQuote}&rdquo;
                     </p>
 
                     {/* Bottom Row: Author details & Stars */}
-                    <div className="flex flex-wrap sm:flex-nowrap items-center justify-between gap-3 pt-4 sm:pt-5 border-t border-slate-100/80">
-                      <div className="flex items-center gap-2.5 sm:gap-3 min-w-0 flex-1">
-                        <div
-                          className="flex h-9 w-9 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-full text-[11px] sm:text-[11.5px] font-bold text-white tracking-wide"
-                          style={{ background: "#0f172a" }}
-                        >
+                    <div className="testimonial-card-divider flex flex-wrap items-center justify-between gap-3 sm:flex-nowrap">
+                      <div className="flex min-w-0 flex-1 items-center gap-2.5 sm:gap-3">
+                        <div className="testimonial-avatar">
                           {initials}
                         </div>
                         <div className="min-w-0 flex-1">
-                          <p className="text-[13.5px] sm:text-[14px] font-bold leading-tight text-slate-900">
+                          <p className="truncate text-[13.5px] font-bold leading-tight text-text-primary sm:text-[14px]">
                             {authorName}
                           </p>
-                          <p className="text-[11.5px] text-slate-500 font-normal leading-tight mt-0.5">
+                          <p className="text-[11.5px] leading-tight text-text-muted mt-0.5">
                             {authorRole}
                           </p>
                         </div>
                       </div>
 
-                      <div className="flex items-center gap-0.5 sm:gap-1 shrink-0">
+                      <div className="flex shrink-0 items-center gap-0.5 sm:gap-1">
                         {Array.from({ length: 5 }).map((_, starIdx) => (
                           <LucideIcon
                             key={starIdx}
                             name="star"
-                            className="h-3 w-3 sm:h-3.5 sm:w-3.5 fill-current"
-                            style={{ color: "var(--color-brand)" }}
+                            className="h-3 w-3 fill-current text-brand sm:h-3.5 sm:w-3.5"
                           />
                         ))}
-                        <span
-                          className="ml-1 text-[11.5px] sm:text-[12.5px] font-bold"
-                          style={{ color: "var(--color-brand)" }}
-                        >
+                        <span className="ml-1 text-[11.5px] font-bold text-brand sm:text-[12.5px]">
                           {(rating || 5).toFixed(1)}
                         </span>
                       </div>

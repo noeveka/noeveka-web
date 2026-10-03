@@ -84,21 +84,17 @@ export default function AboutCta({
           {...fu(0.18)}
           className="mt-10 flex flex-col items-center justify-center gap-5"
         >
-          {/* Primary Pill Button */}
           {isPrimaryExternal ? (
             <a
               href={primaryHref}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex cursor-pointer items-center justify-center rounded-full bg-[#161922] px-9 py-3.5 text-[15px] font-semibold text-white shadow-[0_4px_16px_rgba(22,25,34,0.22)] transition-all duration-200 hover:bg-[#000000] hover:shadow-[0_8px_24px_rgba(22,25,34,0.32)] hover:-translate-y-0.5 active:translate-y-0"
+              className="btn-hero-dark"
             >
               {primaryText}
             </a>
           ) : (
-            <Link
-              to={primaryHref}
-              className="inline-flex cursor-pointer items-center justify-center rounded-full bg-[#161922] px-9 py-3.5 text-[15px] font-semibold text-white shadow-[0_4px_16px_rgba(22,25,34,0.22)] transition-all duration-200 hover:bg-[#000000] hover:shadow-[0_8px_24px_rgba(22,25,34,0.32)] hover:-translate-y-0.5 active:translate-y-0"
-            >
+            <Link to={primaryHref} className="btn-hero-dark">
               {primaryText}
             </Link>
           )}

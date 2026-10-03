@@ -21,13 +21,7 @@ export default function Story({
   const headingLines = heading.split("\n");
 
   return (
-    <section
-      className="flex justify-center border-b"
-      style={{
-        background: "var(--color-bg-subtle)",
-        borderColor: "var(--color-stroke-default)",
-      }}
-    >
+    <section className="about-section-subtle">
       <div className="lp-container lp-px py-16 lg:py-24">
         <div className="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:gap-16">
           {/* Left: sticky heading */}
@@ -81,7 +75,7 @@ export default function Story({
                           : "var(--color-stroke-default)",
                       color:
                         i === milestones.length - 1
-                          ? "#fff"
+                          ? "var(--color-text-inverse)"
                           : "var(--color-text-muted)",
                     }}
                   >

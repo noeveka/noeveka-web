@@ -41,66 +41,40 @@ export default function ResourceGrid({ resources, copy }: ResourceGridProps) {
   const filtered =
     activeCategory === "All" ? items : items.filter((r) => r.category === activeCategory);
 
-  // Dynamic Layout Logic:
-  // If a category tab has exactly 1 item, render it full-width (featured style) to avoid empty grid space.
-  // If more than 1 item, render the featured item (if any) full-width, and the remaining items in a 3-col responsive grid.
   const isSingleItem = filtered.length === 1;
-  const featuredItem = isSingleItem
-    ? filtered[0]
-    : filtered.find((r) => r.isFeatured);
-  const restItems = isSingleItem
-    ? []
-    : filtered.filter((r) => r !== featuredItem);
+  const featuredItem = isSingleItem ? filtered[0] : filtered.find((r) => r.isFeatured);
+  const restItems = isSingleItem ? [] : filtered.filter((r) => r !== featuredItem);
 
-  const rawCategories = copy?.categories && copy.categories.length > 0
-    ? copy.categories
-    : (RESOURCES_CONFIG.categories as unknown as string[]);
+  const rawCategories =
+    copy?.categories && copy.categories.length > 0
+      ? copy.categories
+      : (RESOURCES_CONFIG.categories as unknown as string[]);
 
   const categoriesList = rawCategories.includes("All")
     ? rawCategories
     : ["All", ...rawCategories];
 
   return (
-    <section
-      id="resources"
-      style={{ background: "#faf9f7", borderTop: "1px solid #e8e5dd" }}
-    >
+    <section id="resources" className="resource-grid-section">
       {/* Section Header */}
-      <div className="flex justify-center border-b" style={{ borderColor: "#e8e5dd" }}>
+      <div className="resource-grid-header">
         <div className="lp-container lp-px py-12 lg:py-16">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
-            <div>
-              <h2 className="text-display font-extrabold leading-tight text-neutral-900 sm:text-[2.5rem]">
-                {sectionCopy.heading}
-              </h2>
-            </div>
-            <p className="max-w-[400px] text-[14px] leading-relaxed text-neutral-500 lg:text-right">
-              {sectionCopy.subtext}
-            </p>
+            <h2 className="resource-grid-heading">{sectionCopy.heading}</h2>
+            <p className="resource-grid-subtext lg:text-right">{sectionCopy.subtext}</p>
           </div>
 
           {/* Category filter pills */}
           <div className="mt-8 flex flex-wrap gap-2">
-            {categoriesList.map((cat) => {
-              const isActive = cat === activeCategory;
-              return (
-                <button
-                  key={cat}
-                  onClick={() => setActiveCategory(cat)}
-                  className="rounded-full px-4 py-1.5 text-[12.5px] font-bold transition-all duration-150"
-                  style={{
-                    background: isActive ? "var(--color-brand)" : "#ffffff",
-                    color: isActive ? "#fff" : "#5a5f6b",
-                    border: isActive
-                      ? "1.5px solid var(--color-brand)"
-                      : "1.5px solid #e8e5dd",
-                    boxShadow: isActive ? "0 3px 12px rgba(246,93,1,0.25)" : "none",
-                  }}
-                >
-                  {cat}
-                </button>
-              );
-            })}
+            {categoriesList.map((cat) => (
+              <button
+                key={cat}
+                onClick={() => setActiveCategory(cat)}
+                className={`resource-filter-pill ${cat === activeCategory ? "resource-filter-pill-active" : ""}`}
+              >
+                {cat}
+              </button>
+            ))}
           </div>
         </div>
       </div>
@@ -117,14 +91,11 @@ export default function ResourceGrid({ resources, copy }: ResourceGridProps) {
               transition={{ duration: 0.2 }}
             >
               {filtered.length === 0 ? (
-                <div className="py-20 text-center">
-                  <p className="text-[15px] text-neutral-400">
-                    {sectionCopy.emptyStateText}
-                  </p>
+                <div className="resource-grid-empty">
+                  <p>{sectionCopy.emptyStateText}</p>
                 </div>
               ) : (
                 <div className="flex flex-col gap-6">
-                  {/* Single item or featured item — full width horizontal card */}
                   {featuredItem && (
                     <ResourceCard
                       resource={featuredItem}
@@ -134,8 +105,6 @@ export default function ResourceGrid({ resources, copy }: ResourceGridProps) {
                       copy={sectionCopy}
                     />
                   )}
-
-                  {/* Multiple items — 3 Column Grid */}
                   {restItems.length > 0 && (
                     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
                       {restItems.map((resource, i) => (

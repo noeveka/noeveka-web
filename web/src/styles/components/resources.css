@@ -1,0 +1,395 @@
+/* RESOURCES PAGE COMPONENT CLASSES
+   Resource grid, filter pills, resource card, download modal,
+   cover graphic. All colours use design tokens — no hardcoded hex.
+   ─────────────────────────────────────────────────────────────── */
+
+@layer components {
+
+  /* ── RESOURCE GRID SECTION ───────────────────────────────────── */
+  .resource-grid-section {
+    background-color: var(--color-bg-subtle);
+    border-top: 1px solid var(--color-stroke-default);
+  }
+  .resource-grid-header {
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid var(--color-stroke-default);
+  }
+  .resource-grid-heading {
+    font-size: clamp(1.75rem, 4vw, 2.5rem);
+    font-weight: 800;
+    line-height: 1.15;
+    color: var(--color-text-primary);
+  }
+  .resource-grid-subtext {
+    max-width: 25rem;
+    font-size: var(--text-sm);
+    line-height: var(--line-height-relaxed);
+    color: var(--color-text-muted);
+  }
+  .resource-grid-empty {
+    padding-top: 5rem;
+    padding-bottom: 5rem;
+    text-align: center;
+    font-size: var(--text-base);
+    color: var(--color-text-muted);
+  }
+
+  /* ── CATEGORY FILTER PILL ────────────────────────────────────── */
+  .resource-filter-pill {
+    border-radius: var(--radius-full);
+    padding: 0.375rem 1rem;
+    font-size: 12.5px;
+    font-weight: 700;
+    border: 1.5px solid var(--color-stroke-default);
+    background-color: var(--color-bg-surface);
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition:
+      background-color var(--duration-fast) var(--easing-in-out),
+      border-color var(--duration-fast) var(--easing-in-out),
+      color var(--duration-fast) var(--easing-in-out),
+      box-shadow var(--duration-fast) var(--easing-in-out);
+  }
+  .resource-filter-pill-active {
+    background-color: var(--color-brand);
+    border-color: var(--color-brand);
+    color: var(--color-text-inverse);
+    box-shadow: 0 3px 12px rgba(246, 93, 1, 0.25);
+  }
+
+  /* ── RESOURCE CARD ───────────────────────────────────────────── */
+  .resource-card {
+    position: relative;
+    display: flex;
+    cursor: pointer;
+    overflow: hidden;
+    border-radius: var(--radius-2xl, 1rem);
+    background-color: var(--color-bg-surface);
+    border: 1.5px solid var(--color-stroke-default);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    transition:
+      transform var(--duration-default) var(--easing-in-out),
+      box-shadow var(--duration-default) var(--easing-in-out),
+      border-color var(--duration-default) var(--easing-in-out);
+  }
+  .resource-card:hover {
+    transform: scale(1.015) translateY(-4px);
+    box-shadow: var(--shadow-card-lift);
+    border-color: var(--color-stroke-strong);
+  }
+  .resource-card-title {
+    font-weight: 800;
+    line-height: 1.3;
+    color: var(--color-text-primary);
+    transition: color var(--duration-fast) var(--easing-in-out);
+  }
+  .resource-card:hover .resource-card-title {
+    color: var(--color-brand);
+  }
+  .resource-card-desc {
+    flex: 1;
+    font-weight: 400;
+    line-height: var(--line-height-relaxed);
+    color: var(--color-text-secondary);
+  }
+  .resource-card-footer {
+    margin-top: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid var(--color-stroke-default);
+    padding-top: 1rem;
+  }
+  .resource-card-author-name {
+    font-size: 11px;
+    font-weight: 800;
+    color: var(--color-text-secondary);
+  }
+  .resource-card-cta {
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: var(--text-sm);
+    font-weight: 800;
+    color: var(--color-brand);
+    transition: gap var(--duration-fast) var(--easing-in-out);
+  }
+
+  /* ── DOWNLOAD MODAL ──────────────────────────────────────────── */
+  .dl-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background: rgba(15, 17, 23, 0.55);
+    backdrop-filter: blur(8px);
+  }
+  .dl-modal-panel {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    border-radius: var(--radius-2xl, 1rem);
+    background-color: var(--color-bg-surface);
+    padding: 2rem;
+    box-shadow: 0 24px 80px rgba(0, 0, 0, 0.18);
+  }
+  .dl-modal-close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    display: flex;
+    height: 2rem;
+    width: 2rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-full);
+    border: none;
+    background-color: var(--color-bg-subtle);
+    color: var(--color-text-muted);
+    cursor: pointer;
+    transition: background-color var(--duration-fast) var(--easing-in-out);
+  }
+  .dl-modal-close-btn:hover { background-color: var(--color-stroke-default); }
+
+  /* Resource preview strip inside modal */
+  .dl-modal-preview {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+    border-radius: var(--radius-xl);
+    padding: 0.75rem;
+    background-color: var(--color-bg-subtle);
+    border: 1px solid var(--color-stroke-default);
+  }
+  .dl-modal-preview-icon {
+    display: flex;
+    flex-shrink: 0;
+    height: 2.5rem;
+    width: 2.5rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-lg);
+    background-color: var(--color-brand-tint);
+  }
+  .dl-modal-preview-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-muted);
+  }
+  .dl-modal-preview-title {
+    font-size: 13px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--color-text-primary);
+  }
+  .dl-modal-heading {
+    margin-bottom: 0.25rem;
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--color-text-primary);
+  }
+  .dl-modal-subtext {
+    margin-bottom: 1.25rem;
+    font-size: 13px;
+    line-height: var(--line-height-relaxed);
+    color: var(--color-text-muted);
+  }
+
+  /* Modal form inputs */
+  .dl-modal-field { display: flex; flex-direction: column; gap: 0.25rem; }
+  .dl-modal-label {
+    font-size: 12px;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-secondary);
+  }
+  .dl-modal-input {
+    width: 100%;
+    padding: 0.7rem 1rem;
+    font-size: 14px;
+    border-radius: 10px;
+    outline: none;
+    background-color: var(--color-bg-subtle);
+    border: 1.5px solid var(--color-stroke-default);
+    color: var(--color-text-primary);
+    transition: border-color var(--duration-fast) var(--easing-in-out);
+  }
+  .dl-modal-input:focus { border-color: var(--color-brand); }
+  .dl-modal-input-error { border-color: var(--color-danger) !important; }
+
+  /* Consent row */
+  .dl-modal-consent {
+    display: flex;
+    gap: 0.75rem;
+    border-radius: var(--radius-xl);
+    padding: 0.875rem;
+    background-color: var(--color-bg-subtle);
+    border: 1.5px solid var(--color-stroke-default);
+  }
+  .dl-modal-consent-error {
+    background-color: rgba(239, 68, 68, 0.06);
+    border-color: var(--color-danger);
+  }
+  .dl-modal-consent-text {
+    font-size: 12px;
+    line-height: var(--line-height-relaxed);
+    color: var(--color-text-muted);
+    cursor: pointer;
+  }
+  .dl-modal-field-error {
+    font-size: 11px;
+    color: var(--color-danger);
+  }
+
+  /* Modal submit button — reuses .btn-hero but full-width + different radius */
+  .dl-modal-submit-btn {
+    margin-top: 0.25rem;
+    display: inline-flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: var(--radius-full);
+    border: none;
+    padding: 0.875rem;
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--color-text-inverse);
+    background-color: var(--color-brand);
+    box-shadow: 0 4px 20px rgba(246, 93, 1, 0.3);
+    cursor: pointer;
+    transition:
+      background-color var(--duration-default) var(--easing-in-out),
+      transform var(--duration-fast) var(--easing-in-out),
+      opacity var(--duration-fast) var(--easing-in-out);
+  }
+  .dl-modal-submit-btn:hover:not(:disabled) {
+    background-color: var(--color-brand-hover);
+    transform: translateY(-1px);
+  }
+  .dl-modal-submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+  /* Modal success state */
+  .dl-modal-success-icon {
+    display: flex;
+    height: 3.5rem;
+    width: 3.5rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-full);
+    background-color: rgba(5, 150, 105, 0.10);
+    color: #059669;
+  }
+  .dl-modal-success-heading {
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: var(--color-text-primary);
+  }
+  .dl-modal-success-body {
+    margin-top: 0.375rem;
+    font-size: 13px;
+    line-height: var(--line-height-relaxed);
+    color: var(--color-text-muted);
+  }
+  .dl-modal-download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: var(--radius-full);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    font-size: var(--text-sm);
+    font-weight: 700;
+    color: var(--color-text-inverse);
+    background-color: var(--color-brand);
+    box-shadow: 0 4px 20px rgba(246, 93, 1, 0.28);
+    cursor: pointer;
+    transition:
+      background-color var(--duration-default) var(--easing-in-out),
+      transform var(--duration-fast) var(--easing-in-out),
+      opacity var(--duration-fast) var(--easing-in-out);
+  }
+  .dl-modal-download-btn:hover:not(:disabled) {
+    background-color: var(--color-brand-hover);
+    transform: translateY(-1px);
+  }
+  .dl-modal-download-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+
+  /* Download status toast */
+  .dl-status-toast {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: var(--radius-full);
+    padding: 0.5rem 1rem;
+    font-size: 12px;
+    font-weight: var(--font-weight-semibold);
+  }
+  .dl-status-toast-downloading {
+    background-color: rgba(246, 93, 1, 0.08);
+    color: var(--color-brand);
+    border: 1px solid rgba(246, 93, 1, 0.20);
+  }
+  .dl-status-toast-done {
+    background-color: rgba(5, 150, 105, 0.10);
+    color: #059669;
+    border: 1px solid rgba(5, 150, 105, 0.25);
+  }
+
+  /* ── HERO BADGE TOOLTIP ──────────────────────────────────────── */
+  .resources-badge-tooltip {
+    pointer-events: none;
+    position: absolute;
+    bottom: -1.75rem;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    border-radius: var(--radius-md, 6px);
+    background-color: var(--color-text-primary);
+    padding: 0.125rem 0.5rem;
+    font-size: 10px;
+    font-weight: 700;
+    color: var(--color-text-inverse);
+    opacity: 0;
+    transition: opacity var(--duration-fast) var(--easing-in-out);
+  }
+  .group:hover .resources-badge-tooltip { opacity: 1; }
+
+  /* ── HERO ARC NODE DOTS ──────────────────────────────────────── */
+  .resources-arc-node {
+    pointer-events: none;
+    position: absolute;
+    height: 1rem;
+    width: 1rem;
+    border-radius: var(--radius-full);
+    border: 2px solid rgba(0, 0, 0, 0.15);
+    background-color: var(--color-bg-surface);
+    z-index: 10;
+    display: none;
+  }
+  @media (min-width: 1024px) {
+    .resources-arc-node { display: block; }
+  }
+
+  /* ── RESOURCE COVER HOVER BUTTON ────────────────────────────── */
+  .resource-cover-hover-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-radius: var(--radius-full);
+    background-color: var(--color-bg-surface);
+    padding: 0.5rem 1rem;
+    font-size: 12px;
+    font-weight: 800;
+    color: var(--color-text-primary);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    transition: transform var(--duration-default) var(--easing-in-out);
+  }
+
+}

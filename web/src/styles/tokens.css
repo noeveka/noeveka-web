@@ -397,4 +397,34 @@
   --sidebar-width: 224px;
   --card-radius: 12px;
   --container-max: 1200px; /* landing + marketing page max-width */
+
+  /* ── LANDING PAGE TOKENS ────────────────────────────────────
+     Brand glow shadows — used on hero / CTA buttons */
+  --shadow-brand-glow-sm:  0 4px 24px rgba(246, 93, 1, 0.45);
+  --shadow-brand-glow-md:  0 8px 32px rgba(246, 93, 1, 0.55);
+  --shadow-brand-glow-cta: 0 4px 20px rgba(246, 93, 1, 0.28);
+  --shadow-card-subtle:    0 2px 14px rgba(15, 23, 42, 0.03);
+  --shadow-card-lift:      0 4px 20px rgba(15, 23, 42, 0.04);
+  --shadow-card-hover:     0 6px 24px rgba(15, 23, 42, 0.07);
+
+  /* Icon wrap tints */
+  --color-icon-tint:       #fff4ed; /* peach — icon bg on light cards */
+  --color-icon-tint-dark:  rgba(246, 93, 1, 0.14); /* icon bg on dark cards */
+  --color-icon-tint-brand: rgba(246, 93, 1, 0.08); /* icon bg on white variant */
+  --color-brand-ghost-num: rgba(246, 93, 1, 0.20); /* watermark number tint */
+
+  /* Service card dark variant */
+  --color-service-card-dark: #16171E;
+
+  /* Hero gradient overlays */
+  --gradient-hero-mobile:  linear-gradient(to bottom, rgba(5,10,20,0.18) 0%, rgba(5,10,20,0.55) 35%, rgba(5,10,20,0.75) 55%, rgba(5,10,20,0.92) 100%);
+  --gradient-hero-desktop: linear-gradient(to right,  rgba(5,10,20,0.88) 0%, rgba(5,10,20,0.70) 34%, rgba(5,10,20,0.24) 56%, transparent 76%);
+  --gradient-hero-top:     linear-gradient(to bottom, rgba(5,10,20,0.30) 0%, transparent 100%);
+
+  /* CTA strip decorative blobs */
+  --gradient-blob-tl: radial-gradient(circle at 0% 0%,   rgba(246, 93, 1, 0.08) 0%, transparent 70%);
+  --gradient-blob-br: radial-gradient(circle at 100% 100%, rgba(246, 93, 1, 0.06) 0%, transparent 70%);
+
+  /* Image overlays */
+  --gradient-image-bottom: linear-gradient(to top, rgba(0, 0, 0, 0.3) 0%, transparent 40%);
 }

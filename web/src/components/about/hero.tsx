@@ -115,17 +115,11 @@ export default function Hero({
             {...fu(0.12)}
             className="mt-7 flex flex-wrap items-center justify-center gap-3.5"
           >
-            <Link
-              to={primaryHref}
-              className="inline-flex cursor-pointer items-center justify-center rounded-full bg-[#f65d01] px-8 py-3 text-[14px] font-semibold text-white shadow-[0_4px_16px_rgba(246,93,1,0.28)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#ff711e] hover:shadow-[0_8px_24px_rgba(246,93,1,0.4)] active:translate-y-0"
-            >
+            <Link to={primaryHref} className="btn-hero">
               {primaryText}
             </Link>
 
-            <Link
-              to={secondaryHref}
-              className="inline-flex cursor-pointer items-center justify-center rounded-full border border-neutral-300 bg-white px-7 py-3 text-[14px] font-semibold text-[#161922] shadow-xs transition-all duration-200 hover:-translate-y-0.5 hover:border-neutral-400 hover:bg-neutral-50 active:translate-y-0"
-            >
+            <Link to={secondaryHref} className="btn-outline-pill">
               {secondaryText}
             </Link>
           </motion.div>

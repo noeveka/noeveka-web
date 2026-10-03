@@ -8,59 +8,6 @@ import { SERVICES_CONFIG } from "@/config/landing/services.config";
 
 type Variant = "white" | "orange" | "black";
 
-const styles: Record<
-  Variant,
-  {
-    bg: string;
-    text: string;
-    muted: string;
-    iconBg: string;
-    iconColor: string;
-    border: string;
-    btnBg: string;
-    btnText: string;
-    shadow: string;
-    watermarkBg: string;
-  }
-> = {
-  white: {
-    bg: "var(--color-bg-surface, #FFFFFF)",
-    text: "var(--color-text-primary, #111827)",
-    muted: "#6B7280",
-    iconBg: "rgba(246, 93, 1, 0.08)",
-    iconColor: "var(--color-brand, #F65D01)",
-    border: "rgba(0, 0, 0, 0.06)",
-    btnBg: "rgba(246, 93, 1, 0.08)",
-    btnText: "var(--color-brand, #F65D01)",
-    shadow: "0 6px 24px -2px rgba(0, 0, 0, 0.05), 0 2px 6px -1px rgba(0, 0, 0, 0.02)",
-    watermarkBg: "rgba(246, 93, 1, 0.06)",
-  },
-  orange: {
-    bg: "var(--color-brand, #F65D01)",
-    text: "#FFFFFF",
-    muted: "rgba(255, 255, 255, 0.88)",
-    iconBg: "rgba(255, 255, 255, 0.20)",
-    iconColor: "#FFFFFF",
-    border: "transparent",
-    btnBg: "rgba(255, 255, 255, 0.22)",
-    btnText: "#FFFFFF",
-    shadow: "0 12px 36px -4px rgba(246, 93, 1, 0.38)",
-    watermarkBg: "rgba(0, 0, 0, 0.08)",
-  },
-  black: {
-    bg: "#16171E",
-    text: "#FFFFFF",
-    muted: "#94A3B8",
-    iconBg: "rgba(246, 93, 1, 0.14)",
-    iconColor: "var(--color-brand, #F65D01)",
-    border: "rgba(255, 255, 255, 0.07)",
-    btnBg: "rgba(246, 93, 1, 0.14)",
-    btnText: "var(--color-brand, #F65D01)",
-    shadow: "0 12px 36px -4px rgba(0, 0, 0, 0.35)",
-    watermarkBg: "rgba(255, 255, 255, 0.04)",
-  },
-};
-
 export interface ServiceItem {
   _id?: string;
   title: string;
@@ -119,82 +66,57 @@ export default function WhatWeDo({
         : [...SERVICES_CONFIG.services];
 
   const resolveServiceLink = (service: ServiceItem): string => {
-    // If explicitly provided a valid dedicated page path, keep it
     if (service.ctaLink && service.ctaLink.startsWith("/services/")) {
       return service.ctaLink;
     }
-    // If it's an external link, keep it
     if (service.ctaLink && service.ctaLink.startsWith("http")) {
       return service.ctaLink;
     }
-    // Check against canonical title map
     const mapped = SERVICE_ROUTE_MAP[service.title.trim()];
-    if (mapped) {
-      return mapped;
-    }
-    // Check partial matches
+    if (mapped) return mapped;
+
     const lower = service.title.toLowerCase();
-    if (lower.includes("governance") || lower.includes("assurance")) {
+    if (lower.includes("governance") || lower.includes("assurance"))
       return "/services/ai-governance-architecture-assurance";
-    }
-    if (lower.includes("agentic") || (lower.includes("ai") && lower.includes("systems"))) {
+    if (lower.includes("agentic") || (lower.includes("ai") && lower.includes("systems")))
       return "/services/enterprise-ai-agentic-systems";
-    }
-    if (lower.includes("transformation") || lower.includes("advisory")) {
+    if (lower.includes("transformation") || lower.includes("advisory"))
       return "/services/data-ai-transformation-advisory";
-    }
-    if (lower.includes("data") && lower.includes("architecture")) {
+    if (lower.includes("data") && lower.includes("architecture"))
       return "/services/enterprise-data-ai-architecture";
-    }
-    // Fallback to existing link or /services
+
     return service.ctaLink && service.ctaLink !== "#" ? service.ctaLink : "/services";
   };
 
   return (
     <section
       id="what-we-do"
-      className="relative flex justify-center border-t overflow-hidden"
-      style={{
-        background: "var(--color-bg-subtle, #FAFAFA)",
-        borderColor: "var(--color-stroke-default, rgba(0,0,0,0.06))",
-      }}
+      className="lp-section lp-section-subtle lp-section-border-t relative overflow-hidden"
     >
       {/* Subtle background decorative arc at top right */}
       <div
-        className="absolute top-0 right-0 w-[420px] h-[420px] rounded-full border border-orange-500/10 -translate-y-1/2 translate-x-1/3 pointer-events-none"
+        className="pointer-events-none absolute right-0 top-0 h-[420px] w-[420px] -translate-y-1/2 translate-x-1/3 rounded-full border border-orange-500/10"
         aria-hidden="true"
       />
 
-      <div className="lp-container lp-px py-16 lg:py-24 relative z-10">
+      <div className="lp-container lp-px relative z-10 py-16 lg:py-24">
         {/* Centered Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-14">
-          <motion.p
-            {...fu()}
-            className="text-[11px] font-bold tracking-[0.22em] uppercase mb-3 flex items-center justify-center gap-1.5"
-            style={{ color: "var(--color-brand, #F65D01)" }}
-          >
+        <div className="mx-auto mb-12 max-w-3xl text-center sm:mb-14">
+          <motion.p {...fu()} className="lp-eyebrow mb-3 justify-center">
             <span className="text-[13px] leading-none">✳</span> {eyebrow}
           </motion.p>
-          <motion.h2
-            {...fu(0.06)}
-            className="text-2xl sm:text-3xl lg:text-[40px] font-extrabold tracking-tight leading-[1.2] mb-4"
-            style={{ color: "var(--color-text-primary, #111827)" }}
-          >
+          <motion.h2 {...fu(0.06)} className="lp-section-heading mb-4">
             {heading}
           </motion.h2>
-          <motion.p
-            {...fu(0.1)}
-            className="text-[14px] sm:text-[15px] leading-relaxed max-w-2xl mx-auto"
-            style={{ color: "var(--color-text-muted, #64748B)" }}
-          >
+          <motion.p {...fu(0.1)} className="lp-section-subtext mx-auto max-w-2xl">
             {subtext}
           </motion.p>
         </div>
 
         {/* 2x2 Grid of Services */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+        <div className="mx-auto grid max-w-5xl grid-cols-1 gap-6 md:grid-cols-2">
           {displayServices.map((s, i) => {
-            const cs = styles[s.variant] ?? styles.white;
+            const variantClass = `service-card-${s.variant}` as const;
             const buttonText = s.ctaText || cardCtaText || "Learn More";
             const targetLink = resolveServiceLink(s);
 
@@ -202,50 +124,26 @@ export default function WhatWeDo({
               <motion.div
                 key={s._id ?? `service-${i}`}
                 {...fs(0.06 + i * 0.08)}
-                className="group relative flex flex-col justify-between rounded-[22px] overflow-hidden transition-all duration-300 hover:-translate-y-1.5 p-7 sm:p-8"
-                style={{
-                  background: cs.bg,
-                  border: `1px solid ${cs.border}`,
-                  boxShadow: cs.shadow,
-                  minHeight: "260px",
-                }}
+                className={`service-card ${variantClass}`}
               >
                 {/* Decorative bottom-right watermark shape */}
-                <div
-                  className="absolute -bottom-12 -right-12 w-48 h-48 rounded-full pointer-events-none transition-transform duration-500 group-hover:scale-105"
-                  style={{ background: cs.watermarkBg }}
-                  aria-hidden="true"
-                />
+                <div className="service-card-watermark" aria-hidden="true" />
 
                 <div className="relative z-10">
                   {/* Icon */}
-                  <div
-                    className="w-12 h-12 rounded-2xl flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-105"
-                    style={{ background: cs.iconBg }}
-                  >
+                  <div className="service-card-icon-wrap">
                     <LucideIcon
                       name={s.icon}
                       fallback="layers"
-                      className="w-6 h-6"
-                      style={{ color: cs.iconColor }}
+                      className="service-card-icon h-6 w-6"
                     />
                   </div>
 
                   {/* Title */}
-                  <h3
-                    className="text-[18px] sm:text-[19px] font-bold leading-snug mb-3 tracking-tight"
-                    style={{ color: cs.text }}
-                  >
-                    {s.title}
-                  </h3>
+                  <h3 className="service-card-title">{s.title}</h3>
 
                   {/* Description */}
-                  <p
-                    className="text-[13.5px] sm:text-[14px] leading-relaxed mb-6"
-                    style={{ color: cs.muted }}
-                  >
-                    {s.description}
-                  </p>
+                  <p className="service-card-desc">{s.description}</p>
                 </div>
 
                 {/* CTA Button */}
@@ -255,43 +153,20 @@ export default function WhatWeDo({
                       href={targetLink}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[13px] font-semibold transition-all duration-200 self-start no-underline"
-                      style={{ background: cs.btnBg, color: cs.btnText }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.opacity = "0.85";
-                        e.currentTarget.style.transform = "translateX(3px)";
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.opacity = "1";
-                        e.currentTarget.style.transform = "translateX(0)";
-                      }}
+                      className="service-card-btn"
                     >
                       {buttonText}{" "}
                       <LucideIcon
                         name="arrow-right"
-                        className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5"
-                        style={{ color: cs.btnText }}
+                        className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5"
                       />
                     </a>
                   ) : (
-                    <Link
-                      to={targetLink}
-                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[13px] font-semibold transition-all duration-200 self-start no-underline"
-                      style={{ background: cs.btnBg, color: cs.btnText }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.opacity = "0.85";
-                        e.currentTarget.style.transform = "translateX(3px)";
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.opacity = "1";
-                        e.currentTarget.style.transform = "translateX(0)";
-                      }}
-                    >
+                    <Link to={targetLink} className="service-card-btn">
                       {buttonText}{" "}
                       <LucideIcon
                         name="arrow-right"
-                        className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5"
-                        style={{ color: cs.btnText }}
+                        className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5"
                       />
                     </Link>
                   )}

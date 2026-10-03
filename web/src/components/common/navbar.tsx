@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router";
 import { AnimatePresence, motion } from "framer-motion";
-import { LucideIcon } from "@/components/lucide-icons";
+import { LucideIcon, lucideIconRegistry } from "@/components/lucide-icons";
 import { getSiteSettings, urlFor } from "@/lib/sanity";
 import { NAVBAR_CONFIG } from "@/config/navbar.config";
 
@@ -56,17 +56,7 @@ export default function Navbar() {
   };
 
   return (
-    <header
-      className="fixed top-0 right-0 left-0 z-50 flex justify-center transition-all duration-300"
-      style={{
-        background: scrolled
-          ? "rgba(255,255,255,0.92)"
-          : "rgba(255,255,255,0.0)",
-        backdropFilter: scrolled ? "blur(16px) saturate(180%)" : "none",
-        borderBottom: scrolled ? "1px solid rgba(232,229,221,0.8)" : "1px solid transparent",
-        boxShadow: scrolled ? "0 2px 16px rgba(0,0,0,0.04)" : "none",
-      }}
-    >
+    <header className={`site-navbar ${scrolled ? "site-navbar-scrolled" : ""}`}>
       <div className="lp-container lp-px relative flex h-16 items-center justify-between">
         {/* Left: Logo */}
         <Link to="/" className="flex items-center gap-1">
@@ -94,70 +84,33 @@ export default function Navbar() {
               <Link
                 key={link.label}
                 to={link.href}
-                className="relative py-1 text-[13px] font-semibold transition-colors duration-150"
-                style={{
-                  color: active
-                    ? "var(--color-brand)"
-                    : scrolled
-                    ? "var(--color-text-secondary)"
-                    : "#444",
-                }}
-                onMouseEnter={(e) =>
-                  (e.currentTarget.style.color = "var(--color-brand)")
-                }
-                onMouseLeave={(e) =>
-                  (e.currentTarget.style.color = active
-                    ? "var(--color-brand)"
-                    : scrolled
-                    ? "var(--color-text-secondary)"
-                    : "#444")
-                }
+                className={`navbar-link ${active ? "navbar-link-active" : ""}`}
               >
                 {link.label}
-                {/* Active underline dot */}
-                {active && (
-                  <span
-                    className="absolute -bottom-0.5 left-0 right-0 h-0.5 rounded-full"
-                    style={{ background: "var(--color-brand)" }}
-                  />
-                )}
+                {/* Active underline indicator */}
+                {active && <span className="navbar-link-underline" />}
               </Link>
             );
           })}
         </nav>
 
         {/* Right: CTA */}
-        <Link
-          to={ctaLink}
-          className="hidden cursor-pointer items-center gap-2 rounded-full px-5 py-2.5 text-[13px] font-bold shadow-[0_4px_16px_rgba(246,93,1,0.22)] transition-all lg:inline-flex"
-          style={{ background: "var(--color-brand)", color: "#ffffff" }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.background = "var(--color-brand-hover)";
-            e.currentTarget.style.transform = "translateY(-1px)";
-            e.currentTarget.style.boxShadow = "0 6px 20px rgba(246,93,1,0.35)";
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.background = "var(--color-brand)";
-            e.currentTarget.style.transform = "translateY(0)";
-            e.currentTarget.style.boxShadow = "0 4px 16px rgba(246,93,1,0.22)";
-          }}
-        >
-          <span>{ctaText}</span>{" "}
-          <LucideIcon name="arrow-right" className="h-3.5 w-3.5" />
+        <Link to={ctaLink} className="navbar-cta-btn">
+          <span>{ctaText}</span>
+          <LucideIcon name={lucideIconRegistry.ArrowRight} className="h-3.5 w-3.5" />
         </Link>
 
         {/* Mobile hamburger */}
         <button
           type="button"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="flex h-9 w-9 items-center justify-center rounded-full transition-colors hover:bg-neutral-100 focus:outline-none lg:hidden"
-          style={{ color: "#444" }}
+          className="navbar-mobile-toggle"
           aria-label="Toggle navigation menu"
         >
           {mobileMenuOpen ? (
-            <LucideIcon name="close" className="h-5 w-5" />
+            <LucideIcon name={lucideIconRegistry.Close} className="h-5 w-5" />
           ) : (
-            <LucideIcon name="menu" className="h-5 w-5" />
+            <LucideIcon name={lucideIconRegistry.Menu} className="h-5 w-5" />
           )}
         </button>
       </div>
@@ -170,7 +123,7 @@ export default function Navbar() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.22, ease: "easeInOut" }}
-            className="absolute top-16 right-0 left-0 w-full overflow-hidden border-b border-neutral-200 bg-white px-6 py-5 shadow-xl lg:hidden"
+            className="navbar-mobile-drawer"
           >
             <div className="flex flex-col gap-1">
               {links.map((link) => {
@@ -180,26 +133,21 @@ export default function Navbar() {
                     key={link.label}
                     to={link.href}
                     onClick={() => setMobileMenuOpen(false)}
-                    className="rounded-xl px-4 py-3 text-[14px] font-semibold transition-colors"
-                    style={{
-                      color: active ? "var(--color-brand)" : "#444",
-                      background: active ? "rgba(246,93,1,0.06)" : "transparent",
-                    }}
+                    className={`navbar-mobile-link ${active ? "navbar-mobile-link-active" : ""}`}
                   >
                     {link.label}
                   </Link>
                 );
               })}
             </div>
-            <div className="mt-4 border-t border-neutral-100 pt-4">
+            <div className="mt-4 border-t border-neutral-100 pt-4" style={{ borderColor: "var(--color-stroke-default)" }}>
               <Link
                 to={ctaLink}
                 onClick={() => setMobileMenuOpen(false)}
-                className="flex items-center justify-center gap-2 rounded-full px-5 py-3 text-[14px] font-bold text-white shadow-md transition-colors"
-                style={{ background: "var(--color-brand)" }}
+                className="navbar-mobile-cta"
               >
                 <span>{ctaText}</span>
-                <LucideIcon name="arrow-right" className="h-4 w-4" />
+                <LucideIcon name={lucideIconRegistry.ArrowRight} className="h-4 w-4" />
               </Link>
             </div>
           </motion.div>

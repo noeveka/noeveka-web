@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router";
-import { LucideIcon } from "@/components/lucide-icons";
+import { LucideIcon, lucideIconRegistry } from "@/components/lucide-icons";
 import { RESOURCES_CONFIG } from "@/config/resources.config";
 
 import { MicrosoftFabricSvg } from "@/components/svgs/microsoft-fabric-svg";
@@ -9,6 +9,7 @@ import DatabricksSvg from "../svgs/databricks-svg";
 import AzureSvg from "../svgs/Azure-svg";
 import PowerBISvg from "../svgs/powerbi-svg";
 import TrustCompanyLogoBar from "../landing/trust-company-logo-bar";
+
 interface ResourcesHeroProps {
   eyebrow?: string;
   heading?: string;
@@ -86,7 +87,7 @@ const ARC_BADGES: ArcBadge[] = [
   },
 ];
 
-/* Empty node dots resting on arc lines (Opero-style decorative points) */
+/* Empty node dots resting on arc lines */
 const ARC_NODES = [
   { left: "22%", top: "28%" },
   { left: "6%", top: "42%" },
@@ -94,14 +95,6 @@ const ARC_NODES = [
   { right: "4%", top: "24%" },
   { right: "24%", top: "68%" },
 ];
-
-/* Platform logos strip */
-// const PLATFORMS = [
-//   { name: "Microsoft Fabric", Svg: MicrosoftFabricSvg },
-//   { name: "Databricks", Svg: DatabricksSvg },
-//   { name: "Microsoft Azure", Svg: AzureSvg },
-//   { name: "Power BI", Svg: PowerBISvg },
-// ];
 
 export default function ResourcesHero({
   heading = RESOURCES_CONFIG.hero.heading,
@@ -117,7 +110,7 @@ export default function ResourcesHero({
       {/* ─── HERO SECTION ──────────────────────────────────────── */}
       <section
         className="relative flex justify-center overflow-hidden"
-        style={{ background: "#ffffff", minHeight: "620px" }}
+        style={{ backgroundColor: "var(--color-bg-surface)", minHeight: "620px" }}
       >
         {/* Warm radial background glow */}
         <div
@@ -139,7 +132,7 @@ export default function ResourcesHero({
           }}
         />
 
-        {/* Outer 1200px container containing SVG arcs & badges */}
+        {/* Outer container with SVG arcs & badges */}
         <div className="lp-container lp-px relative z-10 w-full min-h-[580px]">
           {/* 3 Concentric Curved Arc Lines */}
           <svg
@@ -170,21 +163,21 @@ export default function ResourcesHero({
           {ARC_NODES.map((node, idx) => (
             <div
               key={idx}
-              className="pointer-events-none absolute hidden h-4 w-4 rounded-full border-2 border-neutral-300/60 bg-white shadow-sm lg:block z-10"
+              className="resources-arc-node"
               style={{
                 left: node.left,
-                right: node.right,
+                right: (node as { right?: string }).right,
                 top: node.top,
                 transform: "translate(-50%, -50%)",
               }}
             />
           ))}
 
-          {/* 5 Main SVG Circular Badges */}
+          {/* Platform SVG Circular Badges */}
           {ARC_BADGES.map((b, i) => (
             <motion.div
               key={b.key}
-              className="pointer-events-none absolute hidden lg:flex z-20"
+              className="pointer-events-none absolute z-20 hidden lg:flex"
               style={{
                 top: b.top,
                 left: b.left,
@@ -216,9 +209,7 @@ export default function ResourcesHero({
                 }}
               >
                 <b.Svg className="h-7 w-7" />
-                <span className="pointer-events-none absolute -bottom-7 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-neutral-900 px-2 py-0.5 text-[10px] font-bold text-white opacity-0 transition-opacity group-hover:opacity-100">
-                  {b.name}
-                </span>
+                <span className="resources-badge-tooltip">{b.name}</span>
               </div>
             </motion.div>
           ))}
@@ -230,8 +221,7 @@ export default function ResourcesHero({
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.55, delay: 0.08 }}
-              className="mb-5 max-w-[720px] text-[3rem] leading-[1.04] font-extrabold tracking-tight sm:text-[3.8rem] lg:text-[4.8rem]"
-              style={{ color: "#1e212b" }}
+              className="about-narrative-heading mb-5 max-w-[720px] text-[3rem] sm:text-[3.8rem] lg:text-[4.8rem]"
             >
               {heading}{" "}
               <span
@@ -247,7 +237,8 @@ export default function ResourcesHero({
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.16 }}
-              className="mb-9 max-w-[520px] text-[16px] leading-relaxed text-neutral-500 sm:text-[17px]"
+              className="mb-9 max-w-[520px] text-[16px] leading-relaxed sm:text-[17px]"
+              style={{ color: "var(--color-text-secondary)" }}
             >
               {subtext}
             </motion.p>
@@ -259,21 +250,28 @@ export default function ResourcesHero({
               transition={{ duration: 0.4, delay: 0.24 }}
               className="flex flex-wrap items-center justify-center gap-3"
             >
+              {/* Primary — brand filled pill */}
               <a
                 href={ctaPrimaryLink}
-                className="inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-[14px] font-bold text-white shadow-[0_4px_20px_rgba(246,93,1,0.3)] transition-all hover:-translate-y-0.5 hover:shadow-[0_8px_28px_rgba(246,93,1,0.4)]"
-                style={{ background: "var(--color-brand)" }}
+                className="inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-[14px] font-bold transition-all hover:-translate-y-0.5"
+                style={{
+                  background: "var(--color-brand)",
+                  color: "var(--color-text-inverse)",
+                  boxShadow: "0 4px 20px rgba(246,93,1,0.3)",
+                }}
               >
-                <LucideIcon name="download" className="h-4 w-4" />
+                <LucideIcon name={lucideIconRegistry.Download} className="h-4 w-4" />
                 {ctaPrimaryText}
               </a>
+
+              {/* Secondary — surface pill */}
               <Link
                 to={ctaSecondaryLink}
                 className="inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-[14px] font-bold transition-all hover:-translate-y-0.5"
                 style={{
-                  background: "#ffffff",
-                  color: "#1e212b",
-                  border: "1.5px solid #e8e5dd",
+                  backgroundColor: "var(--color-bg-surface)",
+                  color: "var(--color-text-primary)",
+                  border: "1.5px solid var(--color-stroke-default)",
                   boxShadow: "0 2px 8px rgba(0,0,0,0.06)",
                 }}
               >
@@ -290,33 +288,7 @@ export default function ResourcesHero({
         />
       </section>
 
-      {/* ─── PLATFORM TRUST STRIP ──────────────────────────────── */}
-      {/* <div
-        className="flex justify-center overflow-hidden border-b"
-        style={{
-          background: "#faf9f7",
-          borderColor: "var(--color-stroke-default)",
-        }}
-      >
-        <div className="lp-container lp-px flex flex-col items-center gap-6 py-8 sm:flex-row sm:items-center sm:justify-between sm:gap-10">
-          <p className="shrink-0 text-[11px] font-bold tracking-[0.14em] uppercase text-neutral-400">
-            Covering platforms used by
-            <br className="hidden sm:block" /> enterprise teams globally
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 sm:justify-end">
-            {PLATFORMS.map((p) => (
-              <div
-                key={p.name}
-                className="flex items-center gap-2 text-[13px] font-bold tracking-tight text-neutral-600 opacity-70 transition-opacity hover:opacity-100"
-              >
-                <p.Svg className="h-4 w-4" />
-                <span>{p.name}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div> */}
-      <TrustCompanyLogoBar/>
+      <TrustCompanyLogoBar />
     </div>
   );
 }

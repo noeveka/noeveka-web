@@ -1,5 +1,6 @@
-import { CONTACT_CONFIG } from "@/config/contact.config";
 import { motion } from "framer-motion";
+
+import { CONTACT_CONFIG } from "@/config/contact.config";
 
 export interface ContactHeroProps {
   data?: {
@@ -30,9 +31,10 @@ export default function ContactHero({ data }: ContactHeroProps) {
 
       {/* Subtle brand warm ambient glow */}
       <div
-        className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 h-64 w-64 rounded-full blur-3xl opacity-20"
+        className="pointer-events-none absolute top-1/2 left-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full opacity-20 blur-3xl"
         style={{
-          background: "radial-gradient(circle, var(--color-brand) 0%, transparent 70%)",
+          background:
+            "radial-gradient(circle, var(--color-brand) 0%, transparent 70%)",
         }}
       />
 
@@ -41,8 +43,7 @@ export default function ContactHero({ data }: ContactHeroProps) {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
-          className="text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl lg:text-[3.4rem] leading-[1.15]"
-          style={{ color: "var(--color-text-primary)" }}
+          className="about-narrative-heading text-3xl sm:text-4xl md:text-5xl lg:text-[3.4rem]"
         >
           {heading}
         </motion.h1>
@@ -51,7 +52,7 @@ export default function ContactHero({ data }: ContactHeroProps) {
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
-          className="mx-auto mt-4 max-w-2xl text-sm sm:text-base md:text-lg leading-relaxed px-2"
+          className="mx-auto mt-4 max-w-2xl px-2 text-sm leading-relaxed sm:text-base md:text-lg"
           style={{ color: "var(--color-text-secondary)" }}
         >
           {subtext}

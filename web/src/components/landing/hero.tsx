@@ -69,14 +69,15 @@ export default function Hero({
   if (!highlight) highlight = headingHighlight2 || HERO_CONFIG.headingHighlight;
   if (!line2) line2 = headingPart3?.trim() || HERO_CONFIG.headingLine2;
 
+  const ctaClass = "btn-hero";
+
   return (
     <section className="relative flex h-dvh flex-col overflow-hidden">
       {/* ── Background: portrait on phones, landscape on tablet/desktop ── */}
       <img
         src={mobileSrc}
         alt="Noeveka — Enterprise Data & AI Architecture"
-        className="absolute inset-0 h-full w-full object-cover md:hidden"
-        style={{ objectPosition: "center center" }}
+        className="absolute inset-0 h-full w-full object-cover object-center md:hidden"
         fetchPriority="high"
       />
       <img
@@ -87,52 +88,35 @@ export default function Hero({
         fetchPriority="high"
       />
 
-      {/* Mobile overlay: bottom-weighted so lowered text stays legible */}
-      <div
-        className="pointer-events-none absolute inset-0 md:hidden"
-        style={{
-          background:
-            "linear-gradient(to bottom, rgba(5,10,20,0.18) 0%, rgba(5,10,20,0.55) 35%, rgba(5,10,20,0.75) 55%, rgba(5,10,20,0.92) 100%)",
-        }}
-      ></div>
+      {/* Mobile overlay — CSS class drives the gradient token */}
+      <div className="lp-hero-overlay-mobile md:hidden" />
 
-      {/* Tablet/Desktop overlay: left-to-right */}
-      <div
-        className="pointer-events-none absolute inset-0 hidden md:block"
-        style={{
-          background:
-            "linear-gradient(to right, rgba(5,10,20,0.88) 0%, rgba(5,10,20,0.70) 34%, rgba(5,10,20,0.24) 56%, transparent 76%)",
-        }}
-      ></div>
+      {/* Tablet/Desktop overlay */}
+      <div className="lp-hero-overlay-desktop hidden md:block" />
 
       {/* Top vignette */}
-      <div
-        className="pointer-events-none absolute inset-x-0 top-0 h-24"
-        style={{ background: "linear-gradient(to bottom, rgba(5,10,20,0.30) 0%, transparent 100%)" }}
-      ></div>
+      <div className="lp-hero-overlay-top" />
 
-      {/* ── Content ──
-          Phones (<md): column flex, content pinned near the bottom via justify-end.
-          Tablet+ (md+): vertically centered, matching the desktop mock. */}
-      <div className="lp-container lp-px relative z-10 mx-auto flex h-full w-full flex-1 flex-col justify-center pb-14 pt-4 md:flex-none md:justify-center py-24 md:py-32 lg:py-32">
+      {/* ── Content ── */}
+      <div className="lp-container lp-px relative z-10 mx-auto flex h-full w-full flex-1 flex-col justify-end pb-14 pt-4 md:flex-none md:justify-center md:py-32 lg:py-32">
         <div className="max-w-[520px] lg:max-w-[580px]">
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4 }}
-            className="mb-4 text-[11px] sm:text-xs font-bold uppercase tracking-[0.26em] text-white/60"
+            className="lp-eyebrow mb-4 text-white/60"
           >
-            {kicker}
+            <span className="text-[13px] leading-none">✳</span> {kicker}
           </motion.p>
 
           <motion.h1
             initial={{ opacity: 0, y: 18 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.55, delay: 0.08 }}
-            className="mb-5 text-[2.55rem] sm:text-5xl lg:text-[3.6rem] xl:text-[3.85rem] font-extrabold tracking-tight leading-[1.1] text-white"
+            className="mb-5 text-[2.55rem] font-extrabold leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-[3.6rem] xl:text-[3.85rem]"
           >
             {line1}{" "}
-            <span style={{ color: "var(--color-brand, #F65D01)" }}>{highlight}</span>
+            <span className="text-brand">{highlight}</span>
             {" "}
             {line2}
           </motion.h1>
@@ -141,7 +125,7 @@ export default function Hero({
             initial={{ opacity: 0, y: 16 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.16 }}
-            className="mb-9 max-w-[460px] text-[14.5px] sm:text-[15.5px] leading-relaxed text-white/70"
+            className="mb-9 max-w-[460px] text-[14.5px] leading-relaxed text-white/70 sm:text-[15.5px]"
           >
             {subtitle}
           </motion.p>
@@ -152,46 +136,12 @@ export default function Hero({
             transition={{ duration: 0.45, delay: 0.24 }}
           >
             {primaryCtaLink ? (
-              <a
-                href={primaryCtaLink}
-                className="inline-flex cursor-pointer items-center justify-center gap-2.5 rounded-full px-7 py-3.5 text-[14.5px] font-semibold text-white transition-all"
-                style={{
-                  background: "var(--color-brand, #F65D01)",
-                  boxShadow: "0 4px 24px rgba(246,93,1,0.45)",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "var(--color-brand-hover, #D94E00)";
-                  e.currentTarget.style.transform = "translateY(-2px)";
-                  e.currentTarget.style.boxShadow = "0 8px 32px rgba(246,93,1,0.55)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "var(--color-brand, #F65D01)";
-                  e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.boxShadow = "0 4px 24px rgba(246,93,1,0.45)";
-                }}
-              >
+              <a href={primaryCtaLink} className={ctaClass}>
                 {primaryCtaText}{" "}
                 <LucideIcon name="arrow-right" className="h-4 w-4" />
               </a>
             ) : (
-              <button
-                type="button"
-                className="inline-flex cursor-pointer items-center justify-center gap-2.5 rounded-full px-7 py-3.5 text-[14.5px] font-semibold text-white transition-all"
-                style={{
-                  background: "var(--color-brand, #F65D01)",
-                  boxShadow: "0 4px 24px rgba(246,93,1,0.45)",
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = "var(--color-brand-hover, #D94E00)";
-                  e.currentTarget.style.transform = "translateY(-2px)";
-                  e.currentTarget.style.boxShadow = "0 8px 32px rgba(246,93,1,0.55)";
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = "var(--color-brand, #F65D01)";
-                  e.currentTarget.style.transform = "translateY(0)";
-                  e.currentTarget.style.boxShadow = "0 4px 24px rgba(246,93,1,0.45)";
-                }}
-              >
+              <button type="button" className={ctaClass}>
                 {primaryCtaText}{" "}
                 <LucideIcon name="arrow-right" className="h-4 w-4" />
               </button>

@@ -18,24 +18,18 @@ export default function MetricsBar({ metrics }: MetricsBarProps) {
     : [...METRICS_CONFIG.metrics];
 
   return (
-    <section className="flex justify-center border-y border-slate-100 bg-white">
+    <section className="lp-section lp-section-surface lp-section-border-y">
       <div className="lp-container lp-px py-14 lg:py-16">
-        <div className="grid grid-cols-1 divide-y divide-slate-100 sm:grid-cols-3 sm:divide-y-0 sm:divide-x sm:divide-slate-200">
+        <div className="grid grid-cols-1 divide-y divide-stroke-default sm:grid-cols-3 sm:divide-x sm:divide-y-0">
           {display.map((m, i) => (
             <motion.div
               key={m.label}
               {...fs(0.04 + i * 0.1)}
-              className="flex flex-col items-center text-center px-4 sm:px-8 py-8 sm:py-2 first:pl-0 last:pr-0"
+              className="flex flex-col items-center px-4 py-8 text-center first:pl-0 last:pr-0 sm:px-8 sm:py-2"
             >
-              <p className="text-[3.25rem] lg:text-[3.75rem] font-black leading-none tracking-tight text-[#0f172a] mb-3">
-                {m.value}
-              </p>
-              <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-[#475569] mb-1.5">
-                {m.label}
-              </p>
-              <p className="text-[13px] text-[#94a3b8] max-w-[280px] leading-relaxed">
-                {m.sub}
-              </p>
+              <p className="metric-value">{m.value}</p>
+              <p className="metric-label">{m.label}</p>
+              <p className="metric-sub max-w-[280px]">{m.sub}</p>
             </motion.div>
           ))}
         </div>

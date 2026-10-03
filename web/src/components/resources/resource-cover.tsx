@@ -104,8 +104,11 @@ export function ResourceCoverGraphic({
               </div>
             </div>
             <h4
-              className="text-[14.5px] font-extrabold leading-[1.18] tracking-[-0.02em] text-neutral-900"
-              style={{ fontFamily: "'Plus Jakarta Sans', var(--font-primary), sans-serif" }}
+              className="text-[14.5px] font-extrabold leading-[1.18] tracking-[-0.02em]"
+              style={{
+                fontFamily: "'Plus Jakarta Sans', var(--font-primary), sans-serif",
+                color: "var(--color-text-primary)",
+              }}
             >
               {title}
             </h4>
@@ -125,8 +128,9 @@ export function ResourceCoverGraphic({
           {category && (
             <span
               className={`text-[11px] font-extrabold tracking-[0.18em] uppercase ${
-                thumbnailUrl ? "text-white/95" : "text-neutral-900/90"
+                thumbnailUrl ? "text-white/95" : ""
               }`}
+              style={thumbnailUrl ? {} : { color: "var(--color-text-primary)", opacity: 0.9 }}
             >
               {category}
             </span>
@@ -137,8 +141,9 @@ export function ResourceCoverGraphic({
           <div className="drop-shadow-xs">
             <span
               className={`text-[10.5px] font-extrabold tracking-[0.14em] uppercase ${
-                thumbnailUrl ? "text-white/80" : "text-neutral-700/80"
+                thumbnailUrl ? "text-white/80" : ""
               }`}
+              style={thumbnailUrl ? {} : { color: "var(--color-text-secondary)", opacity: 0.8 }}
             >
               {pageText}
             </span>
@@ -148,7 +153,7 @@ export function ResourceCoverGraphic({
 
       {/* Hover Action Overlay */}
       <div className="absolute inset-0 z-20 flex items-center justify-center bg-black/20 opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-        <div className="flex items-center gap-2 rounded-full bg-white px-4 py-2 text-[12px] font-extrabold text-neutral-900 shadow-xl transition-transform duration-300 group-hover:scale-105">
+        <div className="resource-cover-hover-btn">
           <LucideIcon name="download" className="h-4 w-4" style={{ color: "var(--color-brand)" }} />
           <span>{downloadHoverText}</span>
         </div>

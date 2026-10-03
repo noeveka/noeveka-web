@@ -1,5 +1,6 @@
 import {
   Activity,
+  AlertCircle,
   ArrowRight,
   ArrowUpRight,
   BarChart3,
@@ -54,6 +55,9 @@ import {
   Calendar,
   ArrowLeft,
   Crosshair,
+  Globe,
+  Laptop,
+  Handshake
 } from "lucide-react";
 
 // Icon map
@@ -129,9 +133,19 @@ export const iconMap = {
   // theme
   sun: Sun,
   moon: Moon,
+
+  // about page
+  globe: Globe,
+  laptop: Laptop,
+  handshake: Handshake,
+
+  // status
+  "alert-circle": AlertCircle,
+
 } as const;
 
 export const lucideIconRegistry = {
+  AlertCircle: "alert-circle",
   Activity: "activity",
   Crosshair: "crosshair",
   ArrowRight: "arrow-right",
@@ -188,6 +202,11 @@ export const lucideIconRegistry = {
   Scale: "scale",
   Sun: "sun",
   Moon: "moon",
+
+  // about page
+  Globe: "globe",
+  Laptop: "laptop",
+  Handshake: "handshake",
 } as const satisfies Record<string, IconName>;
 
 // Types
