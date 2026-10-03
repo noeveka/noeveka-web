@@ -1,5 +1,5 @@
 /**
- * hero.config.ts — static fallback data for the Hero section.
+ * hero.config.ts - static fallback data for the Hero section.
  */
 
 export const HERO_CONFIG = {
@@ -24,5 +24,5 @@ export const HERO_CONFIG = {
 
   /** Fallback local background image (used when Sanity bgImage is not set) */
   bgImageFallbackUrl: "/assets/hero_section_bg.png",
-  bgImageAlt: "Noeveka — Enterprise Data & AI Architecture",
+  bgImageAlt: "Noeveka - Enterprise Data & AI Architecture",
 } as const;

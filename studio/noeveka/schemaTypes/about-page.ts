@@ -1,19 +1,19 @@
 import {defineField, defineType} from 'sanity'
 
 /**
- * aboutPage — Sanity document type
+ * aboutPage - Sanity document type
  *
  * Mirrors the structure of about.config.ts exactly so that every field
  * edited here maps 1-to-1 to a ?? ABOUT_CONFIG fallback in the web app.
  *
  * Sections (tabs):
- *   1. Hero              — light-mode split banner with founder photo
- *   2. Stats Bar         — 4-column orange metrics strip
- *   3. Resources Teaser  — zigzag resource preview section
- *   4. Founder           — editorial 2-col with photo + bio + credentials
- *   5. Mission           — dark strip with mission statement + 3 pillars
- *   6. Values            — 4 value cards
- *   7. CTA               — bottom call-to-action card
+ *   1. Hero              - light-mode split banner with founder photo
+ *   2. Stats Bar         - 4-column orange metrics strip
+ *   3. Resources Teaser  - zigzag resource preview section
+ *   4. Founder           - editorial 2-col with photo + bio + credentials
+ *   5. Mission           - dark strip with mission statement + 3 pillars
+ *   6. Values            - 4 value cards
+ *   7. CTA               - bottom call-to-action card
  */
 export const aboutPage = defineType({
   name: 'aboutPage',
@@ -48,19 +48,19 @@ export const aboutPage = defineType({
         }),
         defineField({
           name: 'headingLine1',
-          title: 'Heading — Line 1',
+          title: 'Heading - Line 1',
           type: 'string',
           initialValue: 'Architect-Led Clarity for',
         }),
         defineField({
           name: 'headingLine2',
-          title: 'Heading — Line 2',
+          title: 'Heading - Line 2',
           type: 'string',
           initialValue: 'Enterprise Ambition',
         }),
         defineField({
           name: 'headingHighlight',
-          title: 'Heading — Highlight (Orange)',
+          title: 'Heading - Highlight (Orange)',
           type: 'string',
           description: 'Rendered in brand orange.',
           initialValue: '',
@@ -70,7 +70,7 @@ export const aboutPage = defineType({
           title: 'Subheading / Tagline',
           type: 'string',
           description: 'Bold narrative subtitle (e.g. From BI Consulting Pro to NOE·V·EKA).',
-          initialValue: 'From BI Consulting Pro to NOE·V·EKA — Architecting the AI Era.',
+          initialValue: 'From BI Consulting Pro to NOE·V·EKA - Architecting the AI Era.',
         }),
         defineField({
           name: 'subtext',
@@ -83,25 +83,25 @@ export const aboutPage = defineType({
         }),
         defineField({
           name: 'ctaPrimaryText',
-          title: 'Primary CTA — Button Text',
+          title: 'Primary CTA - Button Text',
           type: 'string',
           initialValue: "Let's Talk",
         }),
         defineField({
           name: 'ctaPrimaryLink',
-          title: 'Primary CTA — Link',
+          title: 'Primary CTA - Link',
           type: 'string',
           initialValue: '/contact',
         }),
         defineField({
           name: 'ctaSecondaryText',
-          title: 'Secondary CTA — Button Text',
+          title: 'Secondary CTA - Button Text',
           type: 'string',
           initialValue: 'Explore Focus Areas',
         }),
         defineField({
           name: 'ctaSecondaryLink',
-          title: 'Secondary CTA — Link',
+          title: 'Secondary CTA - Link',
           type: 'string',
           initialValue: '/services',
         }),
@@ -117,7 +117,7 @@ export const aboutPage = defineType({
               name: 'alt',
               title: 'Alt Text',
               type: 'string',
-              initialValue: 'Ajay Kumar — Founder & CEO, Noeveka',
+              initialValue: 'Ajay Kumar - Founder & CEO, Noeveka',
             }),
           ],
         }),
@@ -132,7 +132,7 @@ export const aboutPage = defineType({
               name: 'alt',
               title: 'Alt Text',
               type: 'string',
-              initialValue: 'Ajay Kumar — Founder & CEO, Noeveka',
+              initialValue: 'Ajay Kumar - Founder & CEO, Noeveka',
             }),
           ],
         }),
@@ -267,7 +267,7 @@ export const aboutPage = defineType({
               type: 'text',
               rows: 3,
               initialValue:
-                'We searched for independent, architect-grade guidance in the market — but all we found were vendor reseller pitches, massive agency overheads, and slide decks without real implementation rigor.',
+                'We searched for independent, architect-grade guidance in the market - but all we found were vendor reseller pitches, massive agency overheads, and slide decks without real implementation rigor.',
             }),
             defineField({
               name: 'punchline',
@@ -502,7 +502,7 @@ export const aboutPage = defineType({
           type: 'text',
           rows: 2,
           description:
-            'Displayed as a large blockquote. Do not include surrounding quotes — they are added automatically.',
+            'Displayed as a large blockquote. Do not include surrounding quotes - they are added automatically.',
           initialValue:
             "Good architecture is not about the tool. It's about the judgment behind it.",
         }),
@@ -567,7 +567,7 @@ export const aboutPage = defineType({
           type: 'text',
           rows: 3,
           initialValue:
-            'To give enterprise data leaders direct access to independent, architect-grade thinking — without vendor reseller kickbacks, bloated agency overhead, or junior delivery.',
+            'To give enterprise data leaders direct access to independent, architect-grade thinking - without vendor reseller kickbacks, bloated agency overhead, or junior delivery.',
         }),
         defineField({
           name: 'linkedinUrl',
@@ -650,7 +650,7 @@ export const aboutPage = defineType({
           rows: 3,
           description: 'One clear, compelling sentence or two about why Noeveka exists.',
           initialValue:
-            'To make world-class data architecture thinking accessible to every enterprise — independent, practical, and built for impact.',
+            'To make world-class data architecture thinking accessible to every enterprise - independent, practical, and built for impact.',
         }),
         defineField({
           name: 'pillars',
@@ -736,19 +736,19 @@ export const aboutPage = defineType({
         }),
         defineField({
           name: 'headingPlain',
-          title: 'Heading — Plain text (Legacy)',
+          title: 'Heading - Plain text (Legacy)',
           type: 'string',
           hidden: true,
         }),
         defineField({
           name: 'headingHighlight',
-          title: 'Heading — Highlight (Legacy)',
+          title: 'Heading - Highlight (Legacy)',
           type: 'string',
           hidden: true,
         }),
         defineField({
           name: 'headingTail',
-          title: 'Heading — Tail text (Legacy)',
+          title: 'Heading - Tail text (Legacy)',
           type: 'string',
           hidden: true,
         }),
@@ -758,29 +758,29 @@ export const aboutPage = defineType({
           type: 'text',
           rows: 3,
           initialValue:
-            'Noeveka helps enterprise leaders modernise their Data & AI architecture and governance — without changing the principles, people, or judgment that make their firm what it is.',
+            'Noeveka helps enterprise leaders modernise their Data & AI architecture and governance - without changing the principles, people, or judgment that make their firm what it is.',
         }),
         defineField({
           name: 'primaryCtaText',
-          title: 'Primary CTA — Button Text',
+          title: 'Primary CTA - Button Text',
           type: 'string',
           initialValue: "Let's Talk",
         }),
         defineField({
           name: 'primaryCtaLink',
-          title: 'Primary CTA — Link',
+          title: 'Primary CTA - Link',
           type: 'string',
           initialValue: '/contact',
         }),
         defineField({
           name: 'secondaryCtaText',
-          title: 'Secondary CTA — Link Text',
+          title: 'Secondary CTA - Link Text',
           type: 'string',
           initialValue: 'Explore the Platform',
         }),
         defineField({
           name: 'secondaryCtaLink',
-          title: 'Secondary CTA — Link',
+          title: 'Secondary CTA - Link',
           type: 'string',
           initialValue: '/services',
         }),

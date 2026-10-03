@@ -52,7 +52,7 @@ export default function WhyNoeveka({
       <div className="lp-container lp-px py-20 lg:py-24">
         <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-2 lg:gap-16">
 
-          {/* ── LEFT COLUMN — Copy + 2 Feature Cards + CTA ── */}
+          {/* ── LEFT COLUMN - Copy + 2 Feature Cards + CTA ── */}
           <div>
             {/* Eyebrow */}
             <motion.div {...fu()} className="mb-3.5 inline-flex items-center gap-2">
@@ -107,7 +107,7 @@ export default function WhyNoeveka({
             </motion.div>
           </div>
 
-          {/* ── RIGHT COLUMN — 3 Differentiator Cards Stacked ── */}
+          {/* ── RIGHT COLUMN - 3 Differentiator Cards Stacked ── */}
           <motion.div {...fsl()} className="flex flex-col gap-4 sm:gap-5">
             {displayDifferentiators.map(({ number, icon, title, desc }, idx) => (
               <motion.div

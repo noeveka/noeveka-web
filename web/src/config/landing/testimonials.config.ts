@@ -1,5 +1,5 @@
 /**
- * testimonials.config.ts — static fallback data for the Testimonials section.
+ * testimonials.config.ts - static fallback data for the Testimonials section.
  */
 
 export const TESTIMONIALS_CONFIG = {
@@ -18,7 +18,7 @@ export const TESTIMONIALS_CONFIG = {
       quote:
         "Noeveka transformed our data strategy completely. Their architecture guidance was precise, independent, and immediately actionable. Our federal migration went from risky to bulletproof.",
       authorName: "David Harrington",
-      authorRole: "CEO — FinTech Corp",
+      authorRole: "CEO - FinTech Corp",
       rating: 5,
     },
     {
@@ -26,9 +26,9 @@ export const TESTIMONIALS_CONFIG = {
       company: "Health Group",
       abbr: "HG",
       quote:
-        "The Fabric Architecture Assessment gave us clarity and couldn't get anywhere else. Highly professional team — zero vendor push, real independent advice. Exceptional value.",
+        "The Fabric Architecture Assessment gave us clarity and couldn't get anywhere else. Highly professional team - zero vendor push, real independent advice. Exceptional value.",
       authorName: "Priya Nair",
-      authorRole: "VP Data — Health Group",
+      authorRole: "VP Data - Health Group",
       rating: 5,
     },
     {
@@ -38,7 +38,7 @@ export const TESTIMONIALS_CONFIG = {
       quote:
         "We highly recommend Noeveka for any enterprise data and AI architecture needs. Their independent, vendor agnostic approach helped us build a platform ready for scale.",
       authorName: "Marcus Webb",
-      authorRole: "CTO — HealthSync",
+      authorRole: "CTO - HealthSync",
       rating: 5,
     },
   ],

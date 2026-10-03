@@ -25,7 +25,7 @@ export default function Navbar() {
     getSiteSettings().then(setSettings).catch(console.error);
   }, []);
 
-  // Scroll detection — switch from transparent to frosted
+  // Scroll detection - switch from transparent to frosted
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", onScroll, { passive: true });

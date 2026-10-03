@@ -2,7 +2,7 @@ import type { ServiceDetailPageData } from "@/types/service-detail.types";
 
 /**
  * Static configuration for "Enterprise AI & Agentic Systems"
- * Source: noeveka_service_page_content.md (02 — Enterprise AI & Agentic Systems)
+ * Source: noeveka_service_page_content.md (02 - Enterprise AI & Agentic Systems)
  */
 export const ENTERPRISE_AI_AGENTIC_SYSTEMS_CONFIG: ServiceDetailPageData = {
   title: "Enterprise AI & Agentic Systems Architecture",
@@ -23,16 +23,23 @@ export const ENTERPRISE_AI_AGENTIC_SYSTEMS_CONFIG: ServiceDetailPageData = {
     secondaryCtaLink: "#what-we-do",
     heroImageUrl: "/assets/services/service_three_hero_image.jpeg",
     stackAnnotations: [
-      { tier: "DATA & KNOWLEDGE", label: "Enterprise Data, Knowledge & Models" },
+      {
+        tier: "DATA & KNOWLEDGE",
+        label: "Enterprise Data, Knowledge & Models",
+      },
       { tier: "AI AGENTS", label: "Autonomous Reasoning & Task Execution" },
       { tier: "APIS & TOOLS", label: "Business Applications & API Connectors" },
-      { tier: "GOVERNANCE", label: "Security, Identity, Observability & Oversight" },
+      {
+        tier: "GOVERNANCE",
+        label: "Security, Identity, Observability & Oversight",
+      },
     ],
   },
 
   challenge: {
     eyebrow: "The Challenge",
-    heading: "Building an AI demo is easy. Building an enterprise AI capability is not.",
+    heading:
+      "Building an AI demo is easy. Building an enterprise AI capability is not.",
     paragraphs: [
       "Many organisations can demonstrate generative AI use cases. The harder questions come next: how will agents access enterprise data securely, how are models selected and governed, how are actions authorised, how are outputs monitored, how do multiple agents coordinate, and how does AI become part of existing enterprise processes. Without architecture, experimentation quickly creates another layer of technology fragmentation.",
     ],
@@ -113,25 +120,29 @@ export const ENTERPRISE_AI_AGENTIC_SYSTEMS_CONFIG: ServiceDetailPageData = {
       {
         icon: "database",
         title: "ENTERPRISE DATA & KNOWLEDGE",
-        description: "Enterprise Data, Knowledge graphs and curated context foundations.",
+        description:
+          "Enterprise Data, Knowledge graphs and curated context foundations.",
         variant: "navy",
       },
       {
         icon: "bot",
         title: "AI AGENTS",
-        description: "Reasoning engines, specialized agents, delegation and planning loops.",
+        description:
+          "Reasoning engines, specialized agents, delegation and planning loops.",
         variant: "orange",
       },
       {
         icon: "network",
         title: "APIS & TOOLS",
-        description: "Enterprise systems, CRM/ERP connectors, databases and tools.",
+        description:
+          "Enterprise systems, CRM/ERP connectors, databases and tools.",
         variant: "slate",
       },
       {
         icon: "shield-check",
         title: "GOVERNANCE & CONTROL",
-        description: "Security, identity boundaries, observability and human oversight.",
+        description:
+          "Security, identity boundaries, observability and human oversight.",
         variant: "navy",
       },
     ],
@@ -160,8 +171,7 @@ export const ENTERPRISE_AI_AGENTIC_SYSTEMS_CONFIG: ServiceDetailPageData = {
       {
         number: "03",
         title: "Prototype",
-        description:
-          "Validate the architecture and value proposition rapidly.",
+        description: "Validate the architecture and value proposition rapidly.",
       },
       {
         number: "04",
@@ -172,8 +182,7 @@ export const ENTERPRISE_AI_AGENTIC_SYSTEMS_CONFIG: ServiceDetailPageData = {
       {
         number: "05",
         title: "Scale",
-        description:
-          "Create reusable patterns for future AI capabilities.",
+        description: "Create reusable patterns for future AI capabilities.",
       },
     ],
   },
@@ -181,7 +190,8 @@ export const ENTERPRISE_AI_AGENTIC_SYSTEMS_CONFIG: ServiceDetailPageData = {
   deliverables: {
     eyebrow: "Deliverables",
     heading: "Typical Deliverables",
-    subtext: "Engineering blueprints, integration protocols, and evaluation frameworks.",
+    subtext:
+      "Engineering blueprints, integration protocols, and evaluation frameworks.",
     items: [
       "Enterprise AI & Agentic Architecture Blueprint",
       "Production RAG & vector retrieval architecture specifications",
@@ -197,42 +207,50 @@ export const ENTERPRISE_AI_AGENTIC_SYSTEMS_CONFIG: ServiceDetailPageData = {
   outcomes: {
     eyebrow: "Outcomes",
     heading: "AI that can operate beyond the prototype.",
-    subtext: "Transitioning AI from fragile proof-of-concept into hardened enterprise capability.",
+    subtext:
+      "Transitioning AI from fragile proof-of-concept into hardened enterprise capability.",
     items: [
       {
         icon: "shield-check",
         title: "Production-ready architecture",
-        description: "Hardened infrastructure built to support real enterprise load and concurrency.",
+        description:
+          "Hardened infrastructure built to support real enterprise load and concurrency.",
       },
       {
         icon: "network",
         title: "Secure enterprise integration",
-        description: "Safe data and tool access boundaries complying with enterprise security standards.",
+        description:
+          "Safe data and tool access boundaries complying with enterprise security standards.",
       },
       {
         icon: "layers-3",
         title: "Reusable AI patterns",
-        description: "Shared components that accelerate subsequent AI initiatives across teams.",
+        description:
+          "Shared components that accelerate subsequent AI initiatives across teams.",
       },
       {
         icon: "crosshair",
         title: "Better model and platform decisions",
-        description: "Objective technology selection tailored to latency, cost and governance needs.",
+        description:
+          "Objective technology selection tailored to latency, cost and governance needs.",
       },
       {
         icon: "cpu",
         title: "Controlled autonomous execution",
-        description: "Deterministic guardrails keeping agent tasks verifiable and accountable.",
+        description:
+          "Deterministic guardrails keeping agent tasks verifiable and accountable.",
       },
       {
         icon: "zap",
         title: "Reduced AI experimentation debt",
-        description: "Elimination of brittle point solutions through unified architectural standards.",
+        description:
+          "Elimination of brittle point solutions through unified architectural standards.",
       },
       {
         icon: "star",
         title: "Confidence scaling across organisation",
-        description: "Executive and operational clarity to deploy AI capabilities enterprise-wide.",
+        description:
+          "Executive and operational clarity to deploy AI capabilities enterprise-wide.",
       },
     ],
   },
@@ -240,7 +258,8 @@ export const ENTERPRISE_AI_AGENTIC_SYSTEMS_CONFIG: ServiceDetailPageData = {
   relatedExpertise: {
     eyebrow: "Related Expertise",
     heading: "Related Expertise",
-    subtext: "Explore our other services to address your broader data and AI needs.",
+    subtext:
+      "Explore our other services to address your broader data and AI needs.",
     services: [
       {
         number: "01",

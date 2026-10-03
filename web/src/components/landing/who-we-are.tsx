@@ -48,7 +48,7 @@ export default function WhoWeAre({
       <div className="lp-container lp-px py-16 lg:py-20">
         <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
 
-          {/* LEFT — Founder Image */}
+          {/* LEFT - Founder Image */}
           <motion.div {...fu()} className="relative">
             <div className="relative w-full overflow-hidden rounded-3xl border border-black/5 bg-gray-900 shadow-[0_20px_50px_rgba(0,0,0,0.12)] aspect-4/3 sm:aspect-14/10 lg:h-[430px]">
               <img
@@ -60,7 +60,7 @@ export default function WhoWeAre({
             </div>
           </motion.div>
 
-          {/* RIGHT — Copy */}
+          {/* RIGHT - Copy */}
           <div>
             <motion.p {...fu()} className="lp-eyebrow mb-3">
               <span>✳</span> {eyebrow}

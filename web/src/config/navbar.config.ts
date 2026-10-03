@@ -17,12 +17,12 @@ export interface NavItem {
 }
 
 export const NAVBAR_CONFIG = {
-  /** Icon/symbol logo — used when Sanity logoIcon image is not yet loaded */
+  /** Icon/symbol logo - used when Sanity logoIcon image is not yet loaded */
   logoIconFallbackUrl:
     "https://res.cloudinary.com/dd5elqfus/image/upload/v1788154826/noeveka_logo_dark_jph2va.png",
   logoIconAlt: "",
 
-  /** Text/wordmark logo — used when Sanity logoText image is not yet loaded */
+  /** Text/wordmark logo - used when Sanity logoText image is not yet loaded */
   logoTextFallbackUrl: "/assets/logos/noeveka_final_name_logo.png",
   logoTextAlt: "Noeveka",
 

@@ -12,7 +12,7 @@
  * - Single-use behaviour is NOT enforced at the server level (stateless),
  *   but the 5-minute expiry + opaque URL make replay attacks impractical
  *   for a marketing site with no user accounts.
- * - The raw Sanity URL is never sent to the browser — only this token.
+ * - The raw Sanity URL is never sent to the browser - only this token.
  * - Requires DOWNLOAD_TOKEN_SECRET in env (≥ 32 chars). Falls back to a
  *   hard-coded dev secret so local dev works without extra config.
  */
@@ -48,7 +48,9 @@ function base64urlEncode(data: Uint8Array): string {
 function base64urlDecode(str: string): Uint8Array<ArrayBuffer> {
   const padded = str.replace(/-/g, "+").replace(/_/g, "/");
   const bin = atob(padded);
-  return Uint8Array.from(bin, (c) => c.charCodeAt(0)) as Uint8Array<ArrayBuffer>;
+  return Uint8Array.from(bin, (c) =>
+    c.charCodeAt(0)
+  ) as Uint8Array<ArrayBuffer>;
 }
 
 // ─── Public API ───────────────────────────────────────────────────────────────

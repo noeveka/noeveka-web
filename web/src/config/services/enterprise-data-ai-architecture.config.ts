@@ -2,7 +2,7 @@ import type { ServiceDetailPageData } from "@/types/service-detail.types";
 
 /**
  * Static configuration for "Enterprise Data & AI Architecture"
- * Source: noeveka_service_page_content.md (01 — Enterprise Data & AI Architecture)
+ * Source: noeveka_service_page_content.md (01 - Enterprise Data & AI Architecture)
  */
 export const ENTERPRISE_DATA_AI_ARCHITECTURE_CONFIG: ServiceDetailPageData = {
   title: "Enterprise Data & AI Architecture Advisory",
@@ -120,7 +120,8 @@ export const ENTERPRISE_DATA_AI_ARCHITECTURE_CONFIG: ServiceDetailPageData = {
         variant: "orange",
       },
     ],
-    footerNote: "Architecture works when every layer supports the decisions above it.",
+    footerNote:
+      "Architecture works when every layer supports the decisions above it.",
   },
 
   howWeEngage: {
@@ -165,7 +166,8 @@ export const ENTERPRISE_DATA_AI_ARCHITECTURE_CONFIG: ServiceDetailPageData = {
   deliverables: {
     eyebrow: "Deliverables",
     heading: "Typical Deliverables",
-    subtext: "Pragmatic, high-value architecture blueprints and governance models.",
+    subtext:
+      "Pragmatic, high-value architecture blueprints and governance models.",
     items: [
       "Current state architecture assessment & gap analysis",
       "Target architecture blueprints and reference models",
@@ -187,7 +189,8 @@ export const ENTERPRISE_DATA_AI_ARCHITECTURE_CONFIG: ServiceDetailPageData = {
       {
         icon: "lightbulb",
         title: "Greater clarity",
-        description: "A shared view of the enterprise architecture and its evolution.",
+        description:
+          "A shared view of the enterprise architecture and its evolution.",
       },
       {
         icon: "layers-3",
@@ -197,7 +200,8 @@ export const ENTERPRISE_DATA_AI_ARCHITECTURE_CONFIG: ServiceDetailPageData = {
       {
         icon: "bar-chart-3",
         title: "Better technology decisions",
-        description: "Investment aligned to enterprise needs rather than isolated projects.",
+        description:
+          "Investment aligned to enterprise needs rather than isolated projects.",
       },
       {
         icon: "zap",
@@ -207,7 +211,8 @@ export const ENTERPRISE_DATA_AI_ARCHITECTURE_CONFIG: ServiceDetailPageData = {
       {
         icon: "star",
         title: "AI readiness",
-        description: "A scalable data and platform foundation capable of supporting emerging AI use cases.",
+        description:
+          "A scalable data and platform foundation capable of supporting emerging AI use cases.",
       },
     ],
   },
@@ -215,7 +220,8 @@ export const ENTERPRISE_DATA_AI_ARCHITECTURE_CONFIG: ServiceDetailPageData = {
   relatedExpertise: {
     eyebrow: "Related Expertise",
     heading: "Related Expertise",
-    subtext: "Explore our other services to address your broader data and AI needs.",
+    subtext:
+      "Explore our other services to address your broader data and AI needs.",
     services: [
       {
         number: "02",

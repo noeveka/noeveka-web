@@ -1,5 +1,4 @@
-// Shared newsletter subscription handler — registers email into Resend Audience
-
+// Shared newsletter subscription handler - registers email into Resend Audience
 import { renderNewsletterConfirmationEmail } from "./email-templates/index.js";
 
 export interface NewsletterRequestBody {
@@ -20,21 +19,29 @@ export async function handleNewsletterSubscription(
 
   // 1. Validation
   if (!email?.trim() || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    return { status: 400, body: { error: "A valid email address is required." } };
+    return {
+      status: 400,
+      body: { error: "A valid email address is required." },
+    };
   }
 
   const resendApiKey = env.RESEND_API_KEY;
   const fromEmail = env.FROM_EMAIL || "Noeveka <onboarding@resend.dev>";
 
   if (!resendApiKey) {
-    console.warn("[Newsletter API] RESEND_API_KEY is not set. Simulating success in development.");
+    console.warn(
+      "[Newsletter API] RESEND_API_KEY is not set. Simulating success in development."
+    );
     return {
       status: 200,
-      body: { success: true, message: "Subscribed (dev mode: RESEND_API_KEY not configured)" },
+      body: {
+        success: true,
+        message: "Subscribed (dev mode: RESEND_API_KEY not configured)",
+      },
     };
   }
 
-  // 2. Add contact to Resend Audience (idempotent — Resend de-dupes by email)
+  // 2. Add contact to Resend Audience (idempotent - Resend de-dupes by email)
   try {
     const contactsEndpoint = env.RESEND_AUDIENCE_ID
       ? `https://api.resend.com/audiences/${env.RESEND_AUDIENCE_ID}/contacts`
@@ -57,7 +64,10 @@ export async function handleNewsletterSubscription(
       console.error("[Newsletter API] Resend Audience error:", errText);
     }
   } catch (err: unknown) {
-    console.warn("[Newsletter API] Failed to add contact to Resend Audience:", err);
+    console.warn(
+      "[Newsletter API] Failed to add contact to Resend Audience:",
+      err
+    );
   }
 
   // 3. Send welcome/confirmation email to subscriber
@@ -76,14 +86,17 @@ export async function handleNewsletterSubscription(
       body: JSON.stringify({
         from: fromEmail,
         to: [email.trim()],
-        subject: "You're on the list — Noeveka",
+        subject: "You're on the list - Noeveka",
         html: confirmationHtml,
       }),
     });
 
     if (!emailRes.ok) {
       const errText = await emailRes.text();
-      console.warn("[Newsletter API] Resend confirmation email error:", errText);
+      console.warn(
+        "[Newsletter API] Resend confirmation email error:",
+        errText
+      );
     }
   } catch (err: unknown) {
     console.warn("[Newsletter API] Failed to send confirmation email:", err);
@@ -94,4 +107,3 @@ export async function handleNewsletterSubscription(
     body: { success: true, message: "You're on the list!" },
   };
 }
-

@@ -12,18 +12,18 @@
    - themes.css overrides the :root values for dark mode
 
    NOEVEKA BRAND PALETTE (from brand guidelines):
-     #1E212B  — Dark Navy (dark backgrounds, dark cards)
-     #F65D01  — Orange   (primary brand / CTA)
-     #3D7EB8  — Blue     (secondary accent)
-     #F4F2ED  — Warm Off-White (page background)
-     #8B909A  — Mid Gray (muted text / borders) */
+     #1E212B  - Dark Navy (dark backgrounds, dark cards)
+     #F65D01  - Orange   (primary brand / CTA)
+     #3D7EB8  - Blue     (secondary accent)
+     #F4F2ED  - Warm Off-White (page background)
+     #8B909A  - Mid Gray (muted text / borders) */
 
 @theme {
   /* LAYER 1: PRIMITIVE PALETTE
-     Raw color values — NEVER use directly in JSX.
+     Raw color values - NEVER use directly in JSX.
      These are the raw ingredients for semantic tokens. */
 
-  /* Neutral ramp — warm off-white to near-black */
+  /* Neutral ramp - warm off-white to near-black */
   --color-neutral-0: #ffffff;
   --color-neutral-50: #faf9f7;
   --color-neutral-100: #f4f2ed;
@@ -34,7 +34,7 @@
   --color-neutral-600: #5a5f6b;
   --color-neutral-900: #1e212b;
 
-  /* Noeveka Orange — primary brand ramp */
+  /* Noeveka Orange - primary brand ramp */
   --color-orange-tint: #fff0e6;
   --color-orange-100: #ffd4b3;
   --color-orange-500: #f65d01;
@@ -44,14 +44,14 @@
   --color-orange-light: #ff7a2e;
   --color-orange-lighter: #ff9556;
 
-  /* Noeveka Dark Navy — dark surfaces / hero ramp */
+  /* Noeveka Dark Navy - dark surfaces / hero ramp */
   --color-navy-50: #2a2e3d;
   --color-navy-100: #252839;
   --color-navy-500: #1e212b;
   --color-navy-700: #161820;
   --color-navy-900: #0e0f15;
 
-  /* Noeveka Blue — secondary accent ramp */
+  /* Noeveka Blue - secondary accent ramp */
   --color-blue-tint: #e8f1f9;
   --color-blue-500: #3d7eb8;
   --color-blue-600: #2f6699;
@@ -86,7 +86,7 @@
   --color-dark-text-2: #8b909a;
 
   /* LAYER 2: SEMANTIC TOKENS
-     Purpose-driven — USE THESE in JSX.
+     Purpose-driven - USE THESE in JSX.
      Each background has a matching "-foreground" for text. */
 
   /* Backgrounds + their foreground text colors */
@@ -161,7 +161,7 @@
   --color-input: var(--color-stroke-default);
   --color-ring: var(--color-orange-500);
 
-  /* SPACING — strict 4px base unit
+  /* SPACING - strict 4px base unit
      Every gap, margin, and padding is a multiple of 4. */
 
   --spacing-px: 1px;
@@ -192,7 +192,7 @@
   --border-strong: 1.5px;
   --border-accent: 2px; /* active nav left-edge indicator */
 
-  /* SHADOWS — elevation system
+  /* SHADOWS - elevation system
      Shadows only exist for elevation and focus.
      Never use decoratively. */
   --shadow-none: none;
@@ -204,7 +204,7 @@
   --shadow-focus-neutral: 0 0 0 3px rgba(0, 0, 0, 0.1); /* neutral focus ring */
   --shadow-focus-danger: 0 0 0 3px rgba(196, 43, 43, 0.15); /* error focus ring */
 
-  /* MOTION — conservative, state-change only
+  /* MOTION - conservative, state-change only
       Never animate layout properties.
       Only: opacity, transform, background-color,
             border-color, box-shadow, color. */
@@ -340,13 +340,13 @@
   --stat-padding: var(--spacing-5);
 }
 
-/* :root — LIGHT MODE VALUES (the source of truth)
+/* :root - LIGHT MODE VALUES (the source of truth)
    These are the actual color values.
    The @theme semantic tokens above reference these.
    themes.css overrides these for dark mode. */
 
 :root {
-  /* Backgrounds — warm off-white palette matching #F4F2ED brand */
+  /* Backgrounds - warm off-white palette matching #F4F2ED brand */
   --color-bg-page: #f4f2ed;
   --color-bg-surface: #ffffff;
   --color-bg-subtle: #faf9f7;
@@ -363,14 +363,14 @@
   --color-text-muted: #8b909a;
   --color-text-inverse: #ffffff;
 
-  /* Brand Orange — #F65D01 */
+  /* Brand Orange - #F65D01 */
   --color-brand-tint: #fff0e6;
   --color-brand: #f65d01;
   --color-brand-hover: #d94e00;
   --color-brand-pressed: #b84200;
   --color-brand-text: #d94e00;
 
-  /* Secondary Blue accent — #3D7EB8 */
+  /* Secondary Blue accent - #3D7EB8 */
   --color-accent-tint: #e8f1f9;
   --color-accent: #3d7eb8;
   --color-accent-hover: #2f6699;
@@ -399,32 +399,65 @@
   --container-max: 1200px; /* landing + marketing page max-width */
 
   /* ── LANDING PAGE TOKENS ────────────────────────────────────
-     Brand glow shadows — used on hero / CTA buttons */
-  --shadow-brand-glow-sm:  0 4px 24px rgba(246, 93, 1, 0.45);
-  --shadow-brand-glow-md:  0 8px 32px rgba(246, 93, 1, 0.55);
+     Brand glow shadows - used on hero / CTA buttons */
+  --shadow-brand-glow-sm: 0 4px 24px rgba(246, 93, 1, 0.45);
+  --shadow-brand-glow-md: 0 8px 32px rgba(246, 93, 1, 0.55);
   --shadow-brand-glow-cta: 0 4px 20px rgba(246, 93, 1, 0.28);
-  --shadow-card-subtle:    0 2px 14px rgba(15, 23, 42, 0.03);
-  --shadow-card-lift:      0 4px 20px rgba(15, 23, 42, 0.04);
-  --shadow-card-hover:     0 6px 24px rgba(15, 23, 42, 0.07);
+  --shadow-card-subtle: 0 2px 14px rgba(15, 23, 42, 0.03);
+  --shadow-card-lift: 0 4px 20px rgba(15, 23, 42, 0.04);
+  --shadow-card-hover: 0 6px 24px rgba(15, 23, 42, 0.07);
 
   /* Icon wrap tints */
-  --color-icon-tint:       #fff4ed; /* peach — icon bg on light cards */
-  --color-icon-tint-dark:  rgba(246, 93, 1, 0.14); /* icon bg on dark cards */
-  --color-icon-tint-brand: rgba(246, 93, 1, 0.08); /* icon bg on white variant */
-  --color-brand-ghost-num: rgba(246, 93, 1, 0.20); /* watermark number tint */
+  --color-icon-tint: #fff4ed; /* peach - icon bg on light cards */
+  --color-icon-tint-dark: rgba(246, 93, 1, 0.14); /* icon bg on dark cards */
+  --color-icon-tint-brand: rgba(
+    246,
+    93,
+    1,
+    0.08
+  ); /* icon bg on white variant */
+  --color-brand-ghost-num: rgba(246, 93, 1, 0.2); /* watermark number tint */
 
   /* Service card dark variant */
-  --color-service-card-dark: #16171E;
+  --color-service-card-dark: #16171e;
 
   /* Hero gradient overlays */
-  --gradient-hero-mobile:  linear-gradient(to bottom, rgba(5,10,20,0.18) 0%, rgba(5,10,20,0.55) 35%, rgba(5,10,20,0.75) 55%, rgba(5,10,20,0.92) 100%);
-  --gradient-hero-desktop: linear-gradient(to right,  rgba(5,10,20,0.88) 0%, rgba(5,10,20,0.70) 34%, rgba(5,10,20,0.24) 56%, transparent 76%);
-  --gradient-hero-top:     linear-gradient(to bottom, rgba(5,10,20,0.30) 0%, transparent 100%);
+  --gradient-hero-mobile: linear-gradient(
+    to bottom,
+    rgba(5, 10, 20, 0.18) 0%,
+    rgba(5, 10, 20, 0.55) 35%,
+    rgba(5, 10, 20, 0.75) 55%,
+    rgba(5, 10, 20, 0.92) 100%
+  );
+  --gradient-hero-desktop: linear-gradient(
+    to right,
+    rgba(5, 10, 20, 0.88) 0%,
+    rgba(5, 10, 20, 0.7) 34%,
+    rgba(5, 10, 20, 0.24) 56%,
+    transparent 76%
+  );
+  --gradient-hero-top: linear-gradient(
+    to bottom,
+    rgba(5, 10, 20, 0.3) 0%,
+    transparent 100%
+  );
 
   /* CTA strip decorative blobs */
-  --gradient-blob-tl: radial-gradient(circle at 0% 0%,   rgba(246, 93, 1, 0.08) 0%, transparent 70%);
-  --gradient-blob-br: radial-gradient(circle at 100% 100%, rgba(246, 93, 1, 0.06) 0%, transparent 70%);
+  --gradient-blob-tl: radial-gradient(
+    circle at 0% 0%,
+    rgba(246, 93, 1, 0.08) 0%,
+    transparent 70%
+  );
+  --gradient-blob-br: radial-gradient(
+    circle at 100% 100%,
+    rgba(246, 93, 1, 0.06) 0%,
+    transparent 70%
+  );
 
   /* Image overlays */
-  --gradient-image-bottom: linear-gradient(to top, rgba(0, 0, 0, 0.3) 0%, transparent 40%);
+  --gradient-image-bottom: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.3) 0%,
+    transparent 40%
+  );
 }

@@ -1,19 +1,18 @@
 /* FONTS
-   Self-hosted Inter variable font — single file covers full weight range.
+   Self-hosted Inter variable font - single file covers full weight range.
    Source: /public/assets/fonts/
-   Used on: body, headings, buttons, inputs — everything UI.
+   Used on: body, headings, buttons, inputs - everything UI.
    Never use for: code, API keys, file paths (use a mono font).
 */
 
 /*
-  Inter — Primary typeface
+  Inter - Primary typeface
   opsz axis: 14–32  |  wght axis: 100–900
   format: truetype (variable)
 */
 @font-face {
   font-family: "Inter";
-  src: url("/assets/fonts/Inter-VariableFont_opsz,wght.ttf")
-    format("truetype");
+  src: url("/assets/fonts/Inter-VariableFont_opsz,wght.ttf") format("truetype");
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;

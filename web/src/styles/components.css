@@ -1,4 +1,4 @@
-/* COMPONENT CLASSES — INDEX
+/* COMPONENT CLASSES - INDEX
    This file is an import relay only.
    Add new component groups as sub-files in ./components/.
 
@@ -6,9 +6,9 @@
    ─────────────────────────────────────────────────────── */
 
 @import "./components/primitives.css"; /* Buttons, inputs, cards, nav, badges, chips, stat-tiles, etc. */
-@import "./components/layout.css";     /* lp-container, lp-px, section wrappers, hero overlays        */
-@import "./components/landing.css";    /* Section headers, CTA buttons, service/feature/diff cards     */
-@import "./components/about.css";      /* About-page section wrappers, cards, eyebrow, pillars         */
-@import "./components/contact.css";    /* Contact form inputs, channel links, submit btn, success card */
-@import "./components/resources.css";  /* Resource grid, filter pills, cards, download modal           */
-@import "./components/common.css";     /* Navbar, footer, newsletter strip, global layout chrome       */
+@import "./components/layout.css"; /* lp-container, lp-px, section wrappers, hero overlays        */
+@import "./components/landing.css"; /* Section headers, CTA buttons, service/feature/diff cards     */
+@import "./components/about.css"; /* About-page section wrappers, cards, eyebrow, pillars         */
+@import "./components/contact.css"; /* Contact form inputs, channel links, submit btn, success card */
+@import "./components/resources.css"; /* Resource grid, filter pills, cards, download modal           */
+@import "./components/common.css"; /* Navbar, footer, newsletter strip, global layout chrome       */

@@ -1,4 +1,4 @@
-import { defineField, defineType } from 'sanity'
+import {defineField, defineType} from 'sanity'
 
 export const testimonial = defineType({
   name: 'testimonial',
@@ -35,7 +35,7 @@ export const testimonial = defineType({
       name: 'authorRole',
       title: 'Author Role',
       type: 'string',
-      description: 'e.g. "CDO — FinTech Corp"',
+      description: 'e.g. "CDO - FinTech Corp"',
       validation: (Rule) => Rule.required(),
     }),
     defineField({
@@ -64,7 +64,7 @@ export const testimonial = defineType({
     {
       title: 'Display Order',
       name: 'orderAsc',
-      by: [{ field: 'order', direction: 'asc' }],
+      by: [{field: 'order', direction: 'asc'}],
     },
   ],
 })

@@ -1,7 +1,7 @@
 import {defineField, defineType} from 'sanity'
 
 /**
- * contactPage — Sanity document type
+ * contactPage - Sanity document type
  *
  * Mirrors the structure of contact.config.ts exactly so that every field
  * edited in Sanity maps 1-to-1 to a CONTACT_CONFIG fallback in the web app.

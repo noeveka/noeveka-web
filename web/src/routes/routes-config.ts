@@ -6,7 +6,8 @@ export const routesRegistry = {
   serviceDetail: "/services/:slug",
   serviceDataAiArchitecture: "/services/enterprise-data-ai-architecture",
   serviceAiAgenticSystems: "/services/enterprise-ai-agentic-systems",
-  serviceAiGovernanceAssurance: "/services/ai-governance-architecture-assurance",
+  serviceAiGovernanceAssurance:
+    "/services/ai-governance-architecture-assurance",
   serviceDataAiTransformation: "/services/data-ai-transformation-advisory",
   resources: "/resources",
   contact: "/contact",
@@ -16,12 +17,12 @@ export const routesRegistry = {
   docs: "/docs",
   changelog: "/changelog",
 
-  // auth — public, but redirect away if already logged in
+  // auth - public, but redirect away if already logged in
   login: "/login",
   signup: "/signup",
   forgotPassword: "/forgot-password",
 
-  // protected — dashboard
+  // protected - dashboard
   provenance: "/provenance",
   settings: "/settings",
 } as const;

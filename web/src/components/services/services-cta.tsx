@@ -48,7 +48,7 @@ const styles = {
 export default function ServicesCta({
   headingPart = "Ready to architect your enterprise's ",
   headingHighlight = "data future?",
-  body = "Book a free strategy call with Ajay Kumar and get an independent view of your platform fit, cost, and architecture roadmap — at no cost.",
+  body = "Book a free strategy call with Ajay Kumar and get an independent view of your platform fit, cost, and architecture roadmap - at no cost.",
   primaryCtaText = "Book a Free Strategy Call",
   primaryCtaLink = "/contact",
   secondaryCtaText = "Explore Our Resources",

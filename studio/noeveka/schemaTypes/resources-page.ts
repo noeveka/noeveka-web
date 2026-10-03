@@ -1,7 +1,7 @@
-import { defineField, defineType } from 'sanity'
+import {defineField, defineType} from 'sanity'
 
 /**
- * resourcesPage — Sanity document type
+ * resourcesPage - Sanity document type
  *
  * Mirrors the structure of resources.config.ts exactly so that every field
  * edited in Sanity maps 1-to-1 to a RESOURCES_CONFIG fallback in the web app.
@@ -11,8 +11,8 @@ export const resourcesPage = defineType({
   title: 'Resources Page',
   type: 'document',
   groups: [
-    { name: 'hero', title: '1 · Hero Section' },
-    { name: 'grid', title: '2 · Grid & Copy' },
+    {name: 'hero', title: '1 · Hero Section'},
+    {name: 'grid', title: '2 · Grid & Copy'},
   ],
 
   fields: [
@@ -28,7 +28,8 @@ export const resourcesPage = defineType({
           name: 'eyebrow',
           title: 'Eyebrow Label',
           type: 'string',
-          description: 'Small uppercase tag above the heading (e.g. "Free Resources"). Leave blank to hide.',
+          description:
+            'Small uppercase tag above the heading (e.g. "Free Resources"). Leave blank to hide.',
           initialValue: 'Free Resources',
         }),
         defineField({
@@ -49,7 +50,7 @@ export const resourcesPage = defineType({
           type: 'text',
           rows: 3,
           initialValue:
-            'Practical checklists, playbooks, and guides built by enterprise architects — no fluff, no vendor bias. Download free.',
+            'Practical checklists, playbooks, and guides built by enterprise architects - no fluff, no vendor bias. Download free.',
         }),
         defineField({
           name: 'ctaPrimaryText',
@@ -104,8 +105,9 @@ export const resourcesPage = defineType({
           name: 'categories',
           title: 'Category Filter Tabs',
           type: 'array',
-          of: [{ type: 'string' }],
-          description: 'Custom category filter tabs shown on the resource grid (e.g. "Checklist", "Playbook", "Guide", "Template", "Whitepaper"). "All" is automatically included.',
+          of: [{type: 'string'}],
+          description:
+            'Custom category filter tabs shown on the resource grid (e.g. "Checklist", "Playbook", "Guide", "Template", "Whitepaper"). "All" is automatically included.',
           initialValue: ['Checklist', 'Playbook', 'Guide', 'Template', 'Whitepaper'],
         }),
         defineField({
@@ -119,14 +121,14 @@ export const resourcesPage = defineType({
           name: 'authorAvatar',
           title: 'Author Avatar Image (Card Footer)',
           type: 'image',
-          options: { hotspot: true },
+          options: {hotspot: true},
           description: 'Small circular avatar photo displayed next to author name on card footers.',
         }),
         defineField({
           name: 'emptyStateText',
           title: 'Empty Category Message',
           type: 'string',
-          initialValue: 'No resources in this category yet — check back soon.',
+          initialValue: 'No resources in this category yet - check back soon.',
         }),
       ],
     }),
@@ -137,7 +139,7 @@ export const resourcesPage = defineType({
       title: 'hero.heading',
       subtitle: 'hero.headingHighlight',
     },
-    prepare({ title, subtitle }) {
+    prepare({title, subtitle}) {
       return {
         title: 'Resources Page Settings',
         subtitle: `${title ?? ''} ${subtitle ?? ''}`.trim() || 'Resources Page',

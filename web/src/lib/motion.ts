@@ -1,5 +1,5 @@
 /**
- * Landing page motion helpers — pure JavaScript animation presets.
+ * Landing page motion helpers - pure JavaScript animation presets.
  * These can't live in CSS, so they're kept here as a single utility module.
  *
  * fu  = fade-up          (headings, labels, text)

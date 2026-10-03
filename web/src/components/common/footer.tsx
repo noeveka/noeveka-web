@@ -87,10 +87,10 @@ export default function Footer() {
 
   const socialLinks = settings?.socialLinks?.length
     ? settings.socialLinks.map((s) => ({
-        Icon: ICON_MAP[s.platform] ?? LinkedInSvg,
-        href: s.href,
-        label: s.platform,
-      }))
+      Icon: ICON_MAP[s.platform] ?? LinkedInSvg,
+      href: s.href,
+      label: s.platform,
+    }))
     : FALLBACK_SOCIAL;
 
   const companyHeading =
@@ -159,10 +159,10 @@ export default function Footer() {
     <footer>
       <NewsLetterStrip />
       <div className="footer-wrapper">
-        {/* Subtle ambient light — top right */}
+        {/* Subtle ambient light - top right */}
         <div className="footer-ambient-glow" />
 
-        {/* Watermark — fluid width, always fills the container */}
+        {/* Watermark - fluid width, always fills the container */}
         <div className="footer-watermark" aria-hidden="true">
           <span className="footer-watermark-text">
             NOEVEKA
@@ -171,7 +171,7 @@ export default function Footer() {
 
         {/* ── Desktop grid content (lg and up) ── */}
         <div className="lp-container lp-px relative z-10 hidden grid-cols-5 gap-10 pt-14 pb-28 lg:grid">
-          {/* Brand column — 2 cols */}
+          {/* Brand column - 2 cols */}
           <div className="col-span-2 flex flex-col gap-5">
             {/* Logo */}
             <Link to="/" className="flex items-center gap-1">
@@ -321,9 +321,8 @@ export default function Footer() {
                 </span>
                 <LucideIcon
                   name={lucideIconRegistry.ChevronDown}
-                  className={`h-4 w-4 transition-transform duration-200 ${
-                    openSections.company ? "rotate-180" : ""
-                  }`}
+                  className={`h-4 w-4 transition-transform duration-200 ${openSections.company ? "rotate-180" : ""
+                    }`}
                   style={{ color: "var(--color-brand)" }}
                 />
               </button>
@@ -361,9 +360,8 @@ export default function Footer() {
                 </span>
                 <LucideIcon
                   name={lucideIconRegistry.ChevronDown}
-                  className={`h-4 w-4 transition-transform duration-200 ${
-                    openSections.services ? "rotate-180" : ""
-                  }`}
+                  className={`h-4 w-4 transition-transform duration-200 ${openSections.services ? "rotate-180" : ""
+                    }`}
                   style={{ color: "var(--color-brand)" }}
                 />
               </button>
@@ -401,9 +399,8 @@ export default function Footer() {
                 </span>
                 <LucideIcon
                   name={lucideIconRegistry.ChevronDown}
-                  className={`h-4 w-4 transition-transform duration-200 ${
-                    openSections.contact ? "rotate-180" : ""
-                  }`}
+                  className={`h-4 w-4 transition-transform duration-200 ${openSections.contact ? "rotate-180" : ""
+                    }`}
                   style={{ color: "var(--color-brand)" }}
                 />
               </button>

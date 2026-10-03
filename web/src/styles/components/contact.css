@@ -1,10 +1,9 @@
 /* CONTACT PAGE COMPONENT CLASSES
    Form inputs, channel links, service checkboxes, submit button,
-   success card. All colours reference design tokens — no hardcoded hex.
+   success card. All colours reference design tokens - no hardcoded hex.
    ─────────────────────────────────────────────────────────────────── */
 
 @layer components {
-
   /* ── PAGE SHELL ──────────────────────────────────────────────── */
   .contact-page {
     min-height: 100vh;
@@ -12,7 +11,9 @@
     padding-bottom: 5rem; /* pb-20 */
   }
   @media (min-width: 640px) {
-    .contact-page { padding-bottom: 7rem; /* sm:pb-28 */ }
+    .contact-page {
+      padding-bottom: 7rem; /* sm:pb-28 */
+    }
   }
 
   /* ── FORM FIELD WRAPPER ──────────────────────────────────────── */
@@ -27,7 +28,9 @@
     color: var(--color-text-secondary);
   }
   @media (min-width: 640px) {
-    .contact-label { font-size: var(--text-sm); } /* 13px */
+    .contact-label {
+      font-size: var(--text-sm);
+    } /* 13px */
   }
 
   /* ── TEXT INPUTS & TEXTAREA ──────────────────────────────────── */
@@ -44,11 +47,15 @@
       box-shadow var(--duration-default) var(--easing-in-out);
     outline: none;
   }
-  .contact-input::placeholder { color: var(--color-text-muted); }
-  .contact-input:hover { border-color: var(--color-stroke-strong); }
+  .contact-input::placeholder {
+    color: var(--color-text-muted);
+  }
+  .contact-input:hover {
+    border-color: var(--color-stroke-strong);
+  }
   .contact-input:focus {
     border-color: var(--color-brand);
-    box-shadow: 0 0 0 3px rgba(246, 93, 1, 0.10);
+    box-shadow: 0 0 0 3px rgba(246, 93, 1, 0.1);
   }
   .contact-input-error {
     border-color: var(--color-danger) !important;
@@ -66,9 +73,11 @@
       border-color var(--duration-default) var(--easing-in-out),
       box-shadow var(--duration-default) var(--easing-in-out);
   }
-  .contact-phone-wrap:hover { border-color: var(--color-stroke-strong); }
+  .contact-phone-wrap:hover {
+    border-color: var(--color-stroke-strong);
+  }
   .contact-phone-wrap:focus-within {
-    box-shadow: 0 0 0 3px rgba(246, 93, 1, 0.10);
+    box-shadow: 0 0 0 3px rgba(246, 93, 1, 0.1);
   }
   .contact-phone-prefix {
     position: relative;
@@ -97,7 +106,9 @@
     font-size: var(--text-sm);
     outline: none;
   }
-  .contact-phone-input::placeholder { color: var(--color-text-muted); }
+  .contact-phone-input::placeholder {
+    color: var(--color-text-muted);
+  }
 
   /* ── SERVICE CHECKBOX ROW ────────────────────────────────────── */
   .contact-service-row {
@@ -126,7 +137,8 @@
     background-color: var(--color-text-primary);
     color: var(--color-text-inverse);
   }
-  .contact-service-row:hover .contact-service-box:not(.contact-service-box-checked) {
+  .contact-service-row:hover
+    .contact-service-box:not(.contact-service-box-checked) {
     border-color: var(--color-stroke-strong);
   }
   .contact-service-label {
@@ -155,7 +167,7 @@
     background-color: rgba(239, 68, 68, 0.06);
     padding: 0.875rem;
     font-size: var(--text-sm);
-    color: #b91c1c; /* intentional — danger text has no token yet */
+    color: #b91c1c; /* intentional - danger text has no token yet */
   }
 
   /* ── SUBMIT BUTTON ───────────────────────────────────────────── */
@@ -180,11 +192,20 @@
       opacity var(--duration-fast) var(--easing-in-out);
   }
   @media (min-width: 640px) {
-    .contact-submit-btn { font-size: var(--text-base); }
+    .contact-submit-btn {
+      font-size: var(--text-base);
+    }
   }
-  .contact-submit-btn:hover:not(:disabled) { background-color: var(--color-brand-hover); }
-  .contact-submit-btn:active:not(:disabled) { transform: scale(0.99); }
-  .contact-submit-btn:disabled { opacity: 0.7; cursor: not-allowed; }
+  .contact-submit-btn:hover:not(:disabled) {
+    background-color: var(--color-brand-hover);
+  }
+  .contact-submit-btn:active:not(:disabled) {
+    transform: scale(0.99);
+  }
+  .contact-submit-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
 
   /* ── SUCCESS CARD ────────────────────────────────────────────── */
   .contact-success-card {
@@ -200,7 +221,9 @@
     box-shadow: var(--shadow-sm);
   }
   @media (min-width: 640px) {
-    .contact-success-card { padding: 3rem; }
+    .contact-success-card {
+      padding: 3rem;
+    }
   }
   .contact-success-icon {
     display: flex;
@@ -220,7 +243,9 @@
     color: var(--color-text-primary);
   }
   @media (min-width: 640px) {
-    .contact-success-heading { font-size: 1.375rem; }
+    .contact-success-heading {
+      font-size: 1.375rem;
+    }
   }
   .contact-success-body {
     margin-top: 0.625rem;
@@ -230,7 +255,9 @@
     color: var(--color-text-secondary);
   }
   @media (min-width: 640px) {
-    .contact-success-body { font-size: var(--text-base); }
+    .contact-success-body {
+      font-size: var(--text-base);
+    }
   }
   .contact-success-reset-btn {
     margin-top: 1.5rem;
@@ -245,10 +272,11 @@
     font-size: var(--text-sm);
     font-weight: var(--font-weight-semibold);
     color: var(--color-text-inverse);
-    transition:
-      background-color var(--duration-default) var(--easing-in-out);
+    transition: background-color var(--duration-default) var(--easing-in-out);
   }
-  .contact-success-reset-btn:hover { background-color: var(--color-navy-900); }
+  .contact-success-reset-btn:hover {
+    background-color: var(--color-navy-900);
+  }
 
   /* ── INFO PANEL (right column) ───────────────────────────────── */
   .contact-info-section-title {
@@ -272,13 +300,17 @@
     text-decoration: none;
     transition: color var(--duration-fast) var(--easing-in-out);
   }
-  .contact-info-link:hover { color: var(--color-brand); }
+  .contact-info-link:hover {
+    color: var(--color-brand);
+  }
   .contact-info-link-icon {
     flex-shrink: 0;
     color: var(--color-text-secondary);
     transition: color var(--duration-fast) var(--easing-in-out);
   }
-  .contact-info-link:hover .contact-info-link-icon { color: var(--color-brand); }
+  .contact-info-link:hover .contact-info-link-icon {
+    color: var(--color-brand);
+  }
   .contact-info-link-underline {
     text-decoration: underline;
     text-decoration-color: var(--color-stroke-default);
@@ -299,5 +331,4 @@
     transform: translate(2px, -2px);
     color: var(--color-brand);
   }
-
 }

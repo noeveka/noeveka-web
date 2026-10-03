@@ -164,16 +164,16 @@ export function renderNewsletterConfirmationEmail({
     <!-- Body -->
     <div class="content">
       <p class="text">
-        Thanks for subscribing. We'll keep you informed with strategic insights, industry signals, and resources that matter — no noise, no spam.
+        Thanks for subscribing. We'll keep you informed with strategic insights, industry signals, and resources that matter - no noise, no spam.
       </p>
 
       <hr class="divider" />
 
       <p style="font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: #6b7280; margin: 0 0 16px;">What to expect</p>
 
-      <div class="list-item"><span class="bullet"></span><span><strong>Market intelligence</strong> — curated analysis on trends shaping your sector.</span></div>
-      <div class="list-item"><span class="bullet"></span><span><strong>Free resources</strong> — reports, guides, and frameworks, delivered first to subscribers.</span></div>
-      <div class="list-item"><span class="bullet"></span><span><strong>Strategic perspectives</strong> — direct thoughts from our advisory team.</span></div>
+      <div class="list-item"><span class="bullet"></span><span><strong>Market intelligence</strong> - curated analysis on trends shaping your sector.</span></div>
+      <div class="list-item"><span class="bullet"></span><span><strong>Free resources</strong> - reports, guides, and frameworks, delivered first to subscribers.</span></div>
+      <div class="list-item"><span class="bullet"></span><span><strong>Strategic perspectives</strong> - direct thoughts from our advisory team.</span></div>
 
       <hr class="divider" />
 

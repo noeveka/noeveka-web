@@ -4,7 +4,7 @@ export const RESOURCES_CONFIG = {
     heading: "Architecture thinking,",
     headingHighlight: "yours to keep.",
     subtext:
-      "Practical checklists, playbooks, and guides built by enterprise architects — no fluff, no vendor bias. Download free.",
+      "Practical checklists, playbooks, and guides built by enterprise architects - no fluff, no vendor bias. Download free.",
   },
 
   // Grid Section Copy
@@ -13,7 +13,7 @@ export const RESOURCES_CONFIG = {
     heading: "Explore Our Resources",
     subtext:
       "Find practical materials designed to help enterprise data teams architect better, move faster, and cut through vendor noise.",
-    emptyStateText: "No resources in this category yet — check back soon.",
+    emptyStateText: "No resources in this category yet - check back soon.",
     downloadCtaText: "Download Free",
     downloadHoverText: "Download PDF",
     authorName: "Noeveka",
@@ -24,7 +24,14 @@ export const RESOURCES_CONFIG = {
   },
 
   // Filter categories
-  categories: ["All", "Checklist", "Playbook", "Guide", "Template", "Whitepaper"],
+  categories: [
+    "All",
+    "Checklist",
+    "Playbook",
+    "Guide",
+    "Template",
+    "Whitepaper",
+  ],
 
   // Fallback thumbnail
   fallbackThumbnailUrl: "/assets/Databricks-featured.jpg",
@@ -95,7 +102,7 @@ export const RESOURCES_CONFIG = {
       _id: "fallback-6",
       title: "Enterprise Data Strategy Whitepaper",
       description:
-        "The strategic case for treating data as a product — and how enterprise leaders can build platforms that generate business value.",
+        "The strategic case for treating data as a product - and how enterprise leaders can build platforms that generate business value.",
       category: "Whitepaper",
       tech: "strategy",
       pageCount: 32,
@@ -115,7 +122,7 @@ export const RESOURCES_CONFIG = {
     submitText: "Download Now",
     successHeading: "Your download is ready!",
     successSubtext:
-      "Thank you — check your email too, we'll send you a copy. You can unsubscribe anytime.",
+      "Thank you - check your email too, we'll send you a copy. You can unsubscribe anytime.",
     downloadButtonText: "Click here to download",
   },
 } as const;

@@ -15,8 +15,9 @@ export const ABOUT_CONFIG = {
 
     // Background and founder images
     bgImageFallbackUrl: "/assets/about-page/about_page_hero_image.png",
-    bgImageAlt: "Ajay Kumar — Founder & CEO, Noeveka",
-    mobileBgImageFallbackUrl: "/assets/team-pictures/noeveka_founder_picture_2.jpeg",
+    bgImageAlt: "Ajay Kumar - Founder & CEO, Noeveka",
+    mobileBgImageFallbackUrl:
+      "/assets/team-pictures/noeveka_founder_picture_2.jpeg",
 
     // Highlight metrics & credibility tags
     badgeTags: ["Independent Advisory", "Global Architecture", "15+ Yrs Exp"],
@@ -43,7 +44,8 @@ export const ABOUT_CONFIG = {
     initials: "AK",
     title: "Founder & CEO · Enterprise Data & AI Architect",
     company: "NOEVEKA",
-    tagline: "Good architecture is not about the tool. It's about the judgment behind it.",
+    tagline:
+      "Good architecture is not about the tool. It's about the judgment behind it.",
     quoteHighlight: "judgment behind it.",
     bio: [
       "Ajay Kumar is the Founder & CEO of Noeveka, with more than 15 years of experience shaping enterprise data, analytics and architecture across complex global environments.",
@@ -52,10 +54,10 @@ export const ABOUT_CONFIG = {
     ],
     whyFoundedHeading: "Why He Founded Noeveka",
     whyFoundedText:
-      "Noeveka was founded on a simple belief: enterprises need independent, architect-grade thinking before technology decisions. Too many organisations invest in tools without a clear architecture, governance or execution plan — leading to fragmented platforms, higher costs and limited business impact.\n\nAjay founded Noeveka to bridge this gap — bringing together strategy, architecture and hands-on engineering to help organisations build modern, governed and future-ready data and AI capabilities, including the next generation of agentic systems.",
+      "Noeveka was founded on a simple belief: enterprises need independent, architect-grade thinking before technology decisions. Too many organisations invest in tools without a clear architecture, governance or execution plan - leading to fragmented platforms, higher costs and limited business impact.\n\nAjay founded Noeveka to bridge this gap - bringing together strategy, architecture and hands-on engineering to help organisations build modern, governed and future-ready data and AI capabilities, including the next generation of agentic systems.",
     whyFoundedParagraphs: [
-      "Noeveka was founded on a simple belief: enterprises need independent, architect-grade thinking before technology decisions. Too many organisations invest in tools without a clear architecture, governance or execution plan — leading to fragmented platforms, higher costs and limited business impact.",
-      "Ajay founded Noeveka to bridge this gap — bringing together strategy, architecture and hands-on engineering to help organisations build modern, governed and future-ready data and AI capabilities, including the next generation of agentic systems.",
+      "Noeveka was founded on a simple belief: enterprises need independent, architect-grade thinking before technology decisions. Too many organisations invest in tools without a clear architecture, governance or execution plan - leading to fragmented platforms, higher costs and limited business impact.",
+      "Ajay founded Noeveka to bridge this gap - bringing together strategy, architecture and hands-on engineering to help organisations build modern, governed and future-ready data and AI capabilities, including the next generation of agentic systems.",
     ],
     statusBadges: [
       {
@@ -111,7 +113,7 @@ export const ABOUT_CONFIG = {
     ],
     photoFallbackUrl:
       "/assets/about-page/ajay_image_for_founder_section_about_page.jpg",
-    photoAlt: "Ajay Kumar — Founder & CEO, Noeveka",
+    photoAlt: "Ajay Kumar - Founder & CEO, Noeveka",
     linkedinUrl: "https://www.linkedin.com/company/noeveka",
     email: "connect@noeveka.com",
     contactLink: "/contact",
@@ -157,7 +159,7 @@ export const ABOUT_CONFIG = {
     heading: "Architecture thinking,",
     headingHighlight: "yours to keep.",
     subtext:
-      "Practical checklists, playbooks, and guides built by enterprise architects — no fluff, no vendor bias.",
+      "Practical checklists, playbooks, and guides built by enterprise architects - no fluff, no vendor bias.",
     cardLinkText: "Get Free Download",
     cardLinkHref: "/resources",
     ctaText: "Explore All Free Resources",
@@ -167,7 +169,7 @@ export const ABOUT_CONFIG = {
   // Mission strip (Dark Manifesto)
   mission: {
     statement:
-      "To make world-class data architecture thinking accessible to every enterprise — independent, practical, and built for impact.",
+      "To make world-class data architecture thinking accessible to every enterprise - independent, practical, and built for impact.",
     pillars: [
       {
         number: "01",
@@ -182,7 +184,7 @@ export const ABOUT_CONFIG = {
       {
         number: "03",
         title: "Outcome-Driven",
-        desc: "Every engagement is tied to measurable business outcomes — cost reduction, platform clarity, or team capability.",
+        desc: "Every engagement is tied to measurable business outcomes - cost reduction, platform clarity, or team capability.",
       },
     ],
   },
@@ -219,7 +221,7 @@ export const ABOUT_CONFIG = {
     eyebrow: "Our Journey",
     heading: "How Noeveka took shape",
     subtext:
-      "The evolution of an independent architecture philosophy — shaped by enterprise realities, global perspectives, and a commitment to practical impact.",
+      "The evolution of an independent architecture philosophy - shaped by enterprise realities, global perspectives, and a commitment to practical impact.",
     milestones: [
       {
         year: "2020",
@@ -297,7 +299,7 @@ export const ABOUT_CONFIG = {
       },
       {
         year: "Today",
-        event: "Noeveka — Architecting the AI Era",
+        event: "Noeveka - Architecting the AI Era",
         detail:
           "An independent enterprise Data & AI advisory, helping organizations turn AI ambition into real business impact.",
       },
@@ -307,17 +309,24 @@ export const ABOUT_CONFIG = {
   // Positioning stats for the orange band
   stats: [
     { value: "15+", label: "Years", sub: "Enterprise architecture experience" },
-    { value: "5K+", label: "Leaders", sub: "Trained across global enterprises" },
+    {
+      value: "5K+",
+      label: "Leaders",
+      sub: "Trained across global enterprises",
+    },
     { value: "100%", label: "Independent", sub: "Zero vendor reseller bias" },
-    { value: "4", label: "Focus Areas", sub: "Architecture · AI · Governance · Transformation" },
+    {
+      value: "4",
+      label: "Focus Areas",
+      sub: "Architecture · AI · Governance · Transformation",
+    },
   ],
 
   // Final Conversion CTA Section
   cta: {
     headingLine1: "Build a data foundation that works",
     headingLine2: "with your enterprise, not against it.",
-    body:
-      "Noeveka helps enterprise leaders simplify complexity, strengthen architecture and make better Data & AI decisions without unnecessary reinvention.",
+    body: "Noeveka helps enterprise leaders simplify complexity, strengthen architecture and make better Data & AI decisions without unnecessary reinvention.",
     primaryCtaText: "Start a Conversation →",
     primaryCtaLink: "/contact",
     secondaryCtaText: "Explore Our Focus Areas",

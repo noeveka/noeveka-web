@@ -1,10 +1,9 @@
 /* COMMON COMPONENTS CLASSES
    Navbar, Footer, Newsletter Strip, Global Layout Chrome.
-   All colours and layout metrics use design tokens — zero hardcoded hex.
+   All colours and layout metrics use design tokens - zero hardcoded hex.
    ─────────────────────────────────────────────────────────────── */
 
 @layer components {
-
   /* ── 1. SITE NAVBAR ─────────────────────────────────────────── */
   .site-navbar {
     position: fixed;
@@ -176,7 +175,6 @@
   .navbar-mobile-cta:hover {
     background-color: var(--color-brand-hover);
   }
-
 
   /* ── 2. NEWSLETTER STRIP ─────────────────────────────────────── */
   .newsletter-strip-section {
@@ -367,7 +365,6 @@
     line-height: 1.2;
   }
 
-
   /* ── 3. SITE FOOTER ─────────────────────────────────────────── */
   .footer-wrapper {
     position: relative;
@@ -383,7 +380,11 @@
     right: 0;
     height: 400px;
     width: 400px;
-    background: radial-gradient(circle at 100% 0%, rgba(246, 93, 1, 0.05) 0%, transparent 65%);
+    background: radial-gradient(
+      circle at 100% 0%,
+      rgba(246, 93, 1, 0.05) 0%,
+      transparent 65%
+    );
   }
 
   .footer-watermark {
@@ -575,5 +576,4 @@
   .footer-bottom-link:hover {
     color: var(--color-brand);
   }
-
 }

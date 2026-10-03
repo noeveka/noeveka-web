@@ -70,7 +70,7 @@ const styles = {
   eyebrowText: "about-eyebrow-text",
   eyebrowLine: "about-eyebrow-line",
   heading: "about-narrative-heading text-2xl sm:text-3xl lg:text-[38px]",
-  subtext: "mt-2.5 max-w-xl text-xs sm:text-sm leading-relaxed" ,
+  subtext: "mt-2.5 max-w-xl text-xs sm:text-sm leading-relaxed",
   timelineRoot: "relative mx-auto max-w-[880px] w-full",
   svgPath: "pointer-events-none absolute inset-0 hidden h-full w-full overflow-visible md:block",
   mobileVerticalLine: "pointer-events-none absolute top-3 bottom-3 left-[12px] w-0 border-l-2 border-dashed border-brand/70 md:hidden",
@@ -189,7 +189,7 @@ export default function AboutJourney({
               const isEven = index % 2 === 0;
               const place = item.place || item.location || "";
               const rawHeadline = item.headline || item.title || "";
-              const headline = rawHeadline.replace(/\s*—\s*/g, ": ");
+              const headline = rawHeadline.replace(/\s*-\s*/g, ": ");
               const graphic = resolveGraphic(item);
 
               return (
@@ -223,18 +223,16 @@ export default function AboutJourney({
 
                   {/* Text details */}
                   <div
-                    className={`${styles.textContainer} ${
-                      isEven ? styles.textArtLeft : styles.textArtRight
-                    }`}
+                    className={`${styles.textContainer} ${isEven ? styles.textArtLeft : styles.textArtRight
+                      }`}
                   >
                     <p className={styles.yearText}>{item.year}</p>
                     {place && <h3 className={styles.placeText} style={{ color: "var(--color-text-primary)" }}>{place}</h3>}
                     {headline && <p className={styles.headlineText} style={{ color: "var(--color-text-secondary)" }}>{headline}</p>}
                     {showDescriptions && item.description && (
                       <p
-                        className={`${styles.descText} ${
-                          isEven ? styles.descArtLeft : styles.descArtRight
-                        }`}
+                        className={`${styles.descText} ${isEven ? styles.descArtLeft : styles.descArtRight
+                          }`}
                         style={{ color: "var(--color-text-muted)" }}
                       >
                         {item.description}
@@ -253,9 +251,8 @@ export default function AboutJourney({
                         delay: index * 0.08 + 0.12,
                         ease: [0.16, 1, 0.3, 1],
                       }}
-                      className={`${styles.artContainer} ${
-                        isEven ? styles.artLeft : styles.artRight
-                      }`}
+                      className={`${styles.artContainer} ${isEven ? styles.artLeft : styles.artRight
+                        }`}
                       aria-hidden="true"
                     >
                       <img

@@ -1,7 +1,7 @@
-import { defineField, defineType } from 'sanity'
+import {defineField, defineType} from 'sanity'
 
 /**
- * resource — Sanity document type
+ * resource - Sanity document type
  *
  * Represents a downloadable PDF resource (e.g. checklists, playbooks, guides).
  * The web app shows a thumbnail image and gates the download behind a simple
@@ -15,20 +15,19 @@ export const resource = defineType({
   type: 'document',
 
   groups: [
-    { name: 'content',  title: '1 · Content' },
-    { name: 'asset',    title: '2 · PDF & Thumbnail' },
-    { name: 'meta',     title: '3 · Display & SEO' },
+    {name: 'content', title: '1 · Content'},
+    {name: 'asset', title: '2 · PDF & Thumbnail'},
+    {name: 'meta', title: '3 · Display & SEO'},
   ],
 
   fields: [
-
     // ─── 1. CONTENT ───────────────────────────────────────────────────────────
     defineField({
       name: 'title',
       title: 'Resource Title',
       type: 'string',
       group: 'content',
-      description: 'e.g. "Power BI Health Checklist" — shown on the card and modal.',
+      description: 'e.g. "Power BI Health Checklist" - shown on the card and modal.',
       validation: (Rule) => Rule.required(),
     }),
 
@@ -50,11 +49,11 @@ export const resource = defineType({
       description: 'Used for filtering. e.g. "Checklist", "Playbook", "Guide", "Template".',
       options: {
         list: [
-          { title: 'Checklist',  value: 'Checklist' },
-          { title: 'Playbook',   value: 'Playbook' },
-          { title: 'Guide',      value: 'Guide' },
-          { title: 'Template',   value: 'Template' },
-          { title: 'Whitepaper', value: 'Whitepaper' },
+          {title: 'Checklist', value: 'Checklist'},
+          {title: 'Playbook', value: 'Playbook'},
+          {title: 'Guide', value: 'Guide'},
+          {title: 'Template', value: 'Template'},
+          {title: 'Whitepaper', value: 'Whitepaper'},
         ],
       },
     }),
@@ -103,12 +102,10 @@ export const resource = defineType({
       title: 'Thumbnail Image',
       type: 'image',
       group: 'asset',
-      options: { hotspot: true },
+      options: {hotspot: true},
       description:
         'Cover image shown on the resource card. If left blank, the web app uses a fallback image from resources.config.ts.',
-      fields: [
-        defineField({ name: 'alt', title: 'Alt Text', type: 'string' }),
-      ],
+      fields: [defineField({name: 'alt', title: 'Alt Text', type: 'string'})],
     }),
 
     // ─── 3. DISPLAY & SEO ─────────────────────────────────────────────────────
@@ -132,19 +129,18 @@ export const resource = defineType({
       description: 'Displayed on the card as the publish date.',
       initialValue: () => new Date().toISOString(),
     }),
-
   ],
 
   orderings: [
     {
       title: 'Display Order',
       name: 'orderAsc',
-      by: [{ field: 'order', direction: 'asc' }],
+      by: [{field: 'order', direction: 'asc'}],
     },
     {
       title: 'Newest First',
       name: 'publishedAtDesc',
-      by: [{ field: 'publishedAt', direction: 'desc' }],
+      by: [{field: 'publishedAt', direction: 'desc'}],
     },
   ],
 
@@ -154,7 +150,7 @@ export const resource = defineType({
       subtitle: 'category',
       media: 'thumbnail',
     },
-    prepare({ title, subtitle, media }) {
+    prepare({title, subtitle, media}) {
       return {
         title: title ?? 'Untitled Resource',
         subtitle: subtitle ?? 'No category',

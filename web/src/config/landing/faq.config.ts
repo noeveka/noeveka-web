@@ -1,5 +1,5 @@
 /**
- * faq.config.ts — static fallback data for the Faq section.
+ * faq.config.ts - static fallback data for the Faq section.
  */
 
 export const FAQ_CONFIG = {
@@ -17,7 +17,7 @@ export const FAQ_CONFIG = {
     {
       question: "Do you offer customised architecture solutions for our stack?",
       answer:
-        "Yes — every engagement starts with a thorough discovery of your existing technology landscape, constraints, and goals. We never propose generic blueprints; every recommendation is tailored to your specific platform, team size, and budget.",
+        "Yes - every engagement starts with a thorough discovery of your existing technology landscape, constraints, and goals. We never propose generic blueprints; every recommendation is tailored to your specific platform, team size, and budget.",
     },
     {
       question: "What types of services does Noeveka provide?",
@@ -30,9 +30,10 @@ export const FAQ_CONFIG = {
         "Engagements range from a focused 2-week architecture review sprint to a 3–6 month strategic advisory retainer. Workshop bootcamps are typically 1–2 weekend sessions. We'll recommend the right format after an initial discovery call.",
     },
     {
-      question: "Is Noeveka vendor-neutral, or do you recommend specific platforms?",
+      question:
+        "Is Noeveka vendor-neutral, or do you recommend specific platforms?",
       answer:
-        "We are fully independent and vendor-unbiased. We have deep expertise across Microsoft Fabric, Databricks, Snowflake, dbt, and other leading platforms — and we recommend only what genuinely fits your requirements, not what benefits a partner programme.",
+        "We are fully independent and vendor-unbiased. We have deep expertise across Microsoft Fabric, Databricks, Snowflake, dbt, and other leading platforms - and we recommend only what genuinely fits your requirements, not what benefits a partner programme.",
     },
   ],
 } as const;

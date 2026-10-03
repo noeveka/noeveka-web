@@ -1,5 +1,5 @@
 /**
- * who-we-are.config.ts — static fallback data for the WhoWeAre / About section.
+ * who-we-are.config.ts - static fallback data for the WhoWeAre / About section.
  */
 
 export const WHO_WE_ARE_CONFIG = {
@@ -13,7 +13,7 @@ export const WHO_WE_ARE_CONFIG = {
   founderRole: "Founder & CEO | Enterprise Data & AI Architect",
   founderPhotoFallbackUrl:
     "/assets/team-pictures/founder_image_about_us_section.jpeg",
-  founderPhotoAlt: "Ajay Kumar — Founder & CEO, Noeveka",
+  founderPhotoAlt: "Ajay Kumar - Founder & CEO, Noeveka",
 
   statBadgeValue: "15+",
   statBadgeLabel: "Enterprise Data & Architecture Experience",
@@ -22,5 +22,12 @@ export const WHO_WE_ARE_CONFIG = {
   ratingLabel: undefined as string | undefined,
 
   skillsHeading: "Core Expertise",
-  skills: ["Architecture", "Microsoft Fabric", "Databricks", "FinOps", "AI Strategy", "Governance"],
+  skills: [
+    "Architecture",
+    "Microsoft Fabric",
+    "Databricks",
+    "FinOps",
+    "AI Strategy",
+    "Governance",
+  ],
 } as const;

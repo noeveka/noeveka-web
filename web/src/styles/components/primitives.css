@@ -46,7 +46,7 @@
     font-size: var(--text-h3);
   }
 
-  /* Primary — max one per view */
+  /* Primary - max one per view */
   .btn-primary {
     background-color: var(--btn-primary-bg);
     color: var(--btn-primary-text);
@@ -63,7 +63,7 @@
     box-shadow: var(--shadow-focus);
   }
 
-  /* Secondary — default for non-primary actions */
+  /* Secondary - default for non-primary actions */
   .btn-secondary {
     background-color: var(--btn-secondary-bg);
     color: var(--btn-secondary-text);
@@ -80,7 +80,7 @@
     box-shadow: var(--shadow-focus-neutral);
   }
 
-  /* Ghost — tertiary actions inside cards/toolbars */
+  /* Ghost - tertiary actions inside cards/toolbars */
   .btn-ghost {
     background-color: transparent;
     color: var(--btn-ghost-text);
@@ -95,7 +95,7 @@
     box-shadow: var(--shadow-focus-neutral);
   }
 
-  /* Destructive — delete / disconnect / irreversible only */
+  /* Destructive - delete / disconnect / irreversible only */
   .btn-danger {
     background-color: var(--btn-danger-bg);
     color: var(--btn-danger-text);
@@ -264,7 +264,7 @@
   }
 
   /* Badges & chips */
-  /* Status badge — for connected/active/warning labels */
+  /* Status badge - for connected/active/warning labels */
   .badge {
     display: inline-flex;
     align-items: center;
@@ -297,7 +297,7 @@
     color: var(--color-text-secondary);
   }
 
-  /* Category chip — clickable filter pill */
+  /* Category chip - clickable filter pill */
   .chip {
     display: inline-flex;
     align-items: center;
@@ -501,7 +501,7 @@
   .tooltip {
     background-color: var(--tooltip-bg);
     color: var(--tooltip-text);
-    font-size: var(--tooltip-font-size); /* 11px — uses text-micro via var */
+    font-size: var(--tooltip-font-size); /* 11px - uses text-micro via var */
     font-weight: 400;
     padding: var(--tooltip-padding); /* 6px 10px */
     border-radius: var(--tooltip-radius); /* 4px */

@@ -62,7 +62,7 @@ import {
 
 // Icon map
 // One place to add, remove, or swap icons across the entire app.
-// To change an icon globally — update it here. No component changes needed.
+// To change an icon globally - update it here. No component changes needed.
 
 export const iconMap = {
   // navigation

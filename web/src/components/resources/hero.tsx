@@ -250,7 +250,7 @@ export default function ResourcesHero({
               transition={{ duration: 0.4, delay: 0.24 }}
               className="flex flex-wrap items-center justify-center gap-3"
             >
-              {/* Primary — brand filled pill */}
+              {/* Primary - brand filled pill */}
               <a
                 href={ctaPrimaryLink}
                 className="inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-[14px] font-bold transition-all hover:-translate-y-0.5"
@@ -264,7 +264,7 @@ export default function ResourcesHero({
                 {ctaPrimaryText}
               </a>
 
-              {/* Secondary — surface pill */}
+              {/* Secondary - surface pill */}
               <Link
                 to={ctaSecondaryLink}
                 className="inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-[14px] font-bold transition-all hover:-translate-y-0.5"

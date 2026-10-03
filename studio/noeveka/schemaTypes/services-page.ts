@@ -1,28 +1,28 @@
-import { defineField, defineType } from 'sanity'
+import {defineField, defineType} from 'sanity'
 
 /**
- * servicesPage — Sanity document type
+ * servicesPage - Sanity document type
  *
  * Mirrors the structure of services.config.ts exactly so that every field
  * edited here maps 1-to-1 to a ?? SERVICES_CONFIG fallback in the web app.
  *
  * Sections (tabs):
- *   1. Hero & Focus Areas — Top centered copy + 4 core service areas
- *   2. Impact Principles  — Split section with 3 principles + isometric matrix
- *   3. Engagement Models  — 4 flexible engagement steps with process ball path
- *   4. Industries & Quote — Trusted sectors + founder architecture quote
- *   5. Conversion CTA     — Minimal light mode CTA linking to contact
+ *   1. Hero & Focus Areas - Top centered copy + 4 core service areas
+ *   2. Impact Principles  - Split section with 3 principles + isometric matrix
+ *   3. Engagement Models  - 4 flexible engagement steps with process ball path
+ *   4. Industries & Quote - Trusted sectors + founder architecture quote
+ *   5. Conversion CTA     - Minimal light mode CTA linking to contact
  */
 export const servicesPage = defineType({
   name: 'servicesPage',
   title: 'Services Page',
   type: 'document',
   groups: [
-    { name: 'hero', title: '1 · Hero & Focus Areas' },
-    { name: 'impact', title: '2 · Impact Principles' },
-    { name: 'engagement', title: '3 · Engagement Models' },
-    { name: 'industries', title: '4 · Industries & Quote' },
-    { name: 'cta', title: '5 · Final CTA' },
+    {name: 'hero', title: '1 · Hero & Focus Areas'},
+    {name: 'impact', title: '2 · Impact Principles'},
+    {name: 'engagement', title: '3 · Engagement Models'},
+    {name: 'industries', title: '4 · Industries & Quote'},
+    {name: 'cta', title: '5 · Final CTA'},
   ],
 
   fields: [
@@ -42,19 +42,19 @@ export const servicesPage = defineType({
         }),
         defineField({
           name: 'headingLine1',
-          title: 'Heading — Line 1',
+          title: 'Heading - Line 1',
           type: 'string',
           initialValue: 'Four Focus Areas.',
         }),
         defineField({
           name: 'headingLine2',
-          title: 'Heading — Line 2',
+          title: 'Heading - Line 2',
           type: 'string',
           initialValue: 'Real Business Outcomes.',
         }),
         defineField({
           name: 'headingHighlight',
-          title: 'Heading — Highlight (Brand Orange)',
+          title: 'Heading - Highlight (Brand Orange)',
           type: 'string',
           initialValue: 'Real Business Outcomes.',
         }),
@@ -64,7 +64,7 @@ export const servicesPage = defineType({
           type: 'text',
           rows: 3,
           initialValue:
-            'We solve the most important Data & AI challenges for modern enterprises — with architecture at the core.',
+            'We solve the most important Data & AI challenges for modern enterprises - with architecture at the core.',
         }),
         defineField({
           name: 'ctaPrimaryText',
@@ -125,7 +125,7 @@ export const servicesPage = defineType({
               name: 'bullets',
               title: 'Key Focus Bullets / Capabilities',
               type: 'array',
-              of: [{ type: 'string' }],
+              of: [{type: 'string'}],
             }),
             defineField({
               name: 'visualType',
@@ -133,10 +133,10 @@ export const servicesPage = defineType({
               type: 'string',
               options: {
                 list: [
-                  { title: 'Multi-Tier Stack (01 Architecture)', value: 'stack' },
-                  { title: 'Agentic Network Nodes (02 AI Agents)', value: 'agents' },
-                  { title: 'Governance Shield (03 Risk & Control)', value: 'governance' },
-                  { title: 'Transformation Curve (04 Trajectory)', value: 'transformation' },
+                  {title: 'Multi-Tier Stack (01 Architecture)', value: 'stack'},
+                  {title: 'Agentic Network Nodes (02 AI Agents)', value: 'agents'},
+                  {title: 'Governance Shield (03 Risk & Control)', value: 'governance'},
+                  {title: 'Transformation Curve (04 Trajectory)', value: 'transformation'},
                 ],
               },
               initialValue: 'stack',
@@ -159,7 +159,7 @@ export const servicesPage = defineType({
               title: 'title',
               subtitle: 'number',
             },
-            prepare({ title, subtitle }) {
+            prepare({title, subtitle}) {
               return {
                 title: title || 'Untitled Service',
                 subtitle: subtitle ? `Step ${subtitle}` : '',
@@ -176,7 +176,8 @@ export const servicesPage = defineType({
       title: 'Impact Principles Section',
       type: 'object',
       group: 'impact',
-      description: 'Split section: Value proposition + Isometric Matrix visual on left, 3 principles on right.',
+      description:
+        'Split section: Value proposition + Isometric Matrix visual on left, 3 principles on right.',
       fields: [
         defineField({
           name: 'heading',
@@ -363,13 +364,13 @@ export const servicesPage = defineType({
       fields: [
         defineField({
           name: 'headingPart',
-          title: 'Heading — Plain text',
+          title: 'Heading - Plain text',
           type: 'string',
           initialValue: "Ready to architect your enterprise's ",
         }),
         defineField({
           name: 'headingHighlight',
-          title: 'Heading — Highlight (Orange)',
+          title: 'Heading - Highlight (Orange)',
           type: 'string',
           initialValue: 'data future?',
         }),
@@ -379,7 +380,7 @@ export const servicesPage = defineType({
           type: 'text',
           rows: 3,
           initialValue:
-            'Book a free strategy call with Ajay Kumar and get an independent view of your platform fit, cost, and architecture roadmap — at no cost.',
+            'Book a free strategy call with Ajay Kumar and get an independent view of your platform fit, cost, and architecture roadmap - at no cost.',
         }),
         defineField({
           name: 'primaryCtaText',

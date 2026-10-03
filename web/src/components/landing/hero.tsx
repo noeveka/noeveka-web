@@ -22,7 +22,7 @@ interface HeroProps {
   subtitle?: string;
   primaryCtaText?: string;
   primaryCtaLink?: string;
-  // Retained for backward-compat — not rendered
+  // Retained for backward-compat - not rendered
   trustBadgeRating?: string;
   trustBadgeDescriptor?: string;
   secondaryCtaText?: string;
@@ -47,7 +47,7 @@ export default function Hero({
 }: HeroProps) {
   const kicker = eyebrow || HERO_CONFIG.eyebrow;
 
-  // Resolve background images — Sanity takes priority, fallback to local statics
+  // Resolve background images - Sanity takes priority, fallback to local statics
   const largeSrc = bgImage?.asset
     ? urlFor(bgImage).width(1800).url()
     : LARGE_BG;
@@ -76,19 +76,19 @@ export default function Hero({
       {/* ── Background: portrait on phones, landscape on tablet/desktop ── */}
       <img
         src={mobileSrc}
-        alt="Noeveka — Enterprise Data & AI Architecture"
+        alt="Noeveka - Enterprise Data & AI Architecture"
         className="absolute inset-0 h-full w-full object-cover object-center md:hidden"
         fetchPriority="high"
       />
       <img
         src={largeSrc}
-        alt="Noeveka — Enterprise Data & AI Architecture"
+        alt="Noeveka - Enterprise Data & AI Architecture"
         className="absolute inset-0 hidden h-full w-full object-cover md:block"
         style={{ objectPosition: "65% center" }}
         fetchPriority="high"
       />
 
-      {/* Mobile overlay — CSS class drives the gradient token */}
+      {/* Mobile overlay - CSS class drives the gradient token */}
       <div className="lp-hero-overlay-mobile md:hidden" />
 
       {/* Tablet/Desktop overlay */}

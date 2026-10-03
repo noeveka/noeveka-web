@@ -71,7 +71,7 @@ export default function Testimonials({
           {/* Section Header */}
           <div className="mb-12 text-center sm:mb-16">
             <motion.div {...fu()} className="mb-3 inline-flex items-center gap-2">
-              <span className="text-sm font-semibold text-brand select-none">—</span>
+              <span className="text-sm font-semibold text-brand select-none">-</span>
               <span className="lp-eyebrow">{eyebrow}</span>
             </motion.div>
 
@@ -108,11 +108,10 @@ export default function Testimonials({
                   <motion.div
                     key={_id}
                     {...fs(0.06 + i * 0.1)}
-                    className={`testimonial-card ${
-                      isLastAndOdd
+                    className={`testimonial-card ${isLastAndOdd
                         ? "md:col-span-2 md:mx-auto md:w-full md:max-w-xl lg:col-span-1 lg:max-w-none"
                         : ""
-                    }`}
+                      }`}
                   >
                     {/* Top Row: Quote Badge & Category Tag */}
                     <div className="mb-5 flex items-center justify-between gap-3 sm:mb-6">

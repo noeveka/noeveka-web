@@ -1,10 +1,9 @@
 /* RESOURCES PAGE COMPONENT CLASSES
    Resource grid, filter pills, resource card, download modal,
-   cover graphic. All colours use design tokens — no hardcoded hex.
+   cover graphic. All colours use design tokens - no hardcoded hex.
    ─────────────────────────────────────────────────────────────── */
 
 @layer components {
-
   /* ── RESOURCE GRID SECTION ───────────────────────────────────── */
   .resource-grid-section {
     background-color: var(--color-bg-subtle);
@@ -153,7 +152,9 @@
     cursor: pointer;
     transition: background-color var(--duration-fast) var(--easing-in-out);
   }
-  .dl-modal-close-btn:hover { background-color: var(--color-stroke-default); }
+  .dl-modal-close-btn:hover {
+    background-color: var(--color-stroke-default);
+  }
 
   /* Resource preview strip inside modal */
   .dl-modal-preview {
@@ -203,7 +204,11 @@
   }
 
   /* Modal form inputs */
-  .dl-modal-field { display: flex; flex-direction: column; gap: 0.25rem; }
+  .dl-modal-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
   .dl-modal-label {
     font-size: 12px;
     font-weight: var(--font-weight-semibold);
@@ -220,8 +225,12 @@
     color: var(--color-text-primary);
     transition: border-color var(--duration-fast) var(--easing-in-out);
   }
-  .dl-modal-input:focus { border-color: var(--color-brand); }
-  .dl-modal-input-error { border-color: var(--color-danger) !important; }
+  .dl-modal-input:focus {
+    border-color: var(--color-brand);
+  }
+  .dl-modal-input-error {
+    border-color: var(--color-danger) !important;
+  }
 
   /* Consent row */
   .dl-modal-consent {
@@ -247,7 +256,7 @@
     color: var(--color-danger);
   }
 
-  /* Modal submit button — reuses .btn-hero but full-width + different radius */
+  /* Modal submit button - reuses .btn-hero but full-width + different radius */
   .dl-modal-submit-btn {
     margin-top: 0.25rem;
     display: inline-flex;
@@ -273,7 +282,10 @@
     background-color: var(--color-brand-hover);
     transform: translateY(-1px);
   }
-  .dl-modal-submit-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+  .dl-modal-submit-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
 
   /* Modal success state */
   .dl-modal-success-icon {
@@ -283,7 +295,7 @@
     align-items: center;
     justify-content: center;
     border-radius: var(--radius-full);
-    background-color: rgba(5, 150, 105, 0.10);
+    background-color: rgba(5, 150, 105, 0.1);
     color: #059669;
   }
   .dl-modal-success-heading {
@@ -319,7 +331,10 @@
     background-color: var(--color-brand-hover);
     transform: translateY(-1px);
   }
-  .dl-modal-download-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+  .dl-modal-download-btn:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
 
   /* Download status toast */
   .dl-status-toast {
@@ -334,10 +349,10 @@
   .dl-status-toast-downloading {
     background-color: rgba(246, 93, 1, 0.08);
     color: var(--color-brand);
-    border: 1px solid rgba(246, 93, 1, 0.20);
+    border: 1px solid rgba(246, 93, 1, 0.2);
   }
   .dl-status-toast-done {
-    background-color: rgba(5, 150, 105, 0.10);
+    background-color: rgba(5, 150, 105, 0.1);
     color: #059669;
     border: 1px solid rgba(5, 150, 105, 0.25);
   }
@@ -359,7 +374,9 @@
     opacity: 0;
     transition: opacity var(--duration-fast) var(--easing-in-out);
   }
-  .group:hover .resources-badge-tooltip { opacity: 1; }
+  .group:hover .resources-badge-tooltip {
+    opacity: 1;
+  }
 
   /* ── HERO ARC NODE DOTS ──────────────────────────────────────── */
   .resources-arc-node {
@@ -374,7 +391,9 @@
     display: none;
   }
   @media (min-width: 1024px) {
-    .resources-arc-node { display: block; }
+    .resources-arc-node {
+      display: block;
+    }
   }
 
   /* ── RESOURCE COVER HOVER BUTTON ────────────────────────────── */
@@ -391,5 +410,4 @@
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
     transition: transform var(--duration-default) var(--easing-in-out);
   }
-
 }
