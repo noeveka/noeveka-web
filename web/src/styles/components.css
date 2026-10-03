@@ -12,3 +12,4 @@
 @import "./components/contact.css"; /* Contact form inputs, channel links, submit btn, success card */
 @import "./components/resources.css"; /* Resource grid, filter pills, cards, download modal           */
 @import "./components/common.css"; /* Navbar, footer, newsletter strip, global layout chrome       */
+@import "./components/service-detail.css"; /* Service detail hero, challenge, bento, lens, timeline, etc.  */

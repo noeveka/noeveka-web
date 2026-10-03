@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from "react";
 import { Link } from "react-router";
 import { motion } from "framer-motion";
-import { LucideIcon } from "@/components/lucide-icons";
+import { LucideIcon, lucideIconRegistry } from "@/components/lucide-icons";
 import { fu, fs } from "@/lib/motion";
 import type { ServiceDetailWhatWeDo } from "@/types/service-detail.types";
 
@@ -151,26 +151,26 @@ export default function ServiceWhatWeDo({ whatWeDo }: ServiceWhatWeDoProps) {
   };
 
   return (
-    <section id="what-we-do" className="relative bg-white py-16 sm:py-20 lg:py-24 selection:bg-[#F65D01]/15 overflow-hidden">
+    <section id="what-we-do" className="relative py-16 sm:py-20 lg:py-24 selection:bg-[#F65D01]/15 overflow-hidden" style={{ backgroundColor: "var(--color-bg-surface)" }}>
       <div className="lp-container lp-px mx-auto">
         {/* Header */}
         <div className="max-w-3xl mb-10 sm:mb-14 lg:mb-16">
-          <motion.div {...fu(0.04)} className="flex items-center gap-2 mb-3">
-            <span className="w-6 h-[2px] bg-[#F65D01] inline-block" />
-            <span className="text-[11.5px] font-bold tracking-[0.2em] uppercase text-[#F65D01]">
+          <motion.div {...fu(0.04)} className="service-section-eyebrow mb-3">
+            <span className="service-section-eyebrow-bar" />
+            <span className="service-section-eyebrow-text">
               {whatWeDo.eyebrow || "What We Do"}
             </span>
           </motion.div>
           <motion.h2
             {...fu(0.08)}
-            className="text-2xl sm:text-3xl lg:text-4xl font-extrabold tracking-tight text-[#161922] mb-4 leading-[1.2]"
+            className="service-section-heading mb-4"
           >
             {whatWeDo.heading}
           </motion.h2>
           {whatWeDo.subtext && (
             <motion.p
               {...fu(0.12)}
-              className="text-[15px] sm:text-[16px] leading-relaxed text-[#555D6E] font-normal"
+              className="service-section-subtext"
             >
               {whatWeDo.subtext}
             </motion.p>
@@ -186,30 +186,29 @@ export default function ServiceWhatWeDo({ whatWeDo }: ServiceWhatWeDoProps) {
               <motion.div
                 key={idx}
                 {...fs(0.06 + idx * 0.05)}
-                className={`group relative flex flex-col justify-between rounded-2xl bg-white border border-neutral-200/80 p-6 sm:p-7 ${
-                  isWide ? "lg:p-8" : "lg:p-7"
-                } shadow-[0_4px_20px_rgba(0,0,0,0.03)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_16px_36px_rgba(0,0,0,0.07)] hover:border-[#F65D01]/30 overflow-hidden md:col-span-1 ${spanClass}`}
+                className={`group service-bento-card ${isWide ? "lg:p-8" : "lg:p-7"} md:col-span-1 ${spanClass}`}
               >
                 {/* Subtle ambient decorative gradient on hover */}
                 <div
-                  className="pointer-events-none absolute -right-14 -top-14 h-40 w-40 rounded-full bg-[#F65D01]/5 blur-2xl transition-all duration-500 group-hover:bg-[#F65D01]/10 group-hover:scale-125"
+                  className="pointer-events-none absolute -right-14 -top-14 h-40 w-40 rounded-full blur-2xl transition-all duration-500 group-hover:scale-125"
+                  style={{ backgroundColor: "rgba(246, 93, 1, 0.05)" }}
                   aria-hidden="true"
                 />
 
                 <div className="relative z-10">
                   {/* Icon & Index Pill */}
                   <div className="flex items-center justify-between mb-5">
-                    <div className="w-12 h-12 rounded-xl bg-[#FFF0E6] border border-[#F65D01]/10 flex items-center justify-center text-[#F65D01] transition-all duration-300 group-hover:scale-105 group-hover:bg-[#F65D01] group-hover:text-white group-hover:shadow-[0_4px_16px_rgba(246,93,1,0.25)]">
+                    <div className="service-bento-icon-wrap">
                       <LucideIcon name={item.icon} fallback="layers" className="w-6 h-6 transition-transform duration-300 group-hover:scale-110" />
                     </div>
-                    <span className="text-[11px] font-mono font-semibold tracking-wider text-neutral-400 bg-neutral-100/90 px-2.5 py-1 rounded-full group-hover:text-[#F65D01] group-hover:bg-[#FFF0E6] transition-colors duration-300">
+                    <span className="service-bento-index-pill">
                       {String(idx + 1).padStart(2, "0")}
                     </span>
                   </div>
 
                   {/* Title */}
                   <h3
-                    className={`font-bold text-[#161922] leading-snug mb-3 tracking-tight transition-colors duration-200 group-hover:text-[#F65D01] ${
+                    className={`service-bento-title ${
                       isWide ? "text-[18px] sm:text-[19px] lg:text-[20px]" : "text-[17px] sm:text-[18px]"
                     }`}
                   >
@@ -217,19 +216,19 @@ export default function ServiceWhatWeDo({ whatWeDo }: ServiceWhatWeDoProps) {
                   </h3>
 
                   {/* Description */}
-                  <p className="text-[13.5px] sm:text-[14px] text-[#64748B] leading-relaxed mb-6 font-normal">
+                  <p className="service-bento-desc">
                     {item.description}
                   </p>
                 </div>
 
                 {/* Link CTA */}
-                <div className="relative z-10 pt-4 border-t border-neutral-100">
+                <div className="relative z-10 pt-4" style={{ borderTop: "1px solid var(--color-stroke-default)" }}>
                   <Link
                     to={item.linkUrl || "/contact"}
-                    className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-[#F65D01] transition-all duration-200 group-hover:translate-x-1"
+                    className="service-bento-link"
                   >
                     <span>{item.linkText || "Learn More"}</span>
-                    <LucideIcon name="arrow-right" className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1" />
+                    <LucideIcon name={lucideIconRegistry.ArrowRight} className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-1" />
                   </Link>
                 </div>
               </motion.div>
@@ -253,45 +252,46 @@ export default function ServiceWhatWeDo({ whatWeDo }: ServiceWhatWeDoProps) {
             {whatWeDo.items.map((item, idx) => (
               <div
                 key={idx}
-                className="snap-center shrink-0 w-[84vw] max-w-[320px] flex flex-col justify-between rounded-2xl bg-white border border-neutral-200/90 p-6 shadow-[0_4px_20px_rgba(0,0,0,0.04)] relative overflow-hidden transition-all duration-300"
+                className="service-bento-card snap-center shrink-0 w-[84vw] max-w-[320px] transition-all duration-300"
               >
                 {/* Subtle soft orange glow */}
                 <div
-                  className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full bg-[#F65D01]/5 blur-xl"
+                  className="pointer-events-none absolute -right-10 -top-10 h-32 w-32 rounded-full blur-xl"
+                  style={{ backgroundColor: "rgba(246, 93, 1, 0.05)" }}
                   aria-hidden="true"
                 />
 
                 <div className="relative z-10">
                   {/* Top: Icon + Index Pill */}
                   <div className="flex items-center justify-between mb-4">
-                    <div className="w-11 h-11 rounded-xl bg-[#FFF0E6] border border-[#F65D01]/10 flex items-center justify-center text-[#F65D01]">
-                      <LucideIcon name={item.icon} fallback="layers" className="w-5 h-5 text-[#F65D01]" />
+                    <div className="service-bento-icon-wrap" style={{ width: "2.75rem", height: "2.75rem" }}>
+                      <LucideIcon name={item.icon} fallback="layers" className="w-5 h-5" />
                     </div>
-                    <span className="text-[11px] font-mono font-semibold tracking-wider text-neutral-400 bg-neutral-100 px-2 py-0.5 rounded-full">
+                    <span className="service-bento-index-pill">
                       {String(idx + 1).padStart(2, "0")}
                     </span>
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-[17px] font-bold text-[#161922] leading-snug mb-2 tracking-tight">
+                  <h3 className="service-bento-title text-[17px] mb-2">
                     {item.title}
                   </h3>
 
                   {/* Description */}
-                  <p className="text-[13.5px] text-[#64748B] leading-relaxed mb-5 font-normal">
+                  <p className="service-bento-desc mb-5">
                     {item.description}
                   </p>
                 </div>
 
                 {/* Link CTA */}
-                <div className="relative z-10 pt-3 border-t border-neutral-100">
+                <div className="relative z-10 pt-3" style={{ borderTop: "1px solid var(--color-stroke-default)" }}>
                   <Link
                     to={item.linkUrl || "/contact"}
                     onClick={handleLinkClick}
-                    className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-[#F65D01] active:opacity-80"
+                    className="service-bento-link active:opacity-80"
                   >
                     <span>{item.linkText || "Learn More"}</span>
-                    <LucideIcon name="arrow-right" className="w-3.5 h-3.5" />
+                    <LucideIcon name={lucideIconRegistry.ArrowRight} className="w-3.5 h-3.5" />
                   </Link>
                 </div>
               </div>
@@ -302,9 +302,9 @@ export default function ServiceWhatWeDo({ whatWeDo }: ServiceWhatWeDoProps) {
           <div className="mt-5 flex items-center justify-between px-1">
             {/* Slide Index Counter */}
             <div className="flex items-center gap-2">
-              <span className="text-xs font-mono font-bold text-[#161922]">
+              <span className="text-xs font-mono font-bold" style={{ color: "var(--color-text-primary)" }}>
                 {String(activeIndex + 1).padStart(2, "0")}
-                <span className="text-neutral-400 font-normal">
+                <span className="font-normal" style={{ color: "var(--color-text-muted)" }}>
                   {" "}/ {String(whatWeDo.items.length).padStart(2, "0")}
                 </span>
               </span>
@@ -318,11 +318,11 @@ export default function ServiceWhatWeDo({ whatWeDo }: ServiceWhatWeDoProps) {
                   type="button"
                   onClick={() => scrollToCard(dotIdx)}
                   aria-label={`Go to card ${dotIdx + 1}`}
-                  className={`h-2 rounded-full transition-all duration-300 ${
-                    dotIdx === activeIndex
-                      ? "w-6 bg-[#F65D01]"
-                      : "w-2 bg-neutral-200 hover:bg-neutral-300"
-                  }`}
+                  className="h-2 rounded-full transition-all duration-300"
+                  style={{
+                    width: dotIdx === activeIndex ? "1.5rem" : "0.5rem",
+                    backgroundColor: dotIdx === activeIndex ? "var(--color-brand)" : "var(--color-stroke-strong)",
+                  }}
                 />
               ))}
             </div>
@@ -334,18 +334,28 @@ export default function ServiceWhatWeDo({ whatWeDo }: ServiceWhatWeDoProps) {
                 onClick={handlePrev}
                 disabled={activeIndex === 0}
                 aria-label="Previous card"
-                className="w-9 h-9 rounded-full border border-neutral-200 bg-white flex items-center justify-center text-[#161922] shadow-sm transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed hover:enabled:border-[#F65D01] hover:enabled:text-[#F65D01] active:enabled:scale-95"
+                className="w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed active:enabled:scale-95"
+                style={{
+                  border: "1px solid var(--color-stroke-default)",
+                  backgroundColor: "var(--color-bg-surface)",
+                  color: "var(--color-text-primary)",
+                }}
               >
-                <LucideIcon name="chevron-left" className="w-4 h-4" />
+                <LucideIcon name={lucideIconRegistry.ChevronLeft} className="w-4 h-4" />
               </button>
               <button
                 type="button"
                 onClick={handleNext}
                 disabled={activeIndex === whatWeDo.items.length - 1}
                 aria-label="Next card"
-                className="w-9 h-9 rounded-full border border-neutral-200 bg-white flex items-center justify-center text-[#161922] shadow-sm transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed hover:enabled:border-[#F65D01] hover:enabled:text-[#F65D01] active:enabled:scale-95"
+                className="w-9 h-9 rounded-full flex items-center justify-center transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed active:enabled:scale-95"
+                style={{
+                  border: "1px solid var(--color-stroke-default)",
+                  backgroundColor: "var(--color-bg-surface)",
+                  color: "var(--color-text-primary)",
+                }}
               >
-                <LucideIcon name="chevron-right" className="w-4 h-4" />
+                <LucideIcon name={lucideIconRegistry.ChevronRight} className="w-4 h-4" />
               </button>
             </div>
           </div>

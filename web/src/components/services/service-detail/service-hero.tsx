@@ -1,6 +1,6 @@
 import { Link } from "react-router";
 import { motion } from "framer-motion";
-import { LucideIcon } from "@/components/lucide-icons";
+import { LucideIcon, lucideIconRegistry } from "@/components/lucide-icons";
 import { fu } from "@/lib/motion";
 import type { ServiceDetailHero } from "@/types/service-detail.types";
 
@@ -18,8 +18,8 @@ export default function ServiceHero({ hero }: ServiceHeroProps) {
   const desktopImageAlt = hero.heroImage?.alt || hero.heading;
 
   return (
-    <section className="w-full bg-white lg:bg-[#0A0D14] text-white selection:bg-[#F65D01]/30">
-      <div className="relative lg:min-h-[720px] lg:flex lg:items-center lg:overflow-hidden">
+    <section className="service-hero-section selection:bg-[#F65D01]/30">
+      <div className="service-hero-container">
 
         {/* ── Mobile: flow image at top ── */}
         {mobileImageUrl && (
@@ -49,9 +49,9 @@ export default function ServiceHero({ hero }: ServiceHeroProps) {
 
             {/* Eyebrow / Badge */}
             {hero.badge && (
-              <motion.div {...fu(0.04)} className="flex items-center gap-2 mb-4">
-                <span className="w-5 h-[2px] bg-[#F65D01] inline-block" />
-                <span className="text-[11.5px] font-bold tracking-[0.2em] uppercase text-[#F65D01]">
+              <motion.div {...fu(0.04)} className="service-section-eyebrow mb-4">
+                <span className="service-section-eyebrow-bar" />
+                <span className="service-section-eyebrow-text">
                   {hero.badge}
                 </span>
               </motion.div>
@@ -60,11 +60,11 @@ export default function ServiceHero({ hero }: ServiceHeroProps) {
             {/* Main Headline */}
             <motion.h1
               {...fu(0.08)}
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-[50px] font-extrabold tracking-tight text-[#0A0D14] lg:text-white leading-[1.14] mb-5 sm:mb-6"
+              className="service-hero-heading"
             >
               {hero.heading}{" "}
               {hero.headingHighlight && (
-                <span className="text-[#F65D01] block sm:inline">
+                <span style={{ color: "var(--color-brand)" }} className="block sm:inline">
                   {hero.headingHighlight}
                 </span>
               )}
@@ -73,7 +73,7 @@ export default function ServiceHero({ hero }: ServiceHeroProps) {
             {/* Subtitle Description */}
             <motion.p
               {...fu(0.12)}
-              className="text-[15px] sm:text-[16.5px] leading-relaxed text-neutral-600 lg:text-neutral-200/90 mb-8 sm:mb-10 font-normal max-w-xl"
+              className="service-hero-desc"
             >
               {hero.description}
             </motion.p>
@@ -89,18 +89,18 @@ export default function ServiceHero({ hero }: ServiceHeroProps) {
                     href={hero.primaryCtaLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center gap-2 rounded-full bg-[#F65D01] px-7 py-3.5 text-[14px] sm:text-[15px] font-semibold text-white shadow-[0_4px_20px_rgba(246,93,1,0.45)] transition-all duration-200 hover:bg-[#EA4800] hover:shadow-[0_6px_26px_rgba(246,93,1,0.6)] hover:-translate-y-0.5 active:translate-y-0"
+                    className="service-hero-btn-primary"
                   >
                     <span>{hero.primaryCtaText}</span>
-                    <LucideIcon name="arrow-right" className="w-4 h-4" />
+                    <LucideIcon name={lucideIconRegistry.ArrowRight} className="w-4 h-4" />
                   </a>
                 ) : (
                   <Link
                     to={hero.primaryCtaLink}
-                    className="inline-flex items-center justify-center gap-2 rounded-full bg-[#F65D01] px-7 py-3.5 text-[14px] sm:text-[15px] font-semibold text-white shadow-[0_4px_20px_rgba(246,93,1,0.45)] transition-all duration-200 hover:bg-[#EA4800] hover:shadow-[0_6px_26px_rgba(246,93,1,0.6)] hover:-translate-y-0.5 active:translate-y-0"
+                    className="service-hero-btn-primary"
                   >
                     <span>{hero.primaryCtaText}</span>
-                    <LucideIcon name="arrow-right" className="w-4 h-4" />
+                    <LucideIcon name={lucideIconRegistry.ArrowRight} className="w-4 h-4" />
                   </Link>
                 )
               )}
@@ -111,14 +111,14 @@ export default function ServiceHero({ hero }: ServiceHeroProps) {
                     href={hero.secondaryCtaLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center justify-center rounded-full border border-neutral-300 lg:border-white/25 bg-transparent lg:bg-white/10 lg:backdrop-blur-xs px-6 py-3.5 text-[14px] sm:text-[15px] font-semibold text-[#0A0D14] lg:text-white transition-all duration-200 hover:bg-neutral-100 lg:hover:bg-white/20 lg:hover:border-white/40"
+                    className="service-hero-btn-secondary"
                   >
                     {hero.secondaryCtaText}
                   </a>
                 ) : (
                   <Link
                     to={hero.secondaryCtaLink}
-                    className="inline-flex items-center justify-center rounded-full border border-neutral-300 lg:border-white/25 bg-transparent lg:bg-white/10 lg:backdrop-blur-xs px-6 py-3.5 text-[14px] sm:text-[15px] font-semibold text-[#0A0D14] lg:text-white transition-all duration-200 hover:bg-neutral-100 lg:hover:bg-white/20 lg:hover:border-white/40"
+                    className="service-hero-btn-secondary"
                   >
                     {hero.secondaryCtaText}
                   </Link>
