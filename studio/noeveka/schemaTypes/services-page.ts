@@ -18,11 +18,12 @@ export const servicesPage = defineType({
   title: 'Services Page',
   type: 'document',
   groups: [
-    {name: 'hero', title: '1 · Hero & Focus Areas'},
-    {name: 'impact', title: '2 · Impact Principles'},
-    {name: 'engagement', title: '3 · Engagement Models'},
-    {name: 'industries', title: '4 · Industries & Quote'},
-    {name: 'cta', title: '5 · Final CTA'},
+    {name: 'hero', title: '1. Hero & Core Focus Areas'},
+    {name: 'impact', title: '2. Impact Principles (Unified System)'},
+    {name: 'engagement', title: '3. Flexible Engagement Models'},
+    {name: 'industries', title: '4. Industries & Architecture Quote'},
+    {name: 'cta', title: '5. Final Conversion CTA'},
+    {name: 'seo', title: '6. SEO & Metadata'},
   ],
 
   fields: [
@@ -297,6 +298,12 @@ export const servicesPage = defineType({
       group: 'industries',
       fields: [
         defineField({
+          name: 'title',
+          title: 'Industries Heading / Eyebrow',
+          type: 'string',
+          initialValue: 'Trusted Across Industries',
+        }),
+        defineField({
           name: 'quote',
           title: 'Founder Architecture Quote',
           type: 'object',
@@ -405,6 +412,34 @@ export const servicesPage = defineType({
           title: 'Secondary CTA Link',
           type: 'string',
           initialValue: '/resources',
+        }),
+      ],
+    }),
+
+    // ─── 6. SEO & METADATA ───────────────────────────────────────────────────
+    defineField({
+      name: 'seo',
+      title: 'SEO & Metadata',
+      type: 'object',
+      group: 'seo',
+      description: 'Search engine optimization tags and social sharing metadata.',
+      fields: [
+        defineField({
+          name: 'title',
+          title: 'Meta Title',
+          type: 'string',
+          description: 'Title displayed in search engine results and browser tabs.',
+          initialValue: 'Services | Enterprise Data & AI Advisory',
+        }),
+        defineField({
+          name: 'description',
+          title: 'Meta Description',
+          type: 'text',
+          rows: 3,
+          description:
+            'Summary shown in search engine snippet preview (150-160 characters recommended).',
+          initialValue:
+            'Four core focus areas: Enterprise Data & AI Architecture, Enterprise AI & Agentic Systems, AI Governance, and Data & AI Transformation Advisory.',
         }),
       ],
     }),

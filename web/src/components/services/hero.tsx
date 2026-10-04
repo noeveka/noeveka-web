@@ -9,8 +9,9 @@ import {
   TransformationCurveVisual,
 } from "./service-visuals";
 import { SERVICES_CONFIG, type ServiceFocusArea } from "@/config/services.config";
+import { fadeUp } from "@/lib/motion";
 
-interface ServicesHeroProps {
+export interface ServicesHeroProps {
   eyebrow?: string;
   badge?: string;
   headingLine1?: string;
@@ -110,9 +111,7 @@ export default function ServicesHero({
           {/* Centered Heading & Subtext */}
           <div className="text-center max-w-2xl mx-auto px-2 sm:px-4">
             <motion.h1
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.05 }}
+              {...fadeUp(0.05)}
               className="text-3xl sm:text-4xl md:text-5xl lg:text-[52px] font-extrabold tracking-tight text-[#1e212b] leading-[1.1] mb-3"
             >
               {headingLine1}
@@ -120,9 +119,7 @@ export default function ServicesHero({
               <span className="text-[#f65d01]">{headingHighlight ?? headingLine2}</span>
             </motion.h1>
             <motion.p
-              initial={{ opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.15 }}
+              {...fadeUp(0.15)}
               className="text-sm sm:text-base md:text-lg text-neutral-500 max-w-xl mx-auto leading-relaxed"
             >
               {subtext}

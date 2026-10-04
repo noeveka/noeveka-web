@@ -3,8 +3,10 @@ import { Link } from "react-router";
 import { motion } from "framer-motion";
 
 import { LucideIcon, lucideIconRegistry } from "@/components/lucide-icons";
+import { SERVICES_CONFIG } from "@/config/services.config";
+import { fadeUp } from "@/lib/motion";
 
-interface ServicesCtaProps {
+export interface ServicesCtaProps {
   headingPart?: string;
   headingHighlight?: string;
   body?: string;
@@ -46,22 +48,19 @@ const styles = {
 };
 
 export default function ServicesCta({
-  headingPart = "Ready to architect your enterprise's ",
-  headingHighlight = "data future?",
-  body = "Book a free strategy call with Ajay Kumar and get an independent view of your platform fit, cost, and architecture roadmap - at no cost.",
-  primaryCtaText = "Book a Free Strategy Call",
-  primaryCtaLink = "/contact",
-  secondaryCtaText = "Explore Our Resources",
-  secondaryCtaLink = "/resources",
+  headingPart = SERVICES_CONFIG.ctaSection.headingPart,
+  headingHighlight = SERVICES_CONFIG.ctaSection.headingHighlight,
+  body = SERVICES_CONFIG.ctaSection.body,
+  primaryCtaText = SERVICES_CONFIG.ctaSection.primaryCtaText,
+  primaryCtaLink = SERVICES_CONFIG.ctaSection.primaryCtaLink,
+  secondaryCtaText = SERVICES_CONFIG.ctaSection.secondaryCtaText,
+  secondaryCtaLink = SERVICES_CONFIG.ctaSection.secondaryCtaLink,
 }: ServicesCtaProps) {
   return (
     <section className={styles.section} id="services-cta">
       <div className={styles.container}>
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+          {...fadeUp(0)}
           className={styles.card}
         >
           {/* Ambient subtle glows */}

@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState, useCallback } from "react";
 import { useScroll, useSpring, useMotionValueEvent, type MotionValue } from "framer-motion";
+import { SERVICES_CONFIG } from "@/config/services.config";
 
 export interface ProcessStep {
   number: string;
@@ -7,12 +8,7 @@ export interface ProcessStep {
   desc: string;
 }
 
-const DEFAULT_STEPS: ProcessStep[] = [
-  { number: "01", title: "Advisory Projects", desc: "Focused expertise for specific challenges." },
-  { number: "02", title: "Architecture Assessments", desc: "Independent, objective evaluations." },
-  { number: "03", title: "Transformation Programmes", desc: "End-to-end advisory and architecture leadership." },
-  { number: "04", title: "Fractional Leadership", desc: "Ongoing senior expertise without a permanent hire." },
-];
+const DEFAULT_STEPS: readonly ProcessStep[] = SERVICES_CONFIG.engagementSection.steps;
 
 /**
  * Builds a row (or column) of N deep semicircle humps spanning `length`.
@@ -71,7 +67,7 @@ function useIsVertical(breakpoint = 700) {
   return vertical;
 }
 
-interface ProcessBallPathProps {
+export interface ProcessBallPathProps {
   steps?: readonly ProcessStep[];
   scrollProgress?: MotionValue<number>;
 }

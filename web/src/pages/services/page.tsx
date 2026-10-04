@@ -8,8 +8,12 @@ import {
   IndustryDomains,
   ServicesCta,
   ServicesHero,
+  type EngagementProcessProps,
+  type ImpactPrinciplesProps,
+  type IndustryDomainsProps,
+  type ServicesCtaProps,
+  type ServicesHeroProps,
 } from "@/components/services";
-import { SEO_CONFIG } from "@/config/seo.config";
 import {
   SERVICES_CONFIG,
   type ServiceFocusArea,
@@ -17,54 +21,20 @@ import {
 import { getServicesPage } from "@/lib/sanity";
 
 interface ServicesPageData {
-  hero?: {
-    badge?: string;
-    headingLine1?: string;
-    headingLine2?: string;
-    headingHighlight?: string;
-    subtext?: string;
-    ctaPrimaryText?: string;
-    ctaPrimaryLink?: string;
+  seo?: {
+    title?: string;
+    description?: string;
   };
+  hero?: ServicesHeroProps;
   focusAreas?: ServiceFocusArea[];
-  impactPrinciplesSection?: {
-    heading?: string;
-    body?: string;
-    principles?: Array<{
-      number: string;
-      title: string;
-      description: string;
-    }>;
-  };
-  engagementSection?: {
-    heading?: string;
-    subtext?: string;
-    steps?: Array<{
-      number: string;
-      title: string;
-      desc: string;
-    }>;
-  };
+  impactPrinciplesSection?: ImpactPrinciplesProps;
+  engagementSection?: EngagementProcessProps;
   industrySection?: {
-    quote?: {
-      quote?: string;
-      author?: string;
-      role?: string;
-    };
-    industries?: Array<{
-      label: string;
-      icon: string;
-    }>;
+    title?: string;
+    quote?: IndustryDomainsProps["quote"];
+    industries?: IndustryDomainsProps["industries"];
   };
-  ctaSection?: {
-    headingPart?: string;
-    headingHighlight?: string;
-    body?: string;
-    primaryCtaText?: string;
-    primaryCtaLink?: string;
-    secondaryCtaText?: string;
-    secondaryCtaLink?: string;
-  };
+  ctaSection?: ServicesCtaProps;
 }
 
 export default function ServicesPage() {
@@ -73,14 +43,14 @@ export default function ServicesPage() {
   useEffect(() => {
     getServicesPage().then(setData).catch(console.error);
   }, []);
-  console.log("This is the Service page data coming from sanity", data);
+
+  const metaTitle = data?.seo?.title ?? SERVICES_CONFIG.seo.title;
+  const metaDescription =
+    data?.seo?.description ?? SERVICES_CONFIG.seo.description;
 
   return (
     <>
-      <PageHead
-        title={SEO_CONFIG.pages.services.title}
-        description={SEO_CONFIG.pages.services.description}
-      />
+      <PageHead title={metaTitle} description={metaDescription} />
       <main>
         <ServicesHero
           headingLine1={
@@ -112,6 +82,10 @@ export default function ServicesPage() {
           }
         />
         <EngagementProcess
+          heading={
+            data?.engagementSection?.heading ??
+            SERVICES_CONFIG.engagementSection.heading
+          }
           subtext={
             data?.engagementSection?.subtext ??
             SERVICES_CONFIG.engagementSection.subtext
@@ -122,6 +96,9 @@ export default function ServicesPage() {
           }
         />
         <IndustryDomains
+          title={
+            data?.industrySection?.title ?? SERVICES_CONFIG.industriesTitle
+          }
           quote={data?.industrySection?.quote ?? SERVICES_CONFIG.founderQuote}
           industries={
             data?.industrySection?.industries ?? SERVICES_CONFIG.industries
@@ -158,3 +135,4 @@ export default function ServicesPage() {
     </>
   );
 }
+

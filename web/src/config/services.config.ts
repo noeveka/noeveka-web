@@ -30,6 +30,12 @@ export interface EngagementModel {
 }
 
 export const SERVICES_CONFIG = {
+  seo: {
+    title: "Services | Enterprise Data & AI Advisory",
+    description:
+      "Four core focus areas: Enterprise Data & AI Architecture, Enterprise AI & Agentic Systems, AI Governance, and Data & AI Transformation Advisory.",
+  },
+
   // Hero section copy & options
   hero: {
     badge: "Independent Enterprise Data & AI Advisory",
@@ -232,6 +238,7 @@ export const SERVICES_CONFIG = {
   },
 
   // Industries served
+  industriesTitle: "Trusted Across Industries",
   industries: [
     { label: "Financial Services", icon: "scale" },
     { label: "Energy & Utilities", icon: "zap" },

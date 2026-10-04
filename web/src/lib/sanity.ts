@@ -393,9 +393,13 @@ export async function getContactPage() {
   }`);
 }
 
-// ─── Services Page -──
+// ─── Services Page ───────────────────────────────────────────────────────────
 export async function getServicesPage() {
   return client.fetch(`*[_type == "servicesPage"][0]{
+    seo{
+      title,
+      description
+    },
     hero{
       badge,
       headingLine1,
@@ -435,6 +439,7 @@ export async function getServicesPage() {
       }
     },
     industrySection{
+      title,
       quote{
         quote,
         author,

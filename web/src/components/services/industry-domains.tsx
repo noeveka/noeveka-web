@@ -6,13 +6,15 @@ import {
   lucideIconRegistry,
 } from "@/components/lucide-icons";
 import { SERVICES_CONFIG } from "@/config/services.config";
+import { fadeUp } from "@/lib/motion";
 
-interface IndustryItem {
+export interface IndustryItem {
   label: string;
   icon: string;
 }
 
-interface IndustryDomainsProps {
+export interface IndustryDomainsProps {
+  title?: string;
   quote?: {
     quote?: string;
     author?: string;
@@ -59,6 +61,7 @@ const styles = {
 };
 
 export default function IndustryDomains({
+  title = SERVICES_CONFIG.industriesTitle,
   quote = SERVICES_CONFIG.founderQuote,
   industries = SERVICES_CONFIG.industries,
 }: IndustryDomainsProps) {
@@ -67,10 +70,7 @@ export default function IndustryDomains({
       <div className={styles.container}>
         {/* ── Founder Architecture Quote Card ── */}
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+          {...fadeUp(0)}
           className={styles.quoteCard}
         >
           <div className={styles.quoteGlow} />
@@ -93,7 +93,7 @@ export default function IndustryDomains({
         {/* ── Trusted Across Industries ── */}
         <div>
           <div className={styles.industriesHeader}>
-            <p className={styles.eyebrow}>Trusted Across Industries</p>
+            <p className={styles.eyebrow}>{title}</p>
           </div>
 
           <div className={styles.industriesGrid}>
@@ -103,10 +103,7 @@ export default function IndustryDomains({
               return (
                 <motion.div
                   key={ind.label}
-                  initial={{ opacity: 0, y: 12 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: i * 0.06 }}
+                  {...fadeUp(i * 0.05)}
                   className={styles.industryCard}
                 >
                   <div className={styles.iconCircle}>
