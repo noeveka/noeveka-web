@@ -30,6 +30,12 @@ export interface EngagementModel {
 }
 
 export const SERVICES_CONFIG = {
+  seo: {
+    title: "Services | Enterprise Data & AI Advisory",
+    description:
+      "Four core focus areas: Enterprise Data & AI Architecture, Enterprise AI & Agentic Systems, AI Governance, and Data & AI Transformation Advisory.",
+  },
+
   // Hero section copy & options
   hero: {
     badge: "Independent Enterprise Data & AI Advisory",
@@ -37,7 +43,7 @@ export const SERVICES_CONFIG = {
     headingLine2: "Real Business Outcomes.",
     headingHighlight: "Real Business Outcomes.",
     subtext:
-      "We solve the most important Data & AI challenges for modern enterprises — with architecture at the core.",
+      "We solve the most important Data & AI challenges for modern enterprises - with architecture at the core.",
     ctaPrimaryText: "Explore Focus Areas",
     ctaPrimaryLink: "#services-cards",
     ctaSecondaryText: "Start a Conversation",
@@ -142,8 +148,7 @@ export const SERVICES_CONFIG = {
   // Impact Principles Section (Split layout with scroll-filling vertical line and isometric visual)
   impactPrinciplesSection: {
     heading: "What makes enterprise Data & AI deliver real impact?",
-    body:
-      "Is it the latest foundation model alone? Massive cloud compute? Flashy POC demos? Enterprise AI will not succeed through models alone. Real impact requires architecture, governance, and engineering working as one unified system.",
+    body: "Is it the latest foundation model alone? Massive cloud compute? Flashy POC demos? Enterprise AI will not succeed through models alone. Real impact requires architecture, governance, and engineering working as one unified system.",
     principles: [
       {
         number: "01",
@@ -233,6 +238,7 @@ export const SERVICES_CONFIG = {
   },
 
   // Industries served
+  industriesTitle: "Trusted Across Industries",
   industries: [
     { label: "Financial Services", icon: "scale" },
     { label: "Energy & Utilities", icon: "zap" },
@@ -246,8 +252,7 @@ export const SERVICES_CONFIG = {
   ctaSection: {
     headingPart: "Ready to architect your enterprise's ",
     headingHighlight: "data future?",
-    body:
-      "Book a free strategy call with Ajay Kumar and get an independent view of your platform fit, cost, and architecture roadmap — at no cost.",
+    body: "Book a free strategy call with Ajay Kumar and get an independent view of your platform fit, cost, and architecture roadmap - at no cost.",
     primaryCtaText: "Book a Free Strategy Call",
     primaryCtaLink: "/contact",
     secondaryCtaText: "Explore Our Resources",

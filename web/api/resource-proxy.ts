@@ -1,4 +1,5 @@
 import type { IncomingMessage, ServerResponse } from "node:http";
+
 import { redeemDownloadToken } from "./_lib/downloadTokenStore.js";
 
 export const config = {
@@ -12,10 +13,13 @@ export const config = {
  * fetches the PDF from Sanity CDN server-side, and streams the bytes back
  * to the browser as an attachment.
  *
- * The Sanity CDN URL is never transmitted to the browser — only this
+ * The Sanity CDN URL is never transmitted to the browser - only this
  * proxy URL appears in DevTools, and the token is invalidated on first use.
  */
-export default async function handler(req: IncomingMessage, res: ServerResponse) {
+export default async function handler(
+  req: IncomingMessage,
+  res: ServerResponse
+) {
   if (req.method !== "GET") {
     res.statusCode = 405;
     res.setHeader("Content-Type", "application/json");
@@ -34,13 +38,20 @@ export default async function handler(req: IncomingMessage, res: ServerResponse)
     return;
   }
 
-  // Redeem the token — verifies HMAC signature and expiry.
-  const pdfUrl = await redeemDownloadToken(token, process.env.DOWNLOAD_TOKEN_SECRET);
+  // Redeem the token - verifies HMAC signature and expiry.
+  const pdfUrl = await redeemDownloadToken(
+    token,
+    process.env.DOWNLOAD_TOKEN_SECRET
+  );
 
   if (!pdfUrl) {
-    res.statusCode = 410; // 410 Gone — token expired or already used
+    res.statusCode = 410; // 410 Gone - token expired or already used
     res.setHeader("Content-Type", "application/json");
-    res.end(JSON.stringify({ error: "Download link has expired or has already been used." }));
+    res.end(
+      JSON.stringify({
+        error: "Download link has expired or has already been used.",
+      })
+    );
     return;
   }
 
@@ -68,14 +79,18 @@ export default async function handler(req: IncomingMessage, res: ServerResponse)
     if (!upstream.ok) {
       res.statusCode = 502;
       res.setHeader("Content-Type", "application/json");
-      res.end(JSON.stringify({ error: "Failed to fetch resource from upstream." }));
+      res.end(
+        JSON.stringify({ error: "Failed to fetch resource from upstream." })
+      );
       return;
     }
 
     // Derive a clean filename from the URL path.
     const urlPath = new URL(pdfUrl).pathname;
     const rawFilename = urlPath.split("/").pop() ?? "resource.pdf";
-    const filename = rawFilename.endsWith(".pdf") ? rawFilename : `${rawFilename}.pdf`;
+    const filename = rawFilename.endsWith(".pdf")
+      ? rawFilename
+      : `${rawFilename}.pdf`;
 
     res.statusCode = 200;
     res.setHeader("Content-Type", "application/pdf");

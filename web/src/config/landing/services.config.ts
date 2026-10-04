@@ -1,12 +1,12 @@
 /**
- * services.config.ts — static fallback data for the WhatWeDo / Services section.
+ * services.config.ts - static fallback data for the WhatWeDo / Services section.
  */
 
 export const SERVICES_CONFIG = {
   eyebrow: "OUR CORE EXPERTISE",
   heading: "Expertise for complex enterprise data and AI decisions",
   subtext:
-    "We help organizations design, build and scale modern data and AI systems — from strategy to production, with a focus on real business impact.",
+    "We help organizations design, build and scale modern data and AI systems - from strategy to production, with a focus on real business impact.",
   cardCtaText: "Learn More",
 
   /** Fallback service cards (shown when Sanity returns no service documents) */

@@ -20,6 +20,12 @@ export interface ContactChannel {
 }
 
 export const CONTACT_CONFIG = {
+  seo: {
+    title: "Contact Us",
+    description:
+      "Get in touch with the Noeveka team. Book a free 30-minute strategy call, ask about our services, or send us a message - we respond within 1–2 business days.",
+  },
+
   hero: {
     heading: "Contact our team",
     subtext:
@@ -44,6 +50,17 @@ export const CONTACT_CONFIG = {
     successSubtext:
       "We've received your message. Ajay or our senior advisory team will get back to you within 1–2 business days.",
     resetButtonText: "Send another message",
+    errors: {
+      firstNameRequired: "First name is required.",
+      lastNameRequired: "Last name is required.",
+      emailRequired: "Email is required.",
+      emailInvalid: "Please enter a valid email address.",
+      messageRequired: "Message is required.",
+      serverErrorDefault:
+        "Unable to send your message right now. Please try again or email us directly.",
+      networkError:
+        "Network error. Please check your connection and try again.",
+    },
   },
 
   countryCodes: [

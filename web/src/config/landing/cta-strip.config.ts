@@ -1,5 +1,5 @@
 /**
- * cta-strip.config.ts — static fallback data for the CtaStrip section.
+ * cta-strip.config.ts - static fallback data for the CtaStrip section.
  */
 
 export const CTA_STRIP_CONFIG = {

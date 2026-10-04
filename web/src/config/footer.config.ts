@@ -1,5 +1,5 @@
 /**
- * footer.config.ts — static fallback data for the Footer component.
+ * footer.config.ts - static fallback data for the Footer component.
  * Remove a ?? FOOTER_CONFIG.* to test whether Sanity is returning that field.
  */
 
@@ -13,7 +13,7 @@ export const FOOTER_CONFIG = {
   logoTextAlt: "Noeveka",
 
   tagline:
-    "At Noeveka, we believe enterprises deserve more than expensive tools with poor architecture — we deliver clarity, authority, and real impact.",
+    "At Noeveka, we believe enterprises deserve more than expensive tools with poor architecture - we deliver clarity, authority, and real impact.",
 
   socialLinks: [
     {
@@ -67,7 +67,7 @@ export const FOOTER_CONFIG = {
   newsletterTag: "STAY UPDATED",
   newsletterHeading: "Join our newsletter",
   newsletterSubtext:
-    "Get the latest insights on data, AI architecture, resources and product updates — straight to your inbox.",
+    "Get the latest insights on data, AI architecture, resources and product updates - straight to your inbox.",
   newsletterPlaceholder: "connect@noeveka.com",
 
   copyrightText: "© {year} Noeveka Data & AI Solutions. All rights reserved.",

@@ -1,0 +1,322 @@
+/* ABOUT PAGE COMPONENT CLASSES
+   Section-specific classes for all about/ components.
+   All colours reference design tokens - no hardcoded hex.
+   -── */
+
+@layer components {
+  /* ── SECTION WRAPPER ─────────────────────────────────────── */
+  /* Light off-white sections (narrative, values, credentials) */
+  .about-section-light {
+    display: flex;
+    justify-content: center;
+    background-color: var(--color-bg-surface);
+    border-bottom: 1px solid var(--color-stroke-default);
+  }
+  /* Subtle tinted sections (story, journey) */
+  .about-section-subtle {
+    display: flex;
+    justify-content: center;
+    background-color: var(--color-bg-subtle);
+    border-bottom: 1px solid var(--color-stroke-default);
+  }
+  /* Dark navy sections (mission) */
+  .about-section-dark {
+    display: flex;
+    justify-content: center;
+    background-color: var(--color-text-primary);
+  }
+  /* Full-bleed hero-like (founder) */
+  .about-section-hero {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    overflow: hidden;
+    background-color: var(--color-bg-surface);
+  }
+
+  /* ── EYEBROW LABEL (orange line + uppercase text) ─────────── */
+  /* Usage: <div className="about-eyebrow"><div className="about-eyebrow-line"/><span>LABEL</span></div> */
+  .about-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  .about-eyebrow-line {
+    height: 2px;
+    width: 1.25rem; /* 20px */
+    background-color: var(--color-brand);
+    flex-shrink: 0;
+  }
+  .about-eyebrow-text {
+    font-size: 11.5px;
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-brand);
+  }
+
+  /* ── DECORATIVE ORANGE BAR ────────────────────────────────── */
+  /* Usage: <div className="about-orange-bar"><div/><div/><div/></div> */
+  .about-orange-bar {
+    display: flex;
+    gap: 0.375rem; /* gap-1.5 */
+    margin-top: 1.5rem;
+  }
+  .about-orange-bar-lg {
+    height: 0.375rem;
+    width: 2.5rem;
+    border-radius: var(--radius-full);
+    background-color: var(--color-brand);
+  }
+  .about-orange-bar-md {
+    height: 0.375rem;
+    width: 1rem;
+    border-radius: var(--radius-full);
+    background-color: rgba(246, 93, 1, 0.3);
+  }
+  .about-orange-bar-sm {
+    height: 0.375rem;
+    width: 0.5rem;
+    border-radius: var(--radius-full);
+    background-color: rgba(246, 93, 1, 0.15);
+  }
+
+  /* ── SECTION HEADING ─────────────────────────────────────── */
+  .about-section-heading {
+    font-size: clamp(1.9rem, 4vw, 2.3rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    color: var(--color-text-primary);
+  }
+  /* Highlight span inside headings */
+  .about-heading-highlight {
+    color: var(--color-brand);
+  }
+
+  /* ── NARRATIVE HEADING (larger, two-col layout) ──────────── */
+  .about-narrative-heading {
+    font-size: clamp(1.875rem, 4vw, 2.875rem); /* text-3xl → text-[46px] */
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.15;
+    color: var(--color-text-primary);
+  }
+  /* Right-column body copy */
+  .about-narrative-body {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+  }
+  .about-narrative-punchline {
+    font-size: var(--text-base);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-primary);
+    padding-top: 0.5rem;
+  }
+
+  /* ── VALUE CARD ──────────────────────────────────────────── */
+  .about-value-card {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border-radius: var(--radius-2xl, 1rem);
+    padding: 1.5rem;
+    background-color: var(--color-bg-subtle);
+    border: 1px solid var(--color-stroke-default);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+    transition: transform var(--duration-slow) var(--easing-in-out);
+  }
+  .about-value-card:hover {
+    transform: translateY(-4px);
+  }
+  .about-value-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 3rem;
+    width: 3rem;
+    border-radius: var(--radius-xl);
+    background-color: var(--color-brand-tint);
+    border: 1px solid rgba(246, 93, 1, 0.18);
+    flex-shrink: 0;
+  }
+  .about-value-title {
+    font-size: 14.5px;
+    font-weight: 800;
+    color: var(--color-text-primary);
+    margin-bottom: 0.375rem;
+  }
+  .about-value-desc {
+    font-size: 13px;
+    line-height: 1.65;
+    color: var(--color-text-muted);
+  }
+
+  /* ── MISSION PILLAR CARD (on dark bg) ────────────────────── */
+  .about-mission-pillar {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    border-radius: var(--radius-2xl, 1rem);
+    padding: 1.75rem;
+    background-color: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .about-mission-number {
+    pointer-events: none;
+    position: absolute;
+    top: 1rem;
+    right: 1.25rem;
+    font-size: 3.5rem;
+    font-weight: 900;
+    line-height: 1;
+    user-select: none;
+    color: rgba(246, 93, 1, 0.08);
+  }
+  .about-mission-bar {
+    height: 4px;
+    width: 2.5rem;
+    border-radius: var(--radius-full);
+    background-color: var(--color-brand);
+  }
+  .about-mission-title {
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--color-text-inverse);
+  }
+  .about-mission-desc {
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.55);
+  }
+
+  /* ── FOUNDER: STATUS BADGE ICON ──────────────────────────── */
+  .about-founder-status-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 2.25rem; /* 36px */
+    width: 2.25rem;
+    border-radius: var(--radius-full);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    background-color: var(--color-bg-subtle);
+    flex-shrink: 0;
+  }
+
+  /* ── FOUNDER: FOCUS PILLAR CARD ──────────────────────────── */
+  .about-founder-pillar-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    border-radius: var(--radius-2xl, 1rem);
+    border: 1px solid var(--color-stroke-default);
+    background-color: var(--color-bg-subtle);
+    padding: 0.875rem;
+    transition:
+      border-color var(--duration-default) var(--easing-in-out),
+      background-color var(--duration-default) var(--easing-in-out),
+      transform var(--duration-fast) var(--easing-in-out),
+      box-shadow var(--duration-fast) var(--easing-in-out);
+  }
+  .about-founder-pillar-card:hover {
+    border-color: var(--color-stroke-strong);
+    background-color: var(--color-bg-surface);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
+  }
+  .about-founder-pillar-title {
+    font-size: 12.5px;
+    font-weight: 700;
+    line-height: 1.3;
+    color: var(--color-text-primary);
+  }
+  .about-founder-pillar-desc {
+    margin-top: 0.25rem;
+    font-size: 11px;
+    line-height: 1.4;
+    color: var(--color-text-muted);
+  }
+
+  /* ── RESOURCE CARD (credentials-strip zigzag) ────────────── */
+  .about-resource-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--radius-2xl, 1rem);
+    padding: 1.75rem;
+    background-color: var(--color-bg-surface);
+    border: 1px solid var(--color-stroke-default);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.04);
+    transition:
+      transform var(--duration-default) var(--easing-in-out),
+      box-shadow var(--duration-default) var(--easing-in-out);
+  }
+  .about-resource-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
+  }
+  /* Animated bottom accent on hover */
+  .about-resource-card-accent {
+    pointer-events: none;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    border-radius: 0 0 var(--radius-2xl, 1rem) var(--radius-2xl, 1rem);
+    background-color: var(--color-brand);
+    transform-origin: left;
+    transform: scaleX(0);
+    transition: transform var(--duration-default) var(--easing-in-out);
+  }
+  .about-resource-card:hover .about-resource-card-accent {
+    transform: scaleX(1);
+  }
+  .about-resource-category-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    margin-bottom: 1rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: var(--radius-full);
+    background-color: var(--color-brand-tint);
+    border: 1px solid rgba(246, 93, 1, 0.18);
+  }
+  .about-resource-category-text {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-brand);
+  }
+  .about-resource-title {
+    font-size: 17px;
+    font-weight: 800;
+    line-height: 1.3;
+    color: var(--color-text-primary);
+    margin-bottom: 0.625rem;
+  }
+  .about-resource-desc {
+    font-size: 13.5px;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+    margin-bottom: 1.25rem;
+  }
+  .about-resource-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-brand);
+    text-decoration: none;
+    transition: gap var(--duration-default) var(--easing-in-out);
+  }
+  .about-resource-link:hover {
+    gap: 0.625rem;
+  }
+}

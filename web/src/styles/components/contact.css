@@ -1,0 +1,334 @@
+/* CONTACT PAGE COMPONENT CLASSES
+   Form inputs, channel links, service checkboxes, submit button,
+   success card. All colours reference design tokens - no hardcoded hex.
+   -────────── */
+
+@layer components {
+  /* ── PAGE SHELL ──────────────────────────────────────────────── */
+  .contact-page {
+    min-height: 100vh;
+    background-color: var(--color-bg-surface);
+    padding-bottom: 5rem; /* pb-20 */
+  }
+  @media (min-width: 640px) {
+    .contact-page {
+      padding-bottom: 7rem; /* sm:pb-28 */
+    }
+  }
+
+  /* ── FORM FIELD WRAPPER ──────────────────────────────────────── */
+  .contact-field {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem; /* gap-1.5 */
+  }
+  .contact-label {
+    font-size: var(--text-micro); /* 11px */
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-secondary);
+  }
+  @media (min-width: 640px) {
+    .contact-label {
+      font-size: var(--text-sm);
+    } /* 13px */
+  }
+
+  /* ── TEXT INPUTS & TEXTAREA ──────────────────────────────────── */
+  .contact-input {
+    width: 100%;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-stroke-default);
+    background-color: var(--color-bg-surface);
+    padding: 0.625rem 0.875rem; /* py-2.5 px-3.5 */
+    font-size: var(--text-sm);
+    color: var(--color-text-primary);
+    transition:
+      border-color var(--duration-default) var(--easing-in-out),
+      box-shadow var(--duration-default) var(--easing-in-out);
+    outline: none;
+  }
+  .contact-input::placeholder {
+    color: var(--color-text-muted);
+  }
+  .contact-input:hover {
+    border-color: var(--color-stroke-strong);
+  }
+  .contact-input:focus {
+    border-color: var(--color-brand);
+    box-shadow: 0 0 0 3px rgba(246, 93, 1, 0.1);
+  }
+  .contact-input-error {
+    border-color: var(--color-danger) !important;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.08) !important;
+  }
+
+  /* ── PHONE FIELD WRAPPER ─────────────────────────────────────── */
+  .contact-phone-wrap {
+    position: relative;
+    display: flex;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-stroke-default);
+    background-color: var(--color-bg-surface);
+    transition:
+      border-color var(--duration-default) var(--easing-in-out),
+      box-shadow var(--duration-default) var(--easing-in-out);
+  }
+  .contact-phone-wrap:hover {
+    border-color: var(--color-stroke-strong);
+  }
+  .contact-phone-wrap:focus-within {
+    box-shadow: 0 0 0 3px rgba(246, 93, 1, 0.1);
+  }
+  .contact-phone-prefix {
+    position: relative;
+    display: flex;
+    align-items: center;
+    border-right: 1px solid var(--color-stroke-default);
+    background-color: var(--color-bg-subtle);
+    padding-left: 0.75rem;
+    padding-right: 0.5rem;
+  }
+  .contact-phone-select {
+    cursor: pointer;
+    appearance: none;
+    background: transparent;
+    padding-right: 1.5rem;
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-text-secondary);
+    outline: none;
+  }
+  .contact-phone-input {
+    width: 100%;
+    border-radius: 0 var(--radius-lg) var(--radius-lg) 0;
+    background: transparent;
+    padding: 0.625rem 0.875rem;
+    font-size: var(--text-sm);
+    outline: none;
+  }
+  .contact-phone-input::placeholder {
+    color: var(--color-text-muted);
+  }
+
+  /* ── SERVICE CHECKBOX ROW ────────────────────────────────────── */
+  .contact-service-row {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    gap: 0.625rem;
+    user-select: none;
+  }
+  .contact-service-box {
+    display: flex;
+    height: 1rem;
+    width: 1rem;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-sm, 3px);
+    border: 1px solid var(--color-stroke-default);
+    background-color: var(--color-bg-surface);
+    transition:
+      background-color var(--duration-fast) var(--easing-in-out),
+      border-color var(--duration-fast) var(--easing-in-out);
+  }
+  .contact-service-box-checked {
+    border-color: var(--color-text-primary);
+    background-color: var(--color-text-primary);
+    color: var(--color-text-inverse);
+  }
+  .contact-service-row:hover
+    .contact-service-box:not(.contact-service-box-checked) {
+    border-color: var(--color-stroke-strong);
+  }
+  .contact-service-label {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    transition: color var(--duration-fast) var(--easing-in-out);
+  }
+  .contact-service-row:hover .contact-service-label {
+    color: var(--color-text-primary);
+  }
+
+  /* ── ERROR / FIELD HINT ──────────────────────────────────────── */
+  .contact-field-error {
+    font-size: var(--text-micro);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-danger);
+  }
+
+  /* ── SERVER ERROR BANNER ─────────────────────────────────────── */
+  .contact-server-error {
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    border-radius: var(--radius-lg);
+    border: 1px solid rgba(239, 68, 68, 0.25);
+    background-color: rgba(239, 68, 68, 0.06);
+    padding: 0.875rem;
+    font-size: var(--text-sm);
+    color: #b91c1c; /* intentional - danger text has no token yet */
+  }
+
+  /* ── SUBMIT BUTTON ───────────────────────────────────────────── */
+  .contact-submit-btn {
+    margin-top: 0.75rem;
+    display: flex;
+    width: 100%;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-lg);
+    border: none;
+    background-color: var(--color-brand);
+    padding: 0.75rem 1rem;
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-inverse);
+    box-shadow: var(--shadow-sm);
+    transition:
+      background-color var(--duration-default) var(--easing-in-out),
+      transform var(--duration-fast) var(--easing-in-out),
+      opacity var(--duration-fast) var(--easing-in-out);
+  }
+  @media (min-width: 640px) {
+    .contact-submit-btn {
+      font-size: var(--text-base);
+    }
+  }
+  .contact-submit-btn:hover:not(:disabled) {
+    background-color: var(--color-brand-hover);
+  }
+  .contact-submit-btn:active:not(:disabled) {
+    transform: scale(0.99);
+  }
+  .contact-submit-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
+
+  /* ── SUCCESS CARD ────────────────────────────────────────────── */
+  .contact-success-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-2xl, 1rem);
+    border: 1px solid var(--color-stroke-default);
+    background-color: var(--color-bg-surface);
+    padding: 2rem;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+  }
+  @media (min-width: 640px) {
+    .contact-success-card {
+      padding: 3rem;
+    }
+  }
+  .contact-success-icon {
+    display: flex;
+    height: 4rem;
+    width: 4rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-full);
+    background-color: var(--color-brand-tint);
+    color: var(--color-brand);
+  }
+  .contact-success-heading {
+    margin-top: 1.25rem;
+    font-size: var(--text-h2); /* 18px */
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: var(--letter-spacing-tight);
+    color: var(--color-text-primary);
+  }
+  @media (min-width: 640px) {
+    .contact-success-heading {
+      font-size: 1.375rem;
+    }
+  }
+  .contact-success-body {
+    margin-top: 0.625rem;
+    max-width: 28rem;
+    font-size: var(--text-sm);
+    line-height: var(--line-height-relaxed);
+    color: var(--color-text-secondary);
+  }
+  @media (min-width: 640px) {
+    .contact-success-body {
+      font-size: var(--text-base);
+    }
+  }
+  .contact-success-reset-btn {
+    margin-top: 1.5rem;
+    display: inline-flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius-lg);
+    border: none;
+    background-color: var(--color-text-primary);
+    padding: 0.625rem 1.5rem;
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-inverse);
+    transition: background-color var(--duration-default) var(--easing-in-out);
+  }
+  .contact-success-reset-btn:hover {
+    background-color: var(--color-navy-900);
+  }
+
+  /* ── INFO PANEL (right column) ───────────────────────────────── */
+  .contact-info-section-title {
+    font-size: var(--text-h2); /* 18px */
+    font-weight: var(--font-weight-semibold);
+    letter-spacing: var(--letter-spacing-tight);
+    color: var(--color-text-primary);
+  }
+  .contact-info-section-sub {
+    margin-top: 0.25rem;
+    font-size: var(--text-sm);
+    color: var(--color-text-muted);
+  }
+  .contact-info-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.625rem;
+    font-size: var(--text-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-primary);
+    text-decoration: none;
+    transition: color var(--duration-fast) var(--easing-in-out);
+  }
+  .contact-info-link:hover {
+    color: var(--color-brand);
+  }
+  .contact-info-link-icon {
+    flex-shrink: 0;
+    color: var(--color-text-secondary);
+    transition: color var(--duration-fast) var(--easing-in-out);
+  }
+  .contact-info-link:hover .contact-info-link-icon {
+    color: var(--color-brand);
+  }
+  .contact-info-link-underline {
+    text-decoration: underline;
+    text-decoration-color: var(--color-stroke-default);
+    text-underline-offset: 4px;
+    transition: text-decoration-color var(--duration-fast) var(--easing-in-out);
+  }
+  .contact-info-link:hover .contact-info-link-underline {
+    text-decoration-color: var(--color-brand);
+  }
+  .contact-info-arrow {
+    color: var(--color-text-muted);
+    opacity: 0.7;
+    transition:
+      transform var(--duration-fast) var(--easing-in-out),
+      color var(--duration-fast) var(--easing-in-out);
+  }
+  .contact-info-link:hover .contact-info-arrow {
+    transform: translate(2px, -2px);
+    color: var(--color-brand);
+  }
+}

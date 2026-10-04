@@ -18,7 +18,7 @@
     text-size-adjust: 100%;
   }
 
-  /* Applied Inter globally via body — flows down to every element */
+  /* Applied Inter globally via body - flows down to every element */
   body {
     font-family: var(--font-primary);
     font-size: var(--text-base); /* 14px */
@@ -28,7 +28,7 @@
     line-height: 1.6;
   }
 
-  /* Headings — sentence case, no ALL CAPS, max weight 500 */
+  /* Headings - sentence case, no ALL CAPS, max weight 500 */
   h1,
   h2,
   h3,
@@ -61,7 +61,7 @@
     font-size: var(--text-micro); /* 11px */
   }
 
-  /* Links — only style inline content links blue.
+  /* Links - only style inline content links blue.
    Nav links, buttons, and cards set their own color via Tailwind. */
   a {
     text-decoration: none;
@@ -90,7 +90,7 @@ a.text-secondary {
   color: var(--color-text-secondary);
 } */
 
-  /* Monospace elements — JetBrains Mono only for code/keys/paths */
+  /* Monospace elements - JetBrains Mono only for code/keys/paths */
   code,
   pre,
   kbd {
@@ -104,7 +104,7 @@ a.text-secondary {
     display: block;
   }
 
-  /* Focus ring — every interactive element must have one */
+  /* Focus ring - every interactive element must have one */
   :focus-visible {
     outline: none;
     box-shadow: var(--shadow-focus-neutral);
@@ -150,7 +150,7 @@ a.text-secondary {
 
   /* Keyframes */
 
-  /* Recording pulse — only for active session indicator (one per screen max) */
+  /* Recording pulse - only for active session indicator (one per screen max) */
   @keyframes pulse {
     0%,
     100% {

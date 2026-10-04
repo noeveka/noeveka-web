@@ -1,5 +1,6 @@
 import {
   Activity,
+  AlertCircle,
   ArrowRight,
   ArrowUpRight,
   BarChart3,
@@ -54,11 +55,16 @@ import {
   Calendar,
   ArrowLeft,
   Crosshair,
+  Globe,
+  Laptop,
+  Handshake,
+  Compass,
+  GraduationCap
 } from "lucide-react";
 
 // Icon map
 // One place to add, remove, or swap icons across the entire app.
-// To change an icon globally — update it here. No component changes needed.
+// To change an icon globally - update it here. No component changes needed.
 
 export const iconMap = {
   // navigation
@@ -129,9 +135,22 @@ export const iconMap = {
   // theme
   sun: Sun,
   moon: Moon,
+
+  // about page
+  globe: Globe,
+  laptop: Laptop,
+  handshake: Handshake,
+
+  // status
+  "alert-circle": AlertCircle,
+
+  // features
+  compass: Compass,
+  "graduation-cap": GraduationCap,
 } as const;
 
 export const lucideIconRegistry = {
+  AlertCircle: "alert-circle",
   Activity: "activity",
   Crosshair: "crosshair",
   ArrowRight: "arrow-right",
@@ -188,6 +207,15 @@ export const lucideIconRegistry = {
   Scale: "scale",
   Sun: "sun",
   Moon: "moon",
+
+  // about page
+  Globe: "globe",
+  Laptop: "laptop",
+  Handshake: "handshake",
+
+  // features
+  Compass: "compass",
+  GraduationCap: "graduation-cap",
 } as const satisfies Record<string, IconName>;
 
 // Types

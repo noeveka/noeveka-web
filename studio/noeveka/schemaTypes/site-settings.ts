@@ -5,7 +5,7 @@ export const siteSettings = defineType({
   title: 'Site Settings',
   type: 'document',
   fields: [
-    // ─── Navbar ─────────────────────────────────────────────────────────────
+    // ─── Navbar -────
     defineField({
       name: 'logoIcon',
       title: 'Logo Icon Image',
@@ -50,7 +50,7 @@ export const siteSettings = defineType({
       initialValue: '/#contact',
     }),
 
-    // ─── Footer ─────────────────────────────────────────────────────────────
+    // ─── Footer -────
     defineField({
       name: 'footerTagline',
       title: 'Footer Tagline',
@@ -83,13 +83,13 @@ export const siteSettings = defineType({
     // Company column
     defineField({
       name: 'companyColumnHeading',
-      title: 'Footer — Company Column Heading',
+      title: 'Footer - Company Column Heading',
       type: 'string',
       initialValue: 'Company',
     }),
     defineField({
       name: 'companyLinks',
-      title: 'Footer — Company Column Links',
+      title: 'Footer - Company Column Links',
       type: 'array',
       of: [
         {
@@ -106,13 +106,13 @@ export const siteSettings = defineType({
     // Services column
     defineField({
       name: 'servicesColumnHeading',
-      title: 'Footer — Services Column Heading',
+      title: 'Footer - Services Column Heading',
       type: 'string',
       initialValue: 'Services',
     }),
     defineField({
       name: 'servicesLinks',
-      title: 'Footer — Services Column Links',
+      title: 'Footer - Services Column Links',
       type: 'array',
       of: [
         {
@@ -129,7 +129,7 @@ export const siteSettings = defineType({
     // Contact column
     defineField({
       name: 'contactHeading',
-      title: 'Footer — Contact Column Heading',
+      title: 'Footer - Contact Column Heading',
       type: 'string',
       initialValue: 'Contact',
     }),
@@ -170,7 +170,7 @@ export const siteSettings = defineType({
       type: 'text',
       rows: 2,
       initialValue:
-        'Get the latest insights on data, AI architecture, resources and product updates — straight to your inbox.',
+        'Get the latest insights on data, AI architecture, resources and product updates - straight to your inbox.',
     }),
     defineField({
       name: 'newsletterPlaceholder',

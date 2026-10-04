@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router";
 
-import { LucideIcon } from "@/components/lucide-icons";
+import NewsletterStrip from "@/components/common/newsletter-strip";
+import { LucideIcon, lucideIconRegistry } from "@/components/lucide-icons";
 import InstagramSvg from "@/components/svgs/instagram-svg";
 import LinkedInSvg from "@/components/svgs/linkedin-svg";
 import XSvg from "@/components/svgs/x-svg";
 import YoutubeSvg from "@/components/svgs/youtube-svg";
 import { FOOTER_CONFIG } from "@/config/footer.config";
 import { getSiteSettings, urlFor } from "@/lib/sanity";
-import NewsLetterStrip from "@/components/common/new-letter-strip";
 
 const ICON_MAP: Record<string, () => React.JSX.Element> = {
   LinkedIn: LinkedInSvg,
@@ -18,10 +18,10 @@ const ICON_MAP: Record<string, () => React.JSX.Element> = {
 };
 
 // Derived from config so the social link SVGs are resolved at component level
-const FALLBACK_SOCIAL = FOOTER_CONFIG.socialLinks.map((s) => ({
-  Icon: ICON_MAP[s.platform] ?? LinkedInSvg,
-  href: s.href,
-  label: s.platform,
+const FALLBACK_SOCIAL = FOOTER_CONFIG.socialLinks.map((socialLink) => ({
+  Icon: ICON_MAP[socialLink.platform] ?? LinkedInSvg,
+  href: socialLink.href,
+  label: socialLink.platform,
 }));
 
 function FooterLink({
@@ -33,37 +33,22 @@ function FooterLink({
   light?: boolean;
   href?: string;
 }) {
-  const base = light
-    ? "var(--color-text-secondary)"
-    : "var(--color-text-muted)";
+  const linkClassName = `footer-link ${light ? "footer-link-light" : ""}`;
   if (href && href !== "#") {
     return (
-      <Link
-        to={href}
-        className="text-[13px] transition-colors"
-        style={{ color: base }}
-        onMouseEnter={(e) =>
-          (e.currentTarget.style.color = "var(--color-brand)")
-        }
-        onMouseLeave={(e) => (e.currentTarget.style.color = base)}
-      >
+      <Link to={href} className={linkClassName}>
         {label}
       </Link>
     );
   }
   return (
-    <button
-      className="cursor-pointer border-none bg-transparent p-0 text-left text-[13px] transition-colors"
-      style={{ color: base }}
-      onMouseEnter={(e) => (e.currentTarget.style.color = "var(--color-brand)")}
-      onMouseLeave={(e) => (e.currentTarget.style.color = base)}
-    >
+    <button type="button" className={linkClassName}>
       {label}
     </button>
   );
 }
 
-interface SiteSettings {
+export interface FooterSiteSettings {
   logoIcon?: { asset?: unknown; alt?: string };
   logoText?: { asset?: unknown; alt?: string };
   footerTagline?: string;
@@ -84,7 +69,7 @@ interface SiteSettings {
 }
 
 export default function Footer() {
-  const [settings, setSettings] = useState<SiteSettings | null>(null);
+  const [settings, setSettings] = useState<FooterSiteSettings | null>(null);
 
   useEffect(() => {
     getSiteSettings().then(setSettings).catch(console.error);
@@ -101,10 +86,10 @@ export default function Footer() {
   const tagline = settings?.footerTagline ?? FOOTER_CONFIG.tagline;
 
   const socialLinks = settings?.socialLinks?.length
-    ? settings.socialLinks.map((s) => ({
-        Icon: ICON_MAP[s.platform] ?? LinkedInSvg,
-        href: s.href,
-        label: s.platform,
+    ? settings.socialLinks.map((socialLink) => ({
+        Icon: ICON_MAP[socialLink.platform] ?? LinkedInSvg,
+        href: socialLink.href,
+        label: socialLink.platform,
       }))
     : FALLBACK_SOCIAL;
 
@@ -116,9 +101,9 @@ export default function Footer() {
 
   const servicesHeading =
     settings?.servicesColumnHeading ?? FOOTER_CONFIG.servicesColumnHeading;
-  // const servicesLinks = settings?.servicesLinks?.length
-  //   ? settings.servicesLinks
-  //   : [...FOOTER_CONFIG.servicesLinks];
+  const servicesLinks = settings?.servicesLinks?.length
+    ? settings.servicesLinks
+    : [...FOOTER_CONFIG.servicesLinks];
 
   const contactHeading =
     settings?.contactHeading ?? FOOTER_CONFIG.contactHeading;
@@ -126,7 +111,6 @@ export default function Footer() {
   const contactPhone = settings?.contactPhone ?? FOOTER_CONFIG.contactPhone;
   const contactAddress =
     settings?.contactAddress ?? FOOTER_CONFIG.contactAddress;
-
 
   const copyrightText = (
     settings?.copyrightText ?? FOOTER_CONFIG.copyrightText
@@ -147,9 +131,9 @@ export default function Footer() {
     setOpenSections((prev) => ({ ...prev, [section]: !prev[section] }));
   };
 
-  const handleCopyEmail = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
+  const handleCopyEmail = (event: React.MouseEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
     if (navigator.clipboard) {
       navigator.clipboard.writeText(contactEmail);
       setCopied(true);
@@ -157,70 +141,24 @@ export default function Footer() {
     }
   };
 
-  const shortenedServices = [
-    { label: "Data & AI Architecture", href: "/services/enterprise-data-ai-architecture" },
-    { label: "AI & Agentic Systems", href: "/services/enterprise-ai-agentic-systems" },
-    { label: "AI Governance & Assurance", href: "/services/ai-governance-architecture-assurance" },
-    { label: "Transformation Advisory", href: "/services/data-ai-transformation-advisory" },
-  ];
-
-  const mobileCompanyLinks = [
-    { label: "Home", href: "/" },
-    { label: "Resources", href: "/resources" },
-    { label: "About", href: "/about" },
-    { label: "Contact", href: "/contact" },
-    { label: "Services", href: "/services" },
-    { label: "Privacy Policy", href: "/privacy-policy" },
-    { label: "Terms & Conditions", href: "/terms" },
-  ];
-
   return (
     <footer>
+      <NewsletterStrip />
+      <div className="footer-wrapper">
+        {/* Subtle ambient light - top right */}
+        <div className="footer-ambient-glow" />
 
-      <NewsLetterStrip />
-      <div
-        className="relative overflow-hidden"
-        style={{
-          background: "var(--color-bg-subtle)",
-          borderTop: "1px solid var(--color-stroke-default)",
-        }}
-      >
-        {/* Subtle orange ambient — top right */}
-        <div
-          className="pointer-events-none absolute top-0 right-0 h-[400px] w-[400px]"
-          style={{
-            background:
-              "radial-gradient(circle at 100% 0%, rgba(246,93,1,0.05) 0%, transparent 65%)",
-          }}
-        />
-
-        {/* Watermark — fluid width, always fills the container */}
-        <div
-          className="pointer-events-none absolute right-0 bottom-0 left-0 flex items-end justify-center overflow-hidden select-none"
-          aria-hidden="true"
-        >
-          <span
-            style={{
-              fontSize: "clamp(3.5rem, 18vw, 14rem)",
-              lineHeight: 1,
-              fontWeight: 800,
-              textTransform: "uppercase",
-              letterSpacing: "0.08em",
-              color: "transparent",
-              WebkitTextStroke: "1px rgba(13,15,22,0.05)",
-              whiteSpace: "nowrap",
-            }}
-          >
-            NOEVEKA
-          </span>
+        {/* Watermark - fluid width, always fills the container */}
+        <div className="footer-watermark" aria-hidden="true">
+          <span className="footer-watermark-text">NOEVEKA</span>
         </div>
 
         {/* ── Desktop grid content (lg and up) ── */}
         <div className="lp-container lp-px relative z-10 hidden grid-cols-5 gap-10 pt-14 pb-28 lg:grid">
-          {/* Brand column — 2 cols */}
+          {/* Brand column - 2 cols */}
           <div className="col-span-2 flex flex-col gap-5">
             {/* Logo */}
-            <div className="flex items-center gap-1">
+            <Link to="/" className="flex items-center gap-1">
               <div className="relative h-10 w-10 shrink-0 sm:h-12 sm:w-12">
                 <img
                   src={logoIconSrc}
@@ -235,14 +173,9 @@ export default function Footer() {
                   className="h-full w-full object-contain object-left"
                 />
               </div>
-            </div>
+            </Link>
 
-            <p
-              className="max-w-[260px] text-[13px] leading-relaxed"
-              style={{ color: "var(--color-text-muted)" }}
-            >
-              {tagline}
-            </p>
+            <p className="footer-tagline">{tagline}</p>
 
             {/* Social icons */}
             <div className="flex items-center gap-2.5">
@@ -251,24 +184,9 @@ export default function Footer() {
                   key={label}
                   href={href}
                   aria-label={label}
-                  className="flex h-9 w-9 items-center justify-center rounded-full transition-all"
-                  style={{
-                    background: "var(--color-bg-surface)",
-                    border: "1px solid var(--color-stroke-default)",
-                    color: "var(--color-text-muted)",
-                  }}
-                  onMouseEnter={(e) => {
-                    const el = e.currentTarget as HTMLAnchorElement;
-                    el.style.background = "var(--color-brand)";
-                    el.style.borderColor = "var(--color-brand)";
-                    el.style.color = "#fff";
-                  }}
-                  onMouseLeave={(e) => {
-                    const el = e.currentTarget as HTMLAnchorElement;
-                    el.style.background = "var(--color-bg-surface)";
-                    el.style.borderColor = "var(--color-stroke-default)";
-                    el.style.color = "var(--color-text-muted)";
-                  }}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="footer-social-btn"
                 >
                   <Icon />
                 </a>
@@ -278,16 +196,14 @@ export default function Footer() {
 
           {/* Company */}
           <div className="flex flex-col gap-4">
-            <p
-              className="text-[11.5px] font-bold tracking-[0.18em] uppercase"
-              style={{ color: "var(--color-text-primary)" }}
-            >
-              {companyHeading}
-            </p>
+            <p className="footer-col-heading">{companyHeading}</p>
             <ul className="flex flex-col gap-2.5">
-              {companyLinks.map((l) => (
-                <li key={l.label}>
-                  <FooterLink label={l.label} href={l.href} />
+              {companyLinks.map((companyLink) => (
+                <li key={companyLink.label}>
+                  <FooterLink
+                    label={companyLink.label}
+                    href={companyLink.href}
+                  />
                 </li>
               ))}
             </ul>
@@ -295,16 +211,14 @@ export default function Footer() {
 
           {/* Services */}
           <div className="flex flex-col gap-4">
-            <p
-              className="text-[11.5px] font-bold tracking-[0.18em] uppercase"
-              style={{ color: "var(--color-text-primary)" }}
-            >
-              {servicesHeading}
-            </p>
+            <p className="footer-col-heading">{servicesHeading}</p>
             <ul className="flex flex-col gap-2.5">
-              {shortenedServices.map((service) => (
-                <li key={service.label}>
-                  <FooterLink label={service.label} href={service.href} />
+              {servicesLinks.map((serviceLink) => (
+                <li key={serviceLink.label}>
+                  <FooterLink
+                    label={serviceLink.label}
+                    href={serviceLink.href}
+                  />
                 </li>
               ))}
             </ul>
@@ -312,36 +226,18 @@ export default function Footer() {
 
           {/* Contact */}
           <div className="flex flex-col gap-4">
-            <p
-              className="text-[11.5px] font-bold tracking-[0.18em] uppercase"
-              style={{ color: "var(--color-text-primary)" }}
-            >
-              {contactHeading}
-            </p>
+            <p className="footer-col-heading">{contactHeading}</p>
             <div className="flex flex-col gap-3">
               <a
                 href={`mailto:${contactEmail}`}
-                className="text-[13px] font-medium transition-colors"
-                style={{
-                  color: "var(--color-brand)",
-                  textDecoration: "underline",
-                  textUnderlineOffset: 3,
-                }}
+                className="footer-contact-email"
               >
                 {contactEmail}
               </a>
-              {/* <p
-                className="text-[13px]"
-                style={{ color: "var(--color-text-muted)" }}
-              >
-                {contactPhone}
-              </p> */}
-              <p
-                className="text-[13px] leading-snug"
-                style={{ color: "var(--color-text-muted)" }}
-              >
-                {contactAddress}
-              </p>
+              {contactPhone && (
+                <p className="footer-contact-text">{contactPhone}</p>
+              )}
+              <p className="footer-contact-text">{contactAddress}</p>
             </div>
           </div>
         </div>
@@ -351,7 +247,7 @@ export default function Footer() {
           {/* Brand header */}
           <div className="mb-7 flex flex-col items-start gap-4">
             {/* Logo */}
-            <div className="flex items-center gap-1">
+            <Link to="/" className="flex items-center gap-1">
               <div className="relative h-9 w-9 shrink-0">
                 <img
                   src={logoIconSrc}
@@ -366,15 +262,10 @@ export default function Footer() {
                   className="h-full w-full object-contain object-left"
                 />
               </div>
-            </div>
+            </Link>
 
             {/* Tagline */}
-            <p
-              className="max-w-md text-[13px] leading-relaxed"
-              style={{ color: "var(--color-text-muted)" }}
-            >
-              {tagline}
-            </p>
+            <p className="footer-tagline">{tagline}</p>
 
             {/* Social icons */}
             <div className="flex items-center gap-2.5 pt-0.5">
@@ -383,24 +274,9 @@ export default function Footer() {
                   key={label}
                   href={href}
                   aria-label={label}
-                  className="flex h-9 w-9 items-center justify-center rounded-full transition-all"
-                  style={{
-                    background: "var(--color-bg-surface)",
-                    border: "1px solid var(--color-stroke-default)",
-                    color: "var(--color-text-muted)",
-                  }}
-                  onMouseEnter={(e) => {
-                    const el = e.currentTarget as HTMLAnchorElement;
-                    el.style.background = "var(--color-brand)";
-                    el.style.borderColor = "var(--color-brand)";
-                    el.style.color = "#fff";
-                  }}
-                  onMouseLeave={(e) => {
-                    const el = e.currentTarget as HTMLAnchorElement;
-                    el.style.background = "var(--color-bg-surface)";
-                    el.style.borderColor = "var(--color-stroke-default)";
-                    el.style.color = "var(--color-text-muted)";
-                  }}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="footer-social-btn"
                 >
                   <Icon />
                 </a>
@@ -408,28 +284,18 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Interactive Sections without heavy boxy feel */}
+          {/* Interactive Mobile Accordions */}
           <div className="flex flex-col gap-3">
             {/* ── Section 1: COMPANY ── */}
-            <div
-              className="rounded-xl p-4 transition-all duration-200 sm:p-5"
-              style={{
-                background: "rgba(255, 255, 255, 0.72)",
-                boxShadow: "0 2px 8px rgba(15, 23, 42, 0.02)",
-              }}
-            >
+            <div className="footer-mobile-card">
               <button
+                type="button"
                 onClick={() => toggleSection("company")}
                 className="flex w-full cursor-pointer items-center justify-between border-none bg-transparent p-0 text-left"
               >
-                <span
-                  className="text-[11.5px] font-bold tracking-[0.18em] uppercase"
-                  style={{ color: "var(--color-text-primary)" }}
-                >
-                  {companyHeading}
-                </span>
+                <span className="footer-col-heading">{companyHeading}</span>
                 <LucideIcon
-                  name="chevron-down"
+                  name={lucideIconRegistry.ChevronDown}
                   className={`h-4 w-4 transition-transform duration-200 ${
                     openSections.company ? "rotate-180" : ""
                   }`}
@@ -438,17 +304,20 @@ export default function Footer() {
               </button>
 
               {openSections.company && (
-                <div className="mt-3 grid grid-cols-2 gap-x-4 gap-y-1.5 border-t border-slate-100 pt-3.5">
-                  {mobileCompanyLinks.map((l) => (
+                <div
+                  className="mt-3 grid grid-cols-2 gap-x-4 gap-y-1.5 border-t pt-3.5"
+                  style={{ borderColor: "var(--color-stroke-default)" }}
+                >
+                  {companyLinks.map((companyLink) => (
                     <Link
-                      key={l.label}
-                      to={l.href}
-                      className="group -mx-2 flex items-center justify-between rounded-lg px-2 py-1.5 text-[13px] font-medium text-slate-600 transition-all hover:bg-orange-50/50 hover:text-[#f65d01]"
+                      key={companyLink.label}
+                      to={companyLink.href}
+                      className="footer-mobile-nav-link"
                     >
-                      <span>{l.label}</span>
+                      <span>{companyLink.label}</span>
                       <LucideIcon
-                        name="chevron-right"
-                        className="h-3.5 w-3.5 text-slate-300 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:text-[#f65d01]"
+                        name={lucideIconRegistry.ChevronRight}
+                        className="footer-mobile-chevron"
                       />
                     </Link>
                   ))}
@@ -457,25 +326,15 @@ export default function Footer() {
             </div>
 
             {/* ── Section 2: SERVICES ── */}
-            <div
-              className="rounded-xl p-4 transition-all duration-200 sm:p-5"
-              style={{
-                background: "rgba(255, 255, 255, 0.72)",
-                boxShadow: "0 2px 8px rgba(15, 23, 42, 0.02)",
-              }}
-            >
+            <div className="footer-mobile-card">
               <button
+                type="button"
                 onClick={() => toggleSection("services")}
                 className="flex w-full cursor-pointer items-center justify-between border-none bg-transparent p-0 text-left"
               >
-                <span
-                  className="text-[11.5px] font-bold tracking-[0.18em] uppercase"
-                  style={{ color: "var(--color-text-primary)" }}
-                >
-                  {servicesHeading}
-                </span>
+                <span className="footer-col-heading">{servicesHeading}</span>
                 <LucideIcon
-                  name="chevron-down"
+                  name={lucideIconRegistry.ChevronDown}
                   className={`h-4 w-4 transition-transform duration-200 ${
                     openSections.services ? "rotate-180" : ""
                   }`}
@@ -484,17 +343,20 @@ export default function Footer() {
               </button>
 
               {openSections.services && (
-                <div className="mt-3 flex flex-col gap-1 border-t border-slate-100 pt-3.5">
-                  {shortenedServices.map((service) => (
+                <div
+                  className="mt-3 flex flex-col gap-1 border-t pt-3.5"
+                  style={{ borderColor: "var(--color-stroke-default)" }}
+                >
+                  {servicesLinks.map((serviceLink) => (
                     <Link
-                      key={service.label}
-                      to={service.href}
-                      className="group -mx-2 flex cursor-pointer items-center justify-between rounded-lg px-2 py-1.5 text-[13px] font-medium text-slate-600 transition-all hover:bg-orange-50/50 hover:text-[#f65d01]"
+                      key={serviceLink.label}
+                      to={serviceLink.href}
+                      className="footer-mobile-nav-link"
                     >
-                      <span>{service.label}</span>
+                      <span>{serviceLink.label}</span>
                       <LucideIcon
-                        name="chevron-right"
-                        className="h-3.5 w-3.5 text-slate-300 transition-transform duration-200 group-hover:translate-x-0.5 group-hover:text-[#f65d01]"
+                        name={lucideIconRegistry.ChevronRight}
+                        className="footer-mobile-chevron"
                       />
                     </Link>
                   ))}
@@ -503,25 +365,14 @@ export default function Footer() {
             </div>
 
             {/* ── Section 3: CONTACT ── */}
-            <div
-              className="rounded-2xl p-4 transition-all duration-200 sm:p-5"
-              style={{
-                background: "rgba(255, 255, 255, 0.72)",
-                boxShadow: "0 2px 8px rgba(15, 23, 42, 0.02)",
-              }}
-            >
+            <div className="footer-mobile-card">
               <button
                 onClick={() => toggleSection("contact")}
                 className="flex w-full cursor-pointer items-center justify-between border-none bg-transparent p-0 text-left"
               >
-                <span
-                  className="text-[11.5px] font-bold tracking-[0.18em] uppercase"
-                  style={{ color: "var(--color-text-primary)" }}
-                >
-                  {contactHeading}
-                </span>
+                <span className="footer-col-heading">{contactHeading}</span>
                 <LucideIcon
-                  name="chevron-down"
+                  name={lucideIconRegistry.ChevronDown}
                   className={`h-4 w-4 transition-transform duration-200 ${
                     openSections.contact ? "rotate-180" : ""
                   }`}
@@ -530,23 +381,29 @@ export default function Footer() {
               </button>
 
               {openSections.contact && (
-                <div className="mt-3 flex flex-col gap-3 border-t border-slate-100 pt-3.5">
+                <div
+                  className="mt-3 flex flex-col gap-3 border-t pt-3.5"
+                  style={{ borderColor: "var(--color-stroke-default)" }}
+                >
                   {/* Email with copy */}
                   <div className="flex items-center gap-2">
                     <a
                       href={`mailto:${contactEmail}`}
-                      className="text-[13px] font-semibold transition-colors hover:underline"
-                      style={{ color: "var(--color-brand)" }}
+                      className="footer-contact-email"
                     >
                       {contactEmail}
                     </a>
                     <button
                       onClick={handleCopyEmail}
                       aria-label="Copy email address"
-                      className="flex h-6 w-6 cursor-pointer items-center justify-center rounded-md border border-neutral-200/60 bg-white text-neutral-400 transition-colors hover:border-[#f65d01]/40 hover:text-[#f65d01]"
+                      className="footer-copy-btn"
                     >
                       <LucideIcon
-                        name={copied ? "check" : "copy"}
+                        name={
+                          copied
+                            ? lucideIconRegistry.Check
+                            : lucideIconRegistry.Copy
+                        }
                         className={`h-3 w-3 ${copied ? "text-green-600" : ""}`}
                       />
                     </button>
@@ -559,10 +416,14 @@ export default function Footer() {
 
                   {/* Phone */}
                   {contactPhone && (
-                    <div className="flex items-center gap-2.5 text-[12.5px] text-slate-600">
+                    <div
+                      className="flex items-center gap-2.5 text-[12.5px]"
+                      style={{ color: "var(--color-text-secondary)" }}
+                    >
                       <LucideIcon
-                        name="phone"
-                        className="h-3.5 w-3.5 shrink-0 text-slate-400"
+                        name={lucideIconRegistry.Phone}
+                        className="h-3.5 w-3.5 shrink-0"
+                        style={{ color: "var(--color-text-muted)" }}
                       />
                       <span>{contactPhone}</span>
                     </div>
@@ -570,10 +431,14 @@ export default function Footer() {
 
                   {/* Address */}
                   {contactAddress && (
-                    <div className="flex items-center gap-2.5 text-[12.5px] text-slate-600">
+                    <div
+                      className="flex items-center gap-2.5 text-[12.5px]"
+                      style={{ color: "var(--color-text-secondary)" }}
+                    >
                       <LucideIcon
-                        name="map-pin"
-                        className="h-3.5 w-3.5 shrink-0 text-slate-400"
+                        name={lucideIconRegistry.MapPin}
+                        className="h-3.5 w-3.5 shrink-0"
+                        style={{ color: "var(--color-text-muted)" }}
                       />
                       <span>{contactAddress}</span>
                     </div>
@@ -584,30 +449,19 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* ── Bottom bar ────────────────────────────────────── */}
-        <div
-          className="relative z-10 border-t"
-          style={{ borderColor: "var(--color-stroke-default)" }}
-        >
+        {/* ── Bottom bar */}
+        <div className="footer-bottom-bar">
           <div className="lp-container lp-px flex flex-wrap items-center justify-between gap-3 py-4">
             <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-[11.5px]">
               <p style={{ color: "var(--color-text-muted)" }}>
                 {copyrightText}
               </p>
-              <span className="text-neutral-300">·</span>
-              <Link
-                to="/privacy-policy"
-                className="transition-colors hover:text-[#f65d01]"
-                style={{ color: "var(--color-text-muted)" }}
-              >
+              <span style={{ color: "var(--color-stroke-strong)" }}>·</span>
+              <Link to="/privacy-policy" className="footer-bottom-link">
                 Privacy Policy
               </Link>
-              <span className="text-neutral-300">·</span>
-              <Link
-                to="/terms"
-                className="transition-colors hover:text-[#f65d01]"
-                style={{ color: "var(--color-text-muted)" }}
-              >
+              <span style={{ color: "var(--color-stroke-strong)" }}>·</span>
+              <Link to="/terms" className="footer-bottom-link">
                 Terms & Conditions
               </Link>
             </div>
@@ -627,20 +481,13 @@ export default function Footer() {
 
             {/* Navigation links (hidden on small screens, visible on sm+) */}
             <nav className="hidden items-center gap-5 sm:flex">
-              {footerNavLinks.map((l) => (
+              {footerNavLinks.map((navLink) => (
                 <Link
-                  key={l.label}
-                  to={l.href}
-                  className="cursor-pointer border-none bg-transparent text-[11px] font-medium transition-colors"
-                  style={{ color: "var(--color-text-muted)" }}
-                  onMouseEnter={(e) =>
-                    (e.currentTarget.style.color = "var(--color-brand)")
-                  }
-                  onMouseLeave={(e) =>
-                    (e.currentTarget.style.color = "var(--color-text-muted)")
-                  }
+                  key={navLink.label}
+                  to={navLink.href}
+                  className="footer-bottom-link font-medium"
                 >
-                  {l.label}
+                  {navLink.label}
                 </Link>
               ))}
             </nav>

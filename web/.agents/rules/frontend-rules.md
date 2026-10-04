@@ -153,12 +153,12 @@ export const routesRegistry = {
   docs: "/docs",
   changelog: "/changelog",
 
-  // auth — public, but redirect away if already logged in
+  // auth - public, but redirect away if already logged in
   login: "/login",
   signup: "/signup",
   forgotPassword: "/forgot-password",
 
-  // protected — dashboard
+  // protected - dashboard
   overview: "/overview",
   sessions: "/sessions",
   analytics: "/analytics",
@@ -192,7 +192,7 @@ export default function AppRouter() {
         <Route path={routesRegistry.overview} element={<OverviewPage />} />
       </Route>
 
-      {/* Auth — public only, redirects if logged in */}
+      {/* Auth - public only, redirects if logged in */}
       <Route element={<PublicOnlyRoute />}>
         <Route element={<AuthLayout />}>
           <Route path={routesRegistry.login} element={<LoginPage />} />

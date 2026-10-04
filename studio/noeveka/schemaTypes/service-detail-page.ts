@@ -1,7 +1,7 @@
-import { defineField, defineType } from 'sanity'
+import {defineField, defineType} from 'sanity'
 
 /**
- * serviceDetailPage — Sanity document type for Service Details Pages
+ * serviceDetailPage - Sanity document type for Service Details Pages
  *
  * Slugs:
  * - enterprise-data-ai-architecture
@@ -14,16 +14,16 @@ export const serviceDetailPage = defineType({
   title: 'Service Detail Page',
   type: 'document',
   groups: [
-    { name: 'general', title: '1 · General & SEO' },
-    { name: 'hero', title: '2 · Hero Section' },
-    { name: 'challenge', title: '3 · The Challenge' },
-    { name: 'whatWeDo', title: '4 · What We Do' },
-    { name: 'architectureLens', title: '5 · Architecture Lens' },
-    { name: 'howWeEngage', title: '6 · How We Engage' },
-    { name: 'deliverables', title: '7 · Deliverables' },
-    { name: 'outcomes', title: '8 · Outcomes' },
-    { name: 'relatedServices', title: '9 · Related Expertise' },
-    { name: 'bottomCta', title: '10 · Bottom Banner CTA' },
+    {name: 'general', title: '1 · General & SEO'},
+    {name: 'hero', title: '2 · Hero Section'},
+    {name: 'challenge', title: '3 · The Challenge'},
+    {name: 'whatWeDo', title: '4 · What We Do'},
+    {name: 'architectureLens', title: '5 · Architecture Lens'},
+    {name: 'howWeEngage', title: '6 · How We Engage'},
+    {name: 'deliverables', title: '7 · Deliverables'},
+    {name: 'outcomes', title: '8 · Outcomes'},
+    {name: 'relatedServices', title: '9 · Related Expertise'},
+    {name: 'bottomCta', title: '10 · Bottom Banner CTA'},
   ],
 
   fields: [
@@ -85,7 +85,7 @@ export const serviceDetailPage = defineType({
           type: 'text',
           rows: 3,
           initialValue:
-            'We turn fragmented platforms and growing AI demands into a coherent, future-ready architecture that connects business strategy with data, technology and AI — built for scale, trust and real business value.',
+            'We turn fragmented platforms and growing AI demands into a coherent, future-ready architecture that connects business strategy with data, technology and AI - built for scale, trust and real business value.',
         }),
         defineField({
           name: 'primaryCtaText',
@@ -113,15 +113,31 @@ export const serviceDetailPage = defineType({
         }),
         defineField({
           name: 'heroImage',
-          title: 'Hero Graphic / Architecture Image',
+          title: 'Hero Graphic / Architecture Image (Desktop / Large Screens)',
           type: 'image',
-          options: { hotspot: true },
+          description: 'Background graphic for desktop and large screens',
+          options: {hotspot: true},
           fields: [
             defineField({
               name: 'alt',
               title: 'Alt Text',
               type: 'string',
               initialValue: 'Enterprise Data and AI Architecture Stack',
+            }),
+          ],
+        }),
+        defineField({
+          name: 'heroMobileImage',
+          title: 'Hero Graphic (Mobile / Small Screens)',
+          type: 'image',
+          description: 'Alternative vertical / stacked layout graphic displayed on small screens and mobile devices',
+          options: {hotspot: true},
+          fields: [
+            defineField({
+              name: 'alt',
+              title: 'Alt Text',
+              type: 'string',
+              initialValue: 'Enterprise Data and AI Architecture Stack - Mobile',
             }),
           ],
         }),
@@ -133,8 +149,12 @@ export const serviceDetailPage = defineType({
             {
               type: 'object',
               fields: [
-                defineField({ name: 'tier', title: 'Tier Name (e.g. Business, Data, Platform, AI)', type: 'string' }),
-                defineField({ name: 'label', title: 'Annotation Label', type: 'string' }),
+                defineField({
+                  name: 'tier',
+                  title: 'Tier Name (e.g. Business, Data, Platform, AI)',
+                  type: 'string',
+                }),
+                defineField({name: 'label', title: 'Annotation Label', type: 'string'}),
               ],
             },
           ],
@@ -159,7 +179,7 @@ export const serviceDetailPage = defineType({
           name: 'paragraphs',
           title: 'Challenge Paragraphs',
           type: 'array',
-          of: [{ type: 'text', rows: 3 }],
+          of: [{type: 'text', rows: 3}],
         }),
         defineField({
           name: 'signalsHeading',
@@ -171,7 +191,7 @@ export const serviceDetailPage = defineType({
           name: 'signals',
           title: 'Common Signals List',
           type: 'array',
-          of: [{ type: 'string' }],
+          of: [{type: 'string'}],
         }),
       ],
     }),
@@ -205,14 +225,24 @@ export const serviceDetailPage = defineType({
             {
               type: 'object',
               fields: [
-                defineField({ name: 'icon', title: 'Lucide Icon Name', type: 'string' }),
-                defineField({ name: 'title', title: 'Title', type: 'string' }),
-                defineField({ name: 'description', title: 'Description', type: 'text', rows: 2 }),
-                defineField({ name: 'linkText', title: 'Link Text', type: 'string', initialValue: 'Learn More' }),
-                defineField({ name: 'linkUrl', title: 'Link URL', type: 'string', initialValue: '/contact' }),
+                defineField({name: 'icon', title: 'Lucide Icon Name', type: 'string'}),
+                defineField({name: 'title', title: 'Title', type: 'string'}),
+                defineField({name: 'description', title: 'Description', type: 'text', rows: 2}),
+                defineField({
+                  name: 'linkText',
+                  title: 'Link Text',
+                  type: 'string',
+                  initialValue: 'Learn More',
+                }),
+                defineField({
+                  name: 'linkUrl',
+                  title: 'Link URL',
+                  type: 'string',
+                  initialValue: '/contact',
+                }),
               ],
               preview: {
-                select: { title: 'title', subtitle: 'icon' },
+                select: {title: 'title', subtitle: 'icon'},
               },
             },
           ],
@@ -239,7 +269,7 @@ export const serviceDetailPage = defineType({
           type: 'text',
           rows: 2,
           initialValue:
-            'A holistic view from business strategy to AI consumption — ensuring every layer supports the decisions above it and the capabilities below it.',
+            'A holistic view from business strategy to AI consumption - ensuring every layer supports the decisions above it and the capabilities below it.',
         }),
         defineField({
           name: 'layers',
@@ -249,26 +279,30 @@ export const serviceDetailPage = defineType({
             {
               type: 'object',
               fields: [
-                defineField({ name: 'icon', title: 'Icon Name', type: 'string' }),
-                defineField({ name: 'title', title: 'Layer Name (e.g. BUSINESS, DATA)', type: 'string' }),
-                defineField({ name: 'description', title: 'Layer Description', type: 'string' }),
+                defineField({name: 'icon', title: 'Icon Name', type: 'string'}),
+                defineField({
+                  name: 'title',
+                  title: 'Layer Name (e.g. BUSINESS, DATA)',
+                  type: 'string',
+                }),
+                defineField({name: 'description', title: 'Layer Description', type: 'string'}),
                 defineField({
                   name: 'variant',
                   title: 'Card Style Variant',
                   type: 'string',
                   options: {
                     list: [
-                      { title: 'Dark Navy', value: 'navy' },
-                      { title: 'Steel Slate', value: 'slate' },
-                      { title: 'Brand Orange', value: 'orange' },
-                      { title: 'White Minimal', value: 'white' },
+                      {title: 'Dark Navy', value: 'navy'},
+                      {title: 'Steel Slate', value: 'slate'},
+                      {title: 'Brand Orange', value: 'orange'},
+                      {title: 'White Minimal', value: 'white'},
                     ],
                   },
                   initialValue: 'navy',
                 }),
               ],
               preview: {
-                select: { title: 'title', subtitle: 'description' },
+                select: {title: 'title', subtitle: 'description'},
               },
             },
           ],
@@ -277,7 +311,8 @@ export const serviceDetailPage = defineType({
           name: 'footerNote',
           title: 'Footer Connective Note',
           type: 'string',
-          initialValue: 'EVERY LAYER SUPPORTS THE DECISIONS ABOVE IT AND THE CAPABILITIES BELOW IT.',
+          initialValue:
+            'EVERY LAYER SUPPORTS THE DECISIONS ABOVE IT AND THE CAPABILITIES BELOW IT.',
         }),
       ],
     }),
@@ -311,12 +346,17 @@ export const serviceDetailPage = defineType({
             {
               type: 'object',
               fields: [
-                defineField({ name: 'number', title: 'Step Number (e.g. 01)', type: 'string' }),
-                defineField({ name: 'title', title: 'Step Title', type: 'string' }),
-                defineField({ name: 'description', title: 'Step Description', type: 'text', rows: 2 }),
+                defineField({name: 'number', title: 'Step Number (e.g. 01)', type: 'string'}),
+                defineField({name: 'title', title: 'Step Title', type: 'string'}),
+                defineField({
+                  name: 'description',
+                  title: 'Step Description',
+                  type: 'text',
+                  rows: 2,
+                }),
               ],
               preview: {
-                select: { title: 'title', subtitle: 'number' },
+                select: {title: 'title', subtitle: 'number'},
               },
             },
           ],
@@ -342,13 +382,14 @@ export const serviceDetailPage = defineType({
           title: 'Subtext',
           type: 'text',
           rows: 2,
-          initialValue: 'We provide clear, practical deliverables tailored to your organization’s needs.',
+          initialValue:
+            'We provide clear, practical deliverables tailored to your organization’s needs.',
         }),
         defineField({
           name: 'items',
           title: 'Deliverable Items (Checklist)',
           type: 'array',
-          of: [{ type: 'string' }],
+          of: [{type: 'string'}],
         }),
       ],
     }),
@@ -382,12 +423,17 @@ export const serviceDetailPage = defineType({
             {
               type: 'object',
               fields: [
-                defineField({ name: 'icon', title: 'Lucide Icon Name', type: 'string' }),
-                defineField({ name: 'title', title: 'Outcome Title', type: 'string' }),
-                defineField({ name: 'description', title: 'Outcome Description', type: 'text', rows: 2 }),
+                defineField({name: 'icon', title: 'Lucide Icon Name', type: 'string'}),
+                defineField({name: 'title', title: 'Outcome Title', type: 'string'}),
+                defineField({
+                  name: 'description',
+                  title: 'Outcome Description',
+                  type: 'text',
+                  rows: 2,
+                }),
               ],
               preview: {
-                select: { title: 'title', subtitle: 'icon' },
+                select: {title: 'title', subtitle: 'icon'},
               },
             },
           ],
@@ -423,15 +469,20 @@ export const serviceDetailPage = defineType({
             {
               type: 'object',
               fields: [
-                defineField({ name: 'number', title: 'Service Number (e.g. 02)', type: 'string' }),
-                defineField({ name: 'icon', title: 'Lucide Icon Name', type: 'string' }),
-                defineField({ name: 'title', title: 'Title', type: 'string' }),
-                defineField({ name: 'description', title: 'Description', type: 'text', rows: 2 }),
-                defineField({ name: 'linkUrl', title: 'Target Link URL', type: 'string' }),
-                defineField({ name: 'linkText', title: 'Link Text', type: 'string', initialValue: 'Learn More' }),
+                defineField({name: 'number', title: 'Service Number (e.g. 02)', type: 'string'}),
+                defineField({name: 'icon', title: 'Lucide Icon Name', type: 'string'}),
+                defineField({name: 'title', title: 'Title', type: 'string'}),
+                defineField({name: 'description', title: 'Description', type: 'text', rows: 2}),
+                defineField({name: 'linkUrl', title: 'Target Link URL', type: 'string'}),
+                defineField({
+                  name: 'linkText',
+                  title: 'Link Text',
+                  type: 'string',
+                  initialValue: 'Learn More',
+                }),
               ],
               preview: {
-                select: { title: 'title', subtitle: 'number' },
+                select: {title: 'title', subtitle: 'number'},
               },
             },
           ],
@@ -498,11 +549,13 @@ export const serviceDetailPage = defineType({
     select: {
       title: 'title',
       subtitle: 'slug.current',
+      media: 'hero.heroImage',
     },
-    prepare({ title, subtitle }) {
+    prepare({title, subtitle, media}) {
       return {
         title: title || 'Untitled Service Detail Page',
         subtitle: subtitle ? `/services/${subtitle}` : '',
+        media,
       }
     },
   },

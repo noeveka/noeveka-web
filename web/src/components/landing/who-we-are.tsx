@@ -1,10 +1,10 @@
-import { LucideIcon } from "@/components/lucide-icons";
 import { motion } from "framer-motion";
-import { fu } from "@/lib/motion";
+import { LucideIcon, lucideIconRegistry } from "@/components/lucide-icons";
+import { fadeUp } from "@/lib/motion";
 import { urlFor } from "@/lib/sanity";
 import { WHO_WE_ARE_CONFIG } from "@/config/landing/who-we-are.config";
 
-interface AboutProps {
+export interface WhoWeAreProps {
   eyebrow?: string;
   heading?: string;
   body?: string;
@@ -30,106 +30,107 @@ export default function WhoWeAre({
   founderName = WHO_WE_ARE_CONFIG.founderName,
   founderRole = WHO_WE_ARE_CONFIG.founderRole,
   founderPhoto,
+  statBadgeValue = WHO_WE_ARE_CONFIG.statBadgeValue,
+  statBadgeLabel = WHO_WE_ARE_CONFIG.statBadgeLabel,
   ratingValue = WHO_WE_ARE_CONFIG.ratingValue,
   ratingLabel = WHO_WE_ARE_CONFIG.ratingLabel,
   skillsHeading = WHO_WE_ARE_CONFIG.skillsHeading,
   skills = [...WHO_WE_ARE_CONFIG.skills],
-}: AboutProps) {
-  const founderSrc = founderPhoto?.asset
+}: WhoWeAreProps) {
+  const founderPhotoSource = founderPhoto?.asset
     ? urlFor(founderPhoto).width(800).url()
     : WHO_WE_ARE_CONFIG.founderPhotoFallbackUrl;
-  const founderAlt = founderPhoto?.alt ?? WHO_WE_ARE_CONFIG.founderPhotoAlt;
+  const founderPhotoAltText = founderPhoto?.alt ?? WHO_WE_ARE_CONFIG.founderPhotoAlt;
 
   return (
     <section
       id="who-we-are"
-      className="flex justify-center border-t"
-      style={{ background: "var(--color-bg-surface)", borderColor: "var(--color-stroke-default)" }}
+      className="lp-section lp-section-surface lp-section-border-t"
     >
       <div className="lp-container lp-px py-16 lg:py-20">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
 
-          {/* LEFT — Founder Image */}
-          <motion.div {...fu()} className="relative">
-            <div className="relative w-full aspect-4/3 sm:aspect-14/10 lg:h-[430px] rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.12)] border border-black/5 bg-gray-900">
-              <img src={founderSrc} alt={founderAlt} className="absolute inset-0 w-full h-full object-cover object-[58%_25%]" />
-              <div className="absolute inset-0 pointer-events-none" style={{ background: "linear-gradient(to top, rgba(0,0,0,0.3) 0%, transparent 40%)" }} />
+          {/* LEFT - Founder Image */}
+          <motion.div {...fadeUp()} className="relative">
+            <div className="relative w-full overflow-hidden rounded-3xl border border-black/5 bg-gray-900 shadow-[0_20px_50px_rgba(0,0,0,0.12)] aspect-4/3 sm:aspect-14/10 lg:h-[430px]">
+              <img
+                src={founderPhotoSource}
+                alt={founderPhotoAltText}
+                className="absolute inset-0 h-full w-full object-cover object-[58%_25%]"
+              />
+              <div className="lp-image-overlay-bottom" />
             </div>
           </motion.div>
 
-          {/* RIGHT — Copy */}
+          {/* RIGHT - Copy */}
           <div>
-            <motion.p {...fu()} className="text-[10px] font-bold tracking-[0.22em] uppercase mb-3 flex items-center gap-2" style={{ color: "var(--color-brand)" }}>
+            <motion.p {...fadeUp()} className="lp-eyebrow mb-3">
               <span>✳</span> {eyebrow}
             </motion.p>
-            <motion.h2 {...fu(0.07)} className="text-2xl sm:text-[1.9rem] font-extrabold tracking-tight leading-snug mb-5" style={{ color: "var(--color-text-primary)" }}>
+            <motion.h2
+              {...fadeUp(0.07)}
+              className="lp-section-heading mb-5"
+            >
               {heading}
             </motion.h2>
-            <motion.p {...fu(0.12)} className="text-[14.5px] leading-relaxed mb-8" style={{ color: "var(--color-text-secondary)" }}>
+            <motion.p
+              {...fadeUp(0.12)}
+              className="lp-section-subtext mb-8 text-text-secondary"
+            >
               {body}
             </motion.p>
 
             {/* CTA + Founder credit */}
-            <motion.div {...fu(0.17)} className="flex flex-wrap items-center gap-5 mb-8">
+            <motion.div {...fadeUp(0.17)} className="mb-8 flex flex-wrap items-center gap-5">
               {ctaLink ? (
-                <a
-                  href={ctaLink}
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-[13.5px] font-semibold transition-all cursor-pointer border-none shadow-[0_4px_18px_rgba(246,93,1,0.22)]"
-                  style={{ background: "var(--color-brand)", color: "#ffffff" }}
-                  onMouseEnter={(e) => { e.currentTarget.style.background = "var(--color-brand-hover)"; e.currentTarget.style.transform = "translateY(-1px)"; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.background = "var(--color-brand)"; e.currentTarget.style.transform = "translateY(0)"; }}
-                >
-                  {ctaText} <LucideIcon name="arrow-right" className="w-4 h-4" />
+                <a href={ctaLink} className="btn-hero">
+                  {ctaText} <LucideIcon name={lucideIconRegistry.ArrowRight} className="h-4 w-4" />
                 </a>
               ) : (
-                <button
-                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full text-[13.5px] font-semibold transition-all cursor-pointer border-none shadow-[0_4px_18px_rgba(246,93,1,0.22)]"
-                  style={{ background: "var(--color-brand)", color: "#ffffff" }}
-                  onMouseEnter={(e) => { e.currentTarget.style.background = "var(--color-brand-hover)"; e.currentTarget.style.transform = "translateY(-1px)"; }}
-                  onMouseLeave={(e) => { e.currentTarget.style.background = "var(--color-brand)"; e.currentTarget.style.transform = "translateY(0)"; }}
-                >
-                  {ctaText} <LucideIcon name="arrow-right" className="w-4 h-4" />
+                <button type="button" className="btn-hero">
+                  {ctaText} <LucideIcon name={lucideIconRegistry.ArrowRight} className="h-4 w-4" />
                 </button>
               )}
               <div className="flex flex-col gap-0.5">
-                <p className="text-[13px] font-bold" style={{ color: "var(--color-text-primary)" }}>{founderName}</p>
-                <p className="text-[11px]" style={{ color: "var(--color-text-muted)" }}>{founderRole}</p>
+                <p className="text-[13px] font-bold text-text-primary">{founderName}</p>
+                <p className="text-[11px] text-text-muted">{founderRole}</p>
               </div>
             </motion.div>
 
-            {/* Experience Badge / Rating + Skills cards */}
-            <motion.div {...fu(0.22)} className="flex flex-col sm:flex-row gap-4">
+            {/* Rating + Skills mini-cards */}
+            <motion.div {...fadeUp(0.22)} className="flex flex-col gap-4 sm:flex-row">
               {ratingValue ? (
-                <div className="flex-1 p-4 rounded-xl" style={{ background: "var(--color-bg-subtle)", border: "1px solid var(--color-stroke-default)" }}>
-                  <div className="flex items-center gap-1 mb-1.5">
-                    {[1, 2, 3, 4, 5].map((n) => (
-                      <LucideIcon key={n} name="star" className="w-3.5 h-3.5 fill-amber-400" style={{ color: "#FBBF24" }} />
+                <div className="card-compact flex-1">
+                  <div className="mb-1.5 flex items-center gap-1">
+                    {[1, 2, 3, 4, 5].map((starNumber) => (
+                      <LucideIcon
+                        key={starNumber}
+                        name={lucideIconRegistry.Star}
+                        className="h-3.5 w-3.5 fill-amber-400 text-amber-400"
+                      />
                     ))}
                   </div>
-                  <p className="text-[22px] font-extrabold" style={{ color: "var(--color-text-primary)" }}>
-                    {ratingValue}<span className="text-sm font-semibold" style={{ color: "var(--color-text-muted)" }}>/5.0</span>
+                  <p className="text-[22px] font-extrabold text-text-primary">
+                    {ratingValue}<span className="text-sm font-semibold text-text-muted">/5.0</span>
                   </p>
-                  <p className="text-[11px]" style={{ color: "var(--color-text-muted)" }}>{ratingLabel}</p>
+                  <p className="text-[11px] text-text-muted">{ratingLabel}</p>
                 </div>
               ) : (
-                <div className="flex-1 p-4 rounded-xl flex flex-col justify-center" style={{ background: "var(--color-bg-subtle)", border: "1px solid var(--color-stroke-default)" }}>
-                  <p className="text-[26px] font-black leading-none mb-1.5" style={{ color: "var(--color-brand)" }}>
-                    15+
+                <div className="card-compact flex flex-1 flex-col justify-center">
+                  <p className="mb-1.5 text-[26px] font-black leading-none text-brand">
+                    {statBadgeValue}
                   </p>
-                  <p className="text-[12px] font-bold" style={{ color: "var(--color-text-primary)" }}>
-                    Enterprise Data & Architecture
-                  </p>
-                  <p className="text-[11px]" style={{ color: "var(--color-text-muted)" }}>
-                    Senior Experience
+                  <p className="text-[12px] font-bold text-text-primary">
+                    {statBadgeLabel}
                   </p>
                 </div>
               )}
-              <div className="flex-1 p-4 rounded-xl" style={{ background: "var(--color-bg-subtle)", border: "1px solid var(--color-stroke-default)" }}>
-                <p className="text-[11px] font-bold mb-2.5" style={{ color: "var(--color-text-primary)" }}>{skillsHeading}</p>
+              <div className="card-compact flex-1">
+                <p className="mb-2.5 text-[11px] font-bold text-text-primary">{skillsHeading}</p>
                 <div className="flex flex-wrap gap-1.5">
-                  {skills.map((sk) => (
-                    <span key={sk} className="text-[10.5px] font-medium px-2.5 py-1 rounded-full" style={{ background: "var(--color-bg-surface)", color: "var(--color-text-secondary)", border: "1px solid var(--color-stroke-default)" }}>
-                      {sk}
+                  {skills.map((skill) => (
+                    <span key={skill} className="chip text-[10.5px]">
+                      {skill}
                     </span>
                   ))}
                 </div>

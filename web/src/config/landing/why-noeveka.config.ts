@@ -1,5 +1,5 @@
 /**
- * why-noeveka.config.ts — static fallback data for the WhyNoeveka section.
+ * why-noeveka.config.ts - static fallback data for the WhyNoeveka section.
  */
 
 export const WHY_NOEVEKA_CONFIG = {

@@ -1,56 +1,25 @@
 import { useEffect, useState } from "react";
+
+import {
+  ContactForm,
+  ContactHero,
+  ContactInfo,
+  type ContactChannelsData,
+  type ContactFormData,
+  type ContactHeroProps,
+} from "@/components/contact";
 import { PageHead } from "@/components/seo";
-import { SEO_CONFIG } from "@/config/seo.config";
-import ContactHero from "@/components/contact/contact-hero";
-import ContactForm from "@/components/contact/contact-form";
-import ContactInfo from "@/components/contact/contact-info";
+import { CONTACT_CONFIG } from "@/config/contact.config";
 import { getContactPage } from "@/lib/sanity";
 
 interface ContactPageData {
-  hero?: {
-    heading?: string;
-    subtext?: string;
+  seo?: {
+    title?: string;
+    description?: string;
   };
-  form?: {
-    firstNameLabel?: string;
-    firstNamePlaceholder?: string;
-    lastNameLabel?: string;
-    lastNamePlaceholder?: string;
-    emailLabel?: string;
-    emailPlaceholder?: string;
-    phoneLabel?: string;
-    phonePlaceholder?: string;
-    messageLabel?: string;
-    messagePlaceholder?: string;
-    servicesLabel?: string;
-    services?: Array<{ id: string; label: string }>;
-    submitText?: string;
-    submittingText?: string;
-    successHeading?: string;
-    successSubtext?: string;
-    resetButtonText?: string;
-  };
-  channels?: {
-    chat?: {
-      title?: string;
-      subtext?: string;
-      links?: Array<{
-        icon?: string;
-        label?: string;
-        href?: string;
-        external?: boolean;
-      }>;
-    };
-    call?: {
-      title?: string;
-      subtext?: string;
-      links?: Array<{
-        icon?: string;
-        label?: string;
-        href?: string;
-      }>;
-    };
-  };
+  hero?: ContactHeroProps["data"];
+  form?: ContactFormData;
+  channels?: ContactChannelsData;
 }
 
 export default function ContactPage() {
@@ -66,27 +35,28 @@ export default function ContactPage() {
       });
   }, []);
 
+  const metaTitle = data?.seo?.title ?? CONTACT_CONFIG.seo.title;
+  const metaDescription =
+    data?.seo?.description ?? CONTACT_CONFIG.seo.description;
+
   return (
     <>
-      <PageHead
-        title={SEO_CONFIG.pages.contact.title}
-        description={SEO_CONFIG.pages.contact.description}
-      />
+      <PageHead title={metaTitle} description={metaDescription} />
 
-      <div className="min-h-screen bg-surface pb-20 sm:pb-28">
+      <div className="contact-page">
         {/* 1. Hero Header */}
         <ContactHero data={data?.hero} />
 
         {/* 2. Main Content: Form (Left) & Direct Info (Right) */}
         <div className="lp-container lp-px mx-auto max-w-6xl">
-          <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:gap-16 xl:gap-20 items-start">
+          <div className="grid grid-cols-1 items-start gap-12 lg:grid-cols-12 lg:gap-16 xl:gap-20">
             {/* Left: Contact Form */}
             <div className="lg:col-span-7">
               <ContactForm data={data?.form} />
             </div>
 
             {/* Right: Direct Reachout Channels */}
-            <div className="lg:col-span-5 pt-4 lg:pt-0">
+            <div className="pt-4 lg:col-span-5 lg:pt-0">
               <ContactInfo data={data?.channels} />
             </div>
           </div>
@@ -95,3 +65,4 @@ export default function ContactPage() {
     </>
   );
 }
+

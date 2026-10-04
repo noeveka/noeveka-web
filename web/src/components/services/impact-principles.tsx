@@ -2,14 +2,15 @@ import { useRef, useState } from "react";
 import { motion, useScroll, useSpring, useMotionValueEvent, useTransform } from "framer-motion";
 import { IsometricMatrixVisual } from "./service-visuals";
 import { SERVICES_CONFIG } from "@/config/services.config";
+import { fadeUp } from "@/lib/motion";
 
-interface PrincipleItem {
+export interface PrincipleItem {
   number: string;
   title: string;
   description: string;
 }
 
-interface ImpactPrinciplesProps {
+export interface ImpactPrinciplesProps {
   heading?: string;
   body?: string;
   principles?: readonly PrincipleItem[];
@@ -96,20 +97,14 @@ export default function ImpactPrinciples({
           <div className={styles.leftCol}>
             <div>
               <motion.h2
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
+                {...fadeUp(0)}
                 className={styles.heading}
               >
                 {heading}
               </motion.h2>
 
               <motion.p
-                initial={{ opacity: 0, y: 14 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.08 }}
+                {...fadeUp(0.08)}
                 className={styles.bodyText}
               >
                 {body}

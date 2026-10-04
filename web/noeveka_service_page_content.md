@@ -1,6 +1,6 @@
 NOEVEKA
 
-Service Detail Pages — Developer Content Pack
+Service Detail Pages - Developer Content Pack
 
 All four service pages, field by field, ready to copy into the CMS.
 
@@ -12,9 +12,9 @@ Structure used on every page: Hero → The Challenge → What We Do → Visual M
 
 Common CTA Verb Check
 
-Each page's Hero uses its own primary CTA verb ("Discuss Your Architecture," "Discuss Your AI Architecture," "Assess Your AI Governance," "Discuss Your Transformation"). This is intentional per-page phrasing, not an inconsistency — but flagging it here in case Ajay would rather standardise on one CTA label across all four pages instead.
+Each page's Hero uses its own primary CTA verb ("Discuss Your Architecture," "Discuss Your AI Architecture," "Assess Your AI Governance," "Discuss Your Transformation"). This is intentional per-page phrasing, not an inconsistency - but flagging it here in case Ajay would rather standardise on one CTA label across all four pages instead.
 
-01 — Enterprise Data & AI Architecture
+01 - Enterprise Data & AI Architecture
 
 PAGE URL
 
@@ -54,7 +54,7 @@ SECONDARY CTA BUTTON
 
 Explore Our Approach
 
-HERO VISUAL — DIRECTION FOR DESIGNER
+HERO VISUAL - DIRECTION FOR DESIGNER
 
 Do not use another photograph of Ajay here. Use one of the Noeveka architectural/geometric visuals, ideally a layered structural composition suggesting BUSINESS → DATA → PLATFORM → AI.
 
@@ -118,7 +118,7 @@ SECTION HEADING
 
 Our Architecture Lens
 
-MODEL STRUCTURE — FOR DESIGNER/DEVELOPER
+MODEL STRUCTURE - FOR DESIGNER/DEVELOPER
 
 Horizontal, four-layer model (not cards). BUSINESS (Objectives, outcomes, operating priorities) → DATA (Domains, governance, information architecture) → PLATFORM (Cloud, storage, processing, integration) → CONSUMPTION & AI (BI, analytics, AI and agentic systems).
 
@@ -154,15 +154,15 @@ SECTION HEADING
 
 Architecture should reduce complexity, not document it.
 
-Greater clarity — A shared view of the enterprise architecture and its evolution.
+Greater clarity - A shared view of the enterprise architecture and its evolution.
 
-Reduced duplication — Clear ownership and reusable platform patterns.
+Reduced duplication - Clear ownership and reusable platform patterns.
 
-Better technology decisions — Investment aligned to enterprise needs rather than isolated projects.
+Better technology decisions - Investment aligned to enterprise needs rather than isolated projects.
 
-Faster delivery — Teams operate within known architectural standards.
+Faster delivery - Teams operate within known architectural standards.
 
-AI readiness — A scalable data and platform foundation capable of supporting emerging AI use cases.
+AI readiness - A scalable data and platform foundation capable of supporting emerging AI use cases.
 
 8. How to Engage Us on This Service
 
@@ -206,7 +206,7 @@ SECONDARY CTA BUTTON
 
 Explore All Services
 
-02 — Enterprise AI & Agentic Systems
+02 - Enterprise AI & Agentic Systems
 
 PAGE URL
 
@@ -246,7 +246,7 @@ SECONDARY CTA BUTTON
 
 Explore Our Approach
 
-HERO VISUAL — DIRECTION FOR DESIGNER
+HERO VISUAL - DIRECTION FOR DESIGNER
 
 Use the Noeveka systems visual language, but avoid cliché glowing robots/brains. Think: multiple specialised agents connected through an orchestrated architecture, with enterprise systems around them.
 
@@ -296,9 +296,9 @@ SECTION HEADING
 
 Enterprise Agent Architecture
 
-MODEL STRUCTURE — FOR DESIGNER/DEVELOPER
+MODEL STRUCTURE - FOR DESIGNER/DEVELOPER
 
-Signature hub-and-spoke diagram. Centre label: "AI AGENTS" (keep this exact label — do not swap to "AI Orchestration"; it must match the label used in the services-overview card graphic). Connected around the centre: Enterprise Data, Knowledge, Business Applications, APIs & Tools, Identity, Models. Outer ring: Governance | Security | Observability | Human Oversight.
+Signature hub-and-spoke diagram. Centre label: "AI AGENTS" (keep this exact label - do not swap to "AI Orchestration"; it must match the label used in the services-overview card graphic). Connected around the centre: Enterprise Data, Knowledge, Business Applications, APIs & Tools, Identity, Models. Outer ring: Governance | Security | Observability | Human Oversight.
 
 CAPTION UNDER THE MODEL
 
@@ -388,7 +388,7 @@ SECONDARY CTA BUTTON
 
 Explore All Services
 
-03 — AI Governance & Architecture Assurance
+03 - AI Governance & Architecture Assurance
 
 PAGE URL
 
@@ -428,7 +428,7 @@ SECONDARY CTA BUTTON
 
 Explore Our Approach
 
-HERO VISUAL — DIRECTION FOR DESIGNER
+HERO VISUAL - DIRECTION FOR DESIGNER
 
 Evolve the orange shield / trust-control graphic from the services overview into a fuller-page visual. Key words placed around it: TRUST · CONTROL · ACCOUNTABILITY · TRANSPARENCY.
 
@@ -478,7 +478,7 @@ SECTION HEADING
 
 Governance Model
 
-MODEL STRUCTURE — FOR DESIGNER/DEVELOPER
+MODEL STRUCTURE - FOR DESIGNER/DEVELOPER
 
 Three concentric rings, centred on "RESPONSIBLE ENTERPRISE AI". TRUST ring: Responsible AI, Transparency, Human accountability. CONTROL ring: Security, Risk, Identity, Data access. ASSURANCE ring: Architecture review, Monitoring, Auditability, Compliance.
 
@@ -570,7 +570,7 @@ SECONDARY CTA BUTTON
 
 Explore All Services
 
-04 — Data & AI Transformation Advisory
+04 - Data & AI Transformation Advisory
 
 PAGE URL
 
@@ -610,7 +610,7 @@ SECONDARY CTA BUTTON
 
 Explore Our Approach
 
-HERO VISUAL — DIRECTION FOR DESIGNER
+HERO VISUAL - DIRECTION FOR DESIGNER
 
 Elegant progression visual: ASSESS → DESIGN → EXECUTE → SCALE. Architectural, minimal and premium, matching the arrow graphic on the services-overview card.
 
@@ -660,13 +660,13 @@ SECTION HEADING
 
 Transformation Model
 
-MODEL STRUCTURE — FOR DESIGNER/DEVELOPER
+MODEL STRUCTURE - FOR DESIGNER/DEVELOPER
 
 Signature horizontal progression: ASSESS (Where are we today?) → DESIGN (What must change?) → EXECUTE (How do we get there?) → SCALE (How does it become sustainable?). Underneath the whole model, a supporting strip reading: Strategy · Architecture · Governance · People · Technology.
 
 CAPTION UNDER THE MODEL
 
-This is the same ASSESS → DESIGN → EXECUTE → SCALE progression used on the services-overview card for this service — keep the wording identical between the two.
+This is the same ASSESS → DESIGN → EXECUTE → SCALE progression used on the services-overview card for this service - keep the wording identical between the two.
 
 5. How We Engage
 

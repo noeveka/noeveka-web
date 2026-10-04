@@ -154,7 +154,7 @@ export async function handleResourceDownloadSubmission(
           from: fromEmail,
           to: [email.trim()],
           reply_to: toEmail,
-          subject: `Your download: ${resourceTitle} — Noeveka`,
+          subject: `Your download: ${resourceTitle} - Noeveka`,
           html: userConfirmationHtml,
         }),
       }),
@@ -176,7 +176,7 @@ export async function handleResourceDownloadSubmission(
     };
   } catch (err: unknown) {
     console.error("[Resource Download API] Error:", err);
-    // Still issue a token on email-send failure — the gate has already been
+    // Still issue a token on email-send failure - the gate has already been
     // cleared (contact added, validation passed).
     const downloadToken = pdfUrl
       ? await issueDownloadToken(pdfUrl, tokenSecret)

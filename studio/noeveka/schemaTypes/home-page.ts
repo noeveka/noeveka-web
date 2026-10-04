@@ -1,21 +1,23 @@
-import { defineField, defineType } from 'sanity'
+import {defineField, defineType} from 'sanity'
 
 export const homePage = defineType({
   name: 'homePage',
   title: 'Home Page',
   type: 'document',
   groups: [
-    { name: 'hero', title: 'Hero' },
-    { name: 'services', title: 'Services Section' },
-    { name: 'about', title: 'Who We Are' },
-    { name: 'testimonials', title: 'Testimonials' },
-    { name: 'metrics', title: 'Metrics Bar' },
-    { name: 'why', title: 'Why Noeveka' },
-    { name: 'cta', title: 'CTA Strip' },
-    { name: 'faq', title: 'FAQ' },
+    {name: 'hero', title: '1. Hero Section (Top of Page)'},
+    {name: 'services', title: '2. Services Section (What We Do)'},
+    {name: 'about', title: '3. Who We Are (Founder & Core Expertise)'},
+    {name: 'partnerLogos', title: '4. Enterprise Platforms (Logo Bar)'},
+    {name: 'testimonials', title: '5. Testimonials (Client Reviews)'},
+    {name: 'metrics', title: '6. Metrics Bar (Impact Numbers)'},
+    {name: 'why', title: '7. Why Noeveka (Differentiators & Features)'},
+    {name: 'faq', title: '8. FAQ (Frequently Asked Questions)'},
+    {name: 'cta', title: '9. Call To Action Strip (Bottom Banner)'},
+    {name: 'seo', title: '10. SEO & Metadata'},
   ],
   fields: [
-    // ─── HERO ────────────────────────────────────────────────────────────────
+    // ─── HERO -
     defineField({
       name: 'hero',
       title: 'Hero',
@@ -26,20 +28,17 @@ export const homePage = defineType({
           name: 'bgImage',
           title: 'Background Image (Desktop / Large screen)',
           type: 'image',
-          options: { hotspot: true },
-          fields: [
-            defineField({ name: 'alt', title: 'Alt Text', type: 'string' }),
-          ],
+          options: {hotspot: true},
+          fields: [defineField({name: 'alt', title: 'Alt Text', type: 'string'})],
         }),
         defineField({
           name: 'bgImageMobile',
           title: 'Background Image (Mobile / Small screen)',
-          description: 'Square or portrait image shown on phones (<768px). Leave blank to use the default local fallback.',
+          description:
+            'Square or portrait image shown on phones (<768px). Leave blank to use the default local fallback.',
           type: 'image',
-          options: { hotspot: true },
-          fields: [
-            defineField({ name: 'alt', title: 'Alt Text', type: 'string' }),
-          ],
+          options: {hotspot: true},
+          fields: [defineField({name: 'alt', title: 'Alt Text', type: 'string'})],
         }),
         defineField({
           name: 'eyebrow',
@@ -49,64 +48,27 @@ export const homePage = defineType({
         }),
         defineField({
           name: 'headingLine1',
-          title: 'Heading — Line 1',
+          title: 'Main Headline - First Line',
+          description:
+            'White text before the highlighted word (e.g. "Architecting Enterprise Data &")',
           type: 'string',
-          initialValue: 'Enterprise Data &',
+          initialValue: 'Architecting Enterprise Data &',
         }),
         defineField({
           name: 'headingHighlight',
-          title: 'Heading — Highlight (orange)',
+          title: 'Main Headline - Orange Highlight Word',
+          description: 'Highlighted in brand orange (e.g. "AI")',
           type: 'string',
           initialValue: 'AI',
         }),
         defineField({
           name: 'headingLine2',
-          title: 'Heading — Line 2',
+          title: 'Main Headline - Ending Line',
+          description: 'White text following the highlighted word (e.g. "for Better Decisions")',
           type: 'string',
-          initialValue: 'Solutions',
+          initialValue: 'for Better Decisions',
         }),
-        defineField({
-          name: 'trustBadgeRating',
-          title: 'Trust Badge — Rating',
-          type: 'string',
-          initialValue: '4.9',
-        }),
-        defineField({
-          name: 'trustBadgeDescriptor',
-          title: 'Trust Badge — Descriptor',
-          type: 'string',
-          initialValue: '5K+ Enterprise Leaders Trained',
-        }),
-        defineField({
-          name: 'headingPart1',
-          title: 'Heading — Part 1 (plain)',
-          type: 'string',
-          initialValue: 'Architect-Led ',
-        }),
-        defineField({
-          name: 'headingHighlight1',
-          title: 'Heading — Highlight 1 (orange)',
-          type: 'string',
-          initialValue: 'Enterprise',
-        }),
-        defineField({
-          name: 'headingPart2',
-          title: 'Heading — Part 2 (plain)',
-          type: 'string',
-          initialValue: 'Data & ',
-        }),
-        defineField({
-          name: 'headingHighlight2',
-          title: 'Heading — Highlight 2 (orange)',
-          type: 'string',
-          initialValue: 'AI',
-        }),
-        defineField({
-          name: 'headingPart3',
-          title: 'Heading — Part 3 (plain)',
-          type: 'string',
-          initialValue: ' Solutions',
-        }),
+
         defineField({
           name: 'subtitle',
           title: 'Subtitle / Subheading',
@@ -115,52 +77,20 @@ export const homePage = defineType({
         }),
         defineField({
           name: 'primaryCtaText',
-          title: 'Primary CTA — Button Text',
+          title: 'Primary CTA - Button Text',
           type: 'string',
           initialValue: 'Book a Strategy Call',
         }),
         defineField({
           name: 'primaryCtaLink',
-          title: 'Primary CTA — Link',
+          title: 'Primary CTA - Link',
           type: 'string',
         }),
-        defineField({
-          name: 'secondaryCtaText',
-          title: 'Secondary CTA — Button Text',
-          type: 'string',
-          initialValue: 'Speak to an Architect',
-        }),
-        defineField({
-          name: 'secondaryCtaLink',
-          title: 'Secondary CTA — Link',
-          type: 'string',
-        }),
-        defineField({
-          name: 'trustBullets',
-          title: 'Trust Bullets',
-          description: 'Short bullet points shown below the CTAs',
-          type: 'array',
-          of: [{ type: 'string' }],
-        }),
-        defineField({
-          name: 'stats',
-          title: 'Stats',
-          type: 'array',
-          of: [
-            {
-              type: 'object',
-              fields: [
-                defineField({ name: 'val', title: 'Value', type: 'string' }),
-                defineField({ name: 'label', title: 'Label', type: 'string' }),
-              ],
-              preview: { select: { title: 'val', subtitle: 'label' } },
-            },
-          ],
-        }),
+
       ],
     }),
 
-    // ─── SERVICES SECTION ────────────────────────────────────────────────────
+    // ─── SERVICES SECTION ─
     defineField({
       name: 'servicesSection',
       title: 'Services Section',
@@ -185,7 +115,7 @@ export const homePage = defineType({
           type: 'text',
           rows: 3,
           initialValue:
-            'We help organizations design, build and scale modern data and AI systems — from strategy to production, with a focus on real business impact.',
+            'We help organizations design, build and scale modern data and AI systems - from strategy to production, with a focus on real business impact.',
         }),
         defineField({
           name: 'cardCtaText',
@@ -196,35 +126,60 @@ export const homePage = defineType({
         defineField({
           name: 'services',
           title: 'Services (Optional In-Page Override)',
-          description:
-            'If defined, overrides the global Service documents on the Home Page.',
+          description: 'If defined, overrides the global Service documents on the Home Page.',
           type: 'array',
           of: [
             {
               type: 'object',
               fields: [
-                defineField({ name: 'title', title: 'Title', type: 'string', validation: (Rule) => Rule.required() }),
-                defineField({ name: 'description', title: 'Description', type: 'text', rows: 3, validation: (Rule) => Rule.required() }),
-                defineField({ name: 'icon', title: 'Icon Name', type: 'string', initialValue: 'layers' }),
+                defineField({
+                  name: 'title',
+                  title: 'Title',
+                  type: 'string',
+                  validation: (Rule) => Rule.required(),
+                }),
+                defineField({
+                  name: 'description',
+                  title: 'Description',
+                  type: 'text',
+                  rows: 3,
+                  validation: (Rule) => Rule.required(),
+                }),
+                defineField({
+                  name: 'icon',
+                  title: 'Icon Name',
+                  type: 'string',
+                  initialValue: 'layers',
+                }),
                 defineField({
                   name: 'variant',
                   title: 'Card Variant',
                   type: 'string',
                   options: {
                     list: [
-                      { title: 'White', value: 'white' },
-                      { title: 'Orange (highlight)', value: 'orange' },
-                      { title: 'Black', value: 'black' },
+                      {title: 'White', value: 'white'},
+                      {title: 'Orange (highlight)', value: 'orange'},
+                      {title: 'Black', value: 'black'},
                     ],
                   },
                   initialValue: 'white',
                 }),
-                defineField({ name: 'ctaText', title: 'CTA Text', type: 'string', initialValue: 'Learn More' }),
-                defineField({ name: 'ctaLink', title: 'CTA Link', type: 'string' }),
-                defineField({ name: 'featured', title: 'Featured', type: 'boolean', initialValue: false }),
+                defineField({
+                  name: 'ctaText',
+                  title: 'CTA Text',
+                  type: 'string',
+                  initialValue: 'Learn More',
+                }),
+                defineField({name: 'ctaLink', title: 'CTA Link', type: 'string'}),
+                defineField({
+                  name: 'featured',
+                  title: 'Featured',
+                  type: 'boolean',
+                  initialValue: false,
+                }),
               ],
               preview: {
-                select: { title: 'title', subtitle: 'variant' },
+                select: {title: 'title', subtitle: 'variant'},
               },
             },
           ],
@@ -232,7 +187,7 @@ export const homePage = defineType({
       ],
     }),
 
-    // ─── WHO WE ARE (About) ──────────────────────────────────────────────────
+    // ─── WHO WE ARE (About) -
     defineField({
       name: 'aboutSection',
       title: 'Who We Are Section',
@@ -277,38 +232,36 @@ export const homePage = defineType({
           name: 'founderRole',
           title: 'Founder Role',
           type: 'string',
-          initialValue: 'Founder & Chief Architect — Noeveka',
+          initialValue: 'Founder & Chief Architect - Noeveka',
         }),
         defineField({
           name: 'founderPhoto',
           title: 'Founder Photo',
           type: 'image',
-          options: { hotspot: true },
-          fields: [
-            defineField({ name: 'alt', title: 'Alt Text', type: 'string' }),
-          ],
+          options: {hotspot: true},
+          fields: [defineField({name: 'alt', title: 'Alt Text', type: 'string'})],
         }),
         defineField({
           name: 'statBadgeValue',
-          title: 'Stat Badge — Value',
+          title: 'Stat Badge - Value',
           type: 'string',
           initialValue: '15+',
         }),
         defineField({
           name: 'statBadgeLabel',
-          title: 'Stat Badge — Label',
+          title: 'Stat Badge - Label',
           type: 'string',
           initialValue: 'Years Enterprise Experience',
         }),
         defineField({
           name: 'ratingValue',
-          title: 'Rating — Value',
+          title: 'Rating - Value',
           type: 'string',
           initialValue: '4.9',
         }),
         defineField({
           name: 'ratingLabel',
-          title: 'Rating — Label',
+          title: 'Rating - Label',
           type: 'string',
           initialValue: 'Avg. client rating',
         }),
@@ -322,12 +275,38 @@ export const homePage = defineType({
           name: 'skills',
           title: 'Skills List',
           type: 'array',
-          of: [{ type: 'string' }],
+          of: [{type: 'string'}],
         }),
       ],
     }),
 
-    // ─── TESTIMONIALS SECTION ────────────────────────────────────────────────
+    // ─── PARTNER LOGOS / PLATFORMS BAR 
+    defineField({
+      name: 'trustCompanyLogoBarSection',
+      title: 'Enterprise Platforms Logo Bar',
+      description:
+        'The horizontal strip showcasing experience across leading enterprise data and AI platforms.',
+      type: 'object',
+      group: 'partnerLogos',
+      fields: [
+        defineField({
+          name: 'title',
+          title: 'Section Title',
+          description: 'e.g. "Experience across leading enterprise platforms"',
+          type: 'string',
+          initialValue: 'Experience across leading enterprise platforms',
+        }),
+        defineField({
+          name: 'subtitle',
+          title: 'Section Subtitle',
+          description: 'e.g. "Technology choices guided by enterprise fit, not vendor preference."',
+          type: 'string',
+          initialValue: 'Technology choices guided by enterprise fit, not vendor preference.',
+        }),
+      ],
+    }),
+
+    // ─── TESTIMONIALS SECTION 
     defineField({
       name: 'testimonialsSection',
       title: 'Testimonials Section',
@@ -355,7 +334,7 @@ export const homePage = defineType({
       ],
     }),
 
-    // ─── METRICS BAR ────────────────────────────────────────────────────────
+    // ─── METRICS BAR
     defineField({
       name: 'metricsSection',
       title: 'Metrics Bar',
@@ -370,18 +349,18 @@ export const homePage = defineType({
             {
               type: 'object',
               fields: [
-                defineField({ name: 'value', title: 'Value', type: 'string' }),
-                defineField({ name: 'label', title: 'Label', type: 'string' }),
-                defineField({ name: 'sub', title: 'Sub-label', type: 'string' }),
+                defineField({name: 'value', title: 'Value', type: 'string'}),
+                defineField({name: 'label', title: 'Label', type: 'string'}),
+                defineField({name: 'sub', title: 'Sub-label', type: 'string'}),
               ],
-              preview: { select: { title: 'label', subtitle: 'value' } },
+              preview: {select: {title: 'label', subtitle: 'value'}},
             },
           ],
         }),
       ],
     }),
 
-    // ─── WHY NOEVEKA ─────────────────────────────────────────────────────────
+    // ─── WHY NOEVEKA -
     defineField({
       name: 'whySection',
       title: 'Why Noeveka Section',
@@ -413,10 +392,10 @@ export const homePage = defineType({
             {
               type: 'object',
               fields: [
-                defineField({ name: 'value', title: 'Value', type: 'string' }),
-                defineField({ name: 'label', title: 'Label', type: 'string' }),
+                defineField({name: 'value', title: 'Value', type: 'string'}),
+                defineField({name: 'label', title: 'Label', type: 'string'}),
               ],
-              preview: { select: { title: 'label', subtitle: 'value' } },
+              preview: {select: {title: 'label', subtitle: 'value'}},
             },
           ],
         }),
@@ -428,17 +407,17 @@ export const homePage = defineType({
             {
               type: 'object',
               fields: [
-                defineField({ name: 'number', title: 'Number (e.g. "01")', type: 'string' }),
+                defineField({name: 'number', title: 'Number (e.g. "01")', type: 'string'}),
                 defineField({
                   name: 'icon',
                   title: 'Icon Name (Lucide)',
                   type: 'string',
                   description: 'e.g. "ShieldCheck", "TrendingUp", "Layers3"',
                 }),
-                defineField({ name: 'title', title: 'Title', type: 'string' }),
-                defineField({ name: 'desc', title: 'Description', type: 'text', rows: 3 }),
+                defineField({name: 'title', title: 'Title', type: 'string'}),
+                defineField({name: 'desc', title: 'Description', type: 'text', rows: 3}),
               ],
-              preview: { select: { title: 'title', subtitle: 'number' } },
+              preview: {select: {title: 'title', subtitle: 'number'}},
             },
           ],
         }),
@@ -456,10 +435,10 @@ export const homePage = defineType({
                   type: 'string',
                   description: 'e.g. "MessageSquare", "Users"',
                 }),
-                defineField({ name: 'title', title: 'Title', type: 'string' }),
-                defineField({ name: 'desc', title: 'Description', type: 'text', rows: 3 }),
+                defineField({name: 'title', title: 'Title', type: 'string'}),
+                defineField({name: 'desc', title: 'Description', type: 'text', rows: 3}),
               ],
-              preview: { select: { title: 'title' } },
+              preview: {select: {title: 'title'}},
             },
           ],
         }),
@@ -477,7 +456,7 @@ export const homePage = defineType({
       ],
     }),
 
-    // ─── CTA STRIP ───────────────────────────────────────────────────────────
+    // ─── CTA STRIP -──
     defineField({
       name: 'ctaStrip',
       title: 'CTA Strip',
@@ -492,13 +471,13 @@ export const homePage = defineType({
         }),
         defineField({
           name: 'headingPart',
-          title: 'Heading — Part (plain)',
+          title: 'Heading - Part (plain)',
           type: 'string',
           initialValue: "Ready to architect your enterprise's ",
         }),
         defineField({
           name: 'headingHighlight',
-          title: 'Heading — Highlight (orange)',
+          title: 'Heading - Highlight (orange)',
           type: 'string',
           initialValue: 'data future?',
         }),
@@ -510,30 +489,30 @@ export const homePage = defineType({
         }),
         defineField({
           name: 'primaryCtaText',
-          title: 'Primary CTA — Button Text',
+          title: 'Primary CTA - Button Text',
           type: 'string',
           initialValue: 'Book a Free Strategy Call',
         }),
         defineField({
           name: 'primaryCtaLink',
-          title: 'Primary CTA — Link',
+          title: 'Primary CTA - Link',
           type: 'string',
         }),
         defineField({
           name: 'secondaryCtaText',
-          title: 'Secondary CTA — Button Text',
+          title: 'Secondary CTA - Button Text',
           type: 'string',
           initialValue: 'Explore Our Resources',
         }),
         defineField({
           name: 'secondaryCtaLink',
-          title: 'Secondary CTA — Link',
+          title: 'Secondary CTA - Link',
           type: 'string',
         }),
       ],
     }),
 
-    // ─── FAQ ─────────────────────────────────────────────────────────────────
+    // ─── FAQ -────────
     defineField({
       name: 'faqSection',
       title: 'FAQ Section',
@@ -566,12 +545,40 @@ export const homePage = defineType({
             {
               type: 'object',
               fields: [
-                defineField({ name: 'question', title: 'Question', type: 'string' }),
-                defineField({ name: 'answer', title: 'Answer', type: 'text', rows: 4 }),
+                defineField({name: 'question', title: 'Question', type: 'string'}),
+                defineField({name: 'answer', title: 'Answer', type: 'text', rows: 4}),
               ],
-              preview: { select: { title: 'question' } },
+              preview: {select: {title: 'question'}},
             },
           ],
+        }),
+      ],
+    }),
+
+    // ─── 10. SEO & METADATA ───────────────────────────────────────────────────
+    defineField({
+      name: 'seo',
+      title: 'SEO & Metadata',
+      type: 'object',
+      group: 'seo',
+      description: 'Search engine optimization tags and social sharing metadata.',
+      fields: [
+        defineField({
+          name: 'title',
+          title: 'Meta Title',
+          type: 'string',
+          description: 'Title displayed in search engine results and browser tabs.',
+          initialValue: 'Enterprise Data & AI Advisory',
+        }),
+        defineField({
+          name: 'description',
+          title: 'Meta Description',
+          type: 'text',
+          rows: 3,
+          description:
+            'Summary shown in search engine snippet preview (150-160 characters recommended).',
+          initialValue:
+            'Architect-led target designs, bootcamps, and advisory for Microsoft Fabric, Databricks Lakehouse & GenAI pipelines. Independent, practical, and vendor-unbiased.',
         }),
       ],
     }),
@@ -579,7 +586,7 @@ export const homePage = defineType({
 
   preview: {
     prepare() {
-      return { title: 'Home Page' }
+      return {title: 'Home Page'}
     },
   },
 })

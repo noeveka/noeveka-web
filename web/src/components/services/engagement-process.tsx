@@ -3,10 +3,11 @@ import { useRef } from "react";
 import { motion, useScroll } from "framer-motion";
 
 import { SERVICES_CONFIG } from "@/config/services.config";
+import { fadeUp } from "@/lib/motion";
 
 import ProcessBallPath, { type ProcessStep } from "./process-ball-path";
 
-interface EngagementProcessProps {
+export interface EngagementProcessProps {
   heading?: string;
   subtext?: string;
   steps?: readonly ProcessStep[];
@@ -28,6 +29,7 @@ const styles = {
 };
 
 export default function EngagementProcess({
+  heading = SERVICES_CONFIG.engagementSection.heading,
   subtext = SERVICES_CONFIG.engagementSection.subtext,
   steps = SERVICES_CONFIG.engagementSection.steps,
 }: EngagementProcessProps) {
@@ -53,11 +55,14 @@ export default function EngagementProcess({
       <div className={styles.container}>
         {/* ── Centered Header ── */}
         <div className={styles.headerWrapper}>
+          <motion.h2
+            {...fadeUp(0)}
+            className={styles.heading}
+          >
+            {heading}
+          </motion.h2>
           <motion.p
-            initial={{ opacity: 0, y: 14 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.12 }}
+            {...fadeUp(0.1)}
             className={styles.subtext}
           >
             {subtext}

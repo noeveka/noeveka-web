@@ -1,65 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import { Link } from "react-router";
 import { motion } from "framer-motion";
-import { LucideIcon } from "@/components/lucide-icons";
-import { fu, fs } from "@/lib/motion";
+import { LucideIcon, lucideIconRegistry } from "@/components/lucide-icons";
+import { fadeUp, fadeScale } from "@/lib/motion";
 import { getServices } from "@/lib/sanity";
 import { SERVICES_CONFIG } from "@/config/landing/services.config";
 
 type Variant = "white" | "orange" | "black";
-
-const styles: Record<
-  Variant,
-  {
-    bg: string;
-    text: string;
-    muted: string;
-    iconBg: string;
-    iconColor: string;
-    border: string;
-    btnBg: string;
-    btnText: string;
-    shadow: string;
-    watermarkBg: string;
-  }
-> = {
-  white: {
-    bg: "var(--color-bg-surface, #FFFFFF)",
-    text: "var(--color-text-primary, #111827)",
-    muted: "#6B7280",
-    iconBg: "rgba(246, 93, 1, 0.08)",
-    iconColor: "var(--color-brand, #F65D01)",
-    border: "rgba(0, 0, 0, 0.06)",
-    btnBg: "rgba(246, 93, 1, 0.08)",
-    btnText: "var(--color-brand, #F65D01)",
-    shadow: "0 6px 24px -2px rgba(0, 0, 0, 0.05), 0 2px 6px -1px rgba(0, 0, 0, 0.02)",
-    watermarkBg: "rgba(246, 93, 1, 0.06)",
-  },
-  orange: {
-    bg: "var(--color-brand, #F65D01)",
-    text: "#FFFFFF",
-    muted: "rgba(255, 255, 255, 0.88)",
-    iconBg: "rgba(255, 255, 255, 0.20)",
-    iconColor: "#FFFFFF",
-    border: "transparent",
-    btnBg: "rgba(255, 255, 255, 0.22)",
-    btnText: "#FFFFFF",
-    shadow: "0 12px 36px -4px rgba(246, 93, 1, 0.38)",
-    watermarkBg: "rgba(0, 0, 0, 0.08)",
-  },
-  black: {
-    bg: "#16171E",
-    text: "#FFFFFF",
-    muted: "#94A3B8",
-    iconBg: "rgba(246, 93, 1, 0.14)",
-    iconColor: "var(--color-brand, #F65D01)",
-    border: "rgba(255, 255, 255, 0.07)",
-    btnBg: "rgba(246, 93, 1, 0.14)",
-    btnText: "var(--color-brand, #F65D01)",
-    shadow: "0 12px 36px -4px rgba(0, 0, 0, 0.35)",
-    watermarkBg: "rgba(255, 255, 255, 0.04)",
-  },
-};
 
 export interface ServiceItem {
   _id?: string;
@@ -73,7 +20,7 @@ export interface ServiceItem {
   order?: number;
 }
 
-interface WhatWeDoProps {
+export interface WhatWeDoProps {
   eyebrow?: string;
   heading?: string;
   subtext?: string;
@@ -96,6 +43,15 @@ export default function WhatWeDo({
   services: propServices,
 }: WhatWeDoProps) {
   const [sanityServices, setSanityServices] = useState<ServiceItem[]>([]);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const sliderRef = useRef<HTMLDivElement>(null);
+  const scrollAnimRef = useRef<number | null>(null);
+
+  // Mouse drag support for desktop/emulator testing
+  const isPointerDownRef = useRef(false);
+  const startXRef = useRef(0);
+  const scrollLeftRef = useRef(0);
+  const hasMovedRef = useRef(false);
 
   useEffect(() => {
     // Only fetch standalone service documents if no inline services were passed from page
@@ -118,187 +74,304 @@ export default function WhatWeDo({
         ? sanityServices
         : [...SERVICES_CONFIG.services];
 
+  const handleScroll = useCallback(() => {
+    if (scrollAnimRef.current) {
+      cancelAnimationFrame(scrollAnimRef.current);
+    }
+
+    scrollAnimRef.current = requestAnimationFrame(() => {
+      const container = sliderRef.current;
+      if (!container) return;
+
+      const containerCenter = container.scrollLeft + container.offsetWidth / 2;
+      const children = Array.from(container.children) as HTMLElement[];
+      if (!children.length) return;
+
+      let closestIndex = 0;
+      let minDistance = Infinity;
+
+      children.forEach((child, index) => {
+        const childCenter = child.offsetLeft + child.offsetWidth / 2;
+        const dist = Math.abs(containerCenter - childCenter);
+        if (dist < minDistance) {
+          minDistance = dist;
+          closestIndex = index;
+        }
+      });
+
+      setActiveIndex(closestIndex);
+    });
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (scrollAnimRef.current) {
+        cancelAnimationFrame(scrollAnimRef.current);
+      }
+    };
+  }, []);
+
+  const scrollToCard = (targetIndex: number) => {
+    const container = sliderRef.current;
+    if (!container) return;
+    const children = Array.from(container.children) as HTMLElement[];
+    const target = children[targetIndex];
+    if (!target) return;
+
+    const scrollLeft = target.offsetLeft - (container.offsetWidth - target.offsetWidth) / 2;
+    container.scrollTo({
+      left: Math.max(0, scrollLeft),
+      behavior: "smooth",
+    });
+    setActiveIndex(targetIndex);
+  };
+
+  const handlePrev = () => {
+    if (activeIndex > 0) {
+      scrollToCard(activeIndex - 1);
+    }
+  };
+
+  const handleNext = () => {
+    if (activeIndex < displayServices.length - 1) {
+      scrollToCard(activeIndex + 1);
+    }
+  };
+
+  const handlePointerDown = (event: React.PointerEvent<HTMLDivElement>) => {
+    // Only drag with mouse on desktop/emulators; let mobile browser handle touch + vertical page scroll natively!
+    if (event.pointerType !== "mouse" || event.button !== 0) return;
+    if (!sliderRef.current) return;
+    isPointerDownRef.current = true;
+    hasMovedRef.current = false;
+    startXRef.current = event.pageX - sliderRef.current.offsetLeft;
+    scrollLeftRef.current = sliderRef.current.scrollLeft;
+  };
+
+  const handlePointerMove = (event: React.PointerEvent<HTMLDivElement>) => {
+    if (!isPointerDownRef.current || !sliderRef.current) return;
+    const currentX = event.pageX - sliderRef.current.offsetLeft;
+    const walkDistance = currentX - startXRef.current;
+    if (Math.abs(walkDistance) > 6) {
+      hasMovedRef.current = true;
+    }
+    sliderRef.current.scrollLeft = scrollLeftRef.current - walkDistance;
+  };
+
+  const handlePointerUpOrLeave = () => {
+    isPointerDownRef.current = false;
+  };
+
+  const handleLinkClick = (event: React.MouseEvent) => {
+    if (hasMovedRef.current) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+  };
+
   const resolveServiceLink = (service: ServiceItem): string => {
-    // If explicitly provided a valid dedicated page path, keep it
     if (service.ctaLink && service.ctaLink.startsWith("/services/")) {
       return service.ctaLink;
     }
-    // If it's an external link, keep it
     if (service.ctaLink && service.ctaLink.startsWith("http")) {
       return service.ctaLink;
     }
-    // Check against canonical title map
     const mapped = SERVICE_ROUTE_MAP[service.title.trim()];
-    if (mapped) {
-      return mapped;
-    }
-    // Check partial matches
-    const lower = service.title.toLowerCase();
-    if (lower.includes("governance") || lower.includes("assurance")) {
+    if (mapped) return mapped;
+
+    const lowerTitle = service.title.toLowerCase();
+    if (lowerTitle.includes("governance") || lowerTitle.includes("assurance"))
       return "/services/ai-governance-architecture-assurance";
-    }
-    if (lower.includes("agentic") || (lower.includes("ai") && lower.includes("systems"))) {
+    if (lowerTitle.includes("agentic") || (lowerTitle.includes("ai") && lowerTitle.includes("systems")))
       return "/services/enterprise-ai-agentic-systems";
-    }
-    if (lower.includes("transformation") || lower.includes("advisory")) {
+    if (lowerTitle.includes("transformation") || lowerTitle.includes("advisory"))
       return "/services/data-ai-transformation-advisory";
-    }
-    if (lower.includes("data") && lower.includes("architecture")) {
+    if (lowerTitle.includes("data") && lowerTitle.includes("architecture"))
       return "/services/enterprise-data-ai-architecture";
-    }
-    // Fallback to existing link or /services
+
     return service.ctaLink && service.ctaLink !== "#" ? service.ctaLink : "/services";
+  };
+
+  const renderCardContent = (service: ServiceItem, isMobile = false) => {
+    const buttonText = service.ctaText || cardCtaText || "Learn More";
+    const targetLink = resolveServiceLink(service);
+
+    return (
+      <>
+        {/* Decorative bottom-right watermark shape */}
+        <div className="service-card-watermark" aria-hidden="true" />
+
+        <div className="relative z-10">
+          {/* Icon */}
+          <div className="service-card-icon-wrap">
+            <LucideIcon
+              name={service.icon}
+              fallback={lucideIconRegistry.Layers}
+              className="service-card-icon h-6 w-6"
+            />
+          </div>
+
+          {/* Title */}
+          <h3 className="service-card-title">{service.title}</h3>
+
+          {/* Description */}
+          <p className="service-card-desc">{service.description}</p>
+        </div>
+
+        {/* CTA Button */}
+        <div className="relative z-10 pt-2">
+          {targetLink.startsWith("http") ? (
+            <a
+              href={targetLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={isMobile ? handleLinkClick : undefined}
+              className="service-card-btn"
+            >
+              {buttonText}{" "}
+              <LucideIcon
+                name={lucideIconRegistry.ArrowRight}
+                className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5"
+              />
+            </a>
+          ) : (
+            <Link
+              to={targetLink}
+              onClick={isMobile ? handleLinkClick : undefined}
+              className="service-card-btn"
+            >
+              {buttonText}{" "}
+              <LucideIcon
+                name={lucideIconRegistry.ArrowRight}
+                className="h-3.5 w-3.5 transition-transform duration-200 group-hover:translate-x-0.5"
+              />
+            </Link>
+          )}
+        </div>
+      </>
+    );
   };
 
   return (
     <section
       id="what-we-do"
-      className="relative flex justify-center border-t overflow-hidden"
-      style={{
-        background: "var(--color-bg-subtle, #FAFAFA)",
-        borderColor: "var(--color-stroke-default, rgba(0,0,0,0.06))",
-      }}
+      className="lp-section lp-section-subtle lp-section-border-t relative overflow-hidden"
     >
       {/* Subtle background decorative arc at top right */}
       <div
-        className="absolute top-0 right-0 w-[420px] h-[420px] rounded-full border border-orange-500/10 -translate-y-1/2 translate-x-1/3 pointer-events-none"
+        className="pointer-events-none absolute right-0 top-0 h-[420px] w-[420px] -translate-y-1/2 translate-x-1/3 rounded-full border border-orange-500/10"
         aria-hidden="true"
       />
 
-      <div className="lp-container lp-px py-16 lg:py-24 relative z-10">
+      <div className="lp-container lp-px relative z-10 py-16 lg:py-24">
         {/* Centered Header */}
-        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-14">
-          <motion.p
-            {...fu()}
-            className="text-[11px] font-bold tracking-[0.22em] uppercase mb-3 flex items-center justify-center gap-1.5"
-            style={{ color: "var(--color-brand, #F65D01)" }}
-          >
+        <div className="mx-auto mb-12 max-w-3xl text-center sm:mb-14">
+          <motion.p {...fadeUp()} className="lp-eyebrow mb-3 justify-center">
             <span className="text-[13px] leading-none">✳</span> {eyebrow}
           </motion.p>
-          <motion.h2
-            {...fu(0.06)}
-            className="text-2xl sm:text-3xl lg:text-[40px] font-extrabold tracking-tight leading-[1.2] mb-4"
-            style={{ color: "var(--color-text-primary, #111827)" }}
-          >
+          <motion.h2 {...fadeUp(0.06)} className="lp-section-heading mb-4">
             {heading}
           </motion.h2>
-          <motion.p
-            {...fu(0.1)}
-            className="text-[14px] sm:text-[15px] leading-relaxed max-w-2xl mx-auto"
-            style={{ color: "var(--color-text-muted, #64748B)" }}
-          >
+          <motion.p {...fadeUp(0.1)} className="lp-section-subtext mx-auto max-w-2xl">
             {subtext}
           </motion.p>
         </div>
 
-        {/* 2x2 Grid of Services */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-          {displayServices.map((s, i) => {
-            const cs = styles[s.variant] ?? styles.white;
-            const buttonText = s.ctaText || cardCtaText || "Learn More";
-            const targetLink = resolveServiceLink(s);
+        {/* 1. TABLETS & BIG SCREENS: 2x2 Grid of Services */}
+        <div className="mx-auto hidden max-w-5xl grid-cols-1 gap-6 md:grid md:grid-cols-2">
+          {displayServices.map((service, serviceIndex) => {
+            const variantClass = `service-card-${service.variant}` as const;
 
             return (
               <motion.div
-                key={s._id ?? `service-${i}`}
-                {...fs(0.06 + i * 0.08)}
-                className="group relative flex flex-col justify-between rounded-[22px] overflow-hidden transition-all duration-300 hover:-translate-y-1.5 p-7 sm:p-8"
-                style={{
-                  background: cs.bg,
-                  border: `1px solid ${cs.border}`,
-                  boxShadow: cs.shadow,
-                  minHeight: "260px",
-                }}
+                key={service._id ?? `service-${serviceIndex}`}
+                {...fadeScale(0.06 + serviceIndex * 0.08)}
+                className={`service-card ${variantClass}`}
               >
-                {/* Decorative bottom-right watermark shape */}
-                <div
-                  className="absolute -bottom-12 -right-12 w-48 h-48 rounded-full pointer-events-none transition-transform duration-500 group-hover:scale-105"
-                  style={{ background: cs.watermarkBg }}
-                  aria-hidden="true"
-                />
-
-                <div className="relative z-10">
-                  {/* Icon */}
-                  <div
-                    className="w-12 h-12 rounded-2xl flex items-center justify-center mb-6 transition-transform duration-300 group-hover:scale-105"
-                    style={{ background: cs.iconBg }}
-                  >
-                    <LucideIcon
-                      name={s.icon}
-                      fallback="layers"
-                      className="w-6 h-6"
-                      style={{ color: cs.iconColor }}
-                    />
-                  </div>
-
-                  {/* Title */}
-                  <h3
-                    className="text-[18px] sm:text-[19px] font-bold leading-snug mb-3 tracking-tight"
-                    style={{ color: cs.text }}
-                  >
-                    {s.title}
-                  </h3>
-
-                  {/* Description */}
-                  <p
-                    className="text-[13.5px] sm:text-[14px] leading-relaxed mb-6"
-                    style={{ color: cs.muted }}
-                  >
-                    {s.description}
-                  </p>
-                </div>
-
-                {/* CTA Button */}
-                <div className="relative z-10 pt-2">
-                  {targetLink.startsWith("http") ? (
-                    <a
-                      href={targetLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[13px] font-semibold transition-all duration-200 self-start no-underline"
-                      style={{ background: cs.btnBg, color: cs.btnText }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.opacity = "0.85";
-                        e.currentTarget.style.transform = "translateX(3px)";
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.opacity = "1";
-                        e.currentTarget.style.transform = "translateX(0)";
-                      }}
-                    >
-                      {buttonText}{" "}
-                      <LucideIcon
-                        name="arrow-right"
-                        className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5"
-                        style={{ color: cs.btnText }}
-                      />
-                    </a>
-                  ) : (
-                    <Link
-                      to={targetLink}
-                      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[13px] font-semibold transition-all duration-200 self-start no-underline"
-                      style={{ background: cs.btnBg, color: cs.btnText }}
-                      onMouseEnter={(e) => {
-                        e.currentTarget.style.opacity = "0.85";
-                        e.currentTarget.style.transform = "translateX(3px)";
-                      }}
-                      onMouseLeave={(e) => {
-                        e.currentTarget.style.opacity = "1";
-                        e.currentTarget.style.transform = "translateX(0)";
-                      }}
-                    >
-                      {buttonText}{" "}
-                      <LucideIcon
-                        name="arrow-right"
-                        className="w-3.5 h-3.5 transition-transform duration-200 group-hover:translate-x-0.5"
-                        style={{ color: cs.btnText }}
-                      />
-                    </Link>
-                  )}
-                </div>
+                {renderCardContent(service, false)}
               </motion.div>
             );
           })}
+        </div>
+
+        {/* 2. SMALL SCREENS / MOBILE: Buttery-Smooth Thumb-Swipeable Slider with Controls */}
+        <div className="block md:hidden">
+          {/* Scrollable Container with native momentum snap and touch-pan-y for smooth vertical page scroll */}
+          <div
+            ref={sliderRef}
+            onScroll={handleScroll}
+            onPointerDown={handlePointerDown}
+            onPointerMove={handlePointerMove}
+            onPointerUp={handlePointerUpOrLeave}
+            onPointerLeave={handlePointerUpOrLeave}
+            className="flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth touch-pan-y py-2 px-4 -mx-4 sm:-mx-6 sm:px-6 select-none [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden active:cursor-grabbing"
+            style={{ WebkitOverflowScrolling: "touch" }}
+          >
+            {displayServices.map((service, serviceIndex) => {
+              const variantClass = `service-card-${service.variant}` as const;
+
+              return (
+                <div
+                  key={service._id ?? `mobile-service-${serviceIndex}`}
+                  className={`service-card ${variantClass} snap-center shrink-0 w-[84vw] max-w-[320px] transition-all duration-300`}
+                >
+                  {renderCardContent(service, true)}
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Slider Controller (Pagination & Navigation) */}
+          <div className="mt-5 flex items-center justify-between px-1">
+            {/* Slide Index Counter */}
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-mono font-bold text-[#161922]">
+                {String(activeIndex + 1).padStart(2, "0")}
+                <span className="text-neutral-400 font-normal">
+                  {" "}/ {String(displayServices.length).padStart(2, "0")}
+                </span>
+              </span>
+            </div>
+
+            {/* Dot / Pill Indicators */}
+            <div className="flex items-center gap-1.5">
+              {displayServices.map((_, dotIndex) => (
+                <button
+                  key={dotIndex}
+                  type="button"
+                  onClick={() => scrollToCard(dotIndex)}
+                  aria-label={`Go to card ${dotIndex + 1}`}
+                  className={`h-2 rounded-full transition-all duration-300 ${
+                    dotIndex === activeIndex
+                      ? "w-6 bg-[#F65D01]"
+                      : "w-2 bg-neutral-300 hover:bg-neutral-400"
+                  }`}
+                />
+              ))}
+            </div>
+
+            {/* Prev / Next Buttons */}
+            <div className="flex items-center gap-1.5">
+              <button
+                type="button"
+                onClick={handlePrev}
+                disabled={activeIndex === 0}
+                aria-label="Previous card"
+                className="w-9 h-9 rounded-full border border-neutral-200 bg-white flex items-center justify-center text-[#161922] shadow-sm transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed hover:enabled:border-[#F65D01] hover:enabled:text-[#F65D01] active:enabled:scale-95"
+              >
+                <LucideIcon name={lucideIconRegistry.ChevronLeft} className="w-4 h-4" />
+              </button>
+              <button
+                type="button"
+                onClick={handleNext}
+                disabled={activeIndex === displayServices.length - 1}
+                aria-label="Next card"
+                className="w-9 h-9 rounded-full border border-neutral-200 bg-white flex items-center justify-center text-[#161922] shadow-sm transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed hover:enabled:border-[#F65D01] hover:enabled:text-[#F65D01] active:enabled:scale-95"
+              >
+                <LucideIcon name={lucideIconRegistry.ChevronRight} className="w-4 h-4" />
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </section>

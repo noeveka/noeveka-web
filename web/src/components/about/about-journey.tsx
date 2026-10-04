@@ -1,17 +1,16 @@
 import { motion } from "framer-motion";
 import { ABOUT_CONFIG } from "@/config/about.config";
+import { urlFor } from "@/lib/sanity";
 
 export interface JourneyMilestone {
   year: string;
-  stage?: string;
   location?: string;
   place?: string;
   title?: string;
   headline?: string;
   description?: string;
-  isHighlight?: boolean;
   graphic?: string;
-  image?: string;
+  image?: { asset?: unknown; alt?: string } | string;
   imageWidth?: number;
   imageHeight?: number;
 }
@@ -39,7 +38,12 @@ const LOCATION_GRAPHICS: Record<string, string> = {
 };
 
 function resolveGraphic(item: JourneyMilestone): string {
-  if (item.image) return item.image;
+  if (item.image) {
+    if ((item.image as { asset?: unknown })?.asset) {
+      return urlFor(item.image).url();
+    }
+    if (typeof item.image === "string") return item.image;
+  }
   if (item.graphic && !item.graphic.includes("_graphic")) return item.graphic;
   if (item.place && LOCATION_GRAPHICS[item.place]) return LOCATION_GRAPHICS[item.place];
   if (item.location && LOCATION_GRAPHICS[item.location]) return LOCATION_GRAPHICS[item.location];
@@ -48,42 +52,43 @@ function resolveGraphic(item: JourneyMilestone): string {
 }
 
 /* Horizontal position of dots in percent (even: left of center, odd: right of center) */
-const DOT_X = [44, 56];
-const dotX = (i: number) => DOT_X[i % 2];
+const DOT_HORIZONTAL_PERCENT = [44, 56];
+const getDotHorizontalPercent = (milestoneIndex: number) =>
+  DOT_HORIZONTAL_PERCENT[milestoneIndex % 2];
 
-/* S-curve connecting the dots */
-function buildPath(n: number): string {
-  const cy = (i: number) => i * 100 + 50;
-  let d = `M${dotX(0)} ${cy(0)}`;
-  for (let i = 1; i < n; i += 1) {
-    const mid = (cy(i - 1) + cy(i)) / 2;
-    d += ` C ${dotX(i - 1)} ${mid}, ${dotX(i)} ${mid}, ${dotX(i)} ${cy(i)}`;
+/* S-curve connecting the timeline milestone dots */
+function buildTimelinePath(totalMilestones: number): string {
+  const getCenterY = (milestoneIndex: number) => milestoneIndex * 100 + 50;
+  let pathData = `M${getDotHorizontalPercent(0)} ${getCenterY(0)}`;
+  for (let index = 1; index < totalMilestones; index += 1) {
+    const midY = (getCenterY(index - 1) + getCenterY(index)) / 2;
+    pathData += ` C ${getDotHorizontalPercent(index - 1)} ${midY}, ${getDotHorizontalPercent(index)} ${midY}, ${getDotHorizontalPercent(index)} ${getCenterY(index)}`;
   }
-  return d;
+  return pathData;
 }
 
 const styles = {
-  section: "relative w-full overflow-hidden bg-[#fffff] py-14 sm:py-18 lg:py-24",
+  section: "relative w-full overflow-hidden py-14 sm:py-18 lg:py-24",
   container: "relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8",
   headerWrapper: "mb-10 sm:mb-14 lg:mb-16",
   eyebrowWrapper: "mb-3 flex items-center gap-3",
-  eyebrowText: "text-[10px] sm:text-[11px] font-black tracking-[0.2em] text-[#f65d01] uppercase",
-  eyebrowLine: "h-px w-8 bg-[#f65d01]/40",
-  heading: "text-2xl sm:text-3xl lg:text-[38px] font-extrabold tracking-tight text-[#1a1a1a] leading-[1.15]",
-  subtext: "mt-2.5 max-w-xl text-xs sm:text-sm text-neutral-500 leading-relaxed",
+  eyebrowText: "about-eyebrow-text",
+  eyebrowLine: "about-eyebrow-line",
+  heading: "about-narrative-heading text-2xl sm:text-3xl lg:text-[38px]",
+  subtext: "mt-2.5 max-w-xl text-xs sm:text-sm leading-relaxed",
   timelineRoot: "relative mx-auto max-w-[880px] w-full",
   svgPath: "pointer-events-none absolute inset-0 hidden h-full w-full overflow-visible md:block",
-  mobileVerticalLine: "pointer-events-none absolute top-3 bottom-3 left-[12px] w-0 border-l-2 border-dashed border-[#f65d01]/70 md:hidden",
+  mobileVerticalLine: "pointer-events-none absolute top-3 bottom-3 left-[12px] w-0 border-l-2 border-dashed border-brand/70 md:hidden",
   list: "relative m-0 list-none p-0 pl-10 md:pl-0 md:grid md:grid-cols-1",
   item: "relative flex flex-col pb-12 last:pb-0 md:block md:pb-0",
-  dot: "absolute z-10 h-3.5 w-3.5 rounded-full bg-[#f65d01] shadow-[0_0_0_6px_rgba(246,93,1,0.18)] top-3 left-[-28px] -translate-x-1/2 md:top-1/2 md:-translate-y-1/2 md:-translate-x-1/2",
+  dot: "absolute z-10 h-3.5 w-3.5 rounded-full shadow-[0_0_0_6px_rgba(246,93,1,0.18)] top-3 left-[-28px] -translate-x-1/2 md:top-1/2 md:-translate-y-1/2 md:-translate-x-1/2",
   textContainer: "order-1 text-left md:absolute md:top-1/2 md:-translate-y-1/2",
   textArtLeft: "md:left-[calc(44%+30px)] md:right-0 md:text-left",
   textArtRight: "md:left-0 md:right-[calc(44%+30px)] md:text-right",
-  yearText: "m-0 font-extrabold tracking-tight text-[#f65d01] text-2xl sm:text-3xl md:text-[34px] leading-tight",
-  placeText: "mt-1 mb-0.5 font-bold text-[#1a1a1a] text-base sm:text-lg md:text-xl leading-snug",
-  headlineText: "m-0 text-sm sm:text-[15px] font-medium text-neutral-600 leading-snug",
-  descText: "mt-2.5 text-xs sm:text-[13px] md:text-sm text-neutral-500 leading-relaxed max-w-[36ch]",
+  yearText: "m-0 font-extrabold tracking-tight text-2xl sm:text-3xl md:text-[34px] leading-tight about-heading-highlight",
+  placeText: "mt-1 mb-0.5 font-bold text-base sm:text-lg md:text-xl leading-snug",
+  headlineText: "m-0 text-sm sm:text-[15px] font-medium leading-snug",
+  descText: "mt-2.5 text-xs sm:text-[13px] md:text-sm leading-relaxed max-w-[36ch]",
   descArtLeft: "mr-auto text-left",
   descArtRight: "text-left md:ml-auto md:text-right",
   artContainer: "order-2 mt-4 w-[min(82%,280px)] md:absolute md:top-1/2 md:-translate-y-1/2 md:mt-0 md:w-[min(40%,350px)]",
@@ -142,6 +147,7 @@ export default function AboutJourney({
                 viewport={{ once: true }}
                 transition={{ duration: 0.45, delay: 0.1 }}
                 className={styles.subtext}
+                style={{ color: "var(--color-text-muted)" }}
               >
                 {subtext}
               </motion.p>
@@ -164,7 +170,7 @@ export default function AboutJourney({
             focusable="false"
           >
             <path
-              d={buildPath(displayMilestones.length)}
+              d={buildTimelinePath(displayMilestones.length)}
               fill="none"
               stroke="#f65d01"
               strokeWidth={1.8}
@@ -188,7 +194,7 @@ export default function AboutJourney({
               const isEven = index % 2 === 0;
               const place = item.place || item.location || "";
               const rawHeadline = item.headline || item.title || "";
-              const headline = rawHeadline.replace(/\s*—\s*/g, ": ");
+              const headline = rawHeadline.replace(/\s*-\s*/g, ": ");
               const graphic = resolveGraphic(item);
 
               return (
@@ -216,23 +222,23 @@ export default function AboutJourney({
                       damping: 20,
                     }}
                     className={`${styles.dot} ${isEven ? "md:left-[44%]" : "md:left-[56%]"}`}
+                    style={{ backgroundColor: "var(--color-brand)" }}
                     aria-hidden="true"
                   />
 
                   {/* Text details */}
                   <div
-                    className={`${styles.textContainer} ${
-                      isEven ? styles.textArtLeft : styles.textArtRight
-                    }`}
+                    className={`${styles.textContainer} ${isEven ? styles.textArtLeft : styles.textArtRight
+                      }`}
                   >
                     <p className={styles.yearText}>{item.year}</p>
-                    {place && <h3 className={styles.placeText}>{place}</h3>}
-                    {headline && <p className={styles.headlineText}>{headline}</p>}
+                    {place && <h3 className={styles.placeText} style={{ color: "var(--color-text-primary)" }}>{place}</h3>}
+                    {headline && <p className={styles.headlineText} style={{ color: "var(--color-text-secondary)" }}>{headline}</p>}
                     {showDescriptions && item.description && (
                       <p
-                        className={`${styles.descText} ${
-                          isEven ? styles.descArtLeft : styles.descArtRight
-                        }`}
+                        className={`${styles.descText} ${isEven ? styles.descArtLeft : styles.descArtRight
+                          }`}
+                        style={{ color: "var(--color-text-muted)" }}
                       >
                         {item.description}
                       </p>
@@ -250,9 +256,8 @@ export default function AboutJourney({
                         delay: index * 0.08 + 0.12,
                         ease: [0.16, 1, 0.3, 1],
                       }}
-                      className={`${styles.artContainer} ${
-                        isEven ? styles.artLeft : styles.artRight
-                      }`}
+                      className={`${styles.artContainer} ${isEven ? styles.artLeft : styles.artRight
+                        }`}
                       aria-hidden="true"
                     >
                       <img

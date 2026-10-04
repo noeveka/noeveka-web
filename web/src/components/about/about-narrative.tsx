@@ -52,11 +52,11 @@ export default function AboutNarrative({
     (image as { alt?: string })?.alt ?? ABOUT_CONFIG.narrativeSection.image.alt;
 
   return (
-    <section className="relative w-full overflow-hidden bg-white py-20 lg:py-28">
+    <section className="about-section-light relative w-full overflow-hidden py-20 lg:py-28">
       <div className="lp-container lp-px mx-auto max-w-6xl">
         {/* ── UPPER BLOCK: The Frustration We Saw ── */}
         <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-12 lg:gap-14">
-          {/* Left Column: Standardized Eyebrow + Huge Headline */}
+          {/* Left Column: Eyebrow + Headline */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -65,15 +65,13 @@ export default function AboutNarrative({
             className="lg:col-span-7"
           >
             {top.eyebrow && (
-              <div className="mb-4 flex items-center gap-2">
-                <div className="h-[2px] w-5 bg-[#f65d01]" />
-                <span className="text-[11.5px] font-bold tracking-[0.2em] uppercase text-[#f65d01]">
-                  {top.eyebrow}
-                </span>
+              <div className="about-eyebrow">
+                <div className="about-eyebrow-line" />
+                <span className="about-eyebrow-text">{top.eyebrow}</span>
               </div>
             )}
 
-            <h2 className="text-3xl font-extrabold tracking-tight text-[#1e212b] sm:text-4xl lg:text-[46px] leading-[1.15]">
+            <h2 className="about-narrative-heading">
               {top.headingLine1}
               {top.headingLine2 && (
                 <>
@@ -90,7 +88,7 @@ export default function AboutNarrative({
               {top.headingHighlight && (
                 <>
                   {" "}
-                  <span className="text-[#f65d01]">{top.headingHighlight}</span>
+                  <span className="about-heading-highlight">{top.headingHighlight}</span>
                 </>
               )}
             </h2>
@@ -102,12 +100,12 @@ export default function AboutNarrative({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.55, delay: 0.12 }}
-            className="flex flex-col justify-between space-y-6 text-[15px] leading-relaxed text-neutral-600 sm:text-base lg:col-span-5 lg:pt-8"
+            className="about-narrative-body flex flex-col justify-between space-y-6 lg:col-span-5 lg:pt-8"
           >
             {top.paragraph1 && <p>{top.paragraph1}</p>}
             {top.paragraph2 && <p>{top.paragraph2}</p>}
             {top.punchline && (
-              <p className="pt-2 text-base font-bold text-[#1e212b] sm:text-lg">
+              <p className="about-narrative-punchline sm:text-lg">
                 {top.punchline}
               </p>
             )}
@@ -136,7 +134,7 @@ export default function AboutNarrative({
 
         {/* ── LOWER BLOCK: The Moment We Realised It ── */}
         <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-12 lg:gap-14">
-          {/* Left Column: Standardized Eyebrow + Huge Headline */}
+          {/* Left Column: Eyebrow + Headline */}
           <motion.div
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -145,17 +143,17 @@ export default function AboutNarrative({
             className="lg:col-span-7"
           >
             {(bottom.eyebrowPart1 || bottom.eyebrowHighlight) && (
-              <div className="mb-4 flex items-center gap-2">
-                <div className="h-[2px] w-5 bg-[#f65d01]" />
-                <span className="text-[11.5px] font-bold tracking-[0.2em] uppercase text-[#f65d01]">
+              <div className="about-eyebrow">
+                <div className="about-eyebrow-line" />
+                <span className="about-eyebrow-text">
                   {[bottom.eyebrowPart1, bottom.eyebrowHighlight].filter(Boolean).join(" ")}
                 </span>
               </div>
             )}
 
-            <h2 className="text-3xl font-extrabold tracking-tight text-[#1e212b] sm:text-4xl lg:text-[46px] leading-[1.15]">
+            <h2 className="about-narrative-heading">
               {bottom.headingPlain}{" "}
-              <span className="block text-[#f65d01] sm:inline">
+              <span className="about-heading-highlight block sm:inline">
                 {bottom.headingHighlight}
               </span>
             </h2>
@@ -167,11 +165,11 @@ export default function AboutNarrative({
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-60px" }}
             transition={{ duration: 0.55, delay: 0.12 }}
-            className="flex flex-col justify-between space-y-6 text-[15px] leading-relaxed text-neutral-600 sm:text-base lg:col-span-5 lg:pt-8"
+            className="about-narrative-body flex flex-col justify-between space-y-6 lg:col-span-5 lg:pt-8"
           >
             {bottom.paragraph && <p>{bottom.paragraph}</p>}
             {bottom.punchline && (
-              <p className="pt-2 text-base font-bold text-[#1e212b] sm:text-lg">
+              <p className="about-narrative-punchline sm:text-lg">
                 {bottom.punchline}
               </p>
             )}

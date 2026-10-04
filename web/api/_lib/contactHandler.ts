@@ -150,7 +150,7 @@ export async function handleContactSubmission(
           from: fromEmail,
           to: [email.trim()],
           reply_to: toEmail,
-          subject: `We received your message — Noeveka`,
+          subject: `We received your message - Noeveka`,
           html: userConfirmationHtml,
         }),
       }),

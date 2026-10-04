@@ -2,7 +2,7 @@ import type { ServiceDetailPageData } from "@/types/service-detail.types";
 
 /**
  * Static configuration for "Data & AI Transformation Advisory"
- * Source: noeveka_service_page_content.md (04 — Data & AI Transformation Advisory)
+ * Source: noeveka_service_page_content.md (04 - Data & AI Transformation Advisory)
  */
 export const DATA_AI_TRANSFORMATION_ADVISORY_CONFIG: ServiceDetailPageData = {
   title: "Data & AI Transformation Advisory",
@@ -21,18 +21,32 @@ export const DATA_AI_TRANSFORMATION_ADVISORY_CONFIG: ServiceDetailPageData = {
     primaryCtaLink: "/contact?topic=transformation",
     secondaryCtaText: "Explore Our Approach",
     secondaryCtaLink: "#what-we-do",
-    heroImageUrl: "/assets/services/service_four_hero_image.jpeg",
+    heroImageUrl: "/assets/services/data_ai_transformation_advisory.jpeg",
+    heroMobileImageUrl: "/assets/services/data-ai-transformation-advisory_mobile.png",
     stackAnnotations: [
-      { tier: "ASSESS", label: "Where are we today? Diagnose maturity & constraints" },
-      { tier: "DESIGN", label: "What must change? Target architecture & operating model" },
-      { tier: "EXECUTE", label: "How do we get there? Mobilise programmes & governance" },
-      { tier: "SCALE", label: "How does it become sustainable? Lasting enterprise impact" },
+      {
+        tier: "ASSESS",
+        label: "Where are we today? Diagnose maturity & constraints",
+      },
+      {
+        tier: "DESIGN",
+        label: "What must change? Target architecture & operating model",
+      },
+      {
+        tier: "EXECUTE",
+        label: "How do we get there? Mobilise programmes & governance",
+      },
+      {
+        tier: "SCALE",
+        label: "How does it become sustainable? Lasting enterprise impact",
+      },
     ],
   },
 
   challenge: {
     eyebrow: "The Challenge",
-    heading: "Transformation fails when strategy and execution become disconnected.",
+    heading:
+      "Transformation fails when strategy and execution become disconnected.",
     paragraphs: [
       "Many organisations have ambitious data and AI strategies. Far fewer have clearly defined how architecture, platforms, governance, operating models, people and delivery need to change together. Without that connection, organisations accumulate initiatives but struggle to create enterprise-wide capability.",
     ],
@@ -113,25 +127,29 @@ export const DATA_AI_TRANSFORMATION_ADVISORY_CONFIG: ServiceDetailPageData = {
       {
         icon: "search",
         title: "ASSESS",
-        description: "Where are we today? Diagnose maturity, landscape, constraints and ambitions.",
+        description:
+          "Where are we today? Diagnose maturity, landscape, constraints and ambitions.",
         variant: "navy",
       },
       {
         icon: "lightbulb",
         title: "DESIGN",
-        description: "What must change? Define target architecture, operating model and transformation path.",
+        description:
+          "What must change? Define target architecture, operating model and transformation path.",
         variant: "navy",
       },
       {
         icon: "settings",
         title: "EXECUTE",
-        description: "How do we get there? Mobilise programmes, roadmap delivery and governance.",
+        description:
+          "How do we get there? Mobilise programmes, roadmap delivery and governance.",
         variant: "slate",
       },
       {
         icon: "trending-up",
         title: "SCALE",
-        description: "How does it become sustainable? Continuous enablement, culture and lasting adoption.",
+        description:
+          "How does it become sustainable? Continuous enablement, culture and lasting adoption.",
         variant: "orange",
       },
     ],
@@ -171,8 +189,7 @@ export const DATA_AI_TRANSFORMATION_ADVISORY_CONFIG: ServiceDetailPageData = {
       {
         number: "05",
         title: "Advise",
-        description:
-          "Provide senior guidance as transformation progresses.",
+        description: "Provide senior guidance as transformation progresses.",
       },
     ],
   },
@@ -180,7 +197,8 @@ export const DATA_AI_TRANSFORMATION_ADVISORY_CONFIG: ServiceDetailPageData = {
   deliverables: {
     eyebrow: "Deliverables",
     heading: "Typical Deliverables",
-    subtext: "Comprehensive advisory deliverables designed for executive decision-makers and delivery leaders.",
+    subtext:
+      "Comprehensive advisory deliverables designed for executive decision-makers and delivery leaders.",
     items: [
       "Current-state assessment and maturity diagnosis",
       "Target operating model and governance design",
@@ -194,47 +212,56 @@ export const DATA_AI_TRANSFORMATION_ADVISORY_CONFIG: ServiceDetailPageData = {
   outcomes: {
     eyebrow: "Outcomes",
     heading: "Transformation with direction.",
-    subtext: "Driving alignment, reduced fragmentation, and sustainable enterprise capability.",
+    subtext:
+      "Driving alignment, reduced fragmentation, and sustainable enterprise capability.",
     items: [
       {
         icon: "crosshair",
         title: "Clear enterprise priorities",
-        description: "Focused investment on highest-value initiatives rather than fragmented experiments.",
+        description:
+          "Focused investment on highest-value initiatives rather than fragmented experiments.",
       },
       {
         icon: "layers-3",
         title: "Reduced technology fragmentation",
-        description: "Rationalised systems, eliminated redundancies and streamlined architectures.",
+        description:
+          "Rationalised systems, eliminated redundancies and streamlined architectures.",
       },
       {
         icon: "network",
         title: "Stronger alignment between business and technology",
-        description: "A shared roadmap connecting strategic intent with practical engineering execution.",
+        description:
+          "A shared roadmap connecting strategic intent with practical engineering execution.",
       },
       {
         icon: "shield-check",
         title: "Defined ownership and operating model",
-        description: "Clarity on team structures, decision rights, and governance boundaries.",
+        description:
+          "Clarity on team structures, decision rights, and governance boundaries.",
       },
       {
         icon: "bar-chart-3",
         title: "More focused investment",
-        description: "Targeted capital allocation that maximizes ROI and accelerates value delivery.",
+        description:
+          "Targeted capital allocation that maximizes ROI and accelerates value delivery.",
       },
       {
         icon: "book-open",
         title: "Practical transformation sequencing",
-        description: "Pragmatic, phased milestones preventing operational disruption.",
+        description:
+          "Pragmatic, phased milestones preventing operational disruption.",
       },
       {
         icon: "users",
         title: "Greater organisational capability",
-        description: "Upskilled internal teams and institutionalised architectural practices.",
+        description:
+          "Upskilled internal teams and institutionalised architectural practices.",
       },
       {
         icon: "star",
         title: "Sustainable adoption of data and AI",
-        description: "A durable foundation enabling ongoing innovation and long-term competitiveness.",
+        description:
+          "A durable foundation enabling ongoing innovation and long-term competitiveness.",
       },
     ],
   },
@@ -242,7 +269,8 @@ export const DATA_AI_TRANSFORMATION_ADVISORY_CONFIG: ServiceDetailPageData = {
   relatedExpertise: {
     eyebrow: "Related Expertise",
     heading: "Related Expertise",
-    subtext: "Explore our other services to address your broader data and AI needs.",
+    subtext:
+      "Explore our other services to address your broader data and AI needs.",
     services: [
       {
         number: "01",

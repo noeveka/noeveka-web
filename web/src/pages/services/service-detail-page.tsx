@@ -33,9 +33,11 @@ export default function ServiceDetailPage() {
 
   const fallback = FALLBACK_CONFIG_MAP[currentSlug] ?? ENTERPRISE_DATA_AI_ARCHITECTURE_CONFIG;
   const [data, setData] = useState<ServiceDetailPageData | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     window.scrollTo(0, 0);
+    setLoading(true);
     getServiceDetailPage(currentSlug)
       .then((res) => {
         if (res) {
@@ -44,10 +46,13 @@ export default function ServiceDetailPage() {
       })
       .catch((err) => {
         console.error("Failed to load service detail from Sanity:", err);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, [currentSlug]);
 
-  // Valid service slugs in scope
+  // Valid service slugs in scope (fallback configs exist for these)
   const validSlugs = [
     "enterprise-data-ai-architecture",
     "enterprise-ai-agentic-systems",
@@ -55,7 +60,7 @@ export default function ServiceDetailPage() {
     "data-ai-transformation-advisory",
   ];
 
-  if (!validSlugs.includes(currentSlug)) {
+  if (!loading && !validSlugs.includes(currentSlug) && !data) {
     return <Navigate to="/services" replace />;
   }
 
@@ -64,8 +69,11 @@ export default function ServiceDetailPage() {
     ...fallback.hero,
     ...(data?.hero || {}),
     heroImageUrl: data?.hero?.heroImage?.asset
-      ? urlFor(data.hero.heroImage).width(1200).url()
+      ? urlFor(data.hero.heroImage).width(1600).url()
       : fallback.hero.heroImageUrl,
+    heroMobileImageUrl: data?.hero?.heroMobileImage?.asset
+      ? urlFor(data.hero.heroMobileImage).width(1000).url()
+      : fallback.hero.heroMobileImageUrl,
   };
 
   const challengeData = {

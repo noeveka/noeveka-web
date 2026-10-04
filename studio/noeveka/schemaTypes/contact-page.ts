@@ -1,7 +1,7 @@
 import {defineField, defineType} from 'sanity'
 
 /**
- * contactPage — Sanity document type
+ * contactPage - Sanity document type
  *
  * Mirrors the structure of contact.config.ts exactly so that every field
  * edited in Sanity maps 1-to-1 to a CONTACT_CONFIG fallback in the web app.
@@ -11,13 +11,14 @@ export const contactPage = defineType({
   title: 'Contact Page',
   type: 'document',
   groups: [
-    {name: 'hero', title: '1 · Hero Section'},
-    {name: 'form', title: '2 · Form Settings & Copy'},
-    {name: 'channels', title: '3 · Direct Contact Channels'},
+    {name: 'hero', title: '1. Hero Section (Header Banner)'},
+    {name: 'form', title: '2. Form Settings & Copy'},
+    {name: 'channels', title: '3. Direct Reachout Channels'},
+    {name: 'seo', title: '4. SEO & Metadata'},
   ],
 
   fields: [
-    // ─── 1. HERO ──────────────────────────────────────────────────────────────
+    // ─── 1. HERO -─────
     defineField({
       name: 'hero',
       title: 'Hero Header Section',
@@ -176,7 +177,7 @@ export const contactPage = defineType({
       ],
     }),
 
-    // ─── 3. DIRECT CHANNELS ───────────────────────────────────────────────────
+    // ─── 3. DIRECT CHANNELS -─
     defineField({
       name: 'channels',
       title: 'Direct Reachout Channels',
@@ -294,6 +295,34 @@ export const contactPage = defineType({
               ],
             }),
           ],
+        }),
+      ],
+    }),
+
+    // ─── 4. SEO & METADATA ───────────────────────────────────────────────────
+    defineField({
+      name: 'seo',
+      title: 'SEO & Metadata',
+      type: 'object',
+      group: 'seo',
+      description: 'Search engine optimization tags and social sharing metadata.',
+      fields: [
+        defineField({
+          name: 'title',
+          title: 'Meta Title',
+          type: 'string',
+          description: 'Title displayed in search engine results and browser tabs.',
+          initialValue: 'Contact Us',
+        }),
+        defineField({
+          name: 'description',
+          title: 'Meta Description',
+          type: 'text',
+          rows: 3,
+          description:
+            'Summary shown in search engine snippet preview (150-160 characters recommended).',
+          initialValue:
+            'Get in touch with the Noeveka team. Book a free 30-minute strategy call, ask about our services, or send us a message - we respond within 1–2 business days.',
         }),
       ],
     }),

@@ -1,10 +1,15 @@
 export const RESOURCES_CONFIG = {
   // Page Hero Copy
   hero: {
+    eyebrow: "Free Resources",
     heading: "Architecture thinking,",
     headingHighlight: "yours to keep.",
     subtext:
-      "Practical checklists, playbooks, and guides built by enterprise architects — no fluff, no vendor bias. Download free.",
+      "Practical checklists, playbooks, and guides built by enterprise architects - no fluff, no vendor bias. Download free.",
+    ctaPrimaryText: "Browse Resources",
+    ctaPrimaryLink: "#resources",
+    ctaSecondaryText: "Talk to an Architect",
+    ctaSecondaryLink: "/contact",
   },
 
   // Grid Section Copy
@@ -13,7 +18,7 @@ export const RESOURCES_CONFIG = {
     heading: "Explore Our Resources",
     subtext:
       "Find practical materials designed to help enterprise data teams architect better, move faster, and cut through vendor noise.",
-    emptyStateText: "No resources in this category yet — check back soon.",
+    emptyStateText: "No resources in this category yet - check back soon.",
     downloadCtaText: "Download Free",
     downloadHoverText: "Download PDF",
     authorName: "Noeveka",
@@ -24,7 +29,15 @@ export const RESOURCES_CONFIG = {
   },
 
   // Filter categories
-  categories: ["All", "Checklist", "Playbook", "Guide", "Template", "Whitepaper"],
+  allCategoryLabel: "All",
+  categories: [
+    "All",
+    "Checklist",
+    "Playbook",
+    "Guide",
+    "Template",
+    "Whitepaper",
+  ],
 
   // Fallback thumbnail
   fallbackThumbnailUrl: "/assets/Databricks-featured.jpg",
@@ -95,7 +108,7 @@ export const RESOURCES_CONFIG = {
       _id: "fallback-6",
       title: "Enterprise Data Strategy Whitepaper",
       description:
-        "The strategic case for treating data as a product — and how enterprise leaders can build platforms that generate business value.",
+        "The strategic case for treating data as a product - and how enterprise leaders can build platforms that generate business value.",
       category: "Whitepaper",
       tech: "strategy",
       pageCount: 32,
@@ -110,12 +123,26 @@ export const RESOURCES_CONFIG = {
     heading: "Get your free resource",
     subtext:
       "Enter your name and email to instantly download. No account needed.",
+    previewBadgeLabel: "Free Download",
+    nameLabel: "Full Name",
+    namePlaceholder: "Ajay Kumar",
+    emailLabel: "Work Email",
+    emailPlaceholder: "you@company.com",
     consentText:
       "I agree to receive emails from Noeveka, including marketing communications. Unsubscribe anytime.",
     submitText: "Download Now",
+    processingText: "Processing…",
+    requiredNameError: "Name is required.",
+    requiredEmailError: "Email is required.",
+    invalidEmailError: "Please enter a valid email address.",
+    consentError: "Consent is required to download.",
     successHeading: "Your download is ready!",
     successSubtext:
-      "Thank you — check your email too, we'll send you a copy. You can unsubscribe anytime.",
+      "Thank you - check your email too, we'll send you a copy. You can unsubscribe anytime.",
     downloadButtonText: "Click here to download",
+    downloadingText: "Downloading…",
+    savedText: "Saved to your device",
+    emailFollowupText: "The resource will be emailed to you shortly.",
+    closeButtonText: "Close",
   },
 } as const;

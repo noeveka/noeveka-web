@@ -1,11 +1,12 @@
 import tailwindcss from "@tailwindcss/vite";
 import react from "@vitejs/plugin-react";
 import path from "node:path";
-import { defineConfig, loadEnv, type Plugin } from "vite";
+import { type Plugin, defineConfig, loadEnv } from "vite";
+
 import { handleContactSubmission } from "./api/_lib/contactHandler";
-import { handleResourceDownloadSubmission } from "./api/_lib/resourceDownloadHandler";
-import { handleNewsletterSubscription } from "./api/_lib/newsletterHandler";
 import { redeemDownloadToken } from "./api/_lib/downloadTokenStore";
+import { handleNewsletterSubscription } from "./api/_lib/newsletterHandler";
+import { handleResourceDownloadSubmission } from "./api/_lib/resourceDownloadHandler";
 
 function localApiPlugin(env: Record<string, string>): Plugin {
   return {
@@ -29,11 +30,18 @@ function localApiPlugin(env: Record<string, string>): Plugin {
             return;
           }
 
-          const pdfUrl = await redeemDownloadToken(token, env.DOWNLOAD_TOKEN_SECRET);
+          const pdfUrl = await redeemDownloadToken(
+            token,
+            env.DOWNLOAD_TOKEN_SECRET
+          );
           if (!pdfUrl) {
             res.statusCode = 410;
             res.setHeader("Content-Type", "application/json");
-            res.end(JSON.stringify({ error: "Download link has expired or has already been used." }));
+            res.end(
+              JSON.stringify({
+                error: "Download link has expired or has already been used.",
+              })
+            );
             return;
           }
 
@@ -43,11 +51,16 @@ function localApiPlugin(env: Record<string, string>): Plugin {
 
             const urlPath = new URL(pdfUrl).pathname;
             const rawFilename = urlPath.split("/").pop() ?? "resource.pdf";
-            const filename = rawFilename.endsWith(".pdf") ? rawFilename : `${rawFilename}.pdf`;
+            const filename = rawFilename.endsWith(".pdf")
+              ? rawFilename
+              : `${rawFilename}.pdf`;
 
             res.statusCode = 200;
             res.setHeader("Content-Type", "application/pdf");
-            res.setHeader("Content-Disposition", `attachment; filename="${filename}"`);
+            res.setHeader(
+              "Content-Disposition",
+              `attachment; filename="${filename}"`
+            );
             res.setHeader("Cache-Control", "no-store");
 
             const body = upstream.body;
@@ -55,7 +68,10 @@ function localApiPlugin(env: Record<string, string>): Plugin {
               const reader = body.getReader();
               const pump = async (): Promise<void> => {
                 const { done, value } = await reader.read();
-                if (done) { res.end(); return; }
+                if (done) {
+                  res.end();
+                  return;
+                }
                 res.write(value);
                 await pump();
               };
@@ -70,7 +86,7 @@ function localApiPlugin(env: Record<string, string>): Plugin {
           }
           return;
         }
-        // ─────────────────────────────────────────────────────────────────────
+        // -────────────
 
         if (req.method !== "POST") {
           res.statusCode = 405;
@@ -113,7 +129,8 @@ function localApiPlugin(env: Record<string, string>): Plugin {
             res.setHeader("Content-Type", "application/json");
             res.end(JSON.stringify(result.body));
           } catch (err: unknown) {
-            const message = err instanceof Error ? err.message : "Internal error";
+            const message =
+              err instanceof Error ? err.message : "Internal error";
             res.statusCode = 500;
             res.setHeader("Content-Type", "application/json");
             res.end(JSON.stringify({ error: message }));

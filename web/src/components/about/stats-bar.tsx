@@ -1,7 +1,6 @@
 import { motion } from "framer-motion";
-
 import { ABOUT_CONFIG } from "@/config/about.config";
-import { fs } from "@/lib/motion";
+import { fadeScale } from "@/lib/motion";
 
 export interface StatItem {
   value: string;
@@ -9,12 +8,12 @@ export interface StatItem {
   sub: string;
 }
 
-interface StatsBarProps {
+export interface StatsBarProps {
   items?: StatItem[];
 }
 
 export default function StatsBar({ items }: StatsBarProps) {
-  const display: StatItem[] = items?.length ? items : [...ABOUT_CONFIG.stats];
+  const displayStats: StatItem[] = items?.length ? items : [...ABOUT_CONFIG.stats];
 
   return (
     <section
@@ -23,19 +22,17 @@ export default function StatsBar({ items }: StatsBarProps) {
     >
       <div className="lp-container lp-px py-0">
         <div className="grid grid-cols-2 divide-x divide-white/20 sm:grid-cols-4">
-          {display.map(({ value, label, sub }, i) => (
+          {displayStats.map((statItem, index) => (
             <motion.div
-              key={label}
-              {...fs(i * 0.07)}
+              key={statItem.label}
+              {...fadeScale(index * 0.07)}
               className="flex flex-col items-center justify-center gap-0.5 px-4 py-7"
             >
-              <p className="text-display leading-none font-extrabold text-white sm:text-[2.4rem]">
-                {value}
+              <p className="metric-value text-white! sm:text-[2.4rem]">
+                {statItem.value}
               </p>
-              <p className="text-[11px] font-bold tracking-[0.14em] text-white/90 uppercase">
-                {label}
-              </p>
-              <p className="text-center text-[10.5px] text-white/60">{sub}</p>
+              <p className="metric-label text-white/90!">{statItem.label}</p>
+              <p className="metric-sub text-center text-white/60!">{statItem.sub}</p>
             </motion.div>
           ))}
         </div>

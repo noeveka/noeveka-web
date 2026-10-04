@@ -1,5 +1,5 @@
 /**
- * metrics.config.ts — static fallback data for the MetricsBar section.
+ * metrics.config.ts - static fallback data for the MetricsBar section.
  */
 
 export const METRICS_CONFIG = {
