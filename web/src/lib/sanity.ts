@@ -56,6 +56,10 @@ export async function getSiteSettings() {
 // ─── Home Page (all section copy in one request) 
 export async function getHomePage() {
   return client.fetch(`*[_type == "homePage"][0]{
+    seo{
+      title,
+      description
+    },
     hero{
       bgImage{ asset, alt },
       bgImageMobile{ asset, alt },

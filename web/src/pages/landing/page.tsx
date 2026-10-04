@@ -21,6 +21,8 @@ import { getHomePage } from "@/lib/sanity";
 
 interface HomePageContent {
   seo?: {
+    title?: string;
+    description?: string;
     metaTitle?: string;
     metaDescription?: string;
   };
@@ -79,8 +81,13 @@ export default function LandingPage() {
   return (
     <>
       <PageHead
-        title={homePageData?.seo?.metaTitle ?? SEO_CONFIG.pages.landing.title}
+        title={
+          homePageData?.seo?.title ??
+          homePageData?.seo?.metaTitle ??
+          SEO_CONFIG.pages.landing.title
+        }
         description={
+          homePageData?.seo?.description ??
           homePageData?.seo?.metaDescription ??
           SEO_CONFIG.pages.landing.description
         }

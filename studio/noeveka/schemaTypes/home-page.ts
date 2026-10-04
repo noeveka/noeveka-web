@@ -14,6 +14,7 @@ export const homePage = defineType({
     {name: 'why', title: '7. Why Noeveka (Differentiators & Features)'},
     {name: 'faq', title: '8. FAQ (Frequently Asked Questions)'},
     {name: 'cta', title: '9. Call To Action Strip (Bottom Banner)'},
+    {name: 'seo', title: '10. SEO & Metadata'},
   ],
   fields: [
     // ─── HERO -
@@ -550,6 +551,34 @@ export const homePage = defineType({
               preview: {select: {title: 'question'}},
             },
           ],
+        }),
+      ],
+    }),
+
+    // ─── 10. SEO & METADATA ───────────────────────────────────────────────────
+    defineField({
+      name: 'seo',
+      title: 'SEO & Metadata',
+      type: 'object',
+      group: 'seo',
+      description: 'Search engine optimization tags and social sharing metadata.',
+      fields: [
+        defineField({
+          name: 'title',
+          title: 'Meta Title',
+          type: 'string',
+          description: 'Title displayed in search engine results and browser tabs.',
+          initialValue: 'Enterprise Data & AI Advisory',
+        }),
+        defineField({
+          name: 'description',
+          title: 'Meta Description',
+          type: 'text',
+          rows: 3,
+          description:
+            'Summary shown in search engine snippet preview (150-160 characters recommended).',
+          initialValue:
+            'Architect-led target designs, bootcamps, and advisory for Microsoft Fabric, Databricks Lakehouse & GenAI pipelines. Independent, practical, and vendor-unbiased.',
         }),
       ],
     }),
