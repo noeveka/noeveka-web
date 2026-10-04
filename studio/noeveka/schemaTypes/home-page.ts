@@ -67,36 +67,7 @@ export const homePage = defineType({
           type: 'string',
           initialValue: 'for Better Decisions',
         }),
-        defineField({
-          name: 'headingPart1',
-          title: 'Legacy: Heading Part 1',
-          description: 'Optional legacy field (use Main Headline fields above)',
-          type: 'string',
-        }),
-        defineField({
-          name: 'headingHighlight1',
-          title: 'Legacy: Heading Highlight 1',
-          description: 'Optional legacy field',
-          type: 'string',
-        }),
-        defineField({
-          name: 'headingPart2',
-          title: 'Legacy: Heading Part 2',
-          description: 'Optional legacy field',
-          type: 'string',
-        }),
-        defineField({
-          name: 'headingHighlight2',
-          title: 'Legacy: Heading Highlight 2',
-          description: 'Optional legacy field',
-          type: 'string',
-        }),
-        defineField({
-          name: 'headingPart3',
-          title: 'Legacy: Heading Part 3',
-          description: 'Optional legacy field',
-          type: 'string',
-        }),
+
         defineField({
           name: 'subtitle',
           title: 'Subtitle / Subheading',
@@ -114,39 +85,7 @@ export const homePage = defineType({
           title: 'Primary CTA - Link',
           type: 'string',
         }),
-        defineField({
-          name: 'secondaryCtaText',
-          title: 'Secondary CTA - Button Text',
-          type: 'string',
-          initialValue: 'Speak to an Architect',
-        }),
-        defineField({
-          name: 'secondaryCtaLink',
-          title: 'Secondary CTA - Link',
-          type: 'string',
-        }),
-        defineField({
-          name: 'trustBullets',
-          title: 'Trust Bullets',
-          description: 'Short bullet points shown below the CTAs',
-          type: 'array',
-          of: [{type: 'string'}],
-        }),
-        defineField({
-          name: 'stats',
-          title: 'Stats',
-          type: 'array',
-          of: [
-            {
-              type: 'object',
-              fields: [
-                defineField({name: 'val', title: 'Value', type: 'string'}),
-                defineField({name: 'label', title: 'Label', type: 'string'}),
-              ],
-              preview: {select: {title: 'val', subtitle: 'label'}},
-            },
-          ],
-        }),
+
       ],
     }),
 

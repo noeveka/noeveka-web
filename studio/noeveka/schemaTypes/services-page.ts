@@ -36,12 +36,6 @@ export const servicesPage = defineType({
       description: 'Main headline, subtext, and primary call to action.',
       fields: [
         defineField({
-          name: 'badge',
-          title: 'Hero Badge',
-          type: 'string',
-          initialValue: 'Independent Enterprise Data & AI Advisory',
-        }),
-        defineField({
           name: 'headingLine1',
           title: 'Heading - Line 1',
           type: 'string',
@@ -66,18 +60,6 @@ export const servicesPage = defineType({
           rows: 3,
           initialValue:
             'We solve the most important Data & AI challenges for modern enterprises - with architecture at the core.',
-        }),
-        defineField({
-          name: 'ctaPrimaryText',
-          title: 'Primary CTA Text',
-          type: 'string',
-          initialValue: 'Explore Focus Areas',
-        }),
-        defineField({
-          name: 'ctaPrimaryLink',
-          title: 'Primary CTA Link Anchor',
-          type: 'string',
-          initialValue: '#services-cards',
         }),
       ],
     }),
@@ -105,12 +87,6 @@ export const servicesPage = defineType({
               initialValue: '01',
             }),
             defineField({
-              name: 'icon',
-              title: 'Icon Name (Lucide)',
-              type: 'string',
-              initialValue: 'layers-3',
-            }),
-            defineField({
               name: 'title',
               title: 'Title',
               type: 'string',
@@ -121,12 +97,6 @@ export const servicesPage = defineType({
               title: 'Short Description',
               type: 'text',
               rows: 3,
-            }),
-            defineField({
-              name: 'bullets',
-              title: 'Key Focus Bullets / Capabilities',
-              type: 'array',
-              of: [{type: 'string'}],
             }),
             defineField({
               name: 'visualType',

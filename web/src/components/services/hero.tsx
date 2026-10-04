@@ -12,8 +12,6 @@ import { SERVICES_CONFIG, type ServiceFocusArea } from "@/config/services.config
 import { fadeUp } from "@/lib/motion";
 
 export interface ServicesHeroProps {
-  eyebrow?: string;
-  badge?: string;
   headingLine1?: string;
   headingLine2?: string;
   headingHighlight?: string;

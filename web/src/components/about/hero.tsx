@@ -10,21 +10,16 @@ export interface HeroStat {
 }
 
 export interface HeroProps {
-  badge?: string;
   headingLine1?: string;
   headingLine2?: string;
   headingHighlight?: string;
-  subheading?: string;
   subtext?: string;
   ctaPrimaryText?: string;
   ctaPrimaryLink?: string;
   ctaSecondaryText?: string;
   ctaSecondaryLink?: string;
   bgImage?: { asset?: unknown; alt?: string };
-  mobileBgImage?: { asset?: unknown; alt?: string };
-  badgeTags?: string[];
   stats?: HeroStat[];
-  mobileStats?: HeroStat[];
   photo?: { asset?: unknown; alt?: string } | unknown;
   photoAlt?: string;
 }

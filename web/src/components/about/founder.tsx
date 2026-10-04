@@ -19,24 +19,16 @@ export interface FocusPillarItem {
 
 export interface FounderProps {
   eyebrow?: string;
-  heading?: string;
   name?: string;
-  initials?: string;
   title?: string;
-  company?: string;
-  tagline?: string;
   bio?: readonly string[];
   photo?: { asset?: unknown; alt?: string } | string;
   photoAlt?: string;
-  credentials?: readonly { label: string; value: string }[];
   whyFoundedHeading?: string;
   whyFoundedText?: string;
   whyFoundedParagraphs?: readonly string[];
   statusBadges?: readonly StatusBadgeItem[];
   focusPillars?: readonly FocusPillarItem[];
-  linkedinUrl?: string;
-  email?: string;
-  contactLink?: string;
 }
 
 function renderStatusIcon(icon: string) {
@@ -119,7 +111,7 @@ export default function Founder({
       (typeof photo === "string" && photo !== ""));
 
   const rawEyebrow = eyebrow || ABOUT_CONFIG.founder.eyebrow;
-  const cleanEyebrow = rawEyebrow.replace(/[\/]/g, "").trim();
+  const cleanEyebrow = rawEyebrow.replaceAll("/", "").trim();
   const displayEyebrow = cleanEyebrow.toLowerCase().includes("founder")
     ? "FOUNDER"
     : cleanEyebrow;

@@ -7,9 +7,6 @@ import { fadeUp } from "@/lib/motion";
 export interface AboutCtaProps {
   headingLine1?: string;
   headingLine2?: string;
-  headingPlain?: string;
-  headingHighlight?: string;
-  headingTail?: string;
   body?: string;
   primaryCtaText?: string;
   primaryCtaLink?: string;
@@ -20,24 +17,14 @@ export interface AboutCtaProps {
 export default function AboutCta({
   headingLine1,
   headingLine2,
-  headingPlain,
-  headingHighlight,
-  headingTail,
   body,
   primaryCtaText,
   primaryCtaLink,
   secondaryCtaText,
   secondaryCtaLink,
 }: AboutCtaProps) {
-  const line1 =
-    headingLine1 ||
-    (headingPlain ? `${headingPlain} ${headingHighlight || ""}`.trim() : "") ||
-    ABOUT_CONFIG.cta.headingLine1;
-
-  const line2 =
-    headingLine2 ||
-    headingTail ||
-    ABOUT_CONFIG.cta.headingLine2;
+  const line1 = headingLine1 || ABOUT_CONFIG.cta.headingLine1;
+  const line2 = headingLine2 || ABOUT_CONFIG.cta.headingLine2;
 
   const bodyText = body || ABOUT_CONFIG.cta.body;
   const primaryText = primaryCtaText || ABOUT_CONFIG.cta.primaryCtaText;

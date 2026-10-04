@@ -63,18 +63,9 @@ export async function getHomePage() {
       headingLine1,
       headingHighlight,
       headingLine2,
-      headingPart1,
-      headingHighlight1,
-      headingPart2,
-      headingHighlight2,
-      headingPart3,
       subtitle,
       primaryCtaText,
-      primaryCtaLink,
-      secondaryCtaText,
-      secondaryCtaLink,
-      trustBullets,
-      stats[]{ val, label }
+      primaryCtaLink
     },
     servicesSection{
       eyebrow,
@@ -250,21 +241,16 @@ export async function getResourcesPage() {
 export async function getAboutPage() {
   return client.fetch(`*[_type == "aboutPage"][0]{
     hero{
-      badge,
       headingLine1,
       headingLine2,
       headingHighlight,
-      subheading,
       subtext,
       ctaPrimaryText,
       ctaPrimaryLink,
       ctaSecondaryText,
       ctaSecondaryLink,
       bgImage{ asset, alt },
-      mobileBgImage{ asset, alt },
-      badgeTags,
-      stats[]{ value, label },
-      mobileStats[]{ value, label }
+      stats[]{ value, label }
     },
     narrativeSection{
       topBlock{
@@ -296,30 +282,22 @@ export async function getAboutPage() {
       subtext,
       milestones[]{
         year,
-        stage,
         location,
         title,
         description,
-        isHighlight
+        image{ asset, alt }
       }
     },
     founder{
       eyebrow,
-      heading,
       name,
-      initials,
       title,
-      company,
-      tagline,
       bio,
       photo{ asset, alt },
-      credentials[]{ label, value },
       whyFoundedHeading,
       whyFoundedText,
       statusBadges[]{ icon, title, subtext },
-      focusPillars[]{ icon, title, desc, color },
-      linkedinUrl,
-      email
+      focusPillars[]{ icon, title, desc, color }
     },
     mission{
       statement,
@@ -332,9 +310,6 @@ export async function getAboutPage() {
     cta{
       headingLine1,
       headingLine2,
-      headingPlain,
-      headingHighlight,
-      headingTail,
       body,
       primaryCtaText,
       primaryCtaLink,
@@ -401,21 +376,16 @@ export async function getServicesPage() {
       description
     },
     hero{
-      badge,
       headingLine1,
       headingLine2,
       headingHighlight,
-      subtext,
-      ctaPrimaryText,
-      ctaPrimaryLink
+      subtext
     },
     focusAreas[]{
       id,
       number,
-      icon,
       title,
       shortDescription,
-      bullets,
       visualType,
       ctaText,
       ctaLink

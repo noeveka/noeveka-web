@@ -1,17 +1,16 @@
 import { motion } from "framer-motion";
 import { ABOUT_CONFIG } from "@/config/about.config";
+import { urlFor } from "@/lib/sanity";
 
 export interface JourneyMilestone {
   year: string;
-  stage?: string;
   location?: string;
   place?: string;
   title?: string;
   headline?: string;
   description?: string;
-  isHighlight?: boolean;
   graphic?: string;
-  image?: string;
+  image?: { asset?: unknown; alt?: string } | string;
   imageWidth?: number;
   imageHeight?: number;
 }
@@ -39,7 +38,12 @@ const LOCATION_GRAPHICS: Record<string, string> = {
 };
 
 function resolveGraphic(item: JourneyMilestone): string {
-  if (item.image) return item.image;
+  if (item.image) {
+    if ((item.image as { asset?: unknown })?.asset) {
+      return urlFor(item.image).url();
+    }
+    if (typeof item.image === "string") return item.image;
+  }
   if (item.graphic && !item.graphic.includes("_graphic")) return item.graphic;
   if (item.place && LOCATION_GRAPHICS[item.place]) return LOCATION_GRAPHICS[item.place];
   if (item.location && LOCATION_GRAPHICS[item.location]) return LOCATION_GRAPHICS[item.location];

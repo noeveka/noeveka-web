@@ -23,21 +23,16 @@ import { getAboutPage } from "@/lib/sanity";
 
 interface AboutPageData {
   hero?: {
-    badge?: string;
     headingLine1?: string;
     headingLine2?: string;
     headingHighlight?: string;
-    subheading?: string;
     subtext?: string;
     ctaPrimaryText?: string;
     ctaPrimaryLink?: string;
     ctaSecondaryText?: string;
     ctaSecondaryLink?: string;
     bgImage?: { asset?: unknown; alt?: string };
-    mobileBgImage?: { asset?: unknown; alt?: string };
-    badgeTags?: string[];
     stats?: HeroStat[];
-    mobileStats?: HeroStat[];
   };
   narrativeSection?: {
     topBlock?: {
@@ -71,23 +66,16 @@ interface AboutPageData {
   };
   founder?: {
     eyebrow?: string;
-    heading?: string;
     name?: string;
-    initials?: string;
     title?: string;
-    company?: string;
-    tagline?: string;
     bio?: string[];
     photo?: { asset?: unknown; alt?: string };
     photoAlt?: string;
-    credentials?: Array<{ label: string; value: string }>;
     whyFoundedHeading?: string;
     whyFoundedText?: string;
     whyFoundedParagraphs?: string[];
     statusBadges?: StatusBadgeItem[];
     focusPillars?: FocusPillarItem[];
-    linkedinUrl?: string;
-    email?: string;
   };
   mission?: {
     statement?: string;
@@ -100,9 +88,6 @@ interface AboutPageData {
   cta?: {
     headingLine1?: string;
     headingLine2?: string;
-    headingPlain?: string;
-    headingHighlight?: string;
-    headingTail?: string;
     body?: string;
     primaryCtaText?: string;
     primaryCtaLink?: string;
@@ -129,21 +114,16 @@ export default function AboutPage() {
         description={data?.seo?.description || SEO_CONFIG.pages.about.description}
       />
       <Hero
-        badge={data?.hero?.badge}
         headingLine1={data?.hero?.headingLine1}
         headingLine2={data?.hero?.headingLine2}
         headingHighlight={data?.hero?.headingHighlight}
-        subheading={data?.hero?.subheading}
         subtext={data?.hero?.subtext}
         ctaPrimaryText={data?.hero?.ctaPrimaryText}
         ctaPrimaryLink={data?.hero?.ctaPrimaryLink}
         ctaSecondaryText={data?.hero?.ctaSecondaryText}
         ctaSecondaryLink={data?.hero?.ctaSecondaryLink}
         bgImage={data?.hero?.bgImage}
-        mobileBgImage={data?.hero?.mobileBgImage}
-        badgeTags={data?.hero?.badgeTags}
         stats={data?.hero?.stats}
-        mobileStats={data?.hero?.mobileStats}
         photo={data?.founder?.photo}
         photoAlt={data?.founder?.photoAlt}
       />
@@ -162,23 +142,16 @@ export default function AboutPage() {
       />
       <Founder
         eyebrow={data?.founder?.eyebrow}
-        heading={data?.founder?.heading}
         name={data?.founder?.name}
-        initials={data?.founder?.initials}
         title={data?.founder?.title}
-        company={data?.founder?.company}
-        tagline={data?.founder?.tagline}
         bio={data?.founder?.bio ? [...data.founder.bio] : undefined}
         photo={data?.founder?.photo}
         photoAlt={data?.founder?.photoAlt}
-        credentials={data?.founder?.credentials}
         whyFoundedHeading={data?.founder?.whyFoundedHeading}
         whyFoundedText={data?.founder?.whyFoundedText}
         whyFoundedParagraphs={data?.founder?.whyFoundedParagraphs}
         statusBadges={data?.founder?.statusBadges}
         focusPillars={data?.founder?.focusPillars}
-        linkedinUrl={data?.founder?.linkedinUrl}
-        email={data?.founder?.email}
       />
       <Mission
         statement={data?.mission?.statement}
@@ -191,9 +164,6 @@ export default function AboutPage() {
       <AboutCta
         headingLine1={data?.cta?.headingLine1}
         headingLine2={data?.cta?.headingLine2}
-        headingPlain={data?.cta?.headingPlain}
-        headingHighlight={data?.cta?.headingHighlight}
-        headingTail={data?.cta?.headingTail}
         body={data?.cta?.body}
         primaryCtaText={data?.cta?.primaryCtaText}
         primaryCtaLink={data?.cta?.primaryCtaLink}

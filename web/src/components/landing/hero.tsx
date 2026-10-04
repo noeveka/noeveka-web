@@ -14,18 +14,9 @@ export interface HeroProps {
   headingLine1?: string;
   headingHighlight?: string;
   headingLine2?: string;
-  headingPart1?: string;
-  headingHighlight1?: string;
-  headingPart2?: string;
-  headingHighlight2?: string;
-  headingPart3?: string;
   subtitle?: string;
   primaryCtaText?: string;
   primaryCtaLink?: string;
-  secondaryCtaText?: string;
-  secondaryCtaLink?: string;
-  trustBullets?: string[];
-  stats?: Array<{ val: string; label: string }>;
 }
 
 export default function Hero({
@@ -35,9 +26,6 @@ export default function Hero({
   headingLine1,
   headingHighlight,
   headingLine2,
-  headingPart1,
-  headingHighlight2,
-  headingPart3,
   subtitle = HERO_CONFIG.subtitle,
   primaryCtaText = HERO_CONFIG.primaryCtaText,
   primaryCtaLink = HERO_CONFIG.primaryCtaLink,
@@ -52,23 +40,9 @@ export default function Hero({
     ? urlFor(bgImageMobile).width(900).url()
     : SMALL_BG;
 
-  let resolvedHeadingLine1 = headingLine1;
-  let resolvedHighlight = headingHighlight;
-  let resolvedHeadingLine2 = headingLine2;
-
-  if (!resolvedHeadingLine1) {
-    if (headingPart1 && !headingPart1.toLowerCase().includes("architect")) {
-      resolvedHeadingLine1 = headingPart1.trim();
-    } else {
-      resolvedHeadingLine1 = HERO_CONFIG.headingLine1;
-    }
-  }
-  if (!resolvedHighlight) {
-    resolvedHighlight = headingHighlight2 || HERO_CONFIG.headingHighlight;
-  }
-  if (!resolvedHeadingLine2) {
-    resolvedHeadingLine2 = headingPart3?.trim() || HERO_CONFIG.headingLine2;
-  }
+  const resolvedHeadingLine1 = headingLine1 || HERO_CONFIG.headingLine1;
+  const resolvedHighlight = headingHighlight || HERO_CONFIG.headingHighlight;
+  const resolvedHeadingLine2 = headingLine2 || HERO_CONFIG.headingLine2;
 
   const ctaButtonClass = "btn-hero";
 
