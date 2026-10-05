@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { LucideIcon, lucideIconRegistry } from "@/components/lucide-icons";
 import { RESOURCES_CONFIG } from "@/config/resources.config";
+import { useUserIdentityStore } from "@/store/user-identity.store";
 import type { ResourceItem } from "./resource.types";
 
 export interface DownloadModalProps {
@@ -12,6 +13,16 @@ export interface DownloadModalProps {
 export function DownloadModal({ resource, onClose }: DownloadModalProps) {
   const { downloadModal } = RESOURCES_CONFIG;
 
+  // ── Identity store 
+  const { identity, hydrated, hydrate, setIdentity, clearIdentity } =
+    useUserIdentityStore();
+
+  // Hydrate from cookie on first open (no-op if already hydrated)
+  useEffect(() => {
+    if (!hydrated) hydrate();
+  }, [hydrated, hydrate]);
+
+  // ── Local form state 
   const [form, setForm] = useState({ name: "", email: "", consent: false });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
@@ -20,6 +31,82 @@ export function DownloadModal({ resource, onClose }: DownloadModalProps) {
   const [downloadToken, setDownloadToken] = useState<string | null>(null);
   const [serverError, setServerError] = useState<string | null>(null);
 
+  // ── Blob download helper ──────────────────────────────────────────────────
+  const triggerBlobDownload = async (proxyUrl: string, title: string) => {
+    setDownloadStatus("downloading");
+    try {
+      const res = await fetch(proxyUrl);
+      const blob = await res.blob();
+      const objectUrl = URL.createObjectURL(blob);
+      const anchorElement = document.createElement("a");
+      anchorElement.href = objectUrl;
+      anchorElement.download = `${title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}.pdf`;
+      document.body.appendChild(anchorElement);
+      anchorElement.click();
+      document.body.removeChild(anchorElement);
+      URL.revokeObjectURL(objectUrl);
+      setDownloadStatus("done");
+    } catch {
+      setDownloadStatus("idle");
+    }
+  };
+
+  // ── Auto-download when identity is already known 
+  /**
+   * Once hydration completes and we have a stored identity, fire the API
+   * call automatically — the user never sees the form.
+   */
+  useEffect(() => {
+    if (!hydrated || !identity) return;
+
+    // Only auto-trigger on first render when identity is pre-populated.
+    // Guard with a ref-style flag so StrictMode double-invoke doesn't double-fire.
+    let cancelled = false;
+
+    (async () => {
+      setLoading(true);
+      try {
+        const apiRes = await fetch("/api/resource-download", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: identity.name,
+            email: identity.email,
+            consent: true, // user consented when they first submitted
+            resourceTitle: resource.title,
+            resourceId: resource._id,
+            pdfUrl: resource.pdfUrl,
+          }),
+        });
+
+        const data = (await apiRes.json()) as { downloadToken?: string | null };
+        const token = data.downloadToken ?? null;
+
+        if (!cancelled) {
+          setDownloadToken(token);
+          setLoading(false);
+          setSubmitted(true);
+          if (token) {
+            triggerBlobDownload(`/api/resource-proxy?token=${token}`, resource.title);
+          }
+        }
+      } catch (err: unknown) {
+        console.error("Resource auto-download error:", err);
+        if (!cancelled) {
+          setLoading(false);
+          setSubmitted(true);
+        }
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+    // Intentionally runs only once after hydration + identity check
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [hydrated]);
+
+  // ── Form helpers 
   const validate = () => {
     const errorMap: Record<string, string> = {};
     if (!form.name.trim()) errorMap.name = downloadModal.requiredNameError || "Name is required.";
@@ -60,34 +147,32 @@ export function DownloadModal({ resource, onClose }: DownloadModalProps) {
       setLoading(false);
       setSubmitted(true);
 
+      // Persist identity so future downloads skip the form
+      setIdentity(form.name, form.email);
+
       if (token) {
         triggerBlobDownload(`/api/resource-proxy?token=${token}`, resource.title);
       }
     } catch (err: unknown) {
       console.error("Resource download submit error:", err);
       setLoading(false);
-      setSubmitted(true);
-    }
+      setSubmitted(true);    }
   };
 
-  const triggerBlobDownload = async (proxyUrl: string, title: string) => {
-    setDownloadStatus("downloading");
-    try {
-      const res = await fetch(proxyUrl);
-      const blob = await res.blob();
-      const objectUrl = URL.createObjectURL(blob);
-      const anchorElement = document.createElement("a");
-      anchorElement.href = objectUrl;
-      anchorElement.download = `${title.toLowerCase().replace(/[^a-z0-9]+/g, "-")}.pdf`;
-      document.body.appendChild(anchorElement);
-      anchorElement.click();
-      document.body.removeChild(anchorElement);
-      URL.revokeObjectURL(objectUrl);
-      setDownloadStatus("done");
-    } catch {
-      setDownloadStatus("idle");
-    }
+  // ── "Not you?" handler 
+  const handleSwitchIdentity = () => {
+    clearIdentity();
+    setSubmitted(false);
+    setDownloadStatus("idle");
+    setDownloadToken(null);
+    setLoading(false);
+    setForm({ name: "", email: "", consent: false });
+    setErrors({});
+    setServerError(null);
   };
+
+  // ── Loading state (hydrating OR auto-downloading)
+  const isAutoDownloading = hydrated && !!identity && !submitted;
 
   return (
     <div
@@ -105,7 +190,48 @@ export function DownloadModal({ resource, onClose }: DownloadModalProps) {
           <LucideIcon name={lucideIconRegistry.X} className="h-4 w-4" />
         </button>
 
-        {!submitted ? (
+        {/* ── Auto-download in progress (returning user, not yet done) ── */}
+        {isAutoDownloading && (
+          <div className="flex flex-col items-center gap-4 py-6 text-center">
+            {/* Resource preview strip */}
+            <div className="dl-modal-preview">
+              <div className="dl-modal-preview-icon">
+                <LucideIcon
+                  name={lucideIconRegistry.BookOpen}
+                  className="h-5 w-5"
+                  style={{ color: "var(--color-brand)" }}
+                />
+              </div>
+              <div>
+                <p className="dl-modal-preview-label">
+                  {downloadModal.previewBadgeLabel || "Free Download"}
+                </p>
+                <p className="dl-modal-preview-title">{resource.title}</p>
+              </div>
+            </div>
+
+            <div className="flex flex-col items-center gap-2">
+              <span className="h-6 w-6 animate-spin rounded-full border-2 border-current border-t-transparent" style={{ color: "var(--color-brand)" }} />
+              <p className="text-[14px] font-medium" style={{ color: "var(--color-text)" }}>
+                Preparing your download…
+              </p>
+              <p className="text-[13px]" style={{ color: "var(--color-text-muted)" }}>
+                Downloading for <span className="font-medium">{identity?.name}</span>
+              </p>
+            </div>
+
+            <button
+              onClick={handleSwitchIdentity}
+              className="text-[12px] underline underline-offset-2 transition-opacity hover:opacity-70"
+              style={{ color: "var(--color-text-muted)" }}
+            >
+              Not you? Use a different email
+            </button>
+          </div>
+        )}
+
+        {/* ── Form (first-time user OR after "Not you?") ── */}
+        {!isAutoDownloading && !submitted && (
           <>
             {/* Resource preview strip */}
             <div className="dl-modal-preview">
@@ -217,8 +343,10 @@ export function DownloadModal({ resource, onClose }: DownloadModalProps) {
               </button>
             </form>
           </>
-        ) : (
-          /* Success state */
+        )}
+
+        {/* ── Success state (form submitted OR auto-download finished) ── */}
+        {submitted && (
           <div className="flex flex-col items-center gap-4 py-4 text-center">
             <div className="dl-modal-success-icon">
               <LucideIcon name={lucideIconRegistry.CheckCircle2} className="h-7 w-7" />
